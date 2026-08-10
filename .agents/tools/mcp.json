@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp"
+      ]
+    },
+    "engram": {
+      "type": "stdio",
+      "command": "engram",
+      "args": [
+        "mcp"
+      ]
+    },
+    "firecrawl": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_URL": "http://127.0.0.1:3002"
+      }
+    },
+    "semgrep": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "semgrep==1.172.0",
+        "semgrep",
+        "mcp"
+      ]
+    }
+  }
+}

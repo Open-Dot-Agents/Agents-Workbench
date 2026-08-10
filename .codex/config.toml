@@ -1,0 +1,19 @@
+[mcp_servers.codegraph]
+command = "codegraph"
+args = ["serve", "--mcp"]
+
+[mcp_servers.engram]
+command = "engram"
+args = ["mcp"]
+
+[mcp_servers.firecrawl]
+command = "npx"
+args = ["-y", "firecrawl-mcp"]
+env = { FIRECRAWL_API_URL = "http://127.0.0.1:3002" }
+
+[mcp_servers.semgrep]
+command = "uvx"
+args = ["--from", "semgrep==1.172.0", "semgrep", "mcp"]
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+default_tools_approval_mode = "auto"
