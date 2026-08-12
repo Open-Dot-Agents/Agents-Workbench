@@ -8,3 +8,13 @@ tasks:
   default:
     cmds:
       - echo "Workbench Taskfile"
+
+  verify:
+    desc: Run deterministic Workbench release-readiness checks
+    cmds:
+      - python3 task/test/mcp_projections_test.py
+
+  test:
+    desc: Run deterministic projection tests
+    cmds:
+      - task: verify

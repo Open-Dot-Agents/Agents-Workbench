@@ -1,20 +1,51 @@
-# Agents-Workbench
+# Agents Workbench
 
-## Mapping between `.agents` and tool runtimes
+This submodule is an **experimental adapter laboratory**, not a catalog of
+supported Open-Dot-Agents standard adapters. Its checked-in MCP files are
+projections of the canonical `.agents/tools/mcp.json` configuration for
+experimentation and future conformance-suite inputs.
 
-Detailed mappings for each harness are now in [VENDORS.md](/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/WORKBENCH/VENDORS.md).
+## Current experiments
 
-## Quick summary
+| Experiment | Checked-in projection | What is checked |
+| --- | --- | --- |
+| Copilot | `.github/mcp.json` | JSON shape and canonical server data |
+| Codex | `.codex/config.toml` | TOML shape and canonical server data |
+| OpenCode | `.opencode/opencode.json` | OpenCode local-server shape and canonical server data |
 
-- `.agents/AGENTS.md` maps to `AGENTS.md` in Copilot, Claude Code, and Codex.
-- `.agents/tools/mcp.json` maps to `.github/mcp.json` (Copilot), `.mcp.json` (Claude Code), and `.codex/config.toml` (`[mcp_servers]`) for Codex.
-- `.agents/skills/<skill>/SKILL.md` is natively supported by Copilot and Codex while it maps to `.claude/skills/<skill>/SKILL.md` for Claude Code.
+The projection tests do **not** prove that a particular upstream version
+discovers a repository-local configuration, starts every server, or supports
+every MCP capability. They also do not establish native paths as stable
+integration contracts. There is no Claude adapter in this workbench.
+
+See [VENDORS.md](VENDORS.md) for the experimental mapping boundaries and
+[`evidence/`](evidence/) for the evidence required to graduate an experiment.
+
+## Promotion requirements
+
+An experiment can be proposed for a supported standard adapter only after all
+of the following are recorded and reviewed:
+
+1. An evidence record based on
+   [`evidence/ADAPTER_EVIDENCE_TEMPLATE.md`](evidence/ADAPTER_EVIDENCE_TEMPLATE.md)
+   names the exact upstream version, platform, and test date.
+2. A repeatable, real-runtime test command and its capability result are
+   preserved in an accessible evidence link.
+3. The native configuration path is verified for that version, with upstream
+   documentation cited; unverified paths remain experimental.
+4. Supported capabilities, omissions, security or credential assumptions, and
+   known limitations are explicit.
+5. A future conformance test covers the demonstrated behavior and a maintainer
+   approves the promotion.
 
 ## Validation
 
-Run `task test:projections` to confirm the Copilot, Codex, and OpenCode MCP
-adapters preserve the canonical server names, commands, arguments, and
-environment. The standard-library Python suite also validates canonical schema,
-rejects duplicate JSON keys, and checks provider-specific fields. `task test`
-runs this projection check before asking each harness CLI to enumerate its
-configured MCP servers.
+Run `python3 task/test/mcp_projections_test.py` to verify the checked-in
+projections. The suite validates the narrow configuration contracts described
+above, including canonical schema, duplicate-key rejection, and provider
+projection fields. `task test` additionally asks locally installed harness
+CLIs to list MCP servers; that command is an environment-dependent experiment,
+not graduation evidence by itself.
+
+For release-readiness checks, run `task verify`. It only runs deterministic
+projection validation and does not call native harness CLIs.

@@ -7,18 +7,11 @@ import unittest
 from pathlib import Path
 from typing import Any
 
+from fixtures.mcp_projections import MCPProjectionFixtures, load_fixtures
+
 
 ROOT = Path(__file__).resolve().parents[2]
-CANONICAL_SERVER_FIELDS = {"type", "command", "args", "env"}
-CODEX_SERVER_FIELDS = {
-    "command",
-    "args",
-    "env",
-    "startup_timeout_sec",
-    "tool_timeout_sec",
-    "default_tools_approval_mode",
-}
-OPENCODE_SERVER_FIELDS = {"type", "command", "enabled", "environment"}
+FIXTURES = load_fixtures(ROOT)
 
 
 def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -49,15 +42,20 @@ def load_toml(path: Path) -> dict[str, Any]:
 class MCPProjectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.canonical_document = load_json(ROOT / ".agents" / "tools" / "mcp.json")
+        cls.fixtures: MCPProjectionFixtures = FIXTURES
+        cls.canonical_document = load_json(cls.fixtures.canonical_path)
         cls.canonical = cls.canonical_document["mcpServers"]
-        cls.copilot_document = load_json(ROOT / ".github" / "mcp.json")
-        cls.codex_document = load_toml(ROOT / ".codex" / "config.toml")
-        cls.opencode_document = load_json(ROOT / ".opencode" / "opencode.json")
+        cls.copilot_document = load_json(cls.fixtures.copilot_path)
+        cls.codex_document = load_toml(cls.fixtures.codex_path)
+        cls.opencode_document = load_json(cls.fixtures.opencode_path)
 
-    def test_duplicate_json_keys_are_rejected(self) -> None:
+    def test_invalid_duplicate_key_fixture_is_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "duplicate JSON key"):
-            json.loads('{"mcpServers": {}, "mcpServers": {}}', object_pairs_hook=reject_duplicate_keys)
+            load_json(self.fixtures.duplicate_keys_path)
+
+    def test_invalid_non_object_fixture_is_rejected(self) -> None:
+        with self.assertRaisesRegex(ValueError, "must contain a JSON object"):
+            load_json(self.fixtures.non_object_path)
 
     def test_canonical_schema(self) -> None:
         self.assertEqual(set(self.canonical_document), {"mcpServers"})
@@ -70,7 +68,7 @@ class MCPProjectionTests(unittest.TestCase):
                 self.assertTrue(name, "server name cannot be empty")
                 self.assertIsInstance(server, dict)
                 self.assertEqual(
-                    set(server) - CANONICAL_SERVER_FIELDS,
+                    set(server) - self.fixtures.canonical_server_fields,
                     set(),
                     "canonical server contains unsupported fields",
                 )
@@ -104,7 +102,7 @@ class MCPProjectionTests(unittest.TestCase):
                 adapter = codex[name]
                 self.assertIsInstance(adapter, dict)
                 self.assertEqual(
-                    set(adapter) - CODEX_SERVER_FIELDS,
+                    set(adapter) - self.fixtures.codex_server_fields,
                     set(),
                     "Codex server contains unsupported fields",
                 )
@@ -129,7 +127,7 @@ class MCPProjectionTests(unittest.TestCase):
                 adapter = opencode[name]
                 self.assertIsInstance(adapter, dict)
                 self.assertEqual(
-                    set(adapter) - OPENCODE_SERVER_FIELDS,
+                    set(adapter) - self.fixtures.opencode_server_fields,
                     set(),
                     "OpenCode server contains unsupported fields",
                 )
