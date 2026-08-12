@@ -51,3 +51,8 @@ not graduation evidence by itself.
 
 For release-readiness checks, run `task verify`. It only runs deterministic
 projection validation and does not call native harness CLIs.
+
+Pinned third-party MCP package installation and startup checks are isolated in
+[`conformance/mcp-servers/`](conformance/mcp-servers/). Run them with
+`task mcp-servers`; package-manager files do not belong to the canonical
+`.agents` tree.

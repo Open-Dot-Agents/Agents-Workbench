@@ -14,6 +14,14 @@ tasks:
     cmds:
       - python3 task/test/mcp_projections_test.py
 
+  mcp-servers:
+    desc: Install, audit, and probe pinned MCP server packages
+    dir: conformance/mcp-servers
+    cmds:
+      - npm ci --ignore-scripts
+      - npm audit --audit-level=low
+      - npm test
+
   test:
     desc: Run deterministic projection tests
     cmds:
