@@ -1,0 +1,22 @@
+version: 3
+
+tasks:
+  default:
+    cmds:
+      - task: projections
+      - task: codex
+      - task: copilot
+      - task: opencode
+  projections:
+    desc: Verify MCP adapter projections match the canonical configuration
+    cmds:
+      - python3 task/test/mcp_projections_test.py
+  codex:
+    cmds:
+      - codex mcp list
+  copilot:
+    cmds:
+      - copilot mcp list
+  opencode:
+    cmds:
+      - opencode mcp list
