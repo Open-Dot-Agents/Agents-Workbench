@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "harnesses": {
+    "copilot": {
+      "package": "@github/copilot",
+      "version": "1.0.79",
+      "integrity": "sha512-uHBm2BYbKJgyfiKp1WokX7QUNHGvzEX0zaGeb3qM3CybP06rsJrX3JgQe95qwwma6vQz0ah9gV68ERW2JqaKRA=="
+    },
+    "codex": {
+      "package": "@openai/codex",
+      "version": "0.147.0",
+      "integrity": "sha512-EQLEXecAG2ptxI7UpBMo2TR/ga5596/c/OsYF/0LoUDh5JANZ7IoGqlzBEWbuEVQ76JePIbtTW/ihCkp1a7Z3w=="
+    },
+    "claude": {
+      "package": "@anthropic-ai/claude-code",
+      "version": "2.1.229",
+      "integrity": "sha512-6HNg2iBe5DFvOxxdWTxdVaxg7buVvZMEpa+etJp3acBNatXXGdMBbqd3xjgPvqAoCz2ifQ/n5HSBd+xY8RBKfw=="
+    }
+  }
+}

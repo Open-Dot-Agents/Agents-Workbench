@@ -20,6 +20,8 @@ integration contracts. There is no Claude adapter in this workbench.
 
 See [VENDORS.md](VENDORS.md) for the experimental mapping boundaries and
 [`evidence/`](evidence/) for the evidence required to graduate an experiment.
+The credentialed [native conformance harness](conformance/) produces the
+black-box evidence required for Copilot CLI, Codex, and Claude Code promotion.
 
 ## Promotion requirements
 
