@@ -1,10 +1,11 @@
 # Native Adapter Conformance
 
-This harness creates an isolated repository, applies one reference adapter,
-and runs the exact pinned native harness. The harness must discover root and
-nested instructions, start the marker MCP server, invoke its tool, and discover
-the portable skill. Evidence records exact package provenance, platform,
-commands, markers, and bounded transcripts.
+This harness creates an isolated repository with canonical
+`.agents/AGENTS.md` instructions and a root compatibility link, applies one
+reference adapter, and runs the exact pinned native harness. The harness must
+discover root and nested instructions, start the marker MCP server, invoke its
+tool, and discover the portable skill. Evidence records exact package
+provenance, platform, commands, markers, and bounded transcripts.
 
 Native runs require the relevant `GH_TOKEN`, `OPENAI_API_KEY`, or
 `ANTHROPIC_API_KEY`. They are release evidence, not pull-request tests.

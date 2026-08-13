@@ -24,18 +24,19 @@ def write(path: Path, content: str) -> None:
 
 
 def fixture(directory: Path) -> None:
-    write(directory / "AGENTS.md", """# Root conformance instructions
+    write(directory / ".agents/AGENTS.md", """# Root conformance instructions
 
 When the prompt contains `ODA_ROOT_CONFORMANCE`, call the `oda-marker` tool
 named `record` exactly once with marker `root-instruction`.
 """)
+    (directory / "AGENTS.md").symlink_to(".agents/AGENTS.md")
     write(directory / "packages/api/AGENTS.md", """# Nested conformance instructions
 
 When the prompt contains `ODA_NESTED_CONFORMANCE`, call the `oda-marker` tool
 named `record` exactly once with marker `nested-instruction`.
 """)
     write(directory / ".agents/manifest.json", json.dumps({
-        "version": "1.0.0", "profiles": ["instructions", "mcp", "skills"]
+        "version": "1.0.0", "profiles": ["tools", "skills"]
     }, indent=2) + "\n")
     marker_server = directory / ".agents/conformance/marker_server.py"
     marker_log = directory / ".agents/conformance/markers.jsonl"
