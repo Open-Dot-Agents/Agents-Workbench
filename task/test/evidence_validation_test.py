@@ -42,7 +42,7 @@ def required_metadata(run_mode: str = "native") -> dict[str, object]:
         "testedAt": "2026-08-13T00:00:00+00:00",
         "agentsBin": "/tmp/agents",
         "harnessPath": "/usr/bin/codex",
-        "harnessVersionOutput": "codex-cli 0.153.4",
+        "harnessVersionOutput": "codex-cli 0.154.0",
         "acceptedCredentialEnv": "OPENAI_API_KEY,CODEX_ACCESS_TOKEN",
         "credentialEnv": "OPENAI_API_KEY",
         "markers": ["root-instruction", "nested-instruction", "portable-skill", "native-hook", "native-session-hook"],
@@ -74,7 +74,7 @@ def required_metadata(run_mode: str = "native") -> dict[str, object]:
                 "output": "{}",
             },
         ],
-        **({"harnessVersion": "codex-cli 0.153.4"} if run_mode == "native" else {}),
+        **({"harnessVersion": "codex-cli 0.154.0"} if run_mode == "native" else {}),
     }
 
 

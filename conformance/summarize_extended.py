@@ -19,7 +19,7 @@ REQUIRED = {
  'hook-timeout': {'native-process','native-mcp-call','timeout-started','timeout-stopped-command','one-second-timeout-enforced'},
  'instruction-precedence': {'native-process','native-mcp-call','nearest-instruction-overrides-parent','sibling-scope-isolation'},
  'skill-resources': {'native-process','native-mcp-call','skill-script-used'},
- 'profile-tools': {'native-process','initial-off','enabled','removed'},
+ 'profile-tools': {'native-process','initial-off','enabled','removed','enabled-again'},
  'profile-skills': {'native-process','initial-off','enabled','removed'},
  'untrusted': {'native-process','untrusted-hook-not-executed'},
  'refusal-boundaries': {'adapter-refuses-before-writes','no-native-launch'},
@@ -63,7 +63,7 @@ def audit(directory: Path, vendors: list[str]):
                     assert required_checks(vendor,case).issubset({c['id'] for c in checks}), 'required assertion missing'
                     if case=='refusal-boundaries':
                         assert sum(c['id']=='adapter-refuses-before-writes' for c in checks)==(7 if vendor=='codex' else 10)
-                    expected_native={'instruction-precedence':2,'profile-tools':3,'profile-skills':3,'resumed-refresh':2,'resumed-resources':2,'profile-hooks':3,'hook-exit-codes':2}.get(case,1)
+                    expected_native={'instruction-precedence':2,'profile-tools':4,'profile-skills':3,'resumed-refresh':2,'resumed-resources':2,'profile-hooks':3,'hook-exit-codes':2}.get(case,1)
                     if case=='refusal-boundaries' or vendor=='copilot' and case in COPILOT_REFUSALS:expected_native=0
                     if case=='compaction' and vendor=='copilot':expected_native=2
                     assert sum(t['kind']=='native' for t in data['transcripts'])==expected_native, 'native phase missing'

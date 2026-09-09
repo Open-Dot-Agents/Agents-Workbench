@@ -1,27 +1,50 @@
 # Extended native test results
 
 The evidence audit confirms complete coverage for 46 vendor/case combinations:
-35 native passes, 6 expected adapter refusals, and 5 native failures. No case
+37 native passes, 6 expected adapter refusals, and 3 native failures. No case
 has missing or incomplete evidence. Complete coverage does not mean full
 conformance. Neither adapter is promoted to supported status.
 
+Codex changed from 0.153.4 to 0.154.0 in this cycle. Its baseline and all 23
+extended cases were rerun. Copilot kept version 1.0.83; only its four-phase
+`profile-tools` case was rerun. Other Copilot results remain from the prior
+run on that same version. Earlier Codex records are preserved in `attempts/`.
+
 ## Test scope
 
-- Codex 0.153.4 and Copilot 1.0.83, pinned to the latest npm releases checked for this test run.
+- Codex 0.154.0 and Copilot 1.0.83, pinned to the latest npm releases checked on 2026-09-10 (Europe/Rome).
 - Linux, with existing CLI logins copied into private temporary runtime directories.
 - Copilot trusts only the test fixture directories. Normal user configuration is unchanged.
 - The baseline suite is recorded in [LATEST_NATIVE_TESTS.md](LATEST_NATIVE_TESTS.md).
 - This suite tests portable profiles and adapter refusal boundaries. It does not test all vendor features or other operating systems.
 - Refresh tests cover a new invocation and a resumed session. They do not establish continuous reload during an active turn.
 
+## Tools-profile cleanup
+
+The shared CLI now reconciles MCP entries when `tools` is selected or previous
+MCP ownership exists. Removing the profile uses an empty desired server map
+without reading the canonical catalogue. Only owned entries are removed.
+Modified owned entries block removal unless forced. Backup and transaction
+rollback remain active. An absent native file is not created during cleanup.
+
+The four native phases pass on Codex 0.154.0 and Copilot 1.0.83: initially
+unselected, enabled, removed, and enabled again. Each native process returned
+success. The unselected and removed phases recorded no server startup or tool
+call. Earlier failed records remain in `attempts/`.
+
+Deterministic tests cover all three CLI adapters, including preservation of
+unowned servers and unrelated settings, absent catalogues, conflicts, forced
+removal with exact backups, missing native files, repeated apply, and rollback
+across vendors. Claude native testing remains deferred.
+
+For repositories where earlier removal already cleared ownership, follow the
+[reviewed reapplication procedure](../../CLI/README.md). Do not infer ownership
+from server names.
+
 ## Confirmed failures
 
-1. **Tools profile removal, both adapters:** a previously projected MCP server remains active after the tools profile is removed.
-2. **Skills profile selection, both harnesses:** native discovery reads canonical `.agents/skills` when the skills profile is absent or removed.
-3. **Missing stdio environment reference, Codex:** the missing variable does not prevent MCP server activation and a tool call.
-
-These five failed combinations have complete observations. They are separate
-from the two earlier Codex request timeouts.
+1. **Skills profile selection, both harnesses:** native discovery reads canonical `.agents/skills` when the skills profile is absent or removed.
+2. **Missing stdio environment reference, Codex:** the missing variable does not prevent MCP server activation and a tool call.
 
 ## Network interruption and retries
 
@@ -39,7 +62,7 @@ remain under `results/extended/codex/attempts/`.
 it does not establish native support. `native-failure` means the case completed
 and a required behavior failed.
 
-| Case | Codex 0.153.4 | Copilot 1.0.83 |
+| Case | Codex 0.154.0 | Copilot 1.0.83 |
 | --- | --- | --- |
 | remote-https | [native-pass](results/extended/codex/remote-https.json) | [native-pass](results/extended/copilot/remote-https.json) |
 | remote-auth-env | [native-pass](results/extended/codex/remote-auth-env.json) | [adapter-refusal](results/extended/copilot/remote-auth-env.json) |
@@ -49,7 +72,7 @@ and a required behavior failed.
 | hook-timeout | [native-pass](results/extended/codex/hook-timeout.json) | [native-pass](results/extended/copilot/hook-timeout.json) |
 | instruction-precedence | [native-pass](results/extended/codex/instruction-precedence.json) | [native-pass](results/extended/copilot/instruction-precedence.json) |
 | skill-resources | [native-pass](results/extended/codex/skill-resources.json) | [native-pass](results/extended/copilot/skill-resources.json) |
-| profile-tools | [native-failure](results/extended/codex/profile-tools.json) | [native-failure](results/extended/copilot/profile-tools.json) |
+| profile-tools | [native-pass](results/extended/codex/profile-tools.json) | [native-pass](results/extended/copilot/profile-tools.json) |
 | profile-skills | [native-failure](results/extended/codex/profile-skills.json) | [native-failure](results/extended/copilot/profile-skills.json) |
 | untrusted | [native-pass](results/extended/codex/untrusted.json) | [native-pass](results/extended/copilot/untrusted.json) |
 | refusal-boundaries | [adapter-refusal](results/extended/codex/refusal-boundaries.json) | [adapter-refusal](results/extended/copilot/refusal-boundaries.json) |
@@ -97,13 +120,27 @@ python3 WORKBENCH/conformance/summarize_extended.py --coverage-only --json
 ```
 
 The coverage audit passes. The full functional audit below returns failure
-because the five confirmed failures remain:
+because the three confirmed failures remain:
 
 ```sh
 python3 WORKBENCH/conformance/summarize_extended.py --json
 ```
 
-Evidence interval (UTC): 2026-09-09T21:57:08.491854+00:00 to 2026-09-09T22:16:49.234000+00:00.
+Evidence interval (UTC): 2026-09-09T21:57:09.469815+00:00 to 2026-09-09T23:20:48.150685+00:00.
+
+The initial cleanup runs use reference CLI SHA-256
+`5b78db86f29997ed37e6acc7646b645de7eddff2a5914ac690f3fe427d5fc8a1`.
+After native verification, the CLI capability evidence text was updated to
+record the result. The cleanup implementation did not change. Its `apply.go`
+SHA-256 is `a1a82ffc3f53a95705e1a92bc5ecf6e85626e302bca3b5e52beb78388c518861`.
+Go and Workbench tests passed again after the capability text update.
+
+Before commit, both four-phase `profile-tools` cases passed again with the
+complete CLI changes, including the capability evidence text. These reruns
+used CLI SHA-256 `a7701e0e6ab275888a78e463255611a61378648beefbb6638be26d702a5c7387` and the installed Codex 0.154.0 and Copilot 1.0.83.
+Earlier runs remain in `attempts/`. The other extended cases were not rerun
+for this commit check. The coverage audit still passes; the three known
+functional failures remain.
 
 ## Repository verification
 

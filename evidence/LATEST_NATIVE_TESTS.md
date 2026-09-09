@@ -9,8 +9,11 @@ listed fixture behaviors; they do not establish complete profile support.
 
 | Harness | Version observed | Completed (UTC) | Result |
 | --- | --- | --- | --- |
-| codex | 0.153.4 | 2026-09-09T21:22:13.768988+00:00 | PASS |
+| codex | 0.154.0 | 2026-09-09T23:07:26.796330+00:00 | PASS |
 | copilot | 1.0.83 | 2026-09-09T21:21:46.972402+00:00 | PASS |
+
+The earlier Codex 0.153.4 baseline remains in [its preserved record](results/codex-0.153.4.json).
+Copilot has the same version pin; its baseline was not rerun in this cycle.
 
 ## Passed behaviors
 
@@ -46,7 +49,7 @@ does not require a separate assertion for that event.
 ## Source and binary identity
 
 - codex runner SHA-256: `acd25fc42c906142fbfb04494516b35f3c83f69fa8918984b6ba73fea91cbcf0`
-- codex reference CLI SHA-256: `80aef7e3f18bd74a5167945c1ac0b875d83d5f56b856790f57b6d173d1cabbce`
+- codex reference CLI SHA-256: `5b78db86f29997ed37e6acc7646b645de7eddff2a5914ac690f3fe427d5fc8a1`
 - copilot runner SHA-256: `acd25fc42c906142fbfb04494516b35f3c83f69fa8918984b6ba73fea91cbcf0`
 - copilot reference CLI SHA-256: `80aef7e3f18bd74a5167945c1ac0b875d83d5f56b856790f57b6d173d1cabbce`
 

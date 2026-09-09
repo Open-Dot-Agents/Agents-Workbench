@@ -97,7 +97,7 @@ compatibility registry and CLI version declarations at the same time.
 Keep the resolved versions fixed during a run so evidence remains reproducible.
 Do not maintain a test matrix of older Codex or Copilot versions.
 
-The latest tags checked on 2026-09-09 resolve to Codex 0.153.4 and Copilot
+The latest tags checked on 2026-09-10 (Europe/Rome) resolve to Codex 0.154.0 and Copilot
 1.0.83. Claude remains a separate, optional target.
 
 ## Current test priority

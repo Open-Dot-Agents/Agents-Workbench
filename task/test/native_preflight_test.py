@@ -29,7 +29,7 @@ def fake_executable(directory: Path, name: str, output: str) -> Path:
 class NativePreflightTests(unittest.TestCase):
     def test_preflight_uses_explicit_vendor_binary(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            executable = fake_executable(Path(temporary), "codex-dev", "codex-cli 0.153.4")
+            executable = fake_executable(Path(temporary), "codex-dev", "codex-cli 0.154.0")
             with mock.patch.dict(
                 os.environ,
                 {
@@ -49,13 +49,13 @@ class NativePreflightTests(unittest.TestCase):
         self.assertTrue(checks_by_id["preflight.codex.credential"])
         self.assertEqual(metadata["harnessBinaryEnv"], "CODEX_BIN")
         self.assertEqual(metadata["harnessPath"], str(executable))
-        self.assertEqual(metadata["harnessVersionOutput"], "codex-cli 0.153.4")
+        self.assertEqual(metadata["harnessVersionOutput"], "codex-cli 0.154.0")
         self.assertEqual(metadata["credentialEnv"], "OPENAI_API_KEY")
         self.assertEqual(metadata["acceptedCredentialEnv"], "OPENAI_API_KEY,CODEX_ACCESS_TOKEN")
 
     def test_preflight_accepts_codex_access_token(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            executable = fake_executable(Path(temporary), "codex", "codex-cli 0.153.4")
+            executable = fake_executable(Path(temporary), "codex", "codex-cli 0.154.0")
             with mock.patch.dict(
                 os.environ,
                 {
@@ -79,7 +79,7 @@ class NativePreflightTests(unittest.TestCase):
             executable.write_text(
                 "#!/bin/sh\n"
                 "if [ \"$1\" = \"login\" ]; then mkdir -p \"$CODEX_HOME\"; cat > \"$CODEX_HOME/token.txt\"; exit 0; fi\n"
-                "printf '%s\\n' 'codex-cli 0.153.4'\n",
+                "printf '%s\\n' 'codex-cli 0.154.0'\n",
                 encoding="utf-8",
             )
             executable.chmod(0o755)
@@ -152,9 +152,9 @@ class NativePreflightTests(unittest.TestCase):
         self.assertIn("--dangerously-skip-permissions", command)
 
     def test_version_match_rejects_prefix_and_prerelease(self) -> None:
-        for version in ("0.153.41", "10.153.4", "0.153.4-rc1", "0.153.4+local"):
-            self.assertFalse(run_adapter.matches_pinned_version("codex-cli " + version, "0.153.4"))
-        self.assertTrue(run_adapter.matches_pinned_version("codex-cli 0.153.4", "0.153.4"))
+        for version in ("0.154.01", "10.154.0", "0.154.0-rc1", "0.154.0+local"):
+            self.assertFalse(run_adapter.matches_pinned_version("codex-cli " + version, "0.154.0"))
+        self.assertTrue(run_adapter.matches_pinned_version("codex-cli 0.154.0", "0.154.0"))
 
     def test_version_match_accepts_copilot_sentence_punctuation(self) -> None:
         self.assertTrue(run_adapter.matches_pinned_version(

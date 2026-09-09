@@ -30,7 +30,7 @@ class ExistingLoginTests(unittest.TestCase):
             with mock.patch.dict(os.environ, {'AGENTS_BIN': '/fake/agents'}, clear=True), \
                  mock.patch.object(run_adapter, 'harness_executable', return_value=('/fake/codex', 'CODEX_BIN')), \
                  mock.patch.object(run_adapter.subprocess, 'run', side_effect=[
-                     subprocess.CompletedProcess([], 0, 'codex-cli 0.153.4'),
+                     subprocess.CompletedProcess([], 0, 'codex-cli 0.154.0'),
                      subprocess.CompletedProcess([], returncode, 'status')]):
                 checks, _ = run_adapter.preflight('codex', 'auto')
             self.assertEqual(all(c['passed'] for c in checks), returncode == 0)

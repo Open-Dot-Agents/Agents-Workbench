@@ -271,7 +271,7 @@ Do not execute the MCP server or write its log.
 
 
 def profile_tools(case: Case):
-    for phase,profiles in [('initial-off',[]),('enabled',['tools']),('removed',[])]:
+    for phase,profiles in [('initial-off',[]),('enabled',['tools']),('removed',[]),('enabled-again',['tools'])]:
         write(case.root/'.agents/manifest.json',{'version':'1.0.0','profiles':profiles})
         case.apply();before=len(events(case.log));_,markers=case.run()
         new=events(case.log)[before:]
