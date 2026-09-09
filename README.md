@@ -1,17 +1,17 @@
 # Agents Workbench
 
 This submodule is an **experimental adapter laboratory**, not a catalog of
-supported Open-Dot-Agents standard adapters. Its checked-in MCP files are
-projections of the canonical `.agents/tools/mcp.json` configuration for
-experimentation and future conformance-suite inputs.
+supported Open-Dot-Agents standard adapters. Its checked-in MCP and hook files
+are projections of canonical `.agents` configuration for experimentation and
+future conformance-suite inputs.
 
 ## Current experiments
 
 | Experiment | Checked-in projection | What is checked |
 | --- | --- | --- |
-| Copilot | `.github/mcp.json` | JSON shape and canonical server data |
-| Codex | `.codex/config.toml` | TOML shape and canonical server data |
-| OpenCode | `.opencode/opencode.json` | OpenCode local-server shape and canonical server data |
+| Copilot CLI | `.github/mcp.json`, `.github/hooks/open-dot-agents.json` | JSON shape, canonical server data, and command hook shape |
+| Codex | `.codex/config.toml`, `.codex/hooks.json` | TOML MCP shape, canonical server data, and command hook shape |
+| Claude Code | `.mcp.json`, `.claude/settings.json`, `.claude/skills/` | JSON MCP shape, command hooks in settings, and skill projection |
 
 The projection tests do **not** prove that a particular upstream version
 discovers a repository-local configuration, starts every server, or supports
@@ -52,7 +52,38 @@ not graduation evidence by itself.
 For release-readiness checks, run `task verify`. It only runs deterministic
 projection validation and does not call native harness CLIs.
 
+For native adapter evidence, build or select the reference CLI and set
+`AGENTS_BIN`. Then run `task native:preflight VENDOR=codex` to check local
+prerequisites, or `task native:run VENDOR=codex` to run the credentialed
+black-box harness. Use `VENDOR=copilot`, `VENDOR=codex`, or `VENDOR=claude`.
+The harness normally resolves `copilot`, `codex`, or `claude` from `PATH`.
+Set `COPILOT_BIN`, `CODEX_BIN`, or `CLAUDE_BIN` to use an explicit pinned
+binary. Use a non-interactive credential accepted by the native harness:
+`COPILOT_GITHUB_TOKEN`, `GH_TOKEN`, or `GITHUB_TOKEN` for Copilot;
+`OPENAI_API_KEY` or `CODEX_ACCESS_TOKEN` for Codex; and `ANTHROPIC_API_KEY`,
+`ANTHROPIC_AUTH_TOKEN`, or `CLAUDE_CODE_OAUTH_TOKEN` for Claude Code. The
+generated JSON files are local artifacts under `evidence/results/`. When
+`CODEX_ACCESS_TOKEN` is used, the harness imports it into an isolated temporary
+`CODEX_HOME` for that run. Use
+`task native:validate RESULT=evidence/results/codex.json` before using a record
+as adapter evidence. Use `task native:run:all` only in a credentialed
+environment; it writes and validates all three native records before it reports
+which adapters failed.
+
 Pinned third-party MCP package installation and startup checks are isolated in
 [`conformance/mcp-servers/`](conformance/mcp-servers/). Run them with
 `task mcp-servers`; package-manager files do not belong to the canonical
 `.agents` tree.
+
+## Test priority
+
+Use `task verify` for deterministic tests. Use
+`AGENTS_BIN=/path/to/agents task native:preflight:priority`, then `task native`,
+for the default Codex and Copilot native group. Claude remains an explicit
+native target. See [native conformance](conformance/README.md) for credentials,
+version pins, complete runs, and hook execution evidence.
+
+The [extended native report](evidence/EXTENDED_NATIVE_TESTS.md) covers the
+remaining portable feature cases and known failures. Run `task native:extended`
+for that full test group. A passing baseline run alone does not close the
+reported conformance failures.

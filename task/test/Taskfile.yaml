@@ -3,10 +3,14 @@ version: 3
 tasks:
   default:
     cmds:
-      - task: projections
+      - task: deterministic
       - task: codex
       - task: copilot
       - task: opencode
+  deterministic:
+    desc: Run all deterministic tests without native credentials
+    cmds:
+      - python3 -m unittest discover -s task/test -p '*_test.py'
   projections:
     desc: Verify MCP adapter projections match the canonical configuration
     cmds:

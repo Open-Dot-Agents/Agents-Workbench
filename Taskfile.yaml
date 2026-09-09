@@ -12,7 +12,7 @@ tasks:
   verify:
     desc: Run deterministic Workbench release-readiness checks
     cmds:
-      - python3 task/test/mcp_projections_test.py
+      - PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s task/test -p '*_test.py'
 
   mcp-servers:
     desc: Install, audit, and probe pinned MCP server packages
@@ -21,6 +21,110 @@ tasks:
       - npm ci --ignore-scripts
       - npm audit --audit-level=low
       - npm test
+
+  native:priority:
+    desc: Run Codex and Copilot native tests, then validate their evidence
+    cmds:
+      - cmd: task native:run VENDOR=codex
+        ignore_error: true
+      - cmd: task native:run VENDOR=copilot
+        ignore_error: true
+      - task: native:validate
+        vars:
+          RESULT: evidence/results/codex.json
+      - task: native:validate
+        vars:
+          RESULT: evidence/results/copilot.json
+      - python3 conformance/summarize_results.py --vendors codex copilot
+
+  native:preflight:priority:
+    desc: Check Codex and Copilot prerequisites
+    cmds:
+      - cmd: task native:preflight VENDOR=codex
+        ignore_error: true
+      - cmd: task native:preflight VENDOR=copilot
+        ignore_error: true
+      - python3 conformance/summarize_results.py --suffix=-preflight --vendors codex copilot
+
+  native:
+    desc: Run the default native test group (Codex and Copilot)
+    cmds:
+      - task: native:priority
+
+  native:extended:
+    desc: Run all remaining portable feature cases for Codex and Copilot
+    cmds:
+      - cmd: task native:extended:run VENDOR=codex
+        ignore_error: true
+      - cmd: task native:extended:run VENDOR=copilot
+        ignore_error: true
+      - python3 conformance/summarize_extended.py
+
+  native:extended:run:
+    desc: Run extended cases for one latest pinned native harness
+    vars:
+      VENDOR: '{{.VENDOR | default "codex"}}'
+      AUTH: '{{.AUTH | default "auto"}}'
+    cmds:
+      - python3 conformance/run_extended.py "{{.VENDOR}}" --auth "{{.AUTH}}"
+
+  native:extended:audit:
+    desc: Check full extended coverage and report functional failures
+    cmds:
+      - python3 conformance/summarize_extended.py --json
+
+  native:preflight:
+    desc: Check pinned native harness prerequisites and write preflight evidence
+    vars:
+      VENDOR: '{{default "codex" .VENDOR}}'
+      OUTPUT: '{{default (printf "evidence/results/%s-preflight.json" .VENDOR) .OUTPUT}}'
+    cmds:
+      - python3 conformance/run_adapter.py {{.VENDOR}} --preflight-only --output {{.OUTPUT}}
+
+  native:run:
+    desc: Run pinned native harness conformance and write adapter evidence
+    vars:
+      VENDOR: '{{default "codex" .VENDOR}}'
+      OUTPUT: '{{default (printf "evidence/results/%s.json" .VENDOR) .OUTPUT}}'
+    cmds:
+      - python3 conformance/run_adapter.py {{.VENDOR}} --output {{.OUTPUT}}
+
+  native:validate:
+    desc: Validate one native adapter evidence JSON record
+    vars:
+      RESULT: '{{default "evidence/results/codex.json" .RESULT}}'
+    cmds:
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/validate_result.py {{.RESULT}} ../SPEC/spec/1.0/schemas/conformance-result.schema.json
+
+  native:validate:all:
+    desc: Validate Copilot CLI, Codex, and Claude Code native adapter evidence
+    cmds:
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/validate_result.py evidence/results/copilot.json ../SPEC/spec/1.0/schemas/conformance-result.schema.json
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/validate_result.py evidence/results/codex.json ../SPEC/spec/1.0/schemas/conformance-result.schema.json
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/validate_result.py evidence/results/claude.json ../SPEC/spec/1.0/schemas/conformance-result.schema.json
+
+  native:preflight:all:
+    desc: Check Copilot CLI, Codex, and Claude Code prerequisites
+    cmds:
+      - cmd: task native:preflight VENDOR=copilot
+        ignore_error: true
+      - cmd: task native:preflight VENDOR=codex
+        ignore_error: true
+      - cmd: task native:preflight VENDOR=claude
+        ignore_error: true
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/summarize_results.py --suffix=-preflight
+
+  native:run:all:
+    desc: Run Copilot CLI, Codex, and Claude Code native adapter conformance
+    cmds:
+      - cmd: task native:run VENDOR=copilot
+        ignore_error: true
+      - cmd: task native:run VENDOR=codex
+        ignore_error: true
+      - cmd: task native:run VENDOR=claude
+        ignore_error: true
+      - task: native:validate:all
+      - PYTHONDONTWRITEBYTECODE=1 python3 conformance/summarize_results.py
 
   test:
     desc: Run deterministic projection tests

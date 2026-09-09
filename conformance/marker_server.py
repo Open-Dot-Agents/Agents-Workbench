@@ -8,6 +8,8 @@ import sys
 from pathlib import Path
 
 
+MARKERS = ["root-instruction", "nested-instruction", "portable-skill"]
+
 def respond(identifier: object, result: object) -> None:
     print(json.dumps({"jsonrpc": "2.0", "id": identifier, "result": result}), flush=True)
 
@@ -36,11 +38,14 @@ def main() -> int:
                     "type": "object",
                     "additionalProperties": False,
                     "required": ["marker"],
-                    "properties": {"marker": {"type": "string"}},
+                    "properties": {"marker": {"type": "string", "enum": MARKERS}},
                 },
             }]})
         elif method == "tools/call":
             arguments = request.get("params", {}).get("arguments", {})
+            if request.get("params", {}).get("name") != "record" or arguments.get("marker") not in MARKERS:
+                respond(identifier, {"isError": True, "content": [{"type": "text", "text": "invalid marker"}]})
+                continue
             marker_path.parent.mkdir(parents=True, exist_ok=True)
             with marker_path.open("a", encoding="utf-8") as output:
                 output.write(json.dumps({"marker": arguments.get("marker")}) + "\n")

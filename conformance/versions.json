@@ -3,13 +3,13 @@
   "harnesses": {
     "copilot": {
       "package": "@github/copilot",
-      "version": "1.0.79",
-      "integrity": "sha512-uHBm2BYbKJgyfiKp1WokX7QUNHGvzEX0zaGeb3qM3CybP06rsJrX3JgQe95qwwma6vQz0ah9gV68ERW2JqaKRA=="
+      "version": "1.0.83",
+      "integrity": "sha512-M8uZI0V0dahYV1KZij3nGDxaXEGG7I7YUZzQPI7NEZkL/83Nl/tNTbPdxKtdWZbOmWoXsPKXty/eEYoj6RHDhA=="
     },
     "codex": {
       "package": "@openai/codex",
-      "version": "0.147.0",
-      "integrity": "sha512-EQLEXecAG2ptxI7UpBMo2TR/ga5596/c/OsYF/0LoUDh5JANZ7IoGqlzBEWbuEVQ76JePIbtTW/ihCkp1a7Z3w=="
+      "version": "0.153.4",
+      "integrity": "sha512-wbHDmit7S/YvBGVX1DQmk13xtWblZ2cApeJ/pB7xDZ10Cna+DZc5ij7f0F4OxdsXN4FW1oLT48OpogUI1+8Y2w=="
     },
     "claude": {
       "package": "@anthropic-ai/claude-code",
