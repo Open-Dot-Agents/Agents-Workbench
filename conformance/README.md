@@ -205,3 +205,32 @@ requires clean source checkouts, exact source commits, and release version
 1.0.0. Source snapshots and package pins are included in evidence bundles.
 Workflow artifacts expire after 90 days; reviewed release archives provide
 the durable public copy. No local run proves that such a copy was published.
+
+## Security draft evidence
+
+`run_security.py --agents /path/to/agents --result-dir /new/evidence/path
+--native-probe` records draft refusals and direct local Codex sandbox probes.
+Run it on Linux. It needs no model request or credential. It does not install
+packages or change trust. The result directory must be new.
+
+This runner declares `supported: false` and `enforcement_pass: false`: it does
+not supply the explicit native-home context for Codex subset activation. Its direct native observations
+are separate from the unrun adapter enforcement matrix. Claude is skipped by
+user request. Keep this evidence separate from the stable release gate.
+
+## Codex shell subset and Copilot assessment
+
+`run_codex_security.py --agents /path/to/agents --result-dir /new/evidence/path`
+projects the Codex Linux subset before native checks. It uses no model account,
+creates trust only for its isolated fixture, and reports enforcement, refusal,
+and lifecycle results separately. The earlier `run_security.py` still tests
+refusals without the new explicit native-home context.
+
+`run_copilot_security.py --slirp4netns /path/to/slirp4netns --result-dir /new/path`
+assesses native settings with an approved `COPILOT_GITHUB_TOKEN` in its process
+environment. It makes a model request and does not test portable projection.
+It never archives raw native homes or logs. See the
+[Codex report](../evidence/CODEX_SECURITY_SUBSET.md),
+[Copilot report](../evidence/COPILOT_SECURITY_ASSESSMENT.md), and
+[scenario record](../evidence/SECURITY_SCENARIOS.json). These are separate from
+stable release support gates.

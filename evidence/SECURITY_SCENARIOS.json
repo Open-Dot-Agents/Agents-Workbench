@@ -1,0 +1,505 @@
+{
+  "schema_version": "1.0.0",
+  "standard_version": "1.1.0-draft.1",
+  "full_adapter_support": false,
+  "codex_result": "results/codex-security-04/result.json",
+  "codex_result_sha256": "c90cbf37f551f50f22eb130d246a544bb41f44ace1881383a27f8771977a445e",
+  "definitions": {
+    "verified-enforcement": "A covered direct Codex sandbox observation passed after agents apply.",
+    "verified-refusal": "The CLI rejected an unsupported policy or authority condition without repository writes. This is not native enforcement.",
+    "verified-lifecycle": "Native projection application or removal passed.",
+    "deterministic-test-only": "Unit coverage exists; no native fault-injection result.",
+    "outside-subset": "Unsupported by this mapping; no claim from the other results.",
+    "implementation-pending": "No implemented portable native mapping for this scenario."
+  },
+  "scenarios": [
+    {
+      "vendor": "codex",
+      "scenario": "allowed-read",
+      "status": "verified-enforcement",
+      "evidence": [
+        "allowed-read"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "denied-read",
+      "status": "verified-enforcement",
+      "evidence": [
+        "denied-read"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "allowed-write",
+      "status": "verified-enforcement",
+      "evidence": [
+        "allowed-write"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "denied-write",
+      "status": "verified-enforcement",
+      "evidence": [
+        "denied-write"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "allowed-execution",
+      "status": "verified-enforcement",
+      "evidence": [
+        "allowed-execution"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "denied-execution",
+      "status": "verified-refusal",
+      "evidence": [
+        "permission-deny"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "symlink-escape",
+      "status": "verified-enforcement",
+      "evidence": [
+        "symlink-write-escape"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "path-traversal",
+      "status": "verified-enforcement",
+      "evidence": [
+        "path-traversal"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "overlapping-grants",
+      "status": "verified-enforcement",
+      "evidence": [
+        "overlapping-grants"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "exact-command-arguments",
+      "status": "verified-refusal",
+      "evidence": [
+        "exact-command-rules"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "shell-composition",
+      "status": "verified-enforcement",
+      "evidence": [
+        "shell-composition"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "approval-denial",
+      "status": "verified-refusal",
+      "evidence": [
+        "permission-ask"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "noninteractive-ask",
+      "status": "verified-refusal",
+      "evidence": [
+        "permission-ask"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "direct-network",
+      "status": "verified-enforcement",
+      "evidence": [
+        "direct-network-tcp"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "redirect-network",
+      "status": "outside-subset",
+      "evidence": [
+        "No allowed source connection exists in this deny-all network subset"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "private-network",
+      "status": "verified-enforcement",
+      "evidence": [
+        "private-network"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "web-tool-network",
+      "status": "verified-refusal",
+      "evidence": [
+        "scope-builtin-tools"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "remote-mcp-network",
+      "status": "verified-refusal",
+      "evidence": [
+        "scope-mcp-remote"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "local-mcp",
+      "status": "verified-refusal",
+      "evidence": [
+        "scope-mcp-local"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "lsp-process",
+      "status": "verified-refusal",
+      "evidence": [
+        "scope-lsp"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "delegation",
+      "status": "verified-refusal",
+      "evidence": [
+        "scope-delegation"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "background-process",
+      "status": "verified-enforcement",
+      "evidence": [
+        "background-process"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "credential-environment",
+      "status": "verified-refusal",
+      "evidence": [
+        "credential-environment-isolation"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "credential-files",
+      "status": "verified-refusal",
+      "evidence": [
+        "credential-file-isolation"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "conflicting-settings",
+      "status": "verified-refusal",
+      "evidence": [
+        "legacy-user-config"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "missing-prerequisite",
+      "status": "verified-refusal",
+      "evidence": [
+        "missing-native-binary"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "bypass-setting",
+      "status": "verified-refusal",
+      "evidence": [
+        "legacy-project-bypass"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "profile-removal",
+      "status": "verified-lifecycle",
+      "evidence": [
+        "profile-removal"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "rollback",
+      "status": "deterministic-test-only",
+      "evidence": [
+        "TestCodexSecurityTransactionRollback"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "codex",
+      "scenario": "idempotence",
+      "status": "verified-lifecycle",
+      "evidence": [
+        "idempotence"
+      ],
+      "scope": "Direct sandbox shell subset only"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "allowed-read",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "denied-read",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "allowed-write",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "denied-write",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "allowed-execution",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "denied-execution",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "symlink-escape",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "path-traversal",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "overlapping-grants",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "exact-command-arguments",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "shell-composition",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "approval-denial",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "noninteractive-ask",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "direct-network",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "redirect-network",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "private-network",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "web-tool-network",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "remote-mcp-network",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "local-mcp",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "lsp-process",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "delegation",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "background-process",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "credential-environment",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "credential-files",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "conflicting-settings",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "missing-prerequisite",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "bypass-setting",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "profile-removal",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "rollback",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    },
+    {
+      "vendor": "copilot",
+      "scenario": "idempotence",
+      "status": "implementation-pending",
+      "evidence": [],
+      "scope": "Copilot mapping remains pending"
+    }
+  ],
+  "copilot_assessment": {
+    "report": "COPILOT_SECURITY_ASSESSMENT.md",
+    "portable_projection_tested": false,
+    "local_network_deny": "native-mismatch-observed",
+    "observation": "Copilot 1.0.83 reached a live host Unix socket with allowLocalNetwork=false.",
+    "limits": "All 30 portable projection scenarios remain pending. Native filesystem observations do not count as projected enforcement."
+  },
+  "claude": "skipped at user request"
+}
