@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/home/maurizio/.local/bin/copilot",
+    "--help"
+  ],
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "output_sha256": "125dda90989c72ecd2a091ea37700ba008bcea18a21487712e992a81cd230bc8"
+}

@@ -1,0 +1,7 @@
+{
+  "fetched_at": "2026-09-10T20:24:44.632619+00:00",
+  "url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference",
+  "document": "WORKBENCH/evidence/plugin-standard/copilot-marketplace-settings.md",
+  "sha256": "da7e43c09e769e9e294cf57eb27cb80bb7b12e47fbc6be4c70bb98cbd5a5875f",
+  "finding": "Project marketplace autoUpdate is accepted but ignored. The opt-in applies to user or managed settings and interactive or prompt sessions."
+}

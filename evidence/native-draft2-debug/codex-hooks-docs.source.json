@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-09-10T19:03:03.466066+00:00",
+  "root_index": "https://developers.openai.com/llms.txt",
+  "product_index": "https://developers.openai.com/codex/llms.txt",
+  "product_index_sha256": "44caae2d94fe5b10dbc61e498988235bb4c715c7b1e0d0faafc4ff5bf0de4ddb",
+  "url": "https://learn.chatgpt.com/docs/hooks",
+  "fetch_url": "https://learn.chatgpt.com/docs/hooks.md",
+  "initial_fetch_url": "https://developers.openai.com/codex/hooks.md",
+  "sha256": "6b4c549c4f1df78e802f289151e54f7677128b8a9929912afb7e8ecd975d2ce9",
+  "initial_fetch_sha256": "6b4c549c4f1df78e802f289151e54f7677128b8a9929912afb7e8ecd975d2ce9"
+}

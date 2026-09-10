@@ -1,0 +1,314 @@
+{
+  "checked_at": "2026-09-10T15:07:01.315726+00:00",
+  "revision": "uncommitted working tree",
+  "full_adapter_support": false,
+  "checks": [
+    {
+      "check": "go-race",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "exit_code": 0,
+      "stdout": "ok  \tgithub.com/Open-Dot-Agents/Agents-CLI/cmd/agents\t1.108s\nok  \tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t2.409s\n",
+      "stderr": ""
+    },
+    {
+      "check": "go-vet",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "stable-conformance",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/run.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS schema-json\nPASS canonical-manifest\nPASS spec-starter\nPASS example-hooks\nPASS example-basic\nPASS baseline-instructions\nPASS selection-tools\nPASS selection-hooks\nPASS selection-skills\nPASS invalid-manifest-manifest-invalid-capability\nPASS invalid-manifest-manifest-invalid-profile\nPASS invalid-mcp-mcp-insecure-remote\nPASS invalid-mcp-mcp-literal-environment\nPASS invalid-mcp-mcp-mixed-server\nPASS invalid-hooks-hooks-blank-command\nPASS invalid-hooks-hooks-empty-handlers\nPASS invalid-hooks-hooks-empty-matcher\nPASS invalid-hooks-hooks-literal-prompt\nPASS invalid-hooks-hooks-negative-timeout\nPASS invalid-hooks-hooks-null-disabled\nPASS invalid-hooks-hooks-null-event\nPASS invalid-hooks-hooks-null-timeout\nPASS invalid-hooks-hooks-unsupported-event\nPASS invalid-unsafe-skill-name\nPASS invalid-unsafe-skill-path\n25/25 conformance checks passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "security-draft",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/security_draft.py"
+      ],
+      "exit_code": 0,
+      "stdout": "59/59 draft schema cases passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "native-draft",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/native_draft.py"
+      ],
+      "exit_code": 0,
+      "stdout": "18/18 native draft.2 schema cases passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "workbench",
+      "cwd": "WORKBENCH",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "task/test",
+        "-p",
+        "*_test.py"
+      ],
+      "exit_code": 0,
+      "stdout": "create\t.mcp.json\nupdate\t.claude/settings.json\ncreate\tCLAUDE.md\ncreate\tpackages/api/CLAUDE.md\ncreate\t.claude/skills/conformance-skill/SKILL.md\ncreate\t.codex/config.toml\ncreate\t.codex/hooks.json\ncreate\t.github/mcp.json\ncreate\t.github/hooks/open-dot-agents.json\n",
+      "stderr": "..........................................................................\n----------------------------------------------------------------------\nRan 74 tests in 7.574s\n\nOK\n"
+    },
+    {
+      "check": "compatibility",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "CLI/scripts/check_compatibility.py"
+      ],
+      "exit_code": 0,
+      "stdout": "compatibility data, Markdown, CLI summaries, and support evidence rules agree\n",
+      "stderr": ""
+    },
+    {
+      "check": "coverage-tests",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "scripts/native_coverage_test.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.232s\n\nOK\n"
+    },
+    {
+      "check": "coverage-reproducibility",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "scripts/native_coverage.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "repository-validation",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "validate",
+        "--root",
+        "..",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checks\":[{\"id\":\"repository.validate\",\"passed\":true}],\"class\":\"repository\",\"implementation\":\"reference-cli\",\"implementationVersion\":\"dev\",\"passed\":true,\"schemaVersion\":\"1.0.0\",\"standardVersion\":\"1.0.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "check": "native-example-validation",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "validate",
+        "--root",
+        "../SPEC/examples/native-draft",
+        "--experimental",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checks\":[{\"id\":\"repository.validate\",\"passed\":true}],\"class\":\"repository\",\"implementation\":\"reference-cli\",\"implementationVersion\":\"dev\",\"passed\":true,\"schemaVersion\":\"1.1.0-draft.2\",\"standardVersion\":\"1.1.0-draft.2\"}\n",
+      "stderr": ""
+    },
+    {
+      "check": "whitespace-.",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "changed-json-.",
+      "exit_code": 0,
+      "files": [
+        ".agents/features/coverage.json",
+        ".agents/features/implementation.json"
+      ]
+    },
+    {
+      "check": "whitespace-CLI",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "CLI",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "changed-json-CLI",
+      "exit_code": 0,
+      "files": [
+        "compatibility.json",
+        "internal/config/native_schemas/codex-0.154.0.json",
+        "internal/config/native_schemas/codex-0.154.0.source.json"
+      ]
+    },
+    {
+      "check": "whitespace-SPEC",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "SPEC",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "changed-json-SPEC",
+      "exit_code": 0,
+      "files": [
+        "examples/native-draft/.agents/manifest.json",
+        "examples/native-draft/.agents/native/com.openai.codex/profile.json",
+        "spec/1.1-draft.2/schemas/conformance-result.schema.json",
+        "spec/1.1-draft.2/schemas/manifest.schema.json",
+        "spec/1.1-draft.2/schemas/native.schema.json",
+        "spec/1.1-draft.2/schemas/permissions.schema.json",
+        "spec/1.1-draft.2/schemas/sandbox.schema.json"
+      ]
+    },
+    {
+      "check": "whitespace-WORKBENCH",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "WORKBENCH",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "changed-json-WORKBENCH",
+      "exit_code": 0,
+      "files": [
+        "evidence/2026-09-10-codex-trust-builtin/result.json",
+        "evidence/2026-09-10-codex-trust-derived/allow.json",
+        "evidence/2026-09-10-codex-trust-derived/deny.json",
+        "evidence/2026-09-10-codex-trust-derived/noninteractive.json",
+        "evidence/2026-09-10-codex-trust-derived/result.json",
+        "evidence/2026-09-10-codex-trust-safe-bare/result.json",
+        "evidence/2026-09-10-codex-trust-safe/result.json",
+        "evidence/2026-09-10-copilot-local-classes/network-targets.json",
+        "evidence/2026-09-10-copilot-local-classes/result.json",
+        "evidence/2026-09-10-copilot-local-classes/settings.json",
+        "evidence/ISOLATION_APPROVALS.json",
+        "evidence/SECURITY_SCENARIOS.json",
+        "evidence/native-draft2-debug/codex-alias-load-v2.json",
+        "evidence/native-draft2-debug/codex-alias-load.json",
+        "evidence/native-draft2-debug/codex-local-model.json",
+        "evidence/native-draft2-debug/codex-local-trust-image.json",
+        "evidence/native-draft2-debug/codex-local-trust-rule-allow.json",
+        "evidence/native-draft2-debug/codex-local-trust-rule-deny.json",
+        "evidence/native-draft2-debug/codex-local-trust-safe-v2.json",
+        "evidence/native-draft2-debug/codex-local-trust-safe.json",
+        "evidence/native-draft2-debug/codex-projected-agent-execution-v2.json",
+        "evidence/native-draft2-debug/codex-projected-agent-execution.json",
+        "evidence/native-draft2-debug/codex-projected-project-agent-execution.json",
+        "evidence/native-draft2-debug/codex-skill-discovery.json",
+        "evidence/native-draft2-debug/verification.json"
+      ]
+    }
+  ],
+  "implementation_sha256": {
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_lock_other.go": "0b8db6a31e57654b08787bec6db6b1bc28461a976960fc972c7bbe4124640612",
+    "CLI/internal/config/native_ownership.go": "e9d11ac90081253eb4751697fe3592baf832f0884bddb56960ef8eb6c3b6703f",
+    "CLI/internal/config/native_agents.go": "8739598ea52de2655d59867aa370c2b22731c60d5f240b8807b848afeb7b98a8",
+    "CLI/internal/config/native_agents_test.go": "a4faada3777203976b3059dff8d94d4515e30fe92422b22dbc3d2178200533ae",
+    "CLI/internal/config/native_field_context.go": "e15034033fe94701fe27b3148887f7ee9266d3fa454b4b869f6a0b09ae033d15",
+    "CLI/internal/config/native_types.go": "085770eb476af278d3c453a25e8a83cc210d0c75961f966602e1b71d4f4323ba",
+    "CLI/internal/config/native_registry.go": "88c527adc1751d5c6acb483817d4ecea5d511daaac1cb9b15baf7c5603df7a2f",
+    "CLI/internal/config/native_test.go": "f54317fa441e6e3b91b5e4e8b30674ecf5c19454314576ce6b9d92fa5bee8062",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_declarations.go": "ee050eb092c22bf2a7503490a25c45932794b0439955ab99fb7c02c3a86f2d9b",
+    "CLI/internal/config/native_values.go": "618076a318a5379b36e02e2eec33b0f797ee420b13651d9d6cc0541555e15aeb",
+    "CLI/internal/config/native_import_assets.go": "f594c9ff1caa103db8bee53488f802828866cd9fe6305f76ad1851672cfc4b7e",
+    "CLI/internal/config/native_selection.go": "53cec8564cb4565b158b2b254b7404756c29b0ccfc3c8c1c1c61e2091e719578",
+    "CLI/internal/config/native_lock_linux.go": "260735e7dad2c073f7f72dde22637da0ea68b33cd06ecf759705abd44292bbc1",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_import_merge.go": "5fe23b983a4aadca647a749fc7974c75c6d225837761287c3d1d93eafaf3a17f",
+    "CLI/internal/config/native.go": "28691089c7472b0d068c5b7b39b829fee2ee462faeeefe3c44dceef220fb1703",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_schemas/CODEX_LICENSE": "d17f227e4df5da1600391338865ce0f3055211760a36688f816941d58232d8dc",
+    "CLI/internal/config/native_schemas/codex-0.154.0.source.json": "305a007fe52aba019aa3d2d40a69fc488be447e47b67a25708a54a0142a69eab",
+    "CLI/internal/config/native_schemas/codex-0.154.0.json": "2e1fcf1cbb20f255c3baca2e174b4a3c954cef577a130587b8935e2d12c8ade6",
+    "scripts/native_coverage_test.py": "fab8804c8bc4e4abe7307a6d905a24072c6ebe0f0d6796558552cddd1b72af0b",
+    "scripts/native_coverage.py": "b960c2a7d57e5a9d02d4e903f04f6151a6b03b419c221dd687915f623a1ef253",
+    "WORKBENCH/conformance/run_native_local_model.py": "5474d69181e257ebfa141302609d63574cafe199c15d888f9a5ec4298d193684"
+  },
+  "native_evidence": {
+    "WORKBENCH/evidence/native-draft2-debug/codex-projected-agent-execution-v2.json": {
+      "sha256": "89f99dbe27e41d60a239957580f6a218d8ad69293e9a75e9042c5ed2f2148ce1",
+      "scenario_passed": true
+    },
+    "WORKBENCH/evidence/native-draft2-debug/codex-projected-project-agent-execution.json": {
+      "sha256": "3ac2b9b97f4a386b8f51852d90e76ab34660a02e090e288d3714d8e923653ece",
+      "scenario_passed": true
+    },
+    "WORKBENCH/evidence/native-draft2-debug/codex-local-trust-safe-v2.json": {
+      "sha256": "2944f38717de413aa3391d2d9bcbc5f10d568d6a85ff7abda4e75e6afd5e09c1",
+      "scenario_passed": true
+    },
+    "WORKBENCH/evidence/native-draft2-debug/codex-local-trust-image.json": {
+      "sha256": "9dbcad7b385f4afa6075f41129cde94d2f1b6961429370c583bda3efac0015a5",
+      "scenario_passed": true
+    },
+    "WORKBENCH/evidence/native-draft2-debug/codex-local-trust-rule-allow.json": {
+      "sha256": "74cd9f641d081bac9910a057fc8375a32c6590131dd38a14c031153c5199396d",
+      "scenario_passed": true
+    },
+    "WORKBENCH/evidence/native-draft2-debug/codex-local-trust-rule-deny.json": {
+      "sha256": "62ddbb17de56e091810c77579207d855b5ae4699e465f500a6084dfae7cd4d6e",
+      "scenario_passed": true
+    }
+  },
+  "all_passed": true
+}

@@ -1,0 +1,18 @@
+{
+  "stage": "ad-hoc fixture result parser",
+  "native_version": "1.0.83",
+  "fixture": "/mnt/DATA/tmp/oda-copilot-legacy-probe-eqh1t5pk/missing",
+  "passed": false,
+  "native_exit_code": null,
+  "error": "json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "cause": "The fixture parsed the native generated config.json as strict JSON, although it contains // comments. This does not establish native failure.",
+  "observed_files": {
+    "config.json": "// User settings belong in settings.json.\n// This file is managed automatically.\n{\n  \"firstLaunchAt\": 1234,\n  \"trustedFolders\": [\n    \"/mnt/DATA/tmp/oda-copilot-legacy-probe-eqh1t5pk/missing/workspace\"\n  ],\n  \"staff\": false\n}\n",
+    "settings.json": "{\n  \"theme\": \"dim\",\n  \"memory\": false,\n  \"bannerStyle\": \"classic\",\n  \"subagents\": {\n    \"maxDepth\": 1,\n    \"maxConcurrent\": 2\n  }\n}\n"
+  },
+  "observed_sha256": {
+    "config.json": "c96803d69977d33ea940f8bce134e01a304a6cb4d4e4db32e6b5e914b520060d",
+    "settings.json": "356bda2ab9bd08b5f56a7108f43dfed7b738c39e9309bf209e8c06300f0b5140"
+  },
+  "original_runner_archived": false
+}

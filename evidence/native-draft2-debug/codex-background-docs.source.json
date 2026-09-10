@@ -1,0 +1,16 @@
+{
+  "archived_at": "2026-09-10T19:36:10.039347+00:00",
+  "index_url": "https://learn.chatgpt.com/docs/llms.txt",
+  "sources": [
+    {
+      "url": "https://learn.chatgpt.com/docs/hooks.md",
+      "path": "codex-hooks-docs.md",
+      "sha256": "6b4c549c4f1df78e802f289151e54f7677128b8a9929912afb7e8ecd975d2ce9"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/app-server.md",
+      "path": "codex-background-app-server.md",
+      "sha256": "a72a5c88ab05ab9737ec28b432708f2776f696be48eae09ee39c02dd2f9480e0"
+    }
+  ]
+}

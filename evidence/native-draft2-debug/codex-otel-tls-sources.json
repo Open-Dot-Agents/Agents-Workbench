@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/otel/src/otlp.rs",
+    "commit": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+    "path": "WORKBENCH/evidence/native-draft2-debug/codex-otel-tls-otel.source.rs",
+    "sha256": "eb523dadd8371c790a68f63340eb00aacf67ae6124e9baffdcbcb7f6597af11a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/utils/absolute-path/src/lib.rs",
+    "commit": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+    "path": "WORKBENCH/evidence/native-draft2-debug/codex-otel-tls-absolute-path.source.rs",
+    "sha256": "a6f3553c4aefe49082b6bd8fb671eaaf14cf81cb134940bbd6b769024af01b70"
+  }
+]

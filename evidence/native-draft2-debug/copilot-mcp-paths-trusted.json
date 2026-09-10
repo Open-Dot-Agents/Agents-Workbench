@@ -1,0 +1,49 @@
+{
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "fixture": "/mnt/DATA/tmp/oda-mcp-paths-nhehxcgx",
+  "cases": [
+    {
+      "source": "/mnt/DATA/tmp/oda-mcp-paths-nhehxcgx/github/.github/mcp.json",
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugins",
+        "list",
+        "--kind",
+        "mcp",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"plugins\": [],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "source": "/mnt/DATA/tmp/oda-mcp-paths-nhehxcgx/root/.mcp.json",
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugins",
+        "list",
+        "--kind",
+        "mcp",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"plugins\": [],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "source": "/mnt/DATA/tmp/oda-mcp-paths-nhehxcgx/home/mcp-config.json",
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugins",
+        "list",
+        "--kind",
+        "mcp",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"plugins\": [\n    {\n      \"kind\": \"mcp\",\n      \"name\": \"oda-user\",\n      \"scope\": \"user\",\n      \"source\": \"user\",\n      \"enabled\": true,\n      \"description\": \"stdio transport\"\n    }\n  ],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    }
+  ]
+}

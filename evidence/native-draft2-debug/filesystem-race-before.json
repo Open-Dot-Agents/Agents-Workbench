@@ -1,0 +1,33 @@
+{
+  "kind": "isolated reproduction of pre-change writer",
+  "fixture": "/mnt/DATA/tmp/oda-fs-race-before-4kpi3xtk",
+  "command": [
+    "go",
+    "run",
+    "/mnt/DATA/tmp/oda-fs-race-before-4kpi3xtk/writer-before.go",
+    "/mnt/DATA/tmp/oda-fs-race-before-4kpi3xtk"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"outside_after\":\"projected\",\"outside_before\":\"outside\",\"redirected\":true,\"write_error\":\"\\u003cnil\\u003e\"}\n",
+  "stderr": "",
+  "observations": {
+    "outside_after": "projected",
+    "outside_before": "outside",
+    "redirected": true,
+    "write_error": "<nil>"
+  },
+  "writer_source_sha256": "4b630ccff2d32068d39ae41e36b2ab66d8424a6440b711d25557fd0be203ef66",
+  "prechange_native_go_sha256": "28691089c7472b0d068c5b7b39b829fee2ee462faeeefe3c44dceef220fb1703",
+  "original_regression": {
+    "command": [
+      "go",
+      "test",
+      "./internal/config",
+      "-run",
+      "TestNativeAtomicWriteDoesNotFollowDirectoryReplacement",
+      "-count=1"
+    ],
+    "exit_code": 1,
+    "failure": "native write followed a replaced parent directory"
+  }
+}

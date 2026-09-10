@@ -1,0 +1,459 @@
+{
+  "native_version": "0.154.0",
+  "native_sha256": "3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022",
+  "runner_sha256": "615f612b823306d3b490ef568dbb8b3e3ff86156e85a7cc8b8ba24abeceab614",
+  "helper_sha256": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc",
+  "fixture": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc",
+  "cases": [
+    {
+      "case": "object",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "nested": [
+                      {
+                        "value": true
+                      },
+                      7,
+                      "${tool_input}",
+                      0.5
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:b9f4dd1d438416b4d2fe44f90a2e809dfa2e1adcb6aedf0f5ea91dcd38d4faf0",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "null",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": null
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: MCP hook input must be representable as TOML: unsupported unit type at line 1 column 124"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "nested-null",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "outer": {
+                      "value": null
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: MCP hook input must be representable as TOML: unsupported unit type at line 1 column 135"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "array-null",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": [
+                      null
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: MCP hook input must be representable as TOML: unsupported unit type at line 1 column 126"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "uint64",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": 18446744073709551615
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:9438a14e5af15b9f7c993a0a77d4841c8a13c7256b1be86c7f5a9b5e1c8ab473",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "above-int64",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": 9223372036854775808
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:88594b6be5db8417f753ed46b2a8550b9248910c64b9cf12dd9797a07f24a42a",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "int64",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": 9223372036854775807
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:943e5f39118e43674d65e7a93bea5968e15c91ee54f356c7a32bf231756e357a",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "negative-int64",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": -9223372036854775808
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:c49d734ca550e91234b7d6946e6e9041b655020498bad4cdc671e98262e549ea",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "float",
+      "configuration": {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": 1e+100
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json:pre_tool_use:0:0",
+                "eventName": "preToolUse",
+                "handlerType": "mcpTool",
+                "server": "oda_hook",
+                "tool": "record",
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json",
+                "source": "project",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:f3e115a7c4dc8cb5eee83aa9a5c47a4eb55093165993d7b5afc28fef131bf958",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "session-end",
+      "configuration": {
+        "hooks": {
+          "SessionEnd": [
+            {
+              "hooks": [
+                {
+                  "type": "mcp_tool",
+                  "server": "oda_hook",
+                  "tool": "record",
+                  "input": {
+                    "value": "fixture"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [],
+            "warnings": [
+              "skipping MCP tool hook in /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: SessionEnd MCP hooks are not supported"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    }
+  ],
+  "full_adapter_support": false
+}

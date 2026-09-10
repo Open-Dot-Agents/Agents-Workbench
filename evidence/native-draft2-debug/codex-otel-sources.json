@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://learn.chatgpt.com/docs/config-file/config-reference.md",
+    "effective_url": "https://learn.chatgpt.com/docs/config-file/config-reference.md",
+    "path": "WORKBENCH/evidence/native-draft2-debug/codex-otel-reference.md",
+    "sha256": "f432ae52ed50ad88998c396c8da88cba74ef022f51f2def7ca494fd08c94ae58"
+  },
+  {
+    "url": "https://learn.chatgpt.com/docs/config-file/config-advanced.md",
+    "effective_url": "https://learn.chatgpt.com/docs/config-file/config-advanced.md",
+    "path": "WORKBENCH/evidence/native-draft2-debug/codex-otel-advanced.md",
+    "sha256": "42a5bc68a4ae38cae00df542edf16d3b059265b113f22884a8e9a598973190af"
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "experimental": true,
+  "autoUpdate": false,
+  "bashEnv": false,
+  "sandbox": {
+    "enabled": true,
+    "addCurrentWorkingDirectory": false,
+    "allowDevToolAccess": false,
+    "allowBypass": false,
+    "auth": {
+      "git": false,
+      "gh": false
+    },
+    "sandboxMcpServers": false,
+    "sandboxLspServers": false,
+    "userPolicy": {
+      "filesystem": {
+        "readonlyPaths": [
+          "/",
+          "/mnt/DATA/tmp/oda-copilot-native-od0j5hw1/workspace/readonly"
+        ],
+        "readwritePaths": [
+          "/mnt/DATA/tmp/oda-copilot-native-od0j5hw1/workspace",
+          "/dev/null"
+        ],
+        "deniedPaths": [
+          "/mnt/DATA/tmp/oda-copilot-native-od0j5hw1/workspace/private",
+          "/tmp",
+          "/mnt/DATA/tmp/oda-copilot-native-od0j5hw1/outside"
+        ],
+        "clearPolicyOnExit": false
+      },
+      "network": {
+        "allowOutbound": false,
+        "allowLocalNetwork": false
+      }
+    }
+  }
+}

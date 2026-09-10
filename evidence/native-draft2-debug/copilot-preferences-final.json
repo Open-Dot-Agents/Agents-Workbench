@@ -1,0 +1,1166 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1",
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "runner_sha256": "e2297559eefa931244cd6e06418cb31afd0df988b6ecfb171848824527821233",
+  "helper_sha256": {
+    "run_native_approvals.py": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc"
+  },
+  "implementation_sha256": {
+    "CLI/internal/config/apply.go": "300aa7996bfd7823c29f6c2d85d97a726537b88f26f6ce21aa6e350b2edbfda6",
+    "CLI/internal/config/apply_test.go": "ed8bd0f29a50946fd07f1aaaf54fa217d9a01140976670b8e48da08a9c5abb1f",
+    "CLI/internal/config/codex_security.go": "f48cbdb6a09a7d040de69fd613153f488b77dbe7f352a69d82209841b4bf9106",
+    "CLI/internal/config/codex_security_linux.go": "a37c37cd628681f0938454b61ede98829190b26e951f98c3b6e7751b819a3218",
+    "CLI/internal/config/codex_security_linux_test.go": "f0617926a57bbf1bdb342007c4b889cd5ee3ba843e05493e46891cc287bc0e48",
+    "CLI/internal/config/codex_security_other.go": "7fa4f5c3ae7569d10c43024769959bc1793038ff9ac89eab079e4da543261929",
+    "CLI/internal/config/codex_security_test.go": "c9d86a688a91f4f5cf816a5bf6414f786a9bd8d36686c4505f516155571582fc",
+    "CLI/internal/config/config.go": "944b260a18aa53390f3de1c175646b6a867a2d562952d540645933fc89ed45d9",
+    "CLI/internal/config/config_test.go": "6693c20643f9e46e7c32f1ee41d9fb2077c9db40145a7e313a036abd886c12ef",
+    "CLI/internal/config/diff.go": "b21220f0571d92d0a3b6ef0c72868970ec7c674bc0de530152d0bd69dc52b6ab",
+    "CLI/internal/config/diff_test.go": "c51a31dc6afee48eb1bd3a44b3737bc8765b8d4e9f3d204a73c2dc5c3a56e9e1",
+    "CLI/internal/config/hooks_lifecycle_test.go": "4d0dc6234a74c945355962d5fcf557d9cfabd9998bfa3fa0d42e236a43f55d8b",
+    "CLI/internal/config/native.go": "d2056b8aa607c7c28cdd2d2584a18d9daf0590ffa4177d39947ee9338ce7e2fa",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "8d69f8f4d6f20a5adc4d4d93a59ef4da2e704c137ef0894214d64cf9fb612051",
+    "CLI/internal/config/native_codex_hooks_test.go": "743690e6bad933e1dd0f1c09ef42166626b4dec9fd78889a1d35283975286eda",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_legacy.go": "0956b0efa98fc2c65172fef9300dd6f6fe2639d3e8ea7183dfb475c2fc8c11eb",
+    "CLI/internal/config/native_copilot_legacy_test.go": "8e97a1a2c8ab10ede99f758516c52fc2565e982078db747f8625aa740a83d4eb",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_copilot_preferences.go": "426e073102bd97c31a4f98c24848ff7b0f5e59a71bcf3fbb334afff0ab2c5302",
+    "CLI/internal/config/native_copilot_preferences_test.go": "c663219adca0c5e2682a78d46cb3b3c14c862a24767026bd77013c2f254d907c",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "09a30251cadce894f53bc584f415c926de007797d95110ddf424223dccf614ba",
+    "CLI/internal/config/native_field_context.go": "7a3f00d58f49efcda03228a87f3c08058a9dc4e1fdd31ab03a0ae9169dad6d12",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "bb638f6c1d475d51e8ed784bc6c9438bbe8def2461d8f44c7e78d8d2df4a5d4a",
+    "CLI/internal/config/native_import_merge.go": "8b551b5f6c575cd59031adc2247691fbcb490475c6563981a604451415f0bcee",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "997f9cd6e1e1d8b6fb7ed174536d7deb1a4e1d3c95e4e80d91991da9a2b5d566",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_plugins.go": "cbd7349c635964c41e6d9f283a9cd1ebdd469b352046a49ce59859cd8e1a86eb",
+    "CLI/internal/config/native_plugins_test.go": "51e0483f6b0f99542ed20725b2f1c8dd3084f11971d0f1f012cf4c8e33c23e9d",
+    "CLI/internal/config/native_registry.go": "be8aa93d08b4028dfe82701b2252d7f9a5dfb390df866487a3e5469ab671aacf",
+    "CLI/internal/config/native_selection.go": "caaf27195149ed2fa6aa74ec36c95b6434b79e85bb30db7abbb63f0a54f8bc0b",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "84fd82ebef9066c8a65359a7e366f97d8a9488597b1e5b2096c8566ee6ff483e",
+    "CLI/internal/config/native_types.go": "4f73b7b578827939d4be055e0fbc6c89d782db72c2b82d95cb6919ceed7735e5",
+    "CLI/internal/config/native_values.go": "9ad3b476b723fdad768100dafe6c8fe6256d774daee78594697b5d6d292dd90c",
+    "CLI/internal/config/portability.go": "77b15786d741a7ffd3590e3a8935714c919f25df72518625ca24617b6159ce4c",
+    "CLI/internal/config/portability_test.go": "929236192a323030c6c965f5f5a1eb671076e5d7f3daf6db81ea820901bc23c3",
+    "CLI/internal/config/security.go": "e84168641ff9abfc557e1220f5cd38b5e72fb6a64d2cb05a1e6beda10eb3d84c",
+    "CLI/internal/config/security_test.go": "d228446fd340bc399f08d4edbae6de4459cd5fdf80717f07566f5a00bf3ce24e",
+    "CLI/internal/config/tools_lifecycle_test.go": "698943db25951953c2a52cca7866cfe3fa73301e960a17ef037b9743e25f36dd"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "build",
+        "-o",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "./cmd/agents"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "apply",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "create\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/settings.json\nupdate\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/state/open-dot-agents/native/copilot/df64cfd740654c6f3c5450be7d6cc78add9ecaa777771b5952fb869dd73e989f.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "import",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/reimport-plan",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "apply",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "update\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/settings.json\nupdate\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/state/open-dot-agents/native/copilot/df64cfd740654c6f3c5450be7d6cc78add9ecaa777771b5952fb869dd73e989f.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "import",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/reimport-interactive",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "apply",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "update\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/settings.json\nupdate\t/mnt/DATA/tmp/oda-native-preferences-65qff4t1/state/open-dot-agents/native/copilot/df64cfd740654c6f3c5450be7d6cc78add9ecaa777771b5952fb869dd73e989f.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/agents",
+        "import",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/reimport-removed",
+        "--scope",
+        "user",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+        "--experimental"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "phases": [
+    {
+      "name": "plan",
+      "preferences": {
+        "defaultMode": "plan",
+        "banner": "never",
+        "showTipsOnStartup": false,
+        "memory": false,
+        "tabs": {
+          "enabled": true,
+          "sort": [
+            "AGENTS",
+            "CoPiLoT"
+          ],
+          "hide": [
+            "GISTS"
+          ]
+        },
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py plan",
+          "refreshInterval": 1,
+          "padding": 3,
+          "type": "command"
+        }
+      },
+      "state_unchanged_by_apply": true,
+      "projected_preferences": {
+        "banner": "never",
+        "defaultMode": "plan",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py plan",
+          "padding": 3,
+          "refreshInterval": 1,
+          "type": "command"
+        },
+        "tabs": {
+          "enabled": true,
+          "hide": [
+            "GISTS"
+          ],
+          "sort": [
+            "AGENTS",
+            "CoPiLoT"
+          ]
+        }
+      },
+      "settings_mode": 384,
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "--no-auto-update",
+        "--no-remote",
+        "--disable-builtin-mcps"
+      ],
+      "dimensions": [
+        40,
+        140
+      ],
+      "alive_before_teardown": true,
+      "raw_output": "\u001b[>4;2m\u001b[?u\u001b[?2026$p\u001b[?1049h\u001b[?2004h\u001b[?1004h\u001b[?1003h\u001b[?1006h\u001b[?25l\u001b[?12$p\u001b]10;?\u001b\\\u001b]11;?\u001b\\\u001b]4;0;?\u001b\\\u001b]4;1;?\u001b\\\u001b]4;2;?\u001b\\\u001b]4;3;?\u001b\\\u001b]4;4;?\u001b\\\u001b]4;5;?\u001b\\\u001b]4;6;?\u001b\\\u001b]4;7;?\u001b\\\u001b]4;8;?\u001b\\\u001b]4;9;?\u001b\\\u001b]4;10;?\u001b\\\u001b]4;11;?\u001b\\\u001b]4;12;?\u001b\\\u001b]4;13;?\u001b\\\u001b]4;14;?\u001b\\\u001b]4;15;?\u001b\\\u001b[>q\u001b[H\u001b[2J\u001b[?25l\u001b[22;0t\u001b]0;GitHub Copilot\u0007\u001b[H\u001b[2J  Sessions  \u001b[1;97;44m[Current]\u001b[m \u001b[2m Issues \u001b[m \u001b[2m Pull requests \u001b[m\u001b[?996n\u001b]11;#0D1117\u0007\u001b]10;#F0F6FC\u0007\r\n\r\n\u001b[34m  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f\u001b[m  Copilot v1.0.83 uses AI.\r\n\u001b[35m  \u2588 \u001b[96m\u2598\u259d\u001b[35m \u2588\u001b[m  Check for mistakes.\r\n\u001b[35m   \u2594\u2594\u2594\u2594 \u001b[m\u001b[36;2H/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u001b[34m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u276f \r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u001b[C\u001b[94m\u25cf\u001b[m \u001b[94mL\u001b[34moading:\u001b[40;127H\u001b[mfixture-model\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[8;2H\u001b[34m\u25cf\u001b[m No copilot-instructions.md found. Run /init to generate.\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[28A\b\u001b[33m!\u001b[m Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u001b[37m\u00a0copilot help providers\u00a0\u001b[m for configuration details.\u001b[40;12H\u001b[34m 2 skills\u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\r\n\r\n \u001b[1m\u2190\u001b[m open sidebar \u00b7 \u001b[34mplan\u001b[m \u00b7 \u001b[1m/\u001b[m commands \u00b7 \u001b[1m?\u001b[m help \u00b7 \u001b[1mtab\u001b[m next tab\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[12;40r\u001b[40;1H\r\n\u001b[1;40r\u001b[40;4HODA_STATUS_plan\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h",
+      "output": "  Sessions  [Current]  Issues   Pull requests \r\n\r\n  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f  Copilot v1.0.83 uses AI.\r\n  \u2588 \u2598\u259d \u2588  Check for mistakes.\r\n   \u2594\u2594\u2594\u2594 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u276f \r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u25cf Loading:fixture-model\u25cf No copilot-instructions.md found. Run /init to generate.\b! Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u00a0copilot help providers\u00a0 for configuration details. 2 skills\r\n\r\n \u2190 open sidebar \u00b7 plan \u00b7 / commands \u00b7 ? help \u00b7 tab next tab\r\nODA_STATUS_plan\u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d ",
+      "elapsed_seconds": 10.325013735004177,
+      "exit_status": 0,
+      "signal_status": null,
+      "teardown": "pexpect close(force=True) after the observation window",
+      "settings_unchanged_by_native": true,
+      "status_events": [
+        {
+          "recorded_at": 49236.064701695,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 313,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49236.914700629,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 1172,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49237.913169439,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 2173,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49238.916332481,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 3174,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49239.92311684,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 4174,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49240.914152174,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 5175,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49241.914108234,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 6175,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49242.916795889,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 7176,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49243.91853732,
+          "phase": "plan",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/f4529fe7-e1ec-46e8-9e70-0aa1a5ed3cc3",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 8177,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        }
+      ],
+      "refresh_gaps": [
+        0.8499989339979948,
+        0.9984688100012136,
+        1.0031630419980502,
+        1.0067843590004486,
+        0.9910353340019356,
+        0.9999560599972028,
+        1.0026876550036832,
+        1.0017414309986634
+      ],
+      "reimported_preferences": {
+        "banner": "never",
+        "defaultMode": "plan",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py plan",
+          "padding": 3,
+          "refreshInterval": 1,
+          "type": "command"
+        },
+        "tabs": {
+          "enabled": true,
+          "hide": [
+            "GISTS"
+          ],
+          "sort": [
+            "AGENTS",
+            "CoPiLoT"
+          ]
+        }
+      }
+    },
+    {
+      "name": "interactive",
+      "preferences": {
+        "defaultMode": "interactive",
+        "banner": "never",
+        "showTipsOnStartup": false,
+        "memory": false,
+        "tabs": {
+          "enabled": true,
+          "sort": [
+            "copilot",
+            "agents"
+          ],
+          "hide": []
+        },
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py interactive",
+          "refreshInterval": 2,
+          "padding": 0
+        }
+      },
+      "state_unchanged_by_apply": true,
+      "projected_preferences": {
+        "banner": "never",
+        "defaultMode": "interactive",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py interactive",
+          "padding": 0,
+          "refreshInterval": 2
+        },
+        "tabs": {
+          "enabled": true,
+          "hide": [],
+          "sort": [
+            "copilot",
+            "agents"
+          ]
+        }
+      },
+      "settings_mode": 384,
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "--no-auto-update",
+        "--no-remote",
+        "--disable-builtin-mcps"
+      ],
+      "dimensions": [
+        40,
+        140
+      ],
+      "alive_before_teardown": true,
+      "raw_output": "\u001b[>4;2m\u001b[?u\u001b[?2026$p\u001b[?1049h\u001b[?2004h\u001b[?1004h\u001b[?1003h\u001b[?1006h\u001b[?25l\u001b[?12$p\u001b]10;?\u001b\\\u001b]11;?\u001b\\\u001b]4;0;?\u001b\\\u001b]4;1;?\u001b\\\u001b]4;2;?\u001b\\\u001b]4;3;?\u001b\\\u001b]4;4;?\u001b\\\u001b]4;5;?\u001b\\\u001b]4;6;?\u001b\\\u001b]4;7;?\u001b\\\u001b]4;8;?\u001b\\\u001b]4;9;?\u001b\\\u001b]4;10;?\u001b\\\u001b]4;11;?\u001b\\\u001b]4;12;?\u001b\\\u001b]4;13;?\u001b\\\u001b]4;14;?\u001b\\\u001b]4;15;?\u001b\\\u001b[>q\u001b[H\u001b[2J\u001b[?25l\u001b[22;0t\u001b]0;GitHub Copilot\u0007\u001b[H\u001b[2J \u001b[1;97;44m[Current]\u001b[m  Sessions  \u001b[2m Issues \u001b[m \u001b[2m Pull requests \u001b[m  Gists\u001b[?996n\u001b]11;#0D1117\u0007\u001b]10;#F0F6FC\u0007\r\n\r\n\u001b[34m  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f\u001b[m  Copilot v1.0.83 uses AI.\r\n\u001b[35m  \u2588 \u001b[96m\u2598\u259d\u001b[35m \u2588\u001b[m  Check for mistakes.\r\n\u001b[35m   \u2594\u2594\u2594\u2594 \u001b[m\u001b[36;2H/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u001b[2m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u001b[m\u276f\r\n\u001b[2m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u001b[C\u001b[0;94m\u25cf\u001b[m \u001b[94mL\u001b[34moading:\u001b[40;127H\u001b[mfixture-model\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[8;2H\u001b[34m\u25cf\u001b[m No copilot-instructions.md found. Run /init to generate.\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[40;12H\u001b[34m 2 skills\u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[28A\b\u001b[33m!\u001b[m Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u001b[37m\u00a0copilot help providers\u00a0\u001b[m for configuration details.\u001b[38;3H\u001b[?25h\u001b[?25l\r\n\r\n \u001b[94m\u25c9\u001b[m \u001b[34mLo\u001b[94mad\u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[12;39r\u001b[39;1H\r\n\u001b[1;40r\u001b[39;2H\u001b[1m\u2190\u001b[m open sidebar \u00b7 \u001b[1m/\u001b[m commands \u00b7 \u001b[1m?\u001b[m help \u00b7 \u001b[1mtab\u001b[m next tab\u001b[39;127Hfixture-model\r\nODA_STATUS_interactive\u001b[K\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m  \u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h\u001b[?25l\u001b[5;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[37;3H\u001b[?25h",
+      "output": " [Current]  Sessions   Issues   Pull requests   Gists\r\n\r\n  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f  Copilot v1.0.83 uses AI.\r\n  \u2588 \u2598\u259d \u2588  Check for mistakes.\r\n   \u2594\u2594\u2594\u2594 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u276f\r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u25cf Loading:fixture-model\u25cf No copilot-instructions.md found. Run /init to generate. 2 skills\b! Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u00a0copilot help providers\u00a0 for configuration details.\r\n\r\n \u25c9 Load\r\n\u2190 open sidebar \u00b7 / commands \u00b7 ? help \u00b7 tab next tabfixture-model\r\nODA_STATUS_interactive\u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d ",
+      "elapsed_seconds": 10.269145419006236,
+      "exit_status": 0,
+      "signal_status": null,
+      "teardown": "pexpect close(force=True) after the observation window",
+      "settings_unchanged_by_native": true,
+      "status_events": [
+        {
+          "recorded_at": 49245.382865381,
+          "phase": "interactive",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 333,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49247.220106693,
+          "phase": "interactive",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 2176,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49249.228349019,
+          "phase": "interactive",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 4177,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49251.230985907,
+          "phase": "interactive",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 6177,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        },
+        {
+          "recorded_at": 49253.223488206,
+          "phase": "interactive",
+          "value": {
+            "cwd": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace",
+            "session_id": "fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "session_name": null,
+            "transcript_path": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home/session-state/fade8257-1c13-472f-b05a-a8bfe50963bc",
+            "model": {
+              "id": "fixture-model",
+              "display_name": "fixture-model"
+            },
+            "workspace": {
+              "current_dir": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace"
+            },
+            "username": null,
+            "remote": {
+              "connected": false
+            },
+            "version": "1.0.83",
+            "cost": {
+              "total_api_duration_ms": 0,
+              "total_lines_added": 0,
+              "total_lines_removed": 0,
+              "total_duration_ms": 8179,
+              "total_premium_requests": 0
+            },
+            "context_window": {
+              "total_input_tokens": 0,
+              "total_output_tokens": 0,
+              "total_cache_read_tokens": 0,
+              "total_cache_write_tokens": 0,
+              "total_reasoning_tokens": 0,
+              "total_tokens": 0,
+              "context_window_size": 200000,
+              "used_percentage": 0,
+              "remaining_percentage": 100,
+              "remaining_tokens": 200000,
+              "last_call_input_tokens": 0,
+              "last_call_output_tokens": 0,
+              "current_context_tokens": 0,
+              "displayed_context_limit": 128000,
+              "current_context_used_percentage": 0
+            },
+            "ai_used": {
+              "total_nano_aiu": 0,
+              "formatted": "0"
+            },
+            "allow_all_enabled": false
+          }
+        }
+      ],
+      "refresh_gaps": [
+        1.8372413120014244,
+        2.008242326002801,
+        2.0026368879989604,
+        1.9925022989991703
+      ],
+      "reimported_preferences": {
+        "banner": "never",
+        "defaultMode": "interactive",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "statusLine": {
+          "command": "/usr/bin/python3 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/status.py interactive",
+          "padding": 0,
+          "refreshInterval": 2
+        },
+        "tabs": {
+          "enabled": true,
+          "hide": [],
+          "sort": [
+            "copilot",
+            "agents"
+          ]
+        }
+      }
+    },
+    {
+      "name": "removed",
+      "preferences": {
+        "defaultMode": "interactive",
+        "banner": "never",
+        "showTipsOnStartup": false,
+        "memory": false,
+        "tabs": {
+          "enabled": false
+        }
+      },
+      "state_unchanged_by_apply": true,
+      "projected_preferences": {
+        "banner": "never",
+        "defaultMode": "interactive",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "tabs": {
+          "enabled": false
+        }
+      },
+      "settings_mode": 384,
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "--no-auto-update",
+        "--no-remote",
+        "--disable-builtin-mcps"
+      ],
+      "dimensions": [
+        40,
+        140
+      ],
+      "alive_before_teardown": true,
+      "raw_output": "\u001b[>4;2m\u001b[?u\u001b[?2026$p\u001b[?1049h\u001b[?2004h\u001b[?1004h\u001b[?1003h\u001b[?1006h\u001b[?25l\u001b[?12$p\u001b]10;?\u001b\\\u001b]11;?\u001b\\\u001b]4;0;?\u001b\\\u001b]4;1;?\u001b\\\u001b]4;2;?\u001b\\\u001b]4;3;?\u001b\\\u001b]4;4;?\u001b\\\u001b]4;5;?\u001b\\\u001b]4;6;?\u001b\\\u001b]4;7;?\u001b\\\u001b]4;8;?\u001b\\\u001b]4;9;?\u001b\\\u001b]4;10;?\u001b\\\u001b]4;11;?\u001b\\\u001b]4;12;?\u001b\\\u001b]4;13;?\u001b\\\u001b]4;14;?\u001b\\\u001b]4;15;?\u001b\\\u001b[>q\u001b[H\u001b[2J\u001b[?25l\u001b[22;0t\u001b]0;GitHub Copilot\u0007\u001b[H\u001b[2J\u001b[?996n\u001b]11;#0D1117\u0007\u001b]10;#F0F6FC\u0007\u001b[34m  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f\u001b[m  Copilot v1.0.83 uses AI.\r\n\u001b[35m  \u2588 \u001b[96m\u2598\u259d\u001b[35m \u2588\u001b[m  Check for mistakes.\r\n\u001b[35m   \u2594\u2594\u2594\u2594 \u001b[m\u001b[36;2H/mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u001b[2m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u001b[m\u276f\r\n\u001b[2m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u001b[C\u001b[0;94m\u25cf\u001b[m \u001b[94mL\u001b[34moading:\u001b[40;127H\u001b[mfixture-model\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[6;2H\u001b[34m\u25cf\u001b[m No copilot-instructions.md found. Run /init to generate.\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[8;2H\u001b[33m!\u001b[m Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u001b[37m\u00a0copilot help providers\u00a0\u001b[m for configuration details.\u001b[40;12H\u001b[34m 2 skills\u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\r\n\r\n \u001b[1m\u2190\u001b[m open sidebar \u00b7 \u001b[1m/\u001b[m commands \u00b7 \u001b[1m?\u001b[m help\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m  \u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m  \u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m  \u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2574\u2576\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h\u001b[?25l\u001b[3;5H\u001b[96m\u2598\u259d\u001b[35m \u001b[m\u001b[38;3H\u001b[?25h",
+      "output": "  \u256d\u2500\u256e\u256d\u2500\u256e\r\n  \u2570\u2500\u256f\u2570\u2500\u256f  Copilot v1.0.83 uses AI.\r\n  \u2588 \u2598\u259d \u2588  Check for mistakes.\r\n   \u2594\u2594\u2594\u2594 /mnt/DATA/tmp/oda-native-preferences-65qff4t1/workspace [\u2387 main%]\r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u276f\r\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\r\n\u25cf Loading:fixture-model\u25cf No copilot-instructions.md found. Run /init to generate.! Model \"fixture-model\" is not in the built-in catalog. Using defaults for: prompt tokens (COPILOT_PROVIDER_MAX_PROMPT_TOKENS), output\r\n   tokens (COPILOT_PROVIDER_MAX_OUTPUT_TOKENS). Run \u00a0copilot help providers\u00a0 for configuration details. 2 skills\r\n\r\n \u2190 open sidebar \u00b7 / commands \u00b7 ? help\u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d \u2574\u2576    \u2574\u2576 \u2598\u259d ",
+      "elapsed_seconds": 10.257462057001248,
+      "exit_status": 0,
+      "signal_status": null,
+      "teardown": "pexpect close(force=True) after the observation window",
+      "settings_unchanged_by_native": true,
+      "status_events": [],
+      "reimported_preferences": {
+        "banner": "never",
+        "defaultMode": "interactive",
+        "memory": false,
+        "showTipsOnStartup": false,
+        "tabs": {
+          "enabled": false
+        }
+      }
+    }
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "HOME": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+    "COPILOT_HOME": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/home",
+    "COPILOT_CACHE_HOME": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/cache",
+    "XDG_STATE_HOME": "/mnt/DATA/tmp/oda-native-preferences-65qff4t1/state",
+    "COPILOT_OFFLINE": "true",
+    "COPILOT_PROVIDER_TYPE": "openai",
+    "COPILOT_PROVIDER_WIRE_API": "completions",
+    "COPILOT_PROVIDER_BASE_URL": "http://127.0.0.1:9/v1",
+    "COPILOT_MODEL": "fixture-model",
+    "TERM": "xterm-256color"
+  },
+  "full_adapter_support": false,
+  "limitations": [
+    "No model turn, autopilot execution, notifications, or image rendering test.",
+    "Terminal output establishes initial mode; no session.mode_changed event is claimed.",
+    "Timer checks allow scheduling delay and do not establish exact timing guarantees."
+  ],
+  "status_command_source": "import json,sys,time\nfrom pathlib import Path\nvalue=json.load(sys.stdin)\nwith Path('/mnt/DATA/tmp/oda-native-preferences-65qff4t1/status-events.jsonl').open(\"a\") as stream:\n stream.write(json.dumps({\"recorded_at\":time.monotonic(),\"phase\":sys.argv[1],\"value\":value})+\"\\n\")\nprint(\"ODA_STATUS_\"+sys.argv[1])\n",
+  "passed": true
+}

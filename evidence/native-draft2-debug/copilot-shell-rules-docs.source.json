@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-09-10T18:30:43.356789+00:00",
+  "index": "https://docs.github.com/llms.txt",
+  "index_sha256": "8808227efc71ec33434ee9fbee06cf0f0eab833d933e2694e2814f05c80ecb24",
+  "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools",
+  "fetch_url": "https://docs.github.com/api/article/body?pathname=/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools",
+  "sha256": "bbc5081d6e58ce5f26081d65b8b495399e6365f09c2eb5e0cde44ef5d3b80f36"
+}

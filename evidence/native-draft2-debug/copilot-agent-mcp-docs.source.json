@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-09-10T16:53:22.617122+00:00",
+  "index": "https://docs.github.com/llms.txt",
+  "index_sha256": "8808227efc71ec33434ee9fbee06cf0f0eab833d933e2694e2814f05c80ecb24",
+  "url": "https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference",
+  "fetch_url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-command-reference",
+  "sha256": "7033ad8f50f5e5563c832ffc9ce02f15a85386d5a705bd869484c5b9b845894c"
+}

@@ -1,0 +1,21 @@
+{
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "sources": [
+    {
+      "path": "WORKBENCH/evidence/native-draft2-debug/copilot-subagents-source-config.md",
+      "sha256": "da7e43c09e769e9e294cf57eb27cb80bb7b12e47fbc6be4c70bb98cbd5a5875f",
+      "source": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference"
+    },
+    {
+      "path": "WORKBENCH/evidence/native-draft2-debug/copilot-subagents-source-commands.md",
+      "sha256": "49fc20d28db015d49f6b720afe7354ab7474ad23f267b6cd10b3cfc83d814a47",
+      "source": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-command-reference"
+    },
+    {
+      "path": "WORKBENCH/evidence/native-draft2-debug/copilot-subagents-source-providers.txt",
+      "sha256": "b940488a6f3766a2602e9076018f50c2e061039a75d010b8d91319437d48f84c",
+      "source": "/home/maurizio/.local/bin/copilot help providers"
+    }
+  ]
+}

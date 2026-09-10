@@ -1,0 +1,1792 @@
+{
+  "native_version": "0.154.0",
+  "binary_sha256": "3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022",
+  "fixture": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk",
+  "scope": "native config load only; no authentication or model turn",
+  "full_adapter_support": false,
+  "cases": [
+    {
+      "name": "agent-alias",
+      "config": "[agents]\nmax_threads = 2\n",
+      "loaded": true,
+      "config_read": {
+        "config": {
+          "model": null,
+          "review_model": null,
+          "model_context_window": null,
+          "model_auto_compact_token_limit": null,
+          "model_auto_compact_token_limit_scope": null,
+          "model_provider": null,
+          "approval_policy": null,
+          "approvals_reviewer": null,
+          "sandbox_mode": null,
+          "sandbox_workspace_write": null,
+          "forced_chatgpt_workspace_id": null,
+          "forced_login_method": null,
+          "web_search": null,
+          "tools": null,
+          "instructions": null,
+          "developer_instructions": null,
+          "compact_prompt": null,
+          "model_reasoning_effort": null,
+          "model_reasoning_summary": null,
+          "model_verbosity": null,
+          "service_tier": null,
+          "analytics": null,
+          "apps": null,
+          "browser_use": null,
+          "computer_use": null,
+          "desktop": null,
+          "permissions": null,
+          "js_repl_node_path": null,
+          "hide_agent_reasoning": false,
+          "experimental_realtime_webrtc_call_base_url": null,
+          "realtime": null,
+          "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+          "experimental_realtime_ws_startup_context": null,
+          "project_doc_fallback_filenames": [],
+          "mcp_optional_startup_grace_ms": null,
+          "log_dir": null,
+          "sqlite_home": null,
+          "include_apps_instructions": true,
+          "responses_api_metadata": null,
+          "memories": null,
+          "disable_paste_burst": null,
+          "experimental_thread_store": null,
+          "oss_provider": null,
+          "model_instructions_file": null,
+          "auto_review": null,
+          "ghost_snapshot": null,
+          "model_providers": {},
+          "windows": null,
+          "audio": null,
+          "experimental_realtime_ws_backend_prompt": null,
+          "include_permissions_instructions": true,
+          "default_permissions": null,
+          "mcp_oauth_credentials_store": "auto",
+          "experimental_thread_store_endpoint": null,
+          "check_for_update_on_startup": null,
+          "notice": null,
+          "notify": null,
+          "experimental_realtime_start_instructions": null,
+          "profiles": {},
+          "orchestrator": null,
+          "mcp_oauth_callback_url": null,
+          "experimental_compact_prompt_file": null,
+          "plan_mode_reasoning_effort": null,
+          "allow_symlinked_codex_home": null,
+          "skills": null,
+          "tui": null,
+          "mcp_oauth_callback_port": null,
+          "tool_output_token_limit": null,
+          "tool_suggest": null,
+          "experimental_realtime_ws_base_url": null,
+          "features": {
+            "auth_elicitation": true,
+            "background_paginated_rollout_migration": false,
+            "mcp_2026_07_28": false,
+            "memories": false,
+            "mentions_v2": true,
+            "remote_control": false,
+            "remote_plugin": true,
+            "tool_suggest": true,
+            "windows_sandbox_service": false
+          },
+          "include_environment_context": true,
+          "shell_environment_policy": {
+            "inherit": null,
+            "ignore_default_excludes": null,
+            "exclude": null,
+            "set": null,
+            "include_only": null,
+            "filters": null,
+            "experimental_use_profile": null
+          },
+          "allow_login_shell": true,
+          "history": {
+            "persistence": "save-all",
+            "max_bytes": null
+          },
+          "agents": {
+            "enabled": null,
+            "max_concurrent_threads_per_session": 2,
+            "max_depth": null,
+            "default_subagent_model": null,
+            "default_subagent_reasoning_effort": null,
+            "job_max_runtime_seconds": null,
+            "interrupt_message": null
+          },
+          "model_catalog_json": null,
+          "plugins": {},
+          "experimental_use_unified_exec_tool": null,
+          "goals": null,
+          "personality": null,
+          "include_collaboration_mode_instructions": true,
+          "profile": null,
+          "hooks": null,
+          "apps_mcp_product_sku": null,
+          "background_terminal_max_timeout": 300000,
+          "openai_base_url": null,
+          "show_raw_agent_reasoning": null,
+          "marketplaces": {},
+          "js_repl_node_module_dirs": null,
+          "project_doc_max_bytes": 32768,
+          "cli_auth_credentials_store": "file",
+          "file_opener": "vscode",
+          "otel": null,
+          "experimental_realtime_ws_model": null,
+          "projects": null,
+          "feedback": null,
+          "suppress_unstable_features_warning": null,
+          "thread_unload_delay_secs": null,
+          "project_root_markers": [
+            ".git"
+          ],
+          "mcp_servers": {}
+        },
+        "origins": {
+          "agents.max_concurrent_threads_per_session": {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:707f0c74fdf398169b4dca5bf34afc33a5004d9b38ab5031d957e3f2d0c5ac21"
+          }
+        },
+        "layers": [
+          {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:707f0c74fdf398169b4dca5bf34afc33a5004d9b38ab5031d957e3f2d0c5ac21",
+            "config": {
+              "agents": {
+                "max_threads": 2
+              }
+            }
+          },
+          {
+            "name": {
+              "type": "system",
+              "file": "/etc/codex/config.toml"
+            },
+            "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "config": {}
+          }
+        ]
+      },
+      "thread_started": true,
+      "events": [
+        {
+          "id": 1,
+          "result": {
+            "userAgent": "oda_config_debug/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda_config_debug; 0.1.0)",
+            "codexHome": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/home",
+            "platformFamily": "unix",
+            "platformOs": "linux"
+          }
+        },
+        {
+          "method": "remoteControl/status/changed",
+          "params": {
+            "status": "disabled",
+            "serverName": "1Z10",
+            "installationId": "c0d5451a-94df-495b-809b-2a07f6ec9103",
+            "environmentId": null
+          },
+          "emittedAtMs": 1789050473890
+        },
+        {
+          "id": 2,
+          "result": {
+            "config": {
+              "model": null,
+              "review_model": null,
+              "model_context_window": null,
+              "model_auto_compact_token_limit": null,
+              "model_auto_compact_token_limit_scope": null,
+              "model_provider": null,
+              "approval_policy": null,
+              "approvals_reviewer": null,
+              "sandbox_mode": null,
+              "sandbox_workspace_write": null,
+              "forced_chatgpt_workspace_id": null,
+              "forced_login_method": null,
+              "web_search": null,
+              "tools": null,
+              "instructions": null,
+              "developer_instructions": null,
+              "compact_prompt": null,
+              "model_reasoning_effort": null,
+              "model_reasoning_summary": null,
+              "model_verbosity": null,
+              "service_tier": null,
+              "analytics": null,
+              "apps": null,
+              "browser_use": null,
+              "computer_use": null,
+              "desktop": null,
+              "permissions": null,
+              "js_repl_node_path": null,
+              "hide_agent_reasoning": false,
+              "experimental_realtime_webrtc_call_base_url": null,
+              "realtime": null,
+              "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+              "experimental_realtime_ws_startup_context": null,
+              "project_doc_fallback_filenames": [],
+              "mcp_optional_startup_grace_ms": null,
+              "log_dir": null,
+              "sqlite_home": null,
+              "include_apps_instructions": true,
+              "responses_api_metadata": null,
+              "memories": null,
+              "disable_paste_burst": null,
+              "experimental_thread_store": null,
+              "oss_provider": null,
+              "model_instructions_file": null,
+              "auto_review": null,
+              "ghost_snapshot": null,
+              "model_providers": {},
+              "windows": null,
+              "audio": null,
+              "experimental_realtime_ws_backend_prompt": null,
+              "include_permissions_instructions": true,
+              "default_permissions": null,
+              "mcp_oauth_credentials_store": "auto",
+              "experimental_thread_store_endpoint": null,
+              "check_for_update_on_startup": null,
+              "notice": null,
+              "notify": null,
+              "experimental_realtime_start_instructions": null,
+              "profiles": {},
+              "orchestrator": null,
+              "mcp_oauth_callback_url": null,
+              "experimental_compact_prompt_file": null,
+              "plan_mode_reasoning_effort": null,
+              "allow_symlinked_codex_home": null,
+              "skills": null,
+              "tui": null,
+              "mcp_oauth_callback_port": null,
+              "tool_output_token_limit": null,
+              "tool_suggest": null,
+              "experimental_realtime_ws_base_url": null,
+              "features": {
+                "auth_elicitation": true,
+                "background_paginated_rollout_migration": false,
+                "mcp_2026_07_28": false,
+                "memories": false,
+                "mentions_v2": true,
+                "remote_control": false,
+                "remote_plugin": true,
+                "tool_suggest": true,
+                "windows_sandbox_service": false
+              },
+              "include_environment_context": true,
+              "shell_environment_policy": {
+                "inherit": null,
+                "ignore_default_excludes": null,
+                "exclude": null,
+                "set": null,
+                "include_only": null,
+                "filters": null,
+                "experimental_use_profile": null
+              },
+              "allow_login_shell": true,
+              "history": {
+                "persistence": "save-all",
+                "max_bytes": null
+              },
+              "agents": {
+                "enabled": null,
+                "max_concurrent_threads_per_session": 2,
+                "max_depth": null,
+                "default_subagent_model": null,
+                "default_subagent_reasoning_effort": null,
+                "job_max_runtime_seconds": null,
+                "interrupt_message": null
+              },
+              "model_catalog_json": null,
+              "plugins": {},
+              "experimental_use_unified_exec_tool": null,
+              "goals": null,
+              "personality": null,
+              "include_collaboration_mode_instructions": true,
+              "profile": null,
+              "hooks": null,
+              "apps_mcp_product_sku": null,
+              "background_terminal_max_timeout": 300000,
+              "openai_base_url": null,
+              "show_raw_agent_reasoning": null,
+              "marketplaces": {},
+              "js_repl_node_module_dirs": null,
+              "project_doc_max_bytes": 32768,
+              "cli_auth_credentials_store": "file",
+              "file_opener": "vscode",
+              "otel": null,
+              "experimental_realtime_ws_model": null,
+              "projects": null,
+              "feedback": null,
+              "suppress_unstable_features_warning": null,
+              "thread_unload_delay_secs": null,
+              "project_root_markers": [
+                ".git"
+              ],
+              "mcp_servers": {}
+            },
+            "origins": {
+              "agents.max_concurrent_threads_per_session": {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:707f0c74fdf398169b4dca5bf34afc33a5004d9b38ab5031d957e3f2d0c5ac21"
+              }
+            },
+            "layers": [
+              {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:707f0c74fdf398169b4dca5bf34afc33a5004d9b38ab5031d957e3f2d0c5ac21",
+                "config": {
+                  "agents": {
+                    "max_threads": 2
+                  }
+                }
+              },
+              {
+                "name": {
+                  "type": "system",
+                  "file": "/etc/codex/config.toml"
+                },
+                "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "config": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "result": {
+            "thread": {
+              "id": "01a08bb7-cdaa-7df1-8b61-aa91abe67f92",
+              "environments": [
+                {
+                  "environmentId": "local",
+                  "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/workspace",
+                  "runtimeWorkspaceRoots": [
+                    "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/workspace"
+                  ]
+                }
+              ],
+              "extra": null,
+              "sessionId": "01a08bb7-cdaa-7df1-8b61-aa91abe67f92",
+              "forkedFromId": null,
+              "parentThreadId": null,
+              "preview": "",
+              "ephemeral": true,
+              "section": null,
+              "sectionEnteredAt": null,
+              "projectId": null,
+              "historyMode": "legacy",
+              "modelProvider": "openai",
+              "model": "gpt-6-astra",
+              "reasoningEffort": null,
+              "createdAt": 1789050473,
+              "updatedAt": 1789050473,
+              "recencyAt": 1789050473,
+              "status": {
+                "type": "idle"
+              },
+              "path": null,
+              "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/workspace",
+              "cliVersion": "0.154.0",
+              "originator": "oda_config_debug",
+              "source": "vscode",
+              "canAcceptDirectInput": true,
+              "threadSource": null,
+              "agentNickname": null,
+              "agentRole": null,
+              "gitInfo": null,
+              "name": null,
+              "daybreakEnabled": null,
+              "turns": []
+            },
+            "model": "gpt-6-astra",
+            "modelProvider": "openai",
+            "serviceTier": null,
+            "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/workspace",
+            "runtimeWorkspaceRoots": [
+              "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-alias/workspace"
+            ],
+            "instructionSources": [],
+            "approvalPolicy": "on-request",
+            "approvalsReviewer": "user",
+            "sandbox": {
+              "type": "readOnly",
+              "networkAccess": false
+            },
+            "activePermissionProfile": {
+              "id": ":read-only",
+              "extends": null
+            },
+            "reasoningEffort": null,
+            "multiAgentMode": "explicitRequestOnly"
+          }
+        }
+      ],
+      "stderr": "",
+      "warnings": [],
+      "matched_expected": true
+    },
+    {
+      "name": "agent-canonical",
+      "config": "[agents]\nmax_concurrent_threads_per_session = 2\n",
+      "loaded": true,
+      "config_read": {
+        "config": {
+          "model": null,
+          "review_model": null,
+          "model_context_window": null,
+          "model_auto_compact_token_limit": null,
+          "model_auto_compact_token_limit_scope": null,
+          "model_provider": null,
+          "approval_policy": null,
+          "approvals_reviewer": null,
+          "sandbox_mode": null,
+          "sandbox_workspace_write": null,
+          "forced_chatgpt_workspace_id": null,
+          "forced_login_method": null,
+          "web_search": null,
+          "tools": null,
+          "instructions": null,
+          "developer_instructions": null,
+          "compact_prompt": null,
+          "model_reasoning_effort": null,
+          "model_reasoning_summary": null,
+          "model_verbosity": null,
+          "service_tier": null,
+          "analytics": null,
+          "apps": null,
+          "browser_use": null,
+          "computer_use": null,
+          "desktop": null,
+          "audio": null,
+          "marketplaces": {},
+          "js_repl_node_path": null,
+          "model_providers": {},
+          "projects": null,
+          "notice": null,
+          "shell_environment_policy": {
+            "inherit": null,
+            "ignore_default_excludes": null,
+            "exclude": null,
+            "set": null,
+            "include_only": null,
+            "filters": null,
+            "experimental_use_profile": null
+          },
+          "notify": null,
+          "ghost_snapshot": null,
+          "profile": null,
+          "disable_paste_burst": null,
+          "tool_suggest": null,
+          "otel": null,
+          "mcp_oauth_callback_port": null,
+          "orchestrator": null,
+          "oss_provider": null,
+          "experimental_thread_store": null,
+          "project_doc_max_bytes": 32768,
+          "allow_login_shell": true,
+          "hide_agent_reasoning": false,
+          "agents": {
+            "enabled": null,
+            "max_concurrent_threads_per_session": 2,
+            "max_depth": null,
+            "default_subagent_model": null,
+            "default_subagent_reasoning_effort": null,
+            "job_max_runtime_seconds": null,
+            "interrupt_message": null
+          },
+          "include_environment_context": true,
+          "project_root_markers": [
+            ".git"
+          ],
+          "experimental_realtime_webrtc_call_base_url": null,
+          "plan_mode_reasoning_effort": null,
+          "permissions": null,
+          "tui": null,
+          "mcp_servers": {},
+          "experimental_realtime_ws_model": null,
+          "openai_base_url": null,
+          "experimental_realtime_ws_backend_prompt": null,
+          "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+          "hooks": null,
+          "windows": null,
+          "experimental_thread_store_endpoint": null,
+          "allow_symlinked_codex_home": null,
+          "include_permissions_instructions": true,
+          "mcp_oauth_callback_url": null,
+          "background_terminal_max_timeout": 300000,
+          "js_repl_node_module_dirs": null,
+          "cli_auth_credentials_store": "file",
+          "model_instructions_file": null,
+          "apps_mcp_product_sku": null,
+          "experimental_compact_prompt_file": null,
+          "experimental_realtime_ws_base_url": null,
+          "experimental_realtime_ws_startup_context": null,
+          "default_permissions": null,
+          "include_collaboration_mode_instructions": true,
+          "project_doc_fallback_filenames": [],
+          "file_opener": "vscode",
+          "sqlite_home": null,
+          "memories": null,
+          "goals": null,
+          "check_for_update_on_startup": null,
+          "suppress_unstable_features_warning": null,
+          "skills": null,
+          "experimental_realtime_start_instructions": null,
+          "history": {
+            "persistence": "save-all",
+            "max_bytes": null
+          },
+          "thread_unload_delay_secs": null,
+          "feedback": null,
+          "profiles": {},
+          "realtime": null,
+          "include_apps_instructions": true,
+          "plugins": {},
+          "personality": null,
+          "features": {
+            "auth_elicitation": true,
+            "background_paginated_rollout_migration": false,
+            "mcp_2026_07_28": false,
+            "memories": false,
+            "mentions_v2": true,
+            "remote_control": false,
+            "remote_plugin": true,
+            "tool_suggest": true,
+            "windows_sandbox_service": false
+          },
+          "experimental_use_unified_exec_tool": null,
+          "mcp_oauth_credentials_store": "auto",
+          "auto_review": null,
+          "show_raw_agent_reasoning": null,
+          "tool_output_token_limit": null,
+          "log_dir": null,
+          "model_catalog_json": null,
+          "mcp_optional_startup_grace_ms": null,
+          "responses_api_metadata": null
+        },
+        "origins": {
+          "agents.max_concurrent_threads_per_session": {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:da388bae5472e4e6b2c8f9dae172548dea5ad5356ae7220f32331e643de0b979"
+          }
+        },
+        "layers": [
+          {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:da388bae5472e4e6b2c8f9dae172548dea5ad5356ae7220f32331e643de0b979",
+            "config": {
+              "agents": {
+                "max_concurrent_threads_per_session": 2
+              }
+            }
+          },
+          {
+            "name": {
+              "type": "system",
+              "file": "/etc/codex/config.toml"
+            },
+            "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "config": {}
+          }
+        ]
+      },
+      "thread_started": true,
+      "events": [
+        {
+          "id": 1,
+          "result": {
+            "userAgent": "oda_config_debug/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda_config_debug; 0.1.0)",
+            "codexHome": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/home",
+            "platformFamily": "unix",
+            "platformOs": "linux"
+          }
+        },
+        {
+          "method": "remoteControl/status/changed",
+          "params": {
+            "status": "disabled",
+            "serverName": "1Z10",
+            "installationId": "fd3e7fb8-4d3f-47fb-a0ad-7d008b7d3d17",
+            "environmentId": null
+          },
+          "emittedAtMs": 1789050474163
+        },
+        {
+          "id": 2,
+          "result": {
+            "config": {
+              "model": null,
+              "review_model": null,
+              "model_context_window": null,
+              "model_auto_compact_token_limit": null,
+              "model_auto_compact_token_limit_scope": null,
+              "model_provider": null,
+              "approval_policy": null,
+              "approvals_reviewer": null,
+              "sandbox_mode": null,
+              "sandbox_workspace_write": null,
+              "forced_chatgpt_workspace_id": null,
+              "forced_login_method": null,
+              "web_search": null,
+              "tools": null,
+              "instructions": null,
+              "developer_instructions": null,
+              "compact_prompt": null,
+              "model_reasoning_effort": null,
+              "model_reasoning_summary": null,
+              "model_verbosity": null,
+              "service_tier": null,
+              "analytics": null,
+              "apps": null,
+              "browser_use": null,
+              "computer_use": null,
+              "desktop": null,
+              "audio": null,
+              "marketplaces": {},
+              "js_repl_node_path": null,
+              "model_providers": {},
+              "projects": null,
+              "notice": null,
+              "shell_environment_policy": {
+                "inherit": null,
+                "ignore_default_excludes": null,
+                "exclude": null,
+                "set": null,
+                "include_only": null,
+                "filters": null,
+                "experimental_use_profile": null
+              },
+              "notify": null,
+              "ghost_snapshot": null,
+              "profile": null,
+              "disable_paste_burst": null,
+              "tool_suggest": null,
+              "otel": null,
+              "mcp_oauth_callback_port": null,
+              "orchestrator": null,
+              "oss_provider": null,
+              "experimental_thread_store": null,
+              "project_doc_max_bytes": 32768,
+              "allow_login_shell": true,
+              "hide_agent_reasoning": false,
+              "agents": {
+                "enabled": null,
+                "max_concurrent_threads_per_session": 2,
+                "max_depth": null,
+                "default_subagent_model": null,
+                "default_subagent_reasoning_effort": null,
+                "job_max_runtime_seconds": null,
+                "interrupt_message": null
+              },
+              "include_environment_context": true,
+              "project_root_markers": [
+                ".git"
+              ],
+              "experimental_realtime_webrtc_call_base_url": null,
+              "plan_mode_reasoning_effort": null,
+              "permissions": null,
+              "tui": null,
+              "mcp_servers": {},
+              "experimental_realtime_ws_model": null,
+              "openai_base_url": null,
+              "experimental_realtime_ws_backend_prompt": null,
+              "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+              "hooks": null,
+              "windows": null,
+              "experimental_thread_store_endpoint": null,
+              "allow_symlinked_codex_home": null,
+              "include_permissions_instructions": true,
+              "mcp_oauth_callback_url": null,
+              "background_terminal_max_timeout": 300000,
+              "js_repl_node_module_dirs": null,
+              "cli_auth_credentials_store": "file",
+              "model_instructions_file": null,
+              "apps_mcp_product_sku": null,
+              "experimental_compact_prompt_file": null,
+              "experimental_realtime_ws_base_url": null,
+              "experimental_realtime_ws_startup_context": null,
+              "default_permissions": null,
+              "include_collaboration_mode_instructions": true,
+              "project_doc_fallback_filenames": [],
+              "file_opener": "vscode",
+              "sqlite_home": null,
+              "memories": null,
+              "goals": null,
+              "check_for_update_on_startup": null,
+              "suppress_unstable_features_warning": null,
+              "skills": null,
+              "experimental_realtime_start_instructions": null,
+              "history": {
+                "persistence": "save-all",
+                "max_bytes": null
+              },
+              "thread_unload_delay_secs": null,
+              "feedback": null,
+              "profiles": {},
+              "realtime": null,
+              "include_apps_instructions": true,
+              "plugins": {},
+              "personality": null,
+              "features": {
+                "auth_elicitation": true,
+                "background_paginated_rollout_migration": false,
+                "mcp_2026_07_28": false,
+                "memories": false,
+                "mentions_v2": true,
+                "remote_control": false,
+                "remote_plugin": true,
+                "tool_suggest": true,
+                "windows_sandbox_service": false
+              },
+              "experimental_use_unified_exec_tool": null,
+              "mcp_oauth_credentials_store": "auto",
+              "auto_review": null,
+              "show_raw_agent_reasoning": null,
+              "tool_output_token_limit": null,
+              "log_dir": null,
+              "model_catalog_json": null,
+              "mcp_optional_startup_grace_ms": null,
+              "responses_api_metadata": null
+            },
+            "origins": {
+              "agents.max_concurrent_threads_per_session": {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:da388bae5472e4e6b2c8f9dae172548dea5ad5356ae7220f32331e643de0b979"
+              }
+            },
+            "layers": [
+              {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:da388bae5472e4e6b2c8f9dae172548dea5ad5356ae7220f32331e643de0b979",
+                "config": {
+                  "agents": {
+                    "max_concurrent_threads_per_session": 2
+                  }
+                }
+              },
+              {
+                "name": {
+                  "type": "system",
+                  "file": "/etc/codex/config.toml"
+                },
+                "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "config": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "result": {
+            "thread": {
+              "id": "01a08bb7-cec1-7cb3-b420-f615725d19f2",
+              "environments": [
+                {
+                  "environmentId": "local",
+                  "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/workspace",
+                  "runtimeWorkspaceRoots": [
+                    "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/workspace"
+                  ]
+                }
+              ],
+              "extra": null,
+              "sessionId": "01a08bb7-cec1-7cb3-b420-f615725d19f2",
+              "forkedFromId": null,
+              "parentThreadId": null,
+              "preview": "",
+              "ephemeral": true,
+              "section": null,
+              "sectionEnteredAt": null,
+              "projectId": null,
+              "historyMode": "legacy",
+              "modelProvider": "openai",
+              "model": "gpt-6-astra",
+              "reasoningEffort": null,
+              "createdAt": 1789050474,
+              "updatedAt": 1789050474,
+              "recencyAt": 1789050474,
+              "status": {
+                "type": "idle"
+              },
+              "path": null,
+              "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/workspace",
+              "cliVersion": "0.154.0",
+              "originator": "oda_config_debug",
+              "source": "vscode",
+              "canAcceptDirectInput": true,
+              "threadSource": null,
+              "agentNickname": null,
+              "agentRole": null,
+              "gitInfo": null,
+              "name": null,
+              "daybreakEnabled": null,
+              "turns": []
+            },
+            "model": "gpt-6-astra",
+            "modelProvider": "openai",
+            "serviceTier": null,
+            "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/workspace",
+            "runtimeWorkspaceRoots": [
+              "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/agent-canonical/workspace"
+            ],
+            "instructionSources": [],
+            "approvalPolicy": "on-request",
+            "approvalsReviewer": "user",
+            "sandbox": {
+              "type": "readOnly",
+              "networkAccess": false
+            },
+            "activePermissionProfile": {
+              "id": ":read-only",
+              "extends": null
+            },
+            "reasoningEffort": null,
+            "multiAgentMode": "explicitRequestOnly"
+          }
+        }
+      ],
+      "stderr": "",
+      "warnings": [],
+      "matched_expected": true
+    },
+    {
+      "name": "duplicate-alias",
+      "config": "[agents]\nmax_threads = 2\nmax_concurrent_threads_per_session = 2\n",
+      "loaded": true,
+      "config_read": {
+        "config": {
+          "model": null,
+          "review_model": null,
+          "model_context_window": null,
+          "model_auto_compact_token_limit": null,
+          "model_auto_compact_token_limit_scope": null,
+          "model_provider": null,
+          "approval_policy": null,
+          "approvals_reviewer": null,
+          "sandbox_mode": null,
+          "sandbox_workspace_write": null,
+          "forced_chatgpt_workspace_id": null,
+          "forced_login_method": null,
+          "web_search": null,
+          "tools": null,
+          "instructions": null,
+          "developer_instructions": null,
+          "compact_prompt": null,
+          "model_reasoning_effort": null,
+          "model_reasoning_summary": null,
+          "model_verbosity": null,
+          "service_tier": null,
+          "analytics": null,
+          "apps": null,
+          "browser_use": null,
+          "computer_use": null,
+          "desktop": null,
+          "marketplaces": {},
+          "mcp_oauth_credentials_store": "auto",
+          "memories": null,
+          "include_permissions_instructions": true,
+          "mcp_oauth_callback_port": null,
+          "experimental_realtime_ws_base_url": null,
+          "auto_review": null,
+          "default_permissions": null,
+          "history": {
+            "persistence": "save-all",
+            "max_bytes": null
+          },
+          "sqlite_home": null,
+          "plugins": {},
+          "project_doc_fallback_filenames": [],
+          "js_repl_node_path": null,
+          "hide_agent_reasoning": false,
+          "experimental_thread_store": null,
+          "profile": null,
+          "audio": null,
+          "disable_paste_burst": null,
+          "orchestrator": null,
+          "model_instructions_file": null,
+          "background_terminal_max_timeout": 300000,
+          "responses_api_metadata": null,
+          "project_root_markers": [
+            ".git"
+          ],
+          "mcp_oauth_callback_url": null,
+          "otel": null,
+          "allow_symlinked_codex_home": null,
+          "show_raw_agent_reasoning": null,
+          "agents": {
+            "enabled": null,
+            "max_concurrent_threads_per_session": 2,
+            "max_depth": null,
+            "default_subagent_model": null,
+            "default_subagent_reasoning_effort": null,
+            "job_max_runtime_seconds": null,
+            "interrupt_message": null
+          },
+          "hooks": null,
+          "openai_base_url": null,
+          "include_environment_context": true,
+          "experimental_realtime_webrtc_call_base_url": null,
+          "allow_login_shell": true,
+          "mcp_servers": {},
+          "projects": null,
+          "windows": null,
+          "experimental_realtime_ws_model": null,
+          "experimental_compact_prompt_file": null,
+          "tool_suggest": null,
+          "skills": null,
+          "experimental_use_unified_exec_tool": null,
+          "experimental_realtime_start_instructions": null,
+          "features": {
+            "auth_elicitation": true,
+            "background_paginated_rollout_migration": false,
+            "mcp_2026_07_28": false,
+            "memories": false,
+            "mentions_v2": true,
+            "remote_control": false,
+            "remote_plugin": true,
+            "tool_suggest": true,
+            "windows_sandbox_service": false
+          },
+          "include_collaboration_mode_instructions": true,
+          "notify": null,
+          "permissions": null,
+          "mcp_optional_startup_grace_ms": null,
+          "thread_unload_delay_secs": null,
+          "tui": null,
+          "cli_auth_credentials_store": "file",
+          "shell_environment_policy": {
+            "inherit": null,
+            "ignore_default_excludes": null,
+            "exclude": null,
+            "set": null,
+            "include_only": null,
+            "filters": null,
+            "experimental_use_profile": null
+          },
+          "log_dir": null,
+          "js_repl_node_module_dirs": null,
+          "oss_provider": null,
+          "plan_mode_reasoning_effort": null,
+          "ghost_snapshot": null,
+          "personality": null,
+          "tool_output_token_limit": null,
+          "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+          "notice": null,
+          "model_providers": {},
+          "model_catalog_json": null,
+          "profiles": {},
+          "experimental_realtime_ws_backend_prompt": null,
+          "file_opener": "vscode",
+          "check_for_update_on_startup": null,
+          "project_doc_max_bytes": 32768,
+          "suppress_unstable_features_warning": null,
+          "goals": null,
+          "realtime": null,
+          "apps_mcp_product_sku": null,
+          "experimental_realtime_ws_startup_context": null,
+          "feedback": null,
+          "include_apps_instructions": true,
+          "experimental_thread_store_endpoint": null
+        },
+        "origins": {
+          "agents.max_concurrent_threads_per_session": {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:695458a3914d4f3253bcd977d444099f1fc50617e8a40029d0e4a4a1ac2a681f"
+          }
+        },
+        "layers": [
+          {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:695458a3914d4f3253bcd977d444099f1fc50617e8a40029d0e4a4a1ac2a681f",
+            "config": {
+              "agents": {
+                "max_threads": 2,
+                "max_concurrent_threads_per_session": 2
+              }
+            }
+          },
+          {
+            "name": {
+              "type": "system",
+              "file": "/etc/codex/config.toml"
+            },
+            "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "config": {}
+          }
+        ]
+      },
+      "thread_started": true,
+      "events": [
+        {
+          "id": 1,
+          "result": {
+            "userAgent": "oda_config_debug/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda_config_debug; 0.1.0)",
+            "codexHome": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/home",
+            "platformFamily": "unix",
+            "platformOs": "linux"
+          }
+        },
+        {
+          "method": "configWarning",
+          "params": {
+            "summary": "Ignoring malformed agent role definition: duplicate field `max_concurrent_threads_per_session`\n",
+            "details": null
+          },
+          "emittedAtMs": 1789050474448
+        },
+        {
+          "method": "remoteControl/status/changed",
+          "params": {
+            "status": "disabled",
+            "serverName": "1Z10",
+            "installationId": "7eeffa25-8d9c-42ed-a736-87b491c75743",
+            "environmentId": null
+          },
+          "emittedAtMs": 1789050474448
+        },
+        {
+          "id": 2,
+          "result": {
+            "config": {
+              "model": null,
+              "review_model": null,
+              "model_context_window": null,
+              "model_auto_compact_token_limit": null,
+              "model_auto_compact_token_limit_scope": null,
+              "model_provider": null,
+              "approval_policy": null,
+              "approvals_reviewer": null,
+              "sandbox_mode": null,
+              "sandbox_workspace_write": null,
+              "forced_chatgpt_workspace_id": null,
+              "forced_login_method": null,
+              "web_search": null,
+              "tools": null,
+              "instructions": null,
+              "developer_instructions": null,
+              "compact_prompt": null,
+              "model_reasoning_effort": null,
+              "model_reasoning_summary": null,
+              "model_verbosity": null,
+              "service_tier": null,
+              "analytics": null,
+              "apps": null,
+              "browser_use": null,
+              "computer_use": null,
+              "desktop": null,
+              "marketplaces": {},
+              "mcp_oauth_credentials_store": "auto",
+              "memories": null,
+              "include_permissions_instructions": true,
+              "mcp_oauth_callback_port": null,
+              "experimental_realtime_ws_base_url": null,
+              "auto_review": null,
+              "default_permissions": null,
+              "history": {
+                "persistence": "save-all",
+                "max_bytes": null
+              },
+              "sqlite_home": null,
+              "plugins": {},
+              "project_doc_fallback_filenames": [],
+              "js_repl_node_path": null,
+              "hide_agent_reasoning": false,
+              "experimental_thread_store": null,
+              "profile": null,
+              "audio": null,
+              "disable_paste_burst": null,
+              "orchestrator": null,
+              "model_instructions_file": null,
+              "background_terminal_max_timeout": 300000,
+              "responses_api_metadata": null,
+              "project_root_markers": [
+                ".git"
+              ],
+              "mcp_oauth_callback_url": null,
+              "otel": null,
+              "allow_symlinked_codex_home": null,
+              "show_raw_agent_reasoning": null,
+              "agents": {
+                "enabled": null,
+                "max_concurrent_threads_per_session": 2,
+                "max_depth": null,
+                "default_subagent_model": null,
+                "default_subagent_reasoning_effort": null,
+                "job_max_runtime_seconds": null,
+                "interrupt_message": null
+              },
+              "hooks": null,
+              "openai_base_url": null,
+              "include_environment_context": true,
+              "experimental_realtime_webrtc_call_base_url": null,
+              "allow_login_shell": true,
+              "mcp_servers": {},
+              "projects": null,
+              "windows": null,
+              "experimental_realtime_ws_model": null,
+              "experimental_compact_prompt_file": null,
+              "tool_suggest": null,
+              "skills": null,
+              "experimental_use_unified_exec_tool": null,
+              "experimental_realtime_start_instructions": null,
+              "features": {
+                "auth_elicitation": true,
+                "background_paginated_rollout_migration": false,
+                "mcp_2026_07_28": false,
+                "memories": false,
+                "mentions_v2": true,
+                "remote_control": false,
+                "remote_plugin": true,
+                "tool_suggest": true,
+                "windows_sandbox_service": false
+              },
+              "include_collaboration_mode_instructions": true,
+              "notify": null,
+              "permissions": null,
+              "mcp_optional_startup_grace_ms": null,
+              "thread_unload_delay_secs": null,
+              "tui": null,
+              "cli_auth_credentials_store": "file",
+              "shell_environment_policy": {
+                "inherit": null,
+                "ignore_default_excludes": null,
+                "exclude": null,
+                "set": null,
+                "include_only": null,
+                "filters": null,
+                "experimental_use_profile": null
+              },
+              "log_dir": null,
+              "js_repl_node_module_dirs": null,
+              "oss_provider": null,
+              "plan_mode_reasoning_effort": null,
+              "ghost_snapshot": null,
+              "personality": null,
+              "tool_output_token_limit": null,
+              "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+              "notice": null,
+              "model_providers": {},
+              "model_catalog_json": null,
+              "profiles": {},
+              "experimental_realtime_ws_backend_prompt": null,
+              "file_opener": "vscode",
+              "check_for_update_on_startup": null,
+              "project_doc_max_bytes": 32768,
+              "suppress_unstable_features_warning": null,
+              "goals": null,
+              "realtime": null,
+              "apps_mcp_product_sku": null,
+              "experimental_realtime_ws_startup_context": null,
+              "feedback": null,
+              "include_apps_instructions": true,
+              "experimental_thread_store_endpoint": null
+            },
+            "origins": {
+              "agents.max_concurrent_threads_per_session": {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:695458a3914d4f3253bcd977d444099f1fc50617e8a40029d0e4a4a1ac2a681f"
+              }
+            },
+            "layers": [
+              {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:695458a3914d4f3253bcd977d444099f1fc50617e8a40029d0e4a4a1ac2a681f",
+                "config": {
+                  "agents": {
+                    "max_threads": 2,
+                    "max_concurrent_threads_per_session": 2
+                  }
+                }
+              },
+              {
+                "name": {
+                  "type": "system",
+                  "file": "/etc/codex/config.toml"
+                },
+                "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "config": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "result": {
+            "thread": {
+              "id": "01a08bb7-cfd7-7fb2-82e2-43c81c5fe06d",
+              "environments": [
+                {
+                  "environmentId": "local",
+                  "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/workspace",
+                  "runtimeWorkspaceRoots": [
+                    "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/workspace"
+                  ]
+                }
+              ],
+              "extra": null,
+              "sessionId": "01a08bb7-cfd7-7fb2-82e2-43c81c5fe06d",
+              "forkedFromId": null,
+              "parentThreadId": null,
+              "preview": "",
+              "ephemeral": true,
+              "section": null,
+              "sectionEnteredAt": null,
+              "projectId": null,
+              "historyMode": "legacy",
+              "modelProvider": "openai",
+              "model": "gpt-6-astra",
+              "reasoningEffort": null,
+              "createdAt": 1789050474,
+              "updatedAt": 1789050474,
+              "recencyAt": 1789050474,
+              "status": {
+                "type": "idle"
+              },
+              "path": null,
+              "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/workspace",
+              "cliVersion": "0.154.0",
+              "originator": "oda_config_debug",
+              "source": "vscode",
+              "canAcceptDirectInput": true,
+              "threadSource": null,
+              "agentNickname": null,
+              "agentRole": null,
+              "gitInfo": null,
+              "name": null,
+              "daybreakEnabled": null,
+              "turns": []
+            },
+            "model": "gpt-6-astra",
+            "modelProvider": "openai",
+            "serviceTier": null,
+            "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/workspace",
+            "runtimeWorkspaceRoots": [
+              "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/duplicate-alias/workspace"
+            ],
+            "instructionSources": [],
+            "approvalPolicy": "on-request",
+            "approvalsReviewer": "user",
+            "sandbox": {
+              "type": "readOnly",
+              "networkAccess": false
+            },
+            "activePermissionProfile": {
+              "id": ":read-only",
+              "extends": null
+            },
+            "reasoningEffort": null,
+            "multiAgentMode": "explicitRequestOnly"
+          }
+        }
+      ],
+      "stderr": "\u001b[2m2026-09-10T14:27:54.401551Z\u001b[0m \u001b[31mERROR\u001b[0m \u001b[2mcodex_app_server\u001b[0m\u001b[2m:\u001b[0m Ignoring malformed agent role definition: duplicate field `max_concurrent_threads_per_session`\n\n",
+      "warnings": [
+        "Ignoring malformed agent role definition: duplicate field `max_concurrent_threads_per_session`\n"
+      ],
+      "matched_expected": true
+    },
+    {
+      "name": "memory-alias",
+      "config": "[memories]\nno_memories_if_mcp_or_web_search = true\n",
+      "loaded": true,
+      "config_read": {
+        "config": {
+          "model": null,
+          "review_model": null,
+          "model_context_window": null,
+          "model_auto_compact_token_limit": null,
+          "model_auto_compact_token_limit_scope": null,
+          "model_provider": null,
+          "approval_policy": null,
+          "approvals_reviewer": null,
+          "sandbox_mode": null,
+          "sandbox_workspace_write": null,
+          "forced_chatgpt_workspace_id": null,
+          "forced_login_method": null,
+          "web_search": null,
+          "tools": null,
+          "instructions": null,
+          "developer_instructions": null,
+          "compact_prompt": null,
+          "model_reasoning_effort": null,
+          "model_reasoning_summary": null,
+          "model_verbosity": null,
+          "service_tier": null,
+          "analytics": null,
+          "apps": null,
+          "browser_use": null,
+          "computer_use": null,
+          "desktop": null,
+          "tool_output_token_limit": null,
+          "file_opener": "vscode",
+          "log_dir": null,
+          "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+          "memories": {
+            "disable_on_external_context": true,
+            "generate_memories": null,
+            "use_memories": null,
+            "dedicated_tools": null,
+            "max_raw_memories_for_consolidation": null,
+            "max_unused_days": null,
+            "max_rollout_age_days": null,
+            "max_rollouts_per_startup": null,
+            "min_rollout_idle_hours": null,
+            "min_rate_limit_remaining_percent": null,
+            "extract_model": null,
+            "consolidation_model": null
+          },
+          "feedback": null,
+          "show_raw_agent_reasoning": null,
+          "profiles": {},
+          "project_doc_max_bytes": 32768,
+          "experimental_realtime_webrtc_call_base_url": null,
+          "goals": null,
+          "notice": null,
+          "tool_suggest": null,
+          "ghost_snapshot": null,
+          "mcp_oauth_callback_url": null,
+          "hooks": null,
+          "sqlite_home": null,
+          "profile": null,
+          "marketplaces": {},
+          "realtime": null,
+          "features": {
+            "auth_elicitation": true,
+            "background_paginated_rollout_migration": false,
+            "mcp_2026_07_28": false,
+            "memories": false,
+            "mentions_v2": true,
+            "remote_control": false,
+            "remote_plugin": true,
+            "tool_suggest": true,
+            "windows_sandbox_service": false
+          },
+          "check_for_update_on_startup": null,
+          "include_apps_instructions": true,
+          "openai_base_url": null,
+          "experimental_realtime_start_instructions": null,
+          "hide_agent_reasoning": false,
+          "default_permissions": null,
+          "mcp_oauth_credentials_store": "auto",
+          "include_environment_context": true,
+          "model_providers": {},
+          "personality": null,
+          "experimental_realtime_ws_base_url": null,
+          "apps_mcp_product_sku": null,
+          "agents": null,
+          "cli_auth_credentials_store": "file",
+          "project_doc_fallback_filenames": [],
+          "notify": null,
+          "model_instructions_file": null,
+          "model_catalog_json": null,
+          "skills": null,
+          "permissions": null,
+          "plugins": {},
+          "shell_environment_policy": {
+            "inherit": null,
+            "ignore_default_excludes": null,
+            "exclude": null,
+            "set": null,
+            "include_only": null,
+            "filters": null,
+            "experimental_use_profile": null
+          },
+          "background_terminal_max_timeout": 300000,
+          "mcp_oauth_callback_port": null,
+          "windows": null,
+          "mcp_servers": {},
+          "experimental_realtime_ws_startup_context": null,
+          "oss_provider": null,
+          "experimental_use_unified_exec_tool": null,
+          "responses_api_metadata": null,
+          "allow_symlinked_codex_home": null,
+          "project_root_markers": [
+            ".git"
+          ],
+          "auto_review": null,
+          "include_collaboration_mode_instructions": true,
+          "otel": null,
+          "include_permissions_instructions": true,
+          "disable_paste_burst": null,
+          "history": {
+            "persistence": "save-all",
+            "max_bytes": null
+          },
+          "experimental_thread_store_endpoint": null,
+          "thread_unload_delay_secs": null,
+          "projects": null,
+          "orchestrator": null,
+          "suppress_unstable_features_warning": null,
+          "experimental_realtime_ws_backend_prompt": null,
+          "experimental_compact_prompt_file": null,
+          "tui": null,
+          "experimental_realtime_ws_model": null,
+          "experimental_thread_store": null,
+          "mcp_optional_startup_grace_ms": null,
+          "js_repl_node_path": null,
+          "plan_mode_reasoning_effort": null,
+          "audio": null,
+          "js_repl_node_module_dirs": null,
+          "allow_login_shell": true
+        },
+        "origins": {
+          "memories.disable_on_external_context": {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:59b67a545ad26d33c6f1f62e2c55c1e0cf2e4c7304486a94faa995e2095a2071"
+          }
+        },
+        "layers": [
+          {
+            "name": {
+              "type": "user",
+              "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/home/config.toml",
+              "profile": null
+            },
+            "version": "sha256:59b67a545ad26d33c6f1f62e2c55c1e0cf2e4c7304486a94faa995e2095a2071",
+            "config": {
+              "memories": {
+                "no_memories_if_mcp_or_web_search": true
+              }
+            }
+          },
+          {
+            "name": {
+              "type": "system",
+              "file": "/etc/codex/config.toml"
+            },
+            "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "config": {}
+          }
+        ]
+      },
+      "thread_started": true,
+      "events": [
+        {
+          "id": 1,
+          "result": {
+            "userAgent": "oda_config_debug/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda_config_debug; 0.1.0)",
+            "codexHome": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/home",
+            "platformFamily": "unix",
+            "platformOs": "linux"
+          }
+        },
+        {
+          "method": "remoteControl/status/changed",
+          "params": {
+            "status": "disabled",
+            "serverName": "1Z10",
+            "installationId": "acc5cb20-842c-45c7-bda4-3fc219392b8e",
+            "environmentId": null
+          },
+          "emittedAtMs": 1789050474712
+        },
+        {
+          "id": 2,
+          "result": {
+            "config": {
+              "model": null,
+              "review_model": null,
+              "model_context_window": null,
+              "model_auto_compact_token_limit": null,
+              "model_auto_compact_token_limit_scope": null,
+              "model_provider": null,
+              "approval_policy": null,
+              "approvals_reviewer": null,
+              "sandbox_mode": null,
+              "sandbox_workspace_write": null,
+              "forced_chatgpt_workspace_id": null,
+              "forced_login_method": null,
+              "web_search": null,
+              "tools": null,
+              "instructions": null,
+              "developer_instructions": null,
+              "compact_prompt": null,
+              "model_reasoning_effort": null,
+              "model_reasoning_summary": null,
+              "model_verbosity": null,
+              "service_tier": null,
+              "analytics": null,
+              "apps": null,
+              "browser_use": null,
+              "computer_use": null,
+              "desktop": null,
+              "tool_output_token_limit": null,
+              "file_opener": "vscode",
+              "log_dir": null,
+              "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+              "memories": {
+                "disable_on_external_context": true,
+                "generate_memories": null,
+                "use_memories": null,
+                "dedicated_tools": null,
+                "max_raw_memories_for_consolidation": null,
+                "max_unused_days": null,
+                "max_rollout_age_days": null,
+                "max_rollouts_per_startup": null,
+                "min_rollout_idle_hours": null,
+                "min_rate_limit_remaining_percent": null,
+                "extract_model": null,
+                "consolidation_model": null
+              },
+              "feedback": null,
+              "show_raw_agent_reasoning": null,
+              "profiles": {},
+              "project_doc_max_bytes": 32768,
+              "experimental_realtime_webrtc_call_base_url": null,
+              "goals": null,
+              "notice": null,
+              "tool_suggest": null,
+              "ghost_snapshot": null,
+              "mcp_oauth_callback_url": null,
+              "hooks": null,
+              "sqlite_home": null,
+              "profile": null,
+              "marketplaces": {},
+              "realtime": null,
+              "features": {
+                "auth_elicitation": true,
+                "background_paginated_rollout_migration": false,
+                "mcp_2026_07_28": false,
+                "memories": false,
+                "mentions_v2": true,
+                "remote_control": false,
+                "remote_plugin": true,
+                "tool_suggest": true,
+                "windows_sandbox_service": false
+              },
+              "check_for_update_on_startup": null,
+              "include_apps_instructions": true,
+              "openai_base_url": null,
+              "experimental_realtime_start_instructions": null,
+              "hide_agent_reasoning": false,
+              "default_permissions": null,
+              "mcp_oauth_credentials_store": "auto",
+              "include_environment_context": true,
+              "model_providers": {},
+              "personality": null,
+              "experimental_realtime_ws_base_url": null,
+              "apps_mcp_product_sku": null,
+              "agents": null,
+              "cli_auth_credentials_store": "file",
+              "project_doc_fallback_filenames": [],
+              "notify": null,
+              "model_instructions_file": null,
+              "model_catalog_json": null,
+              "skills": null,
+              "permissions": null,
+              "plugins": {},
+              "shell_environment_policy": {
+                "inherit": null,
+                "ignore_default_excludes": null,
+                "exclude": null,
+                "set": null,
+                "include_only": null,
+                "filters": null,
+                "experimental_use_profile": null
+              },
+              "background_terminal_max_timeout": 300000,
+              "mcp_oauth_callback_port": null,
+              "windows": null,
+              "mcp_servers": {},
+              "experimental_realtime_ws_startup_context": null,
+              "oss_provider": null,
+              "experimental_use_unified_exec_tool": null,
+              "responses_api_metadata": null,
+              "allow_symlinked_codex_home": null,
+              "project_root_markers": [
+                ".git"
+              ],
+              "auto_review": null,
+              "include_collaboration_mode_instructions": true,
+              "otel": null,
+              "include_permissions_instructions": true,
+              "disable_paste_burst": null,
+              "history": {
+                "persistence": "save-all",
+                "max_bytes": null
+              },
+              "experimental_thread_store_endpoint": null,
+              "thread_unload_delay_secs": null,
+              "projects": null,
+              "orchestrator": null,
+              "suppress_unstable_features_warning": null,
+              "experimental_realtime_ws_backend_prompt": null,
+              "experimental_compact_prompt_file": null,
+              "tui": null,
+              "experimental_realtime_ws_model": null,
+              "experimental_thread_store": null,
+              "mcp_optional_startup_grace_ms": null,
+              "js_repl_node_path": null,
+              "plan_mode_reasoning_effort": null,
+              "audio": null,
+              "js_repl_node_module_dirs": null,
+              "allow_login_shell": true
+            },
+            "origins": {
+              "memories.disable_on_external_context": {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:59b67a545ad26d33c6f1f62e2c55c1e0cf2e4c7304486a94faa995e2095a2071"
+              }
+            },
+            "layers": [
+              {
+                "name": {
+                  "type": "user",
+                  "file": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/home/config.toml",
+                  "profile": null
+                },
+                "version": "sha256:59b67a545ad26d33c6f1f62e2c55c1e0cf2e4c7304486a94faa995e2095a2071",
+                "config": {
+                  "memories": {
+                    "no_memories_if_mcp_or_web_search": true
+                  }
+                }
+              },
+              {
+                "name": {
+                  "type": "system",
+                  "file": "/etc/codex/config.toml"
+                },
+                "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "config": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "result": {
+            "thread": {
+              "id": "01a08bb7-d0df-7992-8fd0-a7af2e61c0d0",
+              "environments": [
+                {
+                  "environmentId": "local",
+                  "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/workspace",
+                  "runtimeWorkspaceRoots": [
+                    "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/workspace"
+                  ]
+                }
+              ],
+              "extra": null,
+              "sessionId": "01a08bb7-d0df-7992-8fd0-a7af2e61c0d0",
+              "forkedFromId": null,
+              "parentThreadId": null,
+              "preview": "",
+              "ephemeral": true,
+              "section": null,
+              "sectionEnteredAt": null,
+              "projectId": null,
+              "historyMode": "legacy",
+              "modelProvider": "openai",
+              "model": "gpt-6-astra",
+              "reasoningEffort": null,
+              "createdAt": 1789050474,
+              "updatedAt": 1789050474,
+              "recencyAt": 1789050474,
+              "status": {
+                "type": "idle"
+              },
+              "path": null,
+              "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/workspace",
+              "cliVersion": "0.154.0",
+              "originator": "oda_config_debug",
+              "source": "vscode",
+              "canAcceptDirectInput": true,
+              "threadSource": null,
+              "agentNickname": null,
+              "agentRole": null,
+              "gitInfo": null,
+              "name": null,
+              "daybreakEnabled": null,
+              "turns": []
+            },
+            "model": "gpt-6-astra",
+            "modelProvider": "openai",
+            "serviceTier": null,
+            "cwd": "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/workspace",
+            "runtimeWorkspaceRoots": [
+              "/mnt/DATA/tmp/oda-config-debug-89_dxfmk/memory-alias/workspace"
+            ],
+            "instructionSources": [],
+            "approvalPolicy": "on-request",
+            "approvalsReviewer": "user",
+            "sandbox": {
+              "type": "readOnly",
+              "networkAccess": false
+            },
+            "activePermissionProfile": {
+              "id": ":read-only",
+              "extends": null
+            },
+            "reasoningEffort": null,
+            "multiAgentMode": "explicitRequestOnly"
+          }
+        }
+      ],
+      "stderr": "",
+      "warnings": [],
+      "matched_expected": true
+    }
+  ],
+  "matched_expected_load_results": true
+}

@@ -1,0 +1,8 @@
+{
+  "url": "https://github.com/agentplugins/agent-plugins-spec/blob/ff8ab5e392cc87bd88d87c060815a87490e51003/spec/1.0.0.md",
+  "commit": "ff8ab5e392cc87bd88d87c060815a87490e51003",
+  "source_sha256": "97a658b7dca3ce1b4c2266b95da300fa51d9dc4ade59d73168e5f9104272da18",
+  "excerpt": "WORKBENCH/evidence/plugin-standard/agent-plugins-environment-requirements.md",
+  "excerpt_sha256": "2395926b3fa535f370f8cc233892be1c8ebc0cd49635a89945ad3e9c6e81673e",
+  "license": "CC-BY-4.0"
+}

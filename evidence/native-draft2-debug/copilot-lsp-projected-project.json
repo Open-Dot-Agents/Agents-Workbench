@@ -1,0 +1,67 @@
+{
+  "scope": "project",
+  "fixture": "/mnt/DATA/tmp/oda-native-lsp-eaa0spe8",
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "cli_sha256": "5dada76a3e6a9b2ff50ee550a3cd9dddd2820a676ed78c6167f36957b78f5857",
+  "runner_sha256": "8aadef17a38b935cf801eb3a8e3280d187986cf6cf2277061be90295f481043e",
+  "helper_sha256": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc",
+  "configuration": {
+    "lspServers": {
+      "fixture": {
+        "command": "${ODA_LSP_PYTHON}",
+        "args": [
+          "/mnt/DATA/tmp/oda-native-lsp-eaa0spe8/server.py",
+          "${ODA_LSP_EVENTS}"
+        ],
+        "fileExtensions": {
+          ".oda": "fixture"
+        },
+        "env": {
+          "ODA_LSP_MODE": "${ODA_LSP_INPUT}"
+        },
+        "initializationOptions": {
+          "sentinel": "ODA_LSP",
+          "exact": 9007199254740993
+        },
+        "rootUri": "packages/frontend",
+        "requestTimeoutMs": 30000
+      }
+    }
+  },
+  "apply": {
+    "exit": 1,
+    "stdout": "",
+    "stderr": "agents: unexpected argument \"copilot\"\n"
+  },
+  "implementation_sha256": {
+    "CLI/internal/config/native.go": "434eeefe99fb7a99e816101de315a29348062d61549cf4ddb306eec91cc9b74b",
+    "CLI/internal/config/native_agents.go": "f2923f3726f57d76eac8075d02651d31e39403bba5459edad549bf2abe59edf6",
+    "CLI/internal/config/native_agents_test.go": "a4faada3777203976b3059dff8d94d4515e30fe92422b22dbc3d2178200533ae",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "ee050eb092c22bf2a7503490a25c45932794b0439955ab99fb7c02c3a86f2d9b",
+    "CLI/internal/config/native_field_context.go": "209ae52d3407a752f1916501cab05ddf04ed9ccbed443c8dccc0882e21751718",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "c97a97dce3825c8dad277a91e133fe8cfe04f07742a9c8131a3c68d16dfcc06b",
+    "CLI/internal/config/native_import_merge.go": "344a868deb44948ff0a5f6aac458ca8f12973d19ebceca369977ec17a35d6ddc",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "2ba0b03f1f76baeb9aad7a7d9b400302a04020f05a870b204522811013f05d7a",
+    "CLI/internal/config/native_lsp_test.go": "7473e416627cf358d47c933a5bc9467f769b4f6adf7783fea752c7cb04f070f9",
+    "CLI/internal/config/native_ownership.go": "272ac1a48047af5eb139ff2754b12108b002dc62db79f17157b61f1ca6ccc251",
+    "CLI/internal/config/native_registry.go": "88c527adc1751d5c6acb483817d4ecea5d511daaac1cb9b15baf7c5603df7a2f",
+    "CLI/internal/config/native_selection.go": "53cec8564cb4565b158b2b254b7404756c29b0ccfc3c8c1c1c61e2091e719578",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "f54317fa441e6e3b91b5e4e8b30674ecf5c19454314576ce6b9d92fa5bee8062",
+    "CLI/internal/config/native_types.go": "085770eb476af278d3c453a25e8a83cc210d0c75961f966602e1b71d4f4323ba",
+    "CLI/internal/config/native_values.go": "618076a318a5379b36e02e2eec33b0f797ee420b13651d9d6cc0541555e15aeb"
+  },
+  "passed": false,
+  "error": "projection failed",
+  "model_requests": []
+}

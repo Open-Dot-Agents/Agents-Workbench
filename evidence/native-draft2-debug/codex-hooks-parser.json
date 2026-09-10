@@ -1,0 +1,320 @@
+{
+  "native_version": "0.154.0",
+  "native_sha256": "3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022",
+  "fixture": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l",
+  "cases": [
+    {
+      "case": "valid",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/valid",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/valid/hooks.json:session_start:0:0",
+                "eventName": "sessionStart",
+                "handlerType": "command",
+                "command": "true",
+                "async": false,
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/valid/hooks.json",
+                "source": "user",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:696abd07fc74736ff2d809abef82925e1ea697cd2e547d73317c677b0d407441",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "root",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                }
+              ]
+            }
+          ]
+        },
+        "future": true
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/root",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-hook-parser-st1tsr0l/root/hooks.json: unknown field `future`, expected `description` or `hooks` at line 1 column 91"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "event",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                }
+              ]
+            }
+          ],
+          "FutureEvent": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/event",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/event/hooks.json:session_start:0:0",
+                "eventName": "sessionStart",
+                "handlerType": "command",
+                "command": "true",
+                "async": false,
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/event/hooks.json",
+                "source": "user",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:696abd07fc74736ff2d809abef82925e1ea697cd2e547d73317c677b0d407441",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "group",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                }
+              ],
+              "future": true
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/group",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/group/hooks.json:session_start:0:0",
+                "eventName": "sessionStart",
+                "handlerType": "command",
+                "command": "true",
+                "async": false,
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/group/hooks.json",
+                "source": "user",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:696abd07fc74736ff2d809abef82925e1ea697cd2e547d73317c677b0d407441",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "handler",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true",
+                  "future": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/handler",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/handler/hooks.json:session_start:0:0",
+                "eventName": "sessionStart",
+                "handlerType": "command",
+                "command": "true",
+                "async": false,
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/handler/hooks.json",
+                "source": "user",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:696abd07fc74736ff2d809abef82925e1ea697cd2e547d73317c677b0d407441",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "prompt",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true"
+                },
+                {
+                  "type": "prompt"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/prompt",
+            "hooks": [
+              {
+                "key": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/prompt/hooks.json:session_start:0:0",
+                "eventName": "sessionStart",
+                "handlerType": "command",
+                "command": "true",
+                "async": false,
+                "matcher": null,
+                "timeoutSec": 600,
+                "statusMessage": null,
+                "additionalContextLimit": null,
+                "sourcePath": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/prompt/hooks.json",
+                "source": "user",
+                "pluginId": null,
+                "displayOrder": 0,
+                "enabled": true,
+                "isManaged": false,
+                "currentHash": "sha256:696abd07fc74736ff2d809abef82925e1ea697cd2e547d73317c677b0d407441",
+                "trustStatus": "untrusted"
+              }
+            ],
+            "warnings": [
+              "skipping prompt hook in /mnt/DATA/tmp/oda-hook-parser-st1tsr0l/prompt/hooks.json: prompt hooks are not supported yet"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    },
+    {
+      "case": "alias-wrong-type",
+      "configuration": {
+        "hooks": {
+          "SessionStart": [
+            {
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "true",
+                  "command_windows": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "response": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-hook-parser-st1tsr0l/alias-wrong-type",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-hook-parser-st1tsr0l/alias-wrong-type/hooks.json: invalid type: boolean `false`, expected a string at line 1 column 104"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    }
+  ],
+  "runner_sha256": "498a5cc817cbc64ce011e07da18a0850e18626eb19f8d331b97c2725a71dea71"
+}

@@ -1,0 +1,16 @@
+{
+  "provenance": "Failed regression output retained from the tool run before the MCP import fix. This is a package-level test, not a complete native runtime failure.",
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeCopilotMCPLocalTypeImport",
+    "-count=1"
+  ],
+  "cwd": "CLI",
+  "exit_code": 1,
+  "failure": "MCP server \"fixture\" has unsupported local type \"local\"",
+  "pre_change_native_go_sha256": "b713746db1aaa774cf0ca086e8952742d04f8f1126f0b4ed65823db3f6cbf1ce",
+  "test": "CLI/internal/config/native_copilot_mcp_test.go:TestNativeCopilotMCPLocalTypeImport"
+}

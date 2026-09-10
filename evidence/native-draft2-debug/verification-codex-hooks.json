@@ -1,0 +1,312 @@
+{
+  "checked_at": "2026-09-10T19:04:55.807355+00:00",
+  "revision": "uncommitted working tree",
+  "full_adapter_support": false,
+  "checks": [
+    {
+      "check": "stable-conformance",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/run.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS schema-json\nPASS canonical-manifest\nPASS spec-starter\nPASS example-hooks\nPASS example-basic\nPASS baseline-instructions\nPASS selection-tools\nPASS selection-hooks\nPASS selection-skills\nPASS invalid-manifest-manifest-invalid-capability\nPASS invalid-manifest-manifest-invalid-profile\nPASS invalid-mcp-mcp-insecure-remote\nPASS invalid-mcp-mcp-literal-environment\nPASS invalid-mcp-mcp-mixed-server\nPASS invalid-hooks-hooks-blank-command\nPASS invalid-hooks-hooks-empty-handlers\nPASS invalid-hooks-hooks-empty-matcher\nPASS invalid-hooks-hooks-literal-prompt\nPASS invalid-hooks-hooks-negative-timeout\nPASS invalid-hooks-hooks-null-disabled\nPASS invalid-hooks-hooks-null-event\nPASS invalid-hooks-hooks-null-timeout\nPASS invalid-hooks-hooks-unsupported-event\nPASS invalid-unsafe-skill-name\nPASS invalid-unsafe-skill-path\n25/25 conformance checks passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "security-draft",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/security_draft.py"
+      ],
+      "exit_code": 0,
+      "stdout": "59/59 draft schema cases passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "native-draft",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "SPEC/conformance/native_draft.py"
+      ],
+      "exit_code": 0,
+      "stdout": "18/18 native draft.2 schema cases passed\n",
+      "stderr": ""
+    },
+    {
+      "check": "workbench",
+      "cwd": "WORKBENCH",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "task/test",
+        "-p",
+        "*_test.py"
+      ],
+      "exit_code": 0,
+      "stdout": "create\t.mcp.json\nupdate\t.claude/settings.json\ncreate\tCLAUDE.md\ncreate\tpackages/api/CLAUDE.md\ncreate\t.claude/skills/conformance-skill/SKILL.md\ncreate\t.codex/config.toml\ncreate\t.codex/hooks.json\ncreate\t.github/mcp.json\ncreate\t.github/hooks/open-dot-agents.json\n",
+      "stderr": "..........................................................................\n----------------------------------------------------------------------\nRan 74 tests in 8.789s\n\nOK\n"
+    },
+    {
+      "check": "compatibility",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "CLI/scripts/check_compatibility.py"
+      ],
+      "exit_code": 0,
+      "stdout": "compatibility data, Markdown, CLI summaries, and support evidence rules agree\n",
+      "stderr": ""
+    },
+    {
+      "check": "coverage-tests",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "scripts/native_coverage_test.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.684s\n\nOK\n"
+    },
+    {
+      "check": "coverage-reproducibility",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "scripts/native_coverage.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "repository-validation",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "validate",
+        "--root",
+        "..",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checks\":[{\"id\":\"repository.validate\",\"passed\":true}],\"class\":\"repository\",\"implementation\":\"reference-cli\",\"implementationVersion\":\"dev\",\"passed\":true,\"schemaVersion\":\"1.0.0\",\"standardVersion\":\"1.0.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "check": "native-example-validation",
+      "cwd": "CLI",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "validate",
+        "--root",
+        "../SPEC/examples/native-draft",
+        "--experimental",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checks\":[{\"id\":\"repository.validate\",\"passed\":true}],\"class\":\"repository\",\"implementation\":\"reference-cli\",\"implementationVersion\":\"dev\",\"passed\":true,\"schemaVersion\":\"1.1.0-draft.2\",\"standardVersion\":\"1.1.0-draft.2\"}\n",
+      "stderr": ""
+    },
+    {
+      "check": "whitespace-.",
+      "cwd": ".",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "whitespace-CLI",
+      "cwd": "CLI",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "whitespace-SPEC",
+      "cwd": "SPEC",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "whitespace-WORKBENCH",
+      "cwd": "WORKBENCH",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "go-race",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "cwd": "CLI",
+      "exit_code": 0,
+      "stdout": "ok  \tgithub.com/Open-Dot-Agents/Agents-CLI/cmd/agents\t1.130s\nok  \tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t4.224s\n",
+      "stderr": ""
+    },
+    {
+      "check": "go-vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "cwd": "CLI",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "json-.",
+      "files": 6,
+      "exit_code": 0
+    },
+    {
+      "check": "json-CLI",
+      "files": 3,
+      "exit_code": 0
+    },
+    {
+      "check": "json-SPEC",
+      "files": 50,
+      "exit_code": 0
+    },
+    {
+      "check": "json-WORKBENCH",
+      "files": 188,
+      "exit_code": 0
+    },
+    {
+      "check": "report-links",
+      "exit_code": 0
+    },
+    {
+      "check": "native-results-and-final-implementation-hashes",
+      "exit_code": 0
+    },
+    {
+      "check": "native-parser-matrix",
+      "exit_code": 0
+    },
+    {
+      "check": "native-runner-syntax",
+      "exit_code": 0
+    }
+  ],
+  "native_evidence": [
+    "codex-hooks-final-project.json",
+    "codex-hooks-final-user.json",
+    "codex-hooks-inline-project.json",
+    "codex-hooks-inline-user.json",
+    "codex-hooks-deny-project.json",
+    "codex-hooks-deny-user.json",
+    "codex-hooks-modified-project.json",
+    "codex-hooks-modified-user.json",
+    "codex-hooks-review-required-project.json",
+    "codex-hooks-review-required-user.json",
+    "codex-hooks-timeout-user.json"
+  ],
+  "implementation_sha256": {
+    ".agents/features/coverage.json": "d26fe3cf6487731a179d09a9048bb8d571cba08fb9e7125e1a27dfe795396c5a",
+    "CLI/cmd/agents/main.go": "64e87bd97f1cb6c46280e6ca6dca2caa0118e394456c7b07d38bb8e4117f86f3",
+    "CLI/cmd/agents/main_test.go": "2223879f97c384c64e7eeffd2cac9b6e26f9d01f7d35f269686042f11f6c7538",
+    "CLI/go.mod": "68a201ee01d7c0bf1691f091cf4f2c7ac82e4e81857d85a213ca2f921fc41e72",
+    "CLI/go.sum": "d1371b9691e4a62a0f7f956ef1b1a7d4e184877c3243ef1d5956c43f1a598268",
+    "CLI/internal/config/apply.go": "300aa7996bfd7823c29f6c2d85d97a726537b88f26f6ce21aa6e350b2edbfda6",
+    "CLI/internal/config/apply_test.go": "ed8bd0f29a50946fd07f1aaaf54fa217d9a01140976670b8e48da08a9c5abb1f",
+    "CLI/internal/config/codex_security.go": "f48cbdb6a09a7d040de69fd613153f488b77dbe7f352a69d82209841b4bf9106",
+    "CLI/internal/config/codex_security_linux.go": "a37c37cd628681f0938454b61ede98829190b26e951f98c3b6e7751b819a3218",
+    "CLI/internal/config/codex_security_linux_test.go": "f0617926a57bbf1bdb342007c4b889cd5ee3ba843e05493e46891cc287bc0e48",
+    "CLI/internal/config/codex_security_other.go": "7fa4f5c3ae7569d10c43024769959bc1793038ff9ac89eab079e4da543261929",
+    "CLI/internal/config/codex_security_test.go": "c9d86a688a91f4f5cf816a5bf6414f786a9bd8d36686c4505f516155571582fc",
+    "CLI/internal/config/config.go": "9f74323f33f5e39c0cc51545dc32a3fa656c34331a7c90dd8cc5b136c0151364",
+    "CLI/internal/config/config_test.go": "6693c20643f9e46e7c32f1ee41d9fb2077c9db40145a7e313a036abd886c12ef",
+    "CLI/internal/config/diff.go": "b21220f0571d92d0a3b6ef0c72868970ec7c674bc0de530152d0bd69dc52b6ab",
+    "CLI/internal/config/diff_test.go": "c51a31dc6afee48eb1bd3a44b3737bc8765b8d4e9f3d204a73c2dc5c3a56e9e1",
+    "CLI/internal/config/hooks_lifecycle_test.go": "4d0dc6234a74c945355962d5fcf557d9cfabd9998bfa3fa0d42e236a43f55d8b",
+    "CLI/internal/config/native.go": "a5309bf5d82057a40efe13e05387aa8c48d4661bb9b4d3e2ccb528a42aa1ea73",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "1322077071115daa1d0417787ab778f49f2f06268e34597b65a3b7b959de8f0e",
+    "CLI/internal/config/native_codex_hooks_test.go": "c07690e15d29177e0f46872f86644f20bd2858cb87c5ddaa7b385a8f2d403365",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "ee050eb092c22bf2a7503490a25c45932794b0439955ab99fb7c02c3a86f2d9b",
+    "CLI/internal/config/native_field_context.go": "209ae52d3407a752f1916501cab05ddf04ed9ccbed443c8dccc0882e21751718",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "bb638f6c1d475d51e8ed784bc6c9438bbe8def2461d8f44c7e78d8d2df4a5d4a",
+    "CLI/internal/config/native_import_merge.go": "344a868deb44948ff0a5f6aac458ca8f12973d19ebceca369977ec17a35d6ddc",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "3abbe1237d8df7701309c9c76e0870b6964d55627d4af62c481038793a58ee8d",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_registry.go": "88c527adc1751d5c6acb483817d4ecea5d511daaac1cb9b15baf7c5603df7a2f",
+    "CLI/internal/config/native_selection.go": "d682eb1be684e531ed31cdad6ef5b8f9cc3239cf700e2cc76750c5c79440ac03",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "f54317fa441e6e3b91b5e4e8b30674ecf5c19454314576ce6b9d92fa5bee8062",
+    "CLI/internal/config/native_types.go": "085770eb476af278d3c453a25e8a83cc210d0c75961f966602e1b71d4f4323ba",
+    "CLI/internal/config/native_values.go": "c7ead6b8fc4e0ad0e8b98ea2ec5864c6c2a7b6193e8fd1d38d4c419f1e832a61",
+    "CLI/internal/config/portability.go": "77b15786d741a7ffd3590e3a8935714c919f25df72518625ca24617b6159ce4c",
+    "CLI/internal/config/portability_test.go": "929236192a323030c6c965f5f5a1eb671076e5d7f3daf6db81ea820901bc23c3",
+    "CLI/internal/config/security.go": "e84168641ff9abfc557e1220f5cd38b5e72fb6a64d2cb05a1e6beda10eb3d84c",
+    "CLI/internal/config/security_test.go": "d228446fd340bc399f08d4edbae6de4459cd5fdf80717f07566f5a00bf3ce24e",
+    "CLI/internal/config/tools_lifecycle_test.go": "698943db25951953c2a52cca7866cfe3fa73301e960a17ef037b9743e25f36dd",
+    "WORKBENCH/conformance/run_native_codex_hooks.py": "441b7e95da755e7fdc2db6be70fbea7d9db84225c11face4ab98dedb8a6d3cf6",
+    "docs/NATIVE_CONFIGURATION.md": "bcb4d20a1cfa9209486b60b5b2081e55515e1db4ad372415c5e6626fb30257e4",
+    "docs/NATIVE_DEBUG_RESEARCH.md": "32bdff32457e8cfab0c47c991deff80549b41e1bfa4456d8758a7b12029e685a",
+    "docs/VENDOR_EVIDENCE.md": "50ad752cf3edc5a67fa2d379d38a534fb7b01f33d1f35bf806d73e61274719e3",
+    "scripts/native_coverage.py": "df176fe47cb6d5365595115e63114176d533de4fbe753cec853abb6c803b40a1",
+    "scripts/native_coverage_test.py": "294c3c1a3619200329265ef3cb3d63d891655dc1bd4f69c75013ccca05f63c12"
+  },
+  "source_inventory_sha256": "f41f70b081e3920822c125f90a1c27b5bea920061f74510ed20dc49c419ed310"
+}

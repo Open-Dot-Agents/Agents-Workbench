@@ -1,0 +1,395 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y",
+  "vendor": "copilot",
+  "scope": "user",
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "runner_sha256": "29bb40fe7817cc9a38e120722da1ce38d789b5fb2623472b7f08f0d9e0f96c1e",
+  "helper_sha256": {
+    "run_native_approvals.py": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc",
+    "run_native_codex_hooks.py": "441b7e95da755e7fdc2db6be70fbea7d9db84225c11face4ab98dedb8a6d3cf6"
+  },
+  "implementation_sha256": {
+    "CLI/internal/config/apply.go": "300aa7996bfd7823c29f6c2d85d97a726537b88f26f6ce21aa6e350b2edbfda6",
+    "CLI/internal/config/apply_test.go": "ed8bd0f29a50946fd07f1aaaf54fa217d9a01140976670b8e48da08a9c5abb1f",
+    "CLI/internal/config/codex_security.go": "f48cbdb6a09a7d040de69fd613153f488b77dbe7f352a69d82209841b4bf9106",
+    "CLI/internal/config/codex_security_linux.go": "a37c37cd628681f0938454b61ede98829190b26e951f98c3b6e7751b819a3218",
+    "CLI/internal/config/codex_security_linux_test.go": "f0617926a57bbf1bdb342007c4b889cd5ee3ba843e05493e46891cc287bc0e48",
+    "CLI/internal/config/codex_security_other.go": "7fa4f5c3ae7569d10c43024769959bc1793038ff9ac89eab079e4da543261929",
+    "CLI/internal/config/codex_security_test.go": "c9d86a688a91f4f5cf816a5bf6414f786a9bd8d36686c4505f516155571582fc",
+    "CLI/internal/config/config.go": "944b260a18aa53390f3de1c175646b6a867a2d562952d540645933fc89ed45d9",
+    "CLI/internal/config/config_test.go": "6693c20643f9e46e7c32f1ee41d9fb2077c9db40145a7e313a036abd886c12ef",
+    "CLI/internal/config/diff.go": "b21220f0571d92d0a3b6ef0c72868970ec7c674bc0de530152d0bd69dc52b6ab",
+    "CLI/internal/config/diff_test.go": "c51a31dc6afee48eb1bd3a44b3737bc8765b8d4e9f3d204a73c2dc5c3a56e9e1",
+    "CLI/internal/config/hooks_lifecycle_test.go": "4d0dc6234a74c945355962d5fcf557d9cfabd9998bfa3fa0d42e236a43f55d8b",
+    "CLI/internal/config/native.go": "3875224d123e4152100ea343f2296a83fa52a69e08a8c147ca33c90d3c36b6f3",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "8d69f8f4d6f20a5adc4d4d93a59ef4da2e704c137ef0894214d64cf9fb612051",
+    "CLI/internal/config/native_codex_hooks_test.go": "743690e6bad933e1dd0f1c09ef42166626b4dec9fd78889a1d35283975286eda",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_legacy.go": "0956b0efa98fc2c65172fef9300dd6f6fe2639d3e8ea7183dfb475c2fc8c11eb",
+    "CLI/internal/config/native_copilot_legacy_test.go": "8e97a1a2c8ab10ede99f758516c52fc2565e982078db747f8625aa740a83d4eb",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_copilot_preferences.go": "426e073102bd97c31a4f98c24848ff7b0f5e59a71bcf3fbb334afff0ab2c5302",
+    "CLI/internal/config/native_copilot_preferences_test.go": "c663219adca0c5e2682a78d46cb3b3c14c862a24767026bd77013c2f254d907c",
+    "CLI/internal/config/native_copilot_subagents.go": "f321f357532d79b5fe2452a31bb90d2e836e9c4f6d39b344a2cde0247352103b",
+    "CLI/internal/config/native_copilot_subagents_test.go": "8e3d71d7079289e4cf6349f1df8d9ffc942f21735dec0999bf233ff0f41d52fb",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "fa9869c1c0e2e5308ca21617e16e382112f88c4c74f70dcfa526e3136ac6c340",
+    "CLI/internal/config/native_field_context.go": "1c59ebdfdd9da4af21bca764357f0977018e062d0656ce6cad5fc9a724800471",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "bb638f6c1d475d51e8ed784bc6c9438bbe8def2461d8f44c7e78d8d2df4a5d4a",
+    "CLI/internal/config/native_import_merge.go": "8b551b5f6c575cd59031adc2247691fbcb490475c6563981a604451415f0bcee",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "997f9cd6e1e1d8b6fb7ed174536d7deb1a4e1d3c95e4e80d91991da9a2b5d566",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_plugins.go": "cbd7349c635964c41e6d9f283a9cd1ebdd469b352046a49ce59859cd8e1a86eb",
+    "CLI/internal/config/native_plugins_test.go": "51e0483f6b0f99542ed20725b2f1c8dd3084f11971d0f1f012cf4c8e33c23e9d",
+    "CLI/internal/config/native_registry.go": "be8aa93d08b4028dfe82701b2252d7f9a5dfb390df866487a3e5469ab671aacf",
+    "CLI/internal/config/native_selection.go": "11676003d818210681e784516c1f6e2843e6c4c06bfed53935914e879a715ed3",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "84fd82ebef9066c8a65359a7e366f97d8a9488597b1e5b2096c8566ee6ff483e",
+    "CLI/internal/config/native_types.go": "79672317173544fc7b91dedd9c7589294fa9ca2bea67c90e94afa636fb9f4252",
+    "CLI/internal/config/native_values.go": "f86428f618128ffb21207a4143104b454f63037869e610de8f36806e1200983b",
+    "CLI/internal/config/portability.go": "77b15786d741a7ffd3590e3a8935714c919f25df72518625ca24617b6159ce4c",
+    "CLI/internal/config/portability_test.go": "929236192a323030c6c965f5f5a1eb671076e5d7f3daf6db81ea820901bc23c3",
+    "CLI/internal/config/security.go": "e84168641ff9abfc557e1220f5cd38b5e72fb6a64d2cb05a1e6beda10eb3d84c",
+    "CLI/internal/config/security_test.go": "d228446fd340bc399f08d4edbae6de4459cd5fdf80717f07566f5a00bf3ce24e",
+    "CLI/internal/config/tools_lifecycle_test.go": "698943db25951953c2a52cca7866cfe3fa73301e960a17ef037b9743e25f36dd"
+  },
+  "package_hashes": {
+    "plugin.json": "598b0cf729c73c4d5d50d849445f97d3de6c407286ebd5b2feed6eda2c8b625c",
+    "skills/fixture/SKILL.md": "8ce5eb72fd4b5c82f49bce82f00c53cb79065c5a24bb6585badd9640cefdb3e2"
+  },
+  "package_manifest": {
+    "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+    "name": "fixture",
+    "version": "1.0.0"
+  },
+  "package_installation": "explicit native fixture action after adapter apply",
+  "external_model": false,
+  "copied_credentials": false,
+  "full_adapter_support": false,
+  "commands": [
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/agents",
+        "import",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/source",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/source"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/agents",
+        "apply",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/home"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "create\t/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/home/settings.json\nupdate\t/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/state/open-dot-agents/native/copilot/e4300854ee4cf7bdb7629531b64e9d49cfdd4d3688c877cc0aface96a48237cc.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugin",
+        "marketplace",
+        "list"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "Included with GitHub Copilot:\n  \u25c6 copilot-plugins (GitHub: github/copilot-plugins)\n  \u25c6 awesome-copilot (GitHub: github/awesome-copilot)\n\nRegistered marketplaces:\n  \u2022 oda-fixture (Local: /mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugin",
+        "install",
+        "fixture@oda-fixture"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "Plugin \"fixture\" installed successfully. Installed 1 skill.\nEnabled \"fixture@oda-fixture\". It is loaded live from /mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market/fixture, so edits take effect on the next session \u2014 nothing was copied.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugins",
+        "list",
+        "--json",
+        "--kind",
+        "plugin,skill"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "{\n  \"plugins\": [\n    {\n      \"kind\": \"plugin\",\n      \"name\": \"fixture\",\n      \"scope\": \"user\",\n      \"source\": \"live-marketplace:oda-fixture\",\n      \"enabled\": true,\n      \"version\": \"1.0.0\",\n      \"installedFrom\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market\"\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"customize-cloud-agent\",\n      \"description\": \"Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"discover-resources\",\n      \"description\": \"Find a public MCP server or public skill the user could add for an unavailable external capability, such as database access, accessible PDF reports, cloud costs, or architecture diagrams.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"github-pr-media\",\n      \"description\": \"Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    }\n  ],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "skill",
+        "list",
+        "--json"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "[\n  {\n    \"name\": \"fixture\",\n    \"description\": \"Use the isolated plugin fixture marker.\",\n    \"source\": \"plugin\",\n    \"path\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market/fixture/skills/fixture\",\n    \"enabled\": true\n  },\n  {\n    \"name\": \"customize-cloud-agent\",\n    \"description\": \"Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.\",\n    \"source\": \"builtin\",\n    \"path\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/customize-cloud-agent\",\n    \"enabled\": true\n  },\n  {\n    \"name\": \"github-pr-media\",\n    \"description\": \"Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.\",\n    \"source\": \"builtin\",\n    \"path\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/github-pr-media\",\n    \"enabled\": true\n  }\n]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/agents",
+        "import",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/reimport",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/home"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/agents",
+        "apply",
+        "--vendor",
+        "copilot",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/home"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "update\t/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/home/settings.json\nupdate\t/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/state/open-dot-agents/native/copilot/e4300854ee4cf7bdb7629531b64e9d49cfdd4d3688c877cc0aface96a48237cc.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "plugins",
+        "list",
+        "--json",
+        "--kind",
+        "plugin,skill"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "{\n  \"plugins\": [\n    {\n      \"kind\": \"plugin\",\n      \"name\": \"fixture\",\n      \"scope\": \"user\",\n      \"source\": \"live-marketplace:oda-fixture\",\n      \"enabled\": false,\n      \"version\": \"1.0.0\",\n      \"installedFrom\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market\"\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"customize-cloud-agent\",\n      \"description\": \"Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"discover-resources\",\n      \"description\": \"Find a public MCP server or public skill the user could add for an unavailable external capability, such as database access, accessible PDF reports, cloud costs, or architecture diagrams.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    },\n    {\n      \"kind\": \"skill\",\n      \"name\": \"github-pr-media\",\n      \"description\": \"Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.\",\n      \"scope\": \"builtin\",\n      \"source\": \"builtin\",\n      \"enabled\": true\n    }\n  ],\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/copilot",
+        "skill",
+        "list",
+        "--json"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+      "exit_code": 0,
+      "stdout": "[\n  {\n    \"name\": \"customize-cloud-agent\",\n    \"description\": \"Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.\",\n    \"source\": \"builtin\",\n    \"path\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/customize-cloud-agent\",\n    \"enabled\": true\n  },\n  {\n    \"name\": \"github-pr-media\",\n    \"description\": \"Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.\",\n    \"source\": \"builtin\",\n    \"path\": \"/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/github-pr-media\",\n    \"enabled\": true\n  }\n]\n",
+      "stderr": ""
+    }
+  ],
+  "user_files_before_apply": {
+    "config.json": "2994bead38969132f60149437505106d7825e934b39c5b0d836eab259bad3229"
+  },
+  "user_files_after_apply": {
+    "config.json": "2994bead38969132f60149437505106d7825e934b39c5b0d836eab259bad3229",
+    "settings.json": "49fd9502fc1ce451b18ab2213fbcd01bf1f91a08d6e6fed35accc6cef1c6c910"
+  },
+  "marketplace_list": {
+    "command": [
+      "/home/maurizio/.local/bin/copilot",
+      "plugin",
+      "marketplace",
+      "list"
+    ],
+    "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+    "exit_code": 0,
+    "stdout": "Included with GitHub Copilot:\n  \u25c6 copilot-plugins (GitHub: github/copilot-plugins)\n  \u25c6 awesome-copilot (GitHub: github/awesome-copilot)\n\nRegistered marketplaces:\n  \u2022 oda-fixture (Local: /mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market)\n",
+    "stderr": ""
+  },
+  "install": {
+    "command": [
+      "/home/maurizio/.local/bin/copilot",
+      "plugin",
+      "install",
+      "fixture@oda-fixture"
+    ],
+    "cwd": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/workspace",
+    "exit_code": 0,
+    "stdout": "Plugin \"fixture\" installed successfully. Installed 1 skill.\nEnabled \"fixture@oda-fixture\". It is loaded live from /mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market/fixture, so edits take effect on the next session \u2014 nothing was copied.\n",
+    "stderr": ""
+  },
+  "enabled_discovery": {
+    "resources": {
+      "plugins": [
+        {
+          "kind": "plugin",
+          "name": "fixture",
+          "scope": "user",
+          "source": "live-marketplace:oda-fixture",
+          "enabled": true,
+          "version": "1.0.0",
+          "installedFrom": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market"
+        },
+        {
+          "kind": "skill",
+          "name": "customize-cloud-agent",
+          "description": "Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        },
+        {
+          "kind": "skill",
+          "name": "discover-resources",
+          "description": "Find a public MCP server or public skill the user could add for an unavailable external capability, such as database access, accessible PDF reports, cloud costs, or architecture diagrams.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        },
+        {
+          "kind": "skill",
+          "name": "github-pr-media",
+          "description": "Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        }
+      ],
+      "errors": []
+    },
+    "skills": [
+      {
+        "name": "fixture",
+        "description": "Use the isolated plugin fixture marker.",
+        "source": "plugin",
+        "path": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market/fixture/skills/fixture",
+        "enabled": true
+      },
+      {
+        "name": "customize-cloud-agent",
+        "description": "Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.",
+        "source": "builtin",
+        "path": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/customize-cloud-agent",
+        "enabled": true
+      },
+      {
+        "name": "github-pr-media",
+        "description": "Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.",
+        "source": "builtin",
+        "path": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/github-pr-media",
+        "enabled": true
+      }
+    ]
+  },
+  "installed_package": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market/fixture",
+  "installed_package_hashes": {
+    "plugin.json": "598b0cf729c73c4d5d50d849445f97d3de6c407286ebd5b2feed6eda2c8b625c",
+    "skills/fixture/SKILL.md": "8ce5eb72fd4b5c82f49bce82f00c53cb79065c5a24bb6585badd9640cefdb3e2"
+  },
+  "disabled_discovery": {
+    "resources": {
+      "plugins": [
+        {
+          "kind": "plugin",
+          "name": "fixture",
+          "scope": "user",
+          "source": "live-marketplace:oda-fixture",
+          "enabled": false,
+          "version": "1.0.0",
+          "installedFrom": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/market"
+        },
+        {
+          "kind": "skill",
+          "name": "customize-cloud-agent",
+          "description": "Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        },
+        {
+          "kind": "skill",
+          "name": "discover-resources",
+          "description": "Find a public MCP server or public skill the user could add for an unavailable external capability, such as database access, accessible PDF reports, cloud costs, or architecture diagrams.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        },
+        {
+          "kind": "skill",
+          "name": "github-pr-media",
+          "description": "Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.",
+          "scope": "builtin",
+          "source": "builtin",
+          "enabled": true
+        }
+      ],
+      "errors": []
+    },
+    "skills": [
+      {
+        "name": "customize-cloud-agent",
+        "description": "Skill for customizing the Copilot cloud agent (formerly known as Copilot coding agent) environment, including copilot-setup-steps.yml configuration, preinstalling tools and dependencies, runners, and settings. Use when the user mentions copilot-setup-steps, copilot setup steps, or wants to configure the cloud agent environment.",
+        "source": "builtin",
+        "path": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/customize-cloud-agent",
+        "enabled": true
+      },
+      {
+        "name": "github-pr-media",
+        "description": "Upload an image or video to GitHub's user attachments API and embed it in a pull request description or comment. Use when asked to add screenshots, diagrams, recordings, or other media to a PR or GitHub comment.",
+        "source": "builtin",
+        "path": "/mnt/DATA/tmp/oda-plugin-selections-gvnrkk0y/cache/pkg/linux-x64/1.0.83/builtin/github-pr-media",
+        "enabled": true
+      }
+    ]
+  },
+  "passed": true
+}

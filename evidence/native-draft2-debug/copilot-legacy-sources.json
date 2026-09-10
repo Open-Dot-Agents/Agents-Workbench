@@ -1,0 +1,10 @@
+{
+  "native_version": "1.0.83",
+  "native_sha256": "a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd",
+  "native_help": "WORKBENCH/evidence/native-draft2-debug/copilot-legacy-config-help.txt",
+  "native_help_sha256": "3c9ed3dcc6f6e91e8dc15e7d9fed100c6cdf16814ad085ffe0e578de34a96d61",
+  "reference": "WORKBENCH/evidence/native-draft2-debug/copilot-legacy-settings-reference.md",
+  "reference_sha256": "da7e43c09e769e9e294cf57eb27cb80bb7b12e47fbc6be4c70bb98cbd5a5875f",
+  "url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference",
+  "migration_rule": "The native migration moves recognized preferences and leaves application state; the conflict/root precedence is established by native fixture results, not inferred from this reference."
+}

@@ -1,0 +1,462 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t",
+  "vendor": "codex",
+  "scope": "user",
+  "native_version": "0.154.0",
+  "native_sha256": "3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022",
+  "runner_sha256": "83a67e0338b8d2361c63912027bb90875ab90f8dcb6080b2e9740b6b28e54ca1",
+  "helper_sha256": {
+    "run_native_approvals.py": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc",
+    "run_native_codex_hooks.py": "441b7e95da755e7fdc2db6be70fbea7d9db84225c11face4ab98dedb8a6d3cf6"
+  },
+  "implementation_sha256": {
+    "CLI/internal/config/apply.go": "300aa7996bfd7823c29f6c2d85d97a726537b88f26f6ce21aa6e350b2edbfda6",
+    "CLI/internal/config/apply_test.go": "ed8bd0f29a50946fd07f1aaaf54fa217d9a01140976670b8e48da08a9c5abb1f",
+    "CLI/internal/config/codex_security.go": "f48cbdb6a09a7d040de69fd613153f488b77dbe7f352a69d82209841b4bf9106",
+    "CLI/internal/config/codex_security_linux.go": "a37c37cd628681f0938454b61ede98829190b26e951f98c3b6e7751b819a3218",
+    "CLI/internal/config/codex_security_linux_test.go": "f0617926a57bbf1bdb342007c4b889cd5ee3ba843e05493e46891cc287bc0e48",
+    "CLI/internal/config/codex_security_other.go": "7fa4f5c3ae7569d10c43024769959bc1793038ff9ac89eab079e4da543261929",
+    "CLI/internal/config/codex_security_test.go": "c9d86a688a91f4f5cf816a5bf6414f786a9bd8d36686c4505f516155571582fc",
+    "CLI/internal/config/config.go": "944b260a18aa53390f3de1c175646b6a867a2d562952d540645933fc89ed45d9",
+    "CLI/internal/config/config_test.go": "6693c20643f9e46e7c32f1ee41d9fb2077c9db40145a7e313a036abd886c12ef",
+    "CLI/internal/config/diff.go": "b21220f0571d92d0a3b6ef0c72868970ec7c674bc0de530152d0bd69dc52b6ab",
+    "CLI/internal/config/diff_test.go": "c51a31dc6afee48eb1bd3a44b3737bc8765b8d4e9f3d204a73c2dc5c3a56e9e1",
+    "CLI/internal/config/hooks_lifecycle_test.go": "4d0dc6234a74c945355962d5fcf557d9cfabd9998bfa3fa0d42e236a43f55d8b",
+    "CLI/internal/config/native.go": "dcd78f74437dbcd5d307d27412d405b0a42b43c29e77de0b07abc2bb9e4cf6f3",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "8d69f8f4d6f20a5adc4d4d93a59ef4da2e704c137ef0894214d64cf9fb612051",
+    "CLI/internal/config/native_codex_hooks_test.go": "743690e6bad933e1dd0f1c09ef42166626b4dec9fd78889a1d35283975286eda",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "8d4f8a136d8927280092bde0ddf2c03ebe252796ce7e16af7fb558e951f4fde4",
+    "CLI/internal/config/native_field_context.go": "7a3f00d58f49efcda03228a87f3c08058a9dc4e1fdd31ab03a0ae9169dad6d12",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "bb638f6c1d475d51e8ed784bc6c9438bbe8def2461d8f44c7e78d8d2df4a5d4a",
+    "CLI/internal/config/native_import_merge.go": "a9304d25b8a56d029f50ff45a9a8390dc413dd06db07ca14fe970a22965990b3",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "997f9cd6e1e1d8b6fb7ed174536d7deb1a4e1d3c95e4e80d91991da9a2b5d566",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_plugins.go": "f304251c94ca8408c7743a6ae57021f131997ebf6d2f3430aaad8c303311b2d7",
+    "CLI/internal/config/native_plugins_test.go": "ea33e050cd2cacd6e47607135deb6c50cb873fe136891b82650fc30c5acaeb80",
+    "CLI/internal/config/native_registry.go": "88c527adc1751d5c6acb483817d4ecea5d511daaac1cb9b15baf7c5603df7a2f",
+    "CLI/internal/config/native_selection.go": "1e35981007e8425d302aa9f53f3e9e89d9cc34eb9eec8d78366970d6bf5b3ece",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "84fd82ebef9066c8a65359a7e366f97d8a9488597b1e5b2096c8566ee6ff483e",
+    "CLI/internal/config/native_types.go": "085770eb476af278d3c453a25e8a83cc210d0c75961f966602e1b71d4f4323ba",
+    "CLI/internal/config/native_values.go": "ef6cd9f672332aac55d9fecdeeb5f78d91e65fd33827fa0f7eba22cf06c3faba",
+    "CLI/internal/config/portability.go": "77b15786d741a7ffd3590e3a8935714c919f25df72518625ca24617b6159ce4c",
+    "CLI/internal/config/portability_test.go": "929236192a323030c6c965f5f5a1eb671076e5d7f3daf6db81ea820901bc23c3",
+    "CLI/internal/config/security.go": "e84168641ff9abfc557e1220f5cd38b5e72fb6a64d2cb05a1e6beda10eb3d84c",
+    "CLI/internal/config/security_test.go": "d228446fd340bc399f08d4edbae6de4459cd5fdf80717f07566f5a00bf3ce24e",
+    "CLI/internal/config/tools_lifecycle_test.go": "698943db25951953c2a52cca7866cfe3fa73301e960a17ef037b9743e25f36dd"
+  },
+  "package_hashes": {
+    "plugin.json": "598b0cf729c73c4d5d50d849445f97d3de6c407286ebd5b2feed6eda2c8b625c",
+    "skills/fixture/SKILL.md": "8ce5eb72fd4b5c82f49bce82f00c53cb79065c5a24bb6585badd9640cefdb3e2"
+  },
+  "package_manifest": {
+    "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+    "name": "fixture",
+    "version": "1.0.0"
+  },
+  "package_installation": "explicit native fixture action after adapter apply",
+  "external_model": false,
+  "copied_credentials": false,
+  "full_adapter_support": false,
+  "commands": [
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/source",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/source"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/agents",
+        "apply",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+        "--scope",
+        "user",
+        "--experimental",
+        "--native-home",
+        "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+      "exit_code": 0,
+      "stdout": "update\t/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/config.toml\nupdate\t/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/state/open-dot-agents/native/codex/7878b2206cc64bf78c9f803588ef51fabd6de898d2c3bc9575015f4b2016c030.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/codex",
+        "plugin",
+        "marketplace",
+        "list"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+      "exit_code": 0,
+      "stdout": "MARKETPLACE  ROOT\noda-fixture  /mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/market\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/maurizio/.local/bin/codex",
+        "plugin",
+        "add",
+        "fixture@oda-fixture"
+      ],
+      "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+      "exit_code": 0,
+      "stdout": "Added plugin `fixture` from marketplace `oda-fixture`.\nInstalled plugin root: /mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/plugins/cache/oda-fixture/fixture/1.0.0\n",
+      "stderr": ""
+    }
+  ],
+  "user_files_before_apply": {
+    "config.toml": "ce74b1137a3aab3a3b2b222aa1f5ec281fe92e436db77be0c714c85bbf45787f"
+  },
+  "user_files_after_apply": {
+    "config.toml": "77d7d0d3961116c72f76f085179d9f52c6b6f94a34bfccc7923458a37a005f73"
+  },
+  "marketplace_list": {
+    "command": [
+      "/home/maurizio/.local/bin/codex",
+      "plugin",
+      "marketplace",
+      "list"
+    ],
+    "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+    "exit_code": 0,
+    "stdout": "MARKETPLACE  ROOT\noda-fixture  /mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/market\n",
+    "stderr": ""
+  },
+  "install": {
+    "command": [
+      "/home/maurizio/.local/bin/codex",
+      "plugin",
+      "add",
+      "fixture@oda-fixture"
+    ],
+    "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+    "exit_code": 0,
+    "stdout": "Added plugin `fixture` from marketplace `oda-fixture`.\nInstalled plugin root: /mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/plugins/cache/oda-fixture/fixture/1.0.0\n",
+    "stderr": ""
+  },
+  "native_events": [
+    [
+      {
+        "id": 1,
+        "result": {
+          "userAgent": "oda-plugins/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda-plugins; 1)",
+          "codexHome": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home",
+          "platformFamily": "unix",
+          "platformOs": "linux"
+        }
+      },
+      {
+        "method": "remoteControl/status/changed",
+        "params": {
+          "status": "disabled",
+          "serverName": "1Z10",
+          "installationId": "c711c228-4237-4a9f-a94f-63311811e89a",
+          "environmentId": null
+        },
+        "emittedAtMs": 1789070960447
+      },
+      {
+        "id": 2,
+        "result": {
+          "data": [
+            {
+              "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+              "skills": [
+                {
+                  "name": "fixture:fixture",
+                  "description": "Use the isolated plugin fixture marker.",
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/plugins/cache/oda-fixture/fixture/1.0.0/skills/fixture/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": "fixture@oda-fixture"
+                },
+                {
+                  "name": "imagegen",
+                  "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "description": "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex.",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "plugin-creator",
+                  "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow.",
+                  "interface": {
+                    "displayName": "Plugin Creator",
+                    "shortDescription": "Scaffold plugins and marketplace entries",
+                    "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/assets/plugin-creator-small.svg",
+                    "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/assets/plugin-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $plugin-creator to scaffold a valid plugin in the personal marketplace, then validate it before handing it back."
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "description": "Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions.",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "description": "Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources.",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      }
+    ]
+  ],
+  "native_stderr": [
+    []
+  ],
+  "enabled_discovery": {
+    "data": [
+      {
+        "cwd": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/workspace",
+        "skills": [
+          {
+            "name": "fixture:fixture",
+            "description": "Use the isolated plugin fixture marker.",
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/plugins/cache/oda-fixture/fixture/1.0.0/skills/fixture/SKILL.md",
+            "scope": "user",
+            "enabled": true,
+            "pluginId": "fixture@oda-fixture"
+          },
+          {
+            "name": "imagegen",
+            "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+            "interface": {
+              "displayName": "Image Gen",
+              "shortDescription": "Generate or edit images for websites, games, and more",
+              "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/assets/imagegen-small.svg",
+              "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/assets/imagegen.png",
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/imagegen/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "openai-docs",
+            "description": "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex.",
+            "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+            "interface": {
+              "displayName": "OpenAI Docs",
+              "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+              "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/assets/openai-small.svg",
+              "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/assets/openai.png",
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/openai-docs/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "plugin-creator",
+            "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow.",
+            "interface": {
+              "displayName": "Plugin Creator",
+              "shortDescription": "Scaffold plugins and marketplace entries",
+              "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/assets/plugin-creator-small.svg",
+              "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/assets/plugin-creator.png",
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": "Use $plugin-creator to scaffold a valid plugin in the personal marketplace, then validate it before handing it back."
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/plugin-creator/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "review-agent",
+            "description": "Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions.",
+            "interface": {
+              "displayName": "Review Agent",
+              "shortDescription": "Find actionable bugs in code changes",
+              "iconSmall": null,
+              "iconLarge": null,
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/review-agent/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "skill-creator",
+            "description": "Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources.",
+            "shortDescription": "Create or update a skill",
+            "interface": {
+              "displayName": "Skill Creator",
+              "shortDescription": "Create or update a skill",
+              "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/assets/skill-creator-small.svg",
+              "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/assets/skill-creator.png",
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": null
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-creator/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "skill-installer",
+            "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+            "shortDescription": "Install curated skills from openai/skills or other repos",
+            "interface": {
+              "displayName": "Skill Installer",
+              "shortDescription": "Install curated skills from openai/skills or other repos",
+              "iconSmall": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/assets/skill-installer-small.svg",
+              "iconLarge": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/assets/skill-installer.png",
+              "iconSmallUrl": null,
+              "iconLargeUrl": null,
+              "brandColor": null,
+              "defaultPrompt": null
+            },
+            "path": "/mnt/DATA/tmp/oda-plugin-selections-y8em3b8t/home/skills/.system/skill-installer/SKILL.md",
+            "scope": "system",
+            "enabled": true,
+            "pluginId": null
+          }
+        ],
+        "errors": []
+      }
+    ]
+  },
+  "passed": false,
+  "error": ""
+}

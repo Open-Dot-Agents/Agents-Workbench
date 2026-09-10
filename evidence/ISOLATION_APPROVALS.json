@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-09-10",
+  "standard_version": "1.1.0-draft.1",
+  "full_adapter_support": false,
+  "portable_security_projection_tested": false,
+  "native_versions": {
+    "codex": "0.154.0",
+    "copilot": "1.0.83"
+  },
+  "report": "ISOLATION_APPROVALS.md",
+  "copilot_isolation": [
+    {
+      "case": "network-only",
+      "result": "results/isolation-approvals-copilot-network-only-final/result.json",
+      "result_sha256": "d5e292e69a76fdbf84692703a48f6c655cc04a981ea87045992ab5e4e8504355",
+      "probe_unchanged": true,
+      "host_unix_marker_received": true,
+      "host_outside_marker_exists": false,
+      "host_temporary_marker_created": false,
+      "observations": {
+        "workspace-write": {
+          "outcome": "allowed"
+        },
+        "outside-write": {
+          "outcome": "denied",
+          "errno": 30
+        },
+        "private-read": {
+          "outcome": "denied",
+          "errno": 2
+        },
+        "readonly-write": {
+          "outcome": "denied",
+          "errno": 30
+        },
+        "temp-write": {
+          "outcome": "allowed"
+        },
+        "network-2": {
+          "outcome": "denied",
+          "errno": 111
+        },
+        "network-1": {
+          "outcome": "allowed"
+        },
+        "self-loopback": {
+          "outcome": "allowed"
+        },
+        "self-loopback-ipv6": {
+          "outcome": "allowed"
+        },
+        "self-loopback-udp": {
+          "outcome": "allowed"
+        }
+      }
+    },
+    {
+      "case": "deny-socket-path",
+      "result": "results/isolation-approvals-copilot-deny-socket-path-final/result.json",
+      "result_sha256": "a918078d79eff6c86818f8d41b90c950c93561d358ca7d305d5d32dcac48180b",
+      "probe_unchanged": true,
+      "host_unix_marker_received": false,
+      "host_outside_marker_exists": false,
+      "host_temporary_marker_created": false,
+      "observations": {
+        "workspace-write": {
+          "outcome": "allowed"
+        },
+        "outside-write": {
+          "outcome": "allowed"
+        },
+        "private-read": {
+          "outcome": "denied",
+          "errno": 2
+        },
+        "readonly-write": {
+          "outcome": "denied",
+          "errno": 30
+        },
+        "temp-write": {
+          "outcome": "allowed"
+        },
+        "network-2": {
+          "outcome": "denied",
+          "errno": 111
+        },
+        "network-1": {
+          "outcome": "denied",
+          "errno": 2
+        },
+        "self-loopback": {
+          "outcome": "allowed"
+        },
+        "self-loopback-ipv6": {
+          "outcome": "allowed"
+        },
+        "self-loopback-udp": {
+          "outcome": "allowed"
+        }
+      }
+    }
+  ],
+  "model_approvals": [
+    {
+      "vendor": "codex",
+      "mode": "allow",
+      "result": "results/native-approvals-codex-final/allow.json",
+      "passed": true,
+      "assessment_complete": true,
+      "status": "verified-execution",
+      "native_script_started": false,
+      "native_unattended_denial": false,
+      "result_sha256": "86d2b0c835c67114ec8fe37ca968b8b1987c7391211f219d3a37364b746f80a4"
+    },
+    {
+      "vendor": "codex",
+      "mode": "deny",
+      "result": "results/native-approvals-codex-final/deny.json",
+      "passed": true,
+      "assessment_complete": true,
+      "status": "verified-approval-denial",
+      "native_script_started": false,
+      "native_unattended_denial": false,
+      "result_sha256": "253431acd77f81df48e6d9bd5111cbb8891737d6caf02b427b72f21c1dd70b63"
+    },
+    {
+      "vendor": "codex",
+      "mode": "noninteractive",
+      "result": "results/native-approvals-codex-final/noninteractive.json",
+      "passed": false,
+      "assessment_complete": false,
+      "status": "inconclusive",
+      "native_script_started": false,
+      "native_unattended_denial": false,
+      "result_sha256": "6a03c471af87673c48d1462ccedfb6f948e8b5e1519ad6badbffeab443d22a23"
+    },
+    {
+      "vendor": "copilot",
+      "mode": "allow",
+      "result": "results/native-approvals-copilot-final/allow.json",
+      "passed": true,
+      "assessment_complete": true,
+      "status": "verified-execution",
+      "native_script_started": false,
+      "native_unattended_denial": false,
+      "result_sha256": "64b8b989547ca0331afeffde57518324049156b7e4ff9942bafd0e8a14c223d4"
+    },
+    {
+      "vendor": "copilot",
+      "mode": "deny",
+      "result": "results/native-approvals-copilot-final/deny.json",
+      "passed": true,
+      "assessment_complete": true,
+      "status": "verified-approval-denial",
+      "native_script_started": false,
+      "native_unattended_denial": false,
+      "result_sha256": "53004d58012f645155554cd66f5bdb5a4d1298c407bf919a2c8526c59d8518d6"
+    },
+    {
+      "vendor": "copilot",
+      "mode": "noninteractive",
+      "result": "results/native-approvals-copilot-final/noninteractive.json",
+      "passed": true,
+      "assessment_complete": true,
+      "status": "verified-noninteractive-denial",
+      "native_script_started": false,
+      "native_unattended_denial": true,
+      "result_sha256": "7a1b84b78a783fbf8f8da9de2ac5a19ca79a8b306e6a8e9bd43afd1a24de56dc"
+    },
+    {
+      "vendor": "codex",
+      "mode": "noninteractive",
+      "result": "results/native-approvals-codex-unattended-02/noninteractive.json",
+      "passed": false,
+      "assessment_complete": true,
+      "status": "native-ask-mismatch",
+      "native_script_started": true,
+      "native_unattended_denial": false,
+      "result_sha256": "85ab5cb5a3b2222db9279b97ec901fe33c3a20a58a0bccf31d6e1b4d5959ef6a"
+    }
+  ],
+  "decisions": {
+    "copilot_security_projection": "remain-refused; no tested native control denies all required local targets",
+    "codex_portable_ask": "remain-refused; native on-request is not equivalent to mandatory ask",
+    "coverage": "unchanged; native client tests do not establish a portable mapping",
+    "claude_code": "skipped at user request"
+  },
+  "evaluator_sha256": "25293199301c50ee3c7e1667e31769fda8b73bc6a8c41447999711d85a476c4d"
+}

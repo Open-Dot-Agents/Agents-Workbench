@@ -1,0 +1,242 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc",
+  "scope": "project",
+  "location": "file",
+  "scenario": "execution",
+  "native_version": "0.154.0",
+  "native_sha256": "3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022",
+  "runner_sha256": "c47bab228dec71ef838ed44a6ea9efff88f0e3f44a1fb46e51734cb705009cba",
+  "cli_sha256": "07aa9a629e64ae8f3aa78926b9f316931934dfd666395f3c950e7c8f602f75a3",
+  "configuration": {
+    "hooks": {
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "mcp_tool",
+              "server": "oda_hook",
+              "tool": "record",
+              "input": {
+                "event": "${hook_event_name}",
+                "session": "${session_id}",
+                "call": "${tool_use_id}",
+                "payload": "${tool_input}",
+                "text": "command=${tool_input.command}",
+                "nested": [
+                  {
+                    "name": "${tool_name}"
+                  },
+                  7,
+                  true,
+                  null
+                ],
+                "scenario": "execution"
+              },
+              "timeout": 3,
+              "statusMessage": "ODA_MCP_LOADING_PreToolUse"
+            }
+          ]
+        },
+        {
+          "matcher": "apply_patch",
+          "hooks": [
+            {
+              "type": "mcp_tool",
+              "server": "oda_hook",
+              "tool": "record",
+              "input": {
+                "event": "${hook_event_name}",
+                "session": "${session_id}",
+                "call": "${tool_use_id}",
+                "payload": "${tool_input}",
+                "text": "command=${tool_input.command}",
+                "nested": [
+                  {
+                    "name": "${tool_name}"
+                  },
+                  7,
+                  true,
+                  null
+                ],
+                "scenario": "execution"
+              },
+              "timeout": 3,
+              "statusMessage": "ODA_MCP_LOADING_PreToolUse"
+            }
+          ]
+        }
+      ],
+      "PostToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "mcp_tool",
+              "server": "oda_hook",
+              "tool": "record",
+              "input": {
+                "event": "${hook_event_name}",
+                "session": "${session_id}",
+                "call": "${tool_use_id}",
+                "payload": "${tool_input}",
+                "text": "command=${tool_input.command}",
+                "nested": [
+                  {
+                    "name": "${tool_name}"
+                  },
+                  7,
+                  true,
+                  null
+                ],
+                "scenario": "execution"
+              },
+              "timeout": 3,
+              "statusMessage": "ODA_MCP_LOADING_PostToolUse"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "external_model": false,
+  "copied_credentials": false,
+  "full_adapter_support": false,
+  "mcp_configuration": "isolated native prerequisite; not projected in this fixture",
+  "helper_sha256": {
+    "run_native_approvals.py": "21403c1b7c178b2fbdc86c8fea648800c849824c5bea541346486216a86945cc",
+    "run_native_codex_hooks.py": "441b7e95da755e7fdc2db6be70fbea7d9db84225c11face4ab98dedb8a6d3cf6"
+  },
+  "implementation_sha256": {
+    "CLI/internal/config/native.go": "a5309bf5d82057a40efe13e05387aa8c48d4661bb9b4d3e2ccb528a42aa1ea73",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "1322077071115daa1d0417787ab778f49f2f06268e34597b65a3b7b959de8f0e",
+    "CLI/internal/config/native_codex_hooks_test.go": "c07690e15d29177e0f46872f86644f20bd2858cb87c5ddaa7b385a8f2d403365",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "ee050eb092c22bf2a7503490a25c45932794b0439955ab99fb7c02c3a86f2d9b",
+    "CLI/internal/config/native_field_context.go": "209ae52d3407a752f1916501cab05ddf04ed9ccbed443c8dccc0882e21751718",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "bb638f6c1d475d51e8ed784bc6c9438bbe8def2461d8f44c7e78d8d2df4a5d4a",
+    "CLI/internal/config/native_import_merge.go": "344a868deb44948ff0a5f6aac458ca8f12973d19ebceca369977ec17a35d6ddc",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "3abbe1237d8df7701309c9c76e0870b6964d55627d4af62c481038793a58ee8d",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_registry.go": "88c527adc1751d5c6acb483817d4ecea5d511daaac1cb9b15baf7c5603df7a2f",
+    "CLI/internal/config/native_selection.go": "d682eb1be684e531ed31cdad6ef5b8f9cc3239cf700e2cc76750c5c79440ac03",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "f54317fa441e6e3b91b5e4e8b30674ecf5c19454314576ce6b9d92fa5bee8062",
+    "CLI/internal/config/native_types.go": "085770eb476af278d3c453a25e8a83cc210d0c75961f966602e1b71d4f4323ba",
+    "CLI/internal/config/native_values.go": "c7ead6b8fc4e0ad0e8b98ea2ec5864c6c2a7b6193e8fd1d38d4c419f1e832a61"
+  },
+  "native_command": [
+    "/home/maurizio/.local/bin/codex",
+    "app-server",
+    "--stdio"
+  ],
+  "import": {
+    "command": [
+      "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/agents",
+      "import",
+      "--vendor",
+      "codex",
+      "--root",
+      "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/source",
+      "--scope",
+      "project",
+      "--experimental"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "apply": {
+    "command": [
+      "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/agents",
+      "apply",
+      "--vendor",
+      "codex",
+      "--root",
+      "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+      "--scope",
+      "project",
+      "--experimental"
+    ],
+    "exit": 0,
+    "stdout": "create\t/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json\ncreate\t/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/AGENTS.md\nupdate\t/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.agents/state/native-codex.json\n",
+    "stderr": ""
+  },
+  "user_files_before_apply": {
+    "config.toml": "8c309f71b18c559f5bc7ceac129c86ef6813c218864461b1a87a25f60c433e29"
+  },
+  "user_files_after_apply": {
+    "config.toml": "8c309f71b18c559f5bc7ceac129c86ef6813c218864461b1a87a25f60c433e29"
+  },
+  "hooks_list": {
+    "data": [
+      {
+        "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+        "hooks": [],
+        "warnings": [
+          "failed to parse hooks config /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: MCP hook input must be representable as TOML: unsupported unit type at line 29 column 9"
+        ],
+        "errors": []
+      }
+    ]
+  },
+  "passed": false,
+  "error": "unexpected hook count",
+  "events": [
+    {
+      "id": 1,
+      "result": {
+        "userAgent": "oda-mcp-hooks/0.154.0 (Ubuntu 26.4.0; x86_64) unknown (oda-mcp-hooks; 0.1.0)",
+        "codexHome": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/home",
+        "platformFamily": "unix",
+        "platformOs": "linux"
+      }
+    },
+    {
+      "method": "remoteControl/status/changed",
+      "params": {
+        "status": "disabled",
+        "serverName": "1Z10",
+        "installationId": "eac5db4f-2cda-46ad-bba6-7944992fb316",
+        "environmentId": null
+      },
+      "emittedAtMs": 1789067550251
+    },
+    {
+      "id": 2,
+      "result": {
+        "data": [
+          {
+            "cwd": "/mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace",
+            "hooks": [],
+            "warnings": [
+              "failed to parse hooks config /mnt/DATA/tmp/oda-codex-mcp-hooks-x789oljc/workspace/.codex/hooks.json: MCP hook input must be representable as TOML: unsupported unit type at line 29 column 9"
+            ],
+            "errors": []
+          }
+        ]
+      }
+    }
+  ],
+  "approvals": [],
+  "stderr": [],
+  "model_requests": [],
+  "effect": ""
+}

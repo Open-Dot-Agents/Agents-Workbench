@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-09-10T17:04:57.534862+00:00",
+  "index": "https://docs.github.com/llms.txt",
+  "index_sha256": "8808227efc71ec33434ee9fbee06cf0f0eab833d933e2694e2814f05c80ecb24",
+  "url": "https://docs.github.com/en/copilot/reference/hooks-reference",
+  "fetch_url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/hooks-reference",
+  "sha256": "542c726a6d7b84d548f7315148ecd3b6f972edd03142569df05f8eeca62f6f4e"
+}

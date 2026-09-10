@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "path": "WORKBENCH/evidence/native-draft2-debug/codex-skills-source.md",
+      "source": "https://learn.chatgpt.com/docs/build-skills.md",
+      "sha256": "d15791562748e64a53dfec534b8558aa522e732cec0fdedcf7257fa4ef486a20"
+    },
+    {
+      "path": "WORKBENCH/evidence/native-draft2-debug/skills-sh-source.md",
+      "source": "https://raw.githubusercontent.com/vercel-labs/skills/80feb48868972d518436f26711509bc78595b5cb/README.md",
+      "sha256": "b974874366d77133a0125e3c25c190211b4394df014563b7650804c2e4f780a5"
+    }
+  ]
+}

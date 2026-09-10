@@ -501,5 +501,11 @@
     "observation": "Copilot 1.0.83 reached a live host Unix socket with allowLocalNetwork=false.",
     "limits": "All 30 portable projection scenarios remain pending. Native filesystem observations do not count as projected enforcement."
   },
-  "claude": "skipped at user request"
+  "claude": "skipped at user request",
+  "native_followup": {
+    "report": "ISOLATION_APPROVALS.md",
+    "results": "ISOLATION_APPROVALS.json",
+    "portable_matrix_changed": false,
+    "reason": "Native isolation and approval tests do not implement or extend portable security coverage."
+  }
 }
