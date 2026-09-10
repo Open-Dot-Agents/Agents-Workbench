@@ -234,3 +234,17 @@ It never archives raw native homes or logs. See the
 [Copilot report](../evidence/COPILOT_SECURITY_ASSESSMENT.md), and
 [scenario record](../evidence/SECURITY_SCENARIOS.json). These are separate from
 stable release support gates.
+
+## Native model-tool approvals
+
+`run_native_approvals.py --vendor codex|copilot --result-dir /new/path` uses a
+native app-server or ACP client to test explicit allow, explicit deny, and
+unattended tool requests. `--mode` selects one case. It makes model requests;
+Copilot needs an approved token in the process environment, while Codex uses
+an isolated copy of its existing login. Credentials are never archived.
+
+Native tool events must agree with marker state. Model claims and marker
+absence alone are insufficient. A nonzero result can mean a policy mismatch
+or missing evidence; inspect `status` and `assessment_complete`. These tests
+are not a runtime launcher installed by the reference CLI. See
+[the assessment](../evidence/ISOLATION_APPROVALS.md).

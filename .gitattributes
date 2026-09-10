@@ -1,0 +1,5 @@
+# Preserve captured upstream bytes and their recorded evidence hashes.
+evidence/native-draft2-debug/codex-skills-source.md whitespace=-blank-at-eol
+evidence/native-draft2-debug/copilot-legacy-config-help.txt whitespace=-blank-at-eof
+evidence/native-draft2-debug/copilot-native-config-help.txt whitespace=-blank-at-eof
+evidence/plugin-standard/agent-plugins-environment-requirements.md whitespace=-blank-at-eof

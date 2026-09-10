@@ -1,3 +1,16 @@
 __pycache__
 node_modules/
 evidence/results/
+
+# Generated native evidence stays in local or published artifact storage.
+evidence/native-draft2-debug/
+evidence/**/*.runner.py
+evidence/**/runner_source.py
+evidence/ISOLATION_APPROVALS.json
+evidence/plugin-standard/*.json
+evidence/plugin-catalog-review/*.json
+evidence/project-tools/*.json
+evidence/project-tools/stable-import-safety-baseline.test.go
+evidence/2026-*/*.json
+!evidence/2026-09-10-copilot-local-classes/network-targets.json
+!evidence/2026-09-10-copilot-local-classes/settings.json
