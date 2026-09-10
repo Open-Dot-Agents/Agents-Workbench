@@ -25,7 +25,7 @@ import run_adapter as native
 HERE = Path(__file__).resolve().parent
 EVIDENCE = HERE.parent / 'evidence/results/extended'
 SNAPSHOTS = {p.name:p.read_bytes() for p in
-             (Path(__file__), HERE/'extended_server.py', HERE/'hook_probe.py', HERE/'codex_terminal.py', HERE/'run_adapter.py')}
+             (Path(__file__), HERE/'extended_server.py', HERE/'hook_probe.py', HERE/'codex_terminal.py', HERE/'run_adapter.py', HERE/'marker_server.py', HERE/'summarize_extended.py', HERE/'validate_result.py', HERE/'versions.json')}
 SOURCES = {name:hashlib.sha256(data).hexdigest() for name,data in SNAPSHOTS.items()}
 
 
@@ -160,7 +160,7 @@ def remote(case: Case, authenticated=False):
         case.apply();_,markers=case.run();case.call_observed(markers)
         requests=[e for e in events(case.log) if e.get('event')=='http-request']
         case.check('https-requests',bool(requests) and all(e['authorized'] for e in requests),requests)
-        generated=(case.root/('.codex/config.toml' if case.vendor=='codex' else '.github/mcp.json')).read_text()
+        generated=(case.root/{'codex':'.codex/config.toml','copilot':'.github/mcp.json','claude':'.mcp.json'}[case.vendor]).read_text()
         case.check('no-literal-auth-in-projection',token not in generated)
 
 
@@ -168,7 +168,7 @@ def stdio_environment(case: Case):
     sentinel='synthetic-'+uuid.uuid4().hex
     arguments=['two words','literal;echo ODA_BAD','$(touch ODA_BAD)','quote"value','Unicode-è']
     case.stdio(sentinel,arguments);case.env['ODA_NATIVE_ENV']=sentinel
-    if case.vendor=='copilot':case.apply(expect_refusal=True);return
+    if case.vendor in {'copilot','codex'}:case.apply(expect_refusal=True);return
     case.apply();_,markers=case.run();case.call_observed(markers)
     observations=events(case.log)
     case.check('stdio-argv-preserved',any(e.get('argv')==arguments for e in observations),observations)
@@ -285,8 +285,12 @@ def profile_skills(case: Case):
     skill_marker='skill-'+uuid.uuid4().hex
     write(case.root/'.agents/skills/profile-probe/SKILL.md','---\nname: profile-probe\ndescription: Use for ODA_PROFILE requests.\n---\nCall native oda-marker record once with marker `'+skill_marker+'`.\n')
     write(case.root/'.agents/AGENTS.md','# Instructions\n\nFor ODA_PROFILE, use profile-probe only if it is in the native skill list.\nDo not search for or read undiscovered skill files. If it is not available,\ncall native oda-marker record once with marker `'+case.marker+'`.\n')
-    for phase,profiles in [('initial-off',['tools']),('enabled',['tools','skills']),('removed',['tools'])]:
+    for phase,profiles in [('initial-off',['tools']),('enabled',['tools','skills']),('removed',['tools']),('enabled-again',['tools','skills'])]:
         write(case.root/'.agents/manifest.json',{'version':'1.0.0','profiles':profiles})
+        if case.vendor in {'codex','copilot'} and 'skills' not in profiles:
+            case.apply(expect_refusal=True)
+            case.check(phase+'.refused',case.checks[-1]['passed'])
+            continue
         case.apply();_,markers=case.run('ODA_PROFILE. Follow the configured skill availability rule.')
         expected=skill_marker if 'skills' in profiles else case.marker
         unexpected=case.marker if 'skills' in profiles else skill_marker
@@ -429,7 +433,7 @@ def resumed_refresh(case: Case):
 def missing_environment(case: Case):
     case.stdio('synthetic-required-value')
     case.env.pop('ODA_NATIVE_ENV',None)
-    if case.vendor=='copilot':case.apply(expect_refusal=True);return
+    if case.vendor in {'copilot','codex'}:case.apply(expect_refusal=True);return
     case.apply();_,markers=case.run()
     observed=events(case.log)
     case.check('missing-env-fails-activation',not markers and not any(e.get('event')=='startup' for e in observed),observed)
@@ -505,18 +509,34 @@ def stdio_arguments(case: Case):
 CASES={'remote-https':lambda c:remote(c), 'remote-auth-env':lambda c:remote(c,True), 'stdio-env-argv':stdio_environment, 'hook-lifecycle':lifecycle, 'hook-matchers':matchers, 'hook-timeout':hook_timeout, 'instruction-precedence':instructions, 'skill-resources':skill_resources, 'profile-tools':profile_tools, 'profile-skills':profile_skills, 'untrusted':untrusted, 'refusal-boundaries':refusal_boundaries, 'subagent-events':subagents, 'permission-request':permission_request, 'tool-denial':tool_denial, 'compaction':compaction, 'resumed-refresh':resumed_refresh, 'missing-env':missing_environment, 'profile-hooks':profile_hooks, 'hook-exit-codes':hook_exit_codes, 'resumed-resources':resumed_resources, 'remote-missing-env':remote_missing_environment, 'stdio-argv':stdio_arguments}
 
 
+CLAUDE_CASES = ('remote-https','remote-auth-env','stdio-env-argv','instruction-precedence',
+                'skill-resources','profile-tools','profile-skills','missing-env',
+                'profile-hooks','remote-missing-env','stdio-argv')
+
+
+def cases_for(vendor):
+    return CLAUDE_CASES if vendor == 'claude' else tuple(CASES)
+
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('vendor',choices=['codex','copilot'])
+    parser=argparse.ArgumentParser();parser.add_argument('vendor',choices=['codex','copilot','claude'])
     parser.add_argument('--case',choices=list(CASES),action='append');parser.add_argument('--output',type=Path,default=EVIDENCE)
     parser.add_argument('--auth',choices=['auto','environment','existing-login'],default='auto')
-    args=parser.parse_args();checks,metadata=native.preflight(args.vendor,args.auth)
+    args=parser.parse_args()
+    selected=args.case or cases_for(args.vendor)
+    if any(case not in cases_for(args.vendor) for case in selected):
+        parser.error('case is not implemented for this harness')
+    checks,metadata=native.preflight(args.vendor,args.auth)
+    metadata.update(native.source_metadata())
     for name,data in SNAPSHOTS.items():
         source=args.output/'sources'/(SOURCES[name]+'-'+name)
         source.parent.mkdir(parents=True,exist_ok=True)
         if not source.exists():source.write_bytes(data)
-    if not all(c['passed'] for c in checks):print(json.dumps(checks));return 2
+    if not all(c['passed'] for c in checks):
+        write(args.output/args.vendor/'preflight.json',{'passed':False,'checks':checks,'metadata':metadata})
+        print(json.dumps(checks));return 2
     overall=True
-    for case_id in args.case or CASES:
+    for case_id in selected:
         print(f'{args.vendor}: START {case_id}',flush=True)
         record={'vendor':args.vendor,'case':case_id,'package':native.VERSIONS['harnesses'][args.vendor],
                 'sources':SOURCES,'preflight':checks,'startedAt':datetime.now(UTC).isoformat()}

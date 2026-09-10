@@ -20,7 +20,7 @@ REQUIRED = {
  'instruction-precedence': {'native-process','native-mcp-call','nearest-instruction-overrides-parent','sibling-scope-isolation'},
  'skill-resources': {'native-process','native-mcp-call','skill-script-used'},
  'profile-tools': {'native-process','initial-off','enabled','removed','enabled-again'},
- 'profile-skills': {'native-process','initial-off','enabled','removed'},
+ 'profile-skills': {'native-process','initial-off','enabled','removed','enabled-again'},
  'untrusted': {'native-process','untrusted-hook-not-executed'},
  'refusal-boundaries': {'adapter-refuses-before-writes','no-native-launch'},
  'subagent-events': {'native-process','native-mcp-call','event.SubagentStart','event.SubagentStop','nonmatching-event-hooks-skipped'},
@@ -37,8 +37,15 @@ REQUIRED = {
 COPILOT_REFUSALS = {'remote-auth-env','stdio-env-argv','missing-env','remote-missing-env'}
 
 
+def is_refusal(vendor, case):
+    return (case == 'refusal-boundaries' or vendor == 'copilot' and case in COPILOT_REFUSALS
+            or vendor == 'codex' and case in {'stdio-env-argv','missing-env'})
+
+
 def required_checks(vendor, case):
-    if vendor=='copilot' and case in COPILOT_REFUSALS:return {'adapter-refuses-before-writes'}
+    if is_refusal(vendor,case):return {'adapter-refuses-before-writes'} | ({'no-native-launch'} if case=='refusal-boundaries' else set())
+    if case=='profile-skills' and vendor in {'codex','copilot'}:
+        return {'native-process','adapter-refuses-before-writes','initial-off.refused','enabled','removed.refused','enabled-again'}
     required=set(REQUIRED[case])
     if case=='untrusted':required.add('native-mcp-call' if vendor=='codex' else 'untrusted-mcp-not-loaded')
     if case=='compaction' and vendor=='codex':required.add('native-compaction-completed')
@@ -49,7 +56,7 @@ def required_checks(vendor, case):
 def audit(directory: Path, vendors: list[str]):
     rows=[]
     for vendor in vendors:
-        for case in run_extended.CASES:
+        for case in run_extended.cases_for(vendor):
             path=directory/vendor/(case+'.json')
             row={'vendor':vendor,'case':case,'outcome':'missing','valid':False}
             if path.exists():
@@ -63,11 +70,11 @@ def audit(directory: Path, vendors: list[str]):
                     assert required_checks(vendor,case).issubset({c['id'] for c in checks}), 'required assertion missing'
                     if case=='refusal-boundaries':
                         assert sum(c['id']=='adapter-refuses-before-writes' for c in checks)==(7 if vendor=='codex' else 10)
-                    expected_native={'instruction-precedence':2,'profile-tools':4,'profile-skills':3,'resumed-refresh':2,'resumed-resources':2,'profile-hooks':3,'hook-exit-codes':2}.get(case,1)
-                    if case=='refusal-boundaries' or vendor=='copilot' and case in COPILOT_REFUSALS:expected_native=0
+                    expected_native={'instruction-precedence':2,'profile-tools':4,'profile-skills':(4 if vendor=='claude' else 2),'resumed-refresh':2,'resumed-resources':2,'profile-hooks':3,'hook-exit-codes':2}.get(case,1)
+                    if is_refusal(vendor,case):expected_native=0
                     if case=='compaction' and vendor=='copilot':expected_native=2
                     assert sum(t['kind']=='native' for t in data['transcripts'])==expected_native, 'native phase missing'
-                    refusal=case=='refusal-boundaries' or vendor=='copilot' and case in COPILOT_REFUSALS
+                    refusal=is_refusal(vendor,case)
                     expected_outcome=('adapter-refusal' if refusal else 'native-pass') if data['passed'] else ('runner-incomplete' if any(c['id']=='runner-completed' and not c['passed'] for c in checks) else 'native-failure')
                     assert data['outcome']==expected_outcome, 'outcome contradicts checks'
                     assert data['metadata']['agentsSha256']
@@ -84,7 +91,7 @@ def audit(directory: Path, vendors: list[str]):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--result-dir',type=Path,default=run_extended.EVIDENCE)
-    parser.add_argument('--vendors',nargs='+',choices=['codex','copilot'],default=['codex','copilot'])
+    parser.add_argument('--vendors',nargs='+',choices=['codex','copilot','claude'],default=['codex','copilot'])
     parser.add_argument('--coverage-only',action='store_true');parser.add_argument('--json',action='store_true')
     args=parser.parse_args();result=audit(args.result_dir,args.vendors)
     if args.json:print(json.dumps(result,indent=2))

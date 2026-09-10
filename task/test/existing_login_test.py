@@ -74,6 +74,21 @@ class ExistingLoginTests(unittest.TestCase):
             self.assertNotIn('hooks', config)
             self.assertEqual((source/'config.json').read_text(), original)
 
+    def test_claude_uses_empty_private_configuration(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)/'personal'
+            source.mkdir()
+            (source/'settings.json').write_text('{"hooks":{"SessionStart":[]}}')
+            with mock.patch.dict(os.environ, {'CLAUDE_CONFIG_DIR':str(source), 'ANTHROPIC_API_KEY':'synthetic-test'}, clear=True):
+                metadata = {'authMode':'environment'}
+                environment = run_adapter.harness_environment('claude','/fake/claude',metadata,Path(directory))
+            runtime = Path(environment['CLAUDE_CONFIG_DIR'])
+            self.assertNotEqual(runtime,source)
+            self.assertEqual(list(runtime.iterdir()),[])
+            self.assertEqual(runtime.stat().st_mode & 0o777,0o700)
+            self.assertTrue((source/'settings.json').exists())
+            self.assertEqual(environment['ANTHROPIC_API_KEY'],'synthetic-test')
+
     def test_native_mcp_parser_rejects_shell_and_failed_tool_calls(self):
         start = {'type':'tool.execution_start','data':{'toolCallId':'1','toolName':'oda-marker-record','arguments':{'marker':'root-instruction'}}}
         done = {'type':'tool.execution_complete','data':{'toolCallId':'1','success':True}}

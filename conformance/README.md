@@ -176,3 +176,32 @@ child thread in the tested build. Copilot prompt-mode compaction uses `/compact`
 on a resumed session. The suite tests restart/resume refresh, not continuous
 hot reload while an agent turn is running. Non-portable features and other
 operating systems are outside these portable-profile cases.
+
+## Core completion evidence
+
+The extended runner supports Codex and Copilot's 23 cases and eleven Claude
+cases: HTTPS MCP, authenticated HTTPS MCP, stdio environment references,
+instruction precedence, skill resources, tools and skills profile lifecycles,
+missing stdio references, hooks profile lifecycle, missing remote references,
+and literal stdio arguments. Other Claude extended behaviors remain untested.
+
+Codex and Copilot skills-profile tests require refusal for the initially off
+and removed phases, then native skill use for enabled and enabled-again phases.
+Codex stdio reference cases require refusal. These outcomes are adapter refusal
+evidence, not proof of native deactivation or complete capability support.
+
+```sh
+AGENTS_BIN=/absolute/path/to/agents python3 conformance/run_adapter.py codex --output evidence/codex.json
+AGENTS_BIN=/absolute/path/to/agents python3 conformance/run_extended.py codex --output evidence/extended
+python3 conformance/release_gate.py --evidence-dir evidence --vendors codex
+```
+
+Run each harness separately. Use `--auth environment` in CI. Claude requires an
+accepted environment credential; never place its value in a result file or
+command argument. Its test configuration is isolated in a temporary directory.
+
+The release gate requires all three harnesses by default. `--release` also
+requires clean source checkouts, exact source commits, and release version
+1.0.0. Source snapshots and package pins are included in evidence bundles.
+Workflow artifacts expire after 90 days; reviewed release archives provide
+the durable public copy. No local run proves that such a copy was published.

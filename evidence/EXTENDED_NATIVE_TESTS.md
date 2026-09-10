@@ -1,5 +1,8 @@
 # Extended native test results
 
+This is the earlier native snapshot. See [the core completion review](CORE_COMPLETION.md)
+for the subsequent refusal fixes, reviewed runs, and current release blockers.
+
 The evidence audit confirms complete coverage for 46 vendor/case combinations:
 37 native passes, 6 expected adapter refusals, and 3 native failures. No case
 has missing or incomplete evidence. Complete coverage does not mean full

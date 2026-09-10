@@ -273,6 +273,11 @@ def harness_environment(vendor: str, executable: str, metadata: dict[str, object
             metadata["workspaceTrust"] = "temporary-fixture-folders"
         environment[variable] = str(runtime)
         metadata["runtimeHome"] = "temporary"
+    if vendor == "claude":
+        runtime = directory / "claude-runtime"
+        runtime.mkdir(mode=0o700)
+        environment["CLAUDE_CONFIG_DIR"] = str(runtime)
+        metadata["runtimeHome"] = "temporary"
     if vendor == "codex" and metadata.get("credentialEnv") == "CODEX_ACCESS_TOKEN":
         codex_home = directory / "codex-home"
         codex_home.mkdir()
@@ -288,6 +293,21 @@ def harness_environment(vendor: str, executable: str, metadata: dict[str, object
         )
         metadata["credentialImport"] = "codex.login.with-access-token"
     return environment
+
+
+def source_metadata() -> dict[str, object]:
+    metadata: dict[str, object] = {}
+    metadata["sourceCommits"] = {}
+    metadata["sourceDirty"] = {}
+    repository = Path(__file__).resolve().parents[2]
+    for component in (".", "CLI", "SPEC", "WORKBENCH"):
+        path = repository / component
+        revision = subprocess.run(["git", "-C", str(path), "rev-parse", "HEAD"], capture_output=True, text=True)
+        status = subprocess.run(["git", "-C", str(path), "status", "--porcelain"], capture_output=True, text=True)
+        metadata["sourceCommits"][component] = revision.stdout.strip() if revision.returncode == 0 else "unknown"
+        metadata["sourceDirty"][component] = status.returncode != 0 or bool(status.stdout)
+    metadata["platform"] = os.uname().sysname + " " + os.uname().machine
+    return metadata
 
 
 def preflight(vendor: str, auth: str = "environment") -> tuple[list[dict[str, object]], dict[str, str]]:
@@ -412,6 +432,7 @@ def run() -> int:
     parser.add_argument("--preflight-only", action="store_true", help="write harness preflight evidence without running the agent")
     args = parser.parse_args()
     preflight_checks, preflight_metadata = preflight(args.vendor, args.auth)
+    preflight_metadata.update(source_metadata())
     preflight_passed = all(bool(check["passed"]) for check in preflight_checks)
     if args.preflight_only:
         write_evidence(args, preflight_passed, preflight_checks, preflight_metadata, "preflight")
