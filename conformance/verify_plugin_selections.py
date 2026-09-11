@@ -27,10 +27,27 @@ def main():
     parser.add_argument('--with-codex-skills', action='store_true')
     parser.add_argument('--with-codex-otel', action='store_true')
     parser.add_argument('--with-codex-otel-tls', action='store_true')
+    parser.add_argument('--with-instruction-links', action='store_true')
+    parser.add_argument('--with-project-extensions', action='store_true', help='check pinned project sources and the bounded GitHub authentication evidence')
+    parser.add_argument('--with-otel-transports', action='store_true', help='check Codex OTLP transports, metrics, and credential exclusion')
+    parser.add_argument('--with-provider-auth', action='store_true', help='check provider authentication selection and the retained native failure')
+    parser.add_argument('--with-command-auth', action='store_true', help='check token-command preservation and native unauthenticated fallback')
+    parser.add_argument('--with-project-scope', action='store_true', help='check ignored Codex project settings and required/optional projection handling')
+    parser.add_argument('--with-role-scope', action='store_true', help='check bounded Codex child-role overrides and atomic refusal')
+    parser.add_argument('--with-role-references', action='store_true', help='check relocated Codex role files and skill selectors')
+    parser.add_argument('--with-copilot-skill-metadata', action='store_true', help='check skill visibility, invocation, and bounded permission observations')
+    parser.add_argument('--with-copilot-skill-import', action='store_true', help='check project skill import and relocated native execution')
+    parser.add_argument('--with-copilot-recursive-instructions', action='store_true', help='check recursive instruction import and native loading')
+    parser.add_argument('--with-copilot-root-instructions', action='store_true', help='check root instruction import and native reference limits')
+    parser.add_argument('--with-copilot-agent-instructions', action='store_true', help='check native agent instruction locations, references, and scope')
+    parser.add_argument('--with-copilot-canonical-instructions', action='store_true', help='check fixed core binding, relocation, and independent native instructions')
+    parser.add_argument('--with-copilot-user-instructions', action='store_true', help='check user instruction source routing, references, updates, and removal')
     parser.add_argument('--repository-only', action='store_true', help='run repository checks without repeating or promoting native evidence')
     args = parser.parse_args()
-    if args.repository_only and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills, args.with_codex_otel, args.with_codex_otel_tls)):
+    if args.repository_only and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills, args.with_codex_otel, args.with_codex_otel_tls, args.with_instruction_links)):
         parser.error('repository-only cannot select native evidence')
+    if args.with_instruction_links and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills, args.with_codex_otel, args.with_codex_otel_tls)):
+        parser.error('select one current review matrix')
     if args.with_codex_otel_tls and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills, args.with_codex_otel)):
         parser.error('select one current review matrix')
     if args.with_codex_otel and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills)):
@@ -54,11 +71,53 @@ def main():
         ('go-vet', 'CLI', ['go', 'vet', './...']),
         ('workbench', 'WORKBENCH', ['python3', '-m', 'unittest', 'discover', '-s', 'task/test', '-p', '*_test.py']),
         ('compatibility', '.', ['python3', 'CLI/scripts/check_compatibility.py']),
-        ('coverage', '.', ['python3', 'scripts/native_coverage.py', '--check']),
-        ('coverage-tests', '.', ['python3', 'scripts/native_coverage_test.py']),
+        ('coverage', '.', ['python3', 'CLI/scripts/native_coverage.py', '--check']),
+        ('coverage-tests', '.', ['python3', 'CLI/scripts/native_coverage_test.py']),
         ('repository', 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '..', '--format', 'json']),
         ('spec-starter-repository', 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '../SPEC', '--format', 'json']),
     ]
+    if args.with_project_extensions:
+        commands += [
+            ('project-extension-integrity', '.', ['python3', 'CLI/scripts/check_project_extensions.py']),
+            ('project-extension-refusals', '.', ['python3', 'CLI/scripts/check_project_extensions_test.py']),
+        ]
+    if args.with_otel_transports:
+        commands.append(('codex-otel-transports', '.', ['python3', 'WORKBENCH/conformance/verify_codex_otel_transports.py']))
+    if args.with_provider_auth:
+        commands.append(('codex-provider-auth', '.', ['python3', 'WORKBENCH/conformance/verify_native_provider_auth.py']))
+    if args.with_command_auth:
+        commands.append(('codex-command-auth', '.', ['python3', 'WORKBENCH/conformance/verify_native_command_auth.py']))
+    if args.with_project_scope:
+        commands.append(('codex-project-scope', '.', ['python3', 'WORKBENCH/conformance/verify_codex_project_scope.py']))
+    if args.with_role_scope:
+        commands.append(('codex-role-scope', '.', ['python3', 'WORKBENCH/conformance/verify_codex_role_scope.py']))
+    if args.with_role_references:
+        commands.append(('codex-role-references', '.', ['python3', 'WORKBENCH/conformance/verify_codex_role_references.py']))
+    if args.with_copilot_skill_metadata:
+        commands.append(('copilot-skill-metadata', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_skill_metadata.py']))
+        commands.append(('copilot-skill-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_skill_metadata_test.py']))
+    if args.with_copilot_skill_import:
+        commands.append(('copilot-skill-import', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_skill_import.py']))
+        commands.append(('copilot-skill-import-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_skill_import_test.py']))
+    if args.with_copilot_recursive_instructions:
+        commands.append(('copilot-recursive-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_recursive_instructions.py']))
+        commands.append(('copilot-instruction-trigger-evidence', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_instruction_triggers.py']))
+        commands.append(('copilot-recursive-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_recursive_instructions_test.py']))
+    if args.with_copilot_root_instructions:
+        commands.append(('copilot-root-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_root_instructions.py']))
+        commands.append(('copilot-root-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_root_instructions_test.py']))
+    if args.with_copilot_agent_instructions:
+        commands.append(('copilot-agent-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_agent_instructions.py']))
+        commands.append(('copilot-agent-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_agent_instructions_test.py']))
+        commands.append(('agent-instruction-example', 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '../SPEC/examples/native-agent-instructions', '--experimental', '--format', 'json']))
+    if args.with_copilot_canonical_instructions:
+        commands.append(('copilot-canonical-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_canonical_instructions.py']))
+        commands.append(('copilot-canonical-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_canonical_instructions_test.py']))
+        commands.append(('canonical-instruction-example', 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '../SPEC/examples/canonical-instructions', '--experimental', '--format', 'json']))
+    if args.with_copilot_user_instructions:
+        commands.append(('copilot-user-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_user_instructions.py']))
+        commands.append(('copilot-user-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_user_instructions_test.py']))
+        commands.append(('user-instruction-example', 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '../SPEC/examples/user-instructions', '--experimental', '--format', 'json']))
     for example in ('native-draft', 'plugins-draft'):
         commands.append((example, 'CLI', ['go', 'run', './cmd/agents', 'validate', '--root',
                                          '../SPEC/examples/' + example, '--experimental', '--format', 'json']))
@@ -119,6 +178,10 @@ def main():
         native += ['WORKBENCH/evidence/native-draft2-debug/codex-otel-tls-identity-' + signal + '-' + key + '-final.json'
                    for signal in ('exporter', 'trace_exporter', 'metrics_exporter') for key in ('ec', 'rsa')]
 
+    if args.with_instruction_links:
+        native = [f'WORKBENCH/evidence/native-draft2-debug/{vendor}-instruction-link-{origin}-final.json'
+                  for vendor in ('codex', 'copilot') for origin in ('stable', 'native')]
+
     if args.repository_only:
         native = []
 
@@ -135,12 +198,34 @@ def main():
             if Path(name).name.startswith('codex-otel-adapter-'): runner = 'run_native_codex_otel.py'
             if Path(name).name.startswith('codex-otel-tls-http-'): runner = 'run_native_codex_otel.py'
             elif Path(name).name.startswith('codex-otel-tls-'): runner = 'run_native_codex_otel_tls.py'
+            if '-instruction-link-' in name: runner = 'run_native_instruction_links.py'
             assert sha(ROOT / 'WORKBENCH/conformance' / runner) == record['runner_sha256'], name
             for source, digest in record['implementation_sha256'].items():
                 assert sha(ROOT / source) == digest, source
             for source, digest in record['helper_sha256'].items():
                 assert sha(ROOT / 'WORKBENCH/conformance' / source) == digest, source
-            if runner == 'run_native_plugin_git.py':
+            if runner == 'run_native_instruction_links.py':
+                assert record['native_version'] == ('0.154.0' if record['vendor'] == 'codex' else '1.0.83'), name
+                from run_native_approvals import PINS
+                assert record['native_sha256'] == PINS[record['vendor']], name
+                assert [p['label'] for p in record['phases']] == ['first', 'updated'], name
+                for phase in record['phases']:
+                    assert phase['link_preserved'] and phase['user_files_unchanged_by_apply'], name
+                    assert not phase['plan']['actions'] and not phase['plan_after_import']['actions'], name
+                    assert phase['instruction_marker_count'] == 1 and phase['model_requests'], name
+                    assert phase['import']['exit_code'] == 0 and phase['marker'] in phase['canonical_after_import'], name
+                    field = 'input' if record['vendor'] == 'codex' else 'messages'
+                    context = json.dumps(phase['model_requests'][0][field])
+                    assert context.count(phase['marker']) == 1, name
+                    if phase['label'] == 'updated': assert 'ODA_CANONICAL_FIRST_MARKER' not in context, name
+                    if record['vendor'] == 'codex':
+                        assert phase['completion']['status'] == 'completed', name
+                        assert any(e.get('method') == 'turn/completed' and e['params']['threadId'] == phase['session_id'] for e in phase['events']), name
+                    else:
+                        assert phase['completion']['stopReason'] == 'end_turn', name
+                        assert phase['native_trust_after_session'] == [str(Path(record['fixture']) / 'workspace')], name
+                        assert any(e.get('method') == 'session/update' and e['params']['sessionId'] == phase['session_id'] for e in phase['events']), name
+            elif runner == 'run_native_plugin_git.py':
                 expected = 'first_package_hashes' if record['vendor'] == 'codex' else 'second_package_hashes'
                 assert record['installed_hashes'] == record[expected], name
                 assert record['first_revision'] != record['second_revision'], name
@@ -272,6 +357,17 @@ def main():
         return names
 
     check('retained-failed-native-attempts', failed_records)
+    if args.with_instruction_links:
+        def instruction_sources():
+            sources = json.loads((ROOT / 'WORKBENCH/evidence/native-draft2-debug/instruction-link-docs.sources.json').read_text())
+            for source in sources: assert sha(ROOT / source['path']) == source['sha256']
+            for origin in ('stable', 'native'):
+                path = ROOT / f'WORKBENCH/evidence/native-draft2-debug/copilot-instruction-link-{origin}-first.json'
+                record = json.loads(path.read_text())
+                assert not record['passed'] and record['error'] == 'native fixture trust changed'
+                assert sha(path.with_suffix('.runner.py')) == record['runner_sha256']
+            return {'sources': sources, 'first_attempts': 'Retained incorrect fixture assertion on native first-launch metadata.'}
+        check('instruction-link-sources-and-first-attempts', instruction_sources)
     if args.with_codex_otel:
         def otel_sources():
             entries = json.loads((ROOT / 'WORKBENCH/evidence/native-draft2-debug/codex-otel-sources.json').read_text())
@@ -375,8 +471,116 @@ def main():
             assert sha(ROOT / source['excerpt']) == source['excerpt_sha256']
             return source
         check('standard-environment-source', environment_source)
-    docs = ['docs/PLUGIN_STANDARD.md', 'docs/NATIVE_CONFIGURATION.md', 'docs/NATIVE_DEBUG_RESEARCH.md',
+    if args.with_project_extensions:
+        def project_extensions():
+            base = ROOT / 'WORKBENCH/evidence/project-tools'
+            source = ROOT / '.agents/plugins/com.openai.codex'
+            provenance = json.loads((source / 'provenance.json').read_text())
+            records = []
+            for vendor in ('codex', 'copilot'):
+                for token in ('present-first', 'missing'):
+                    path = base / f'github-{vendor}-auth-{token}.json'
+                    data = json.loads(path.read_text())
+                    assert data['passed'] and data['native_turn_completed']
+                    assert data['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_github_plugin_auth.py')
+                    assert data['source_revision'] == provenance['revision']
+                    assert data['source_files'] == provenance['files']
+                    for name, digest in data['source_files'].items():
+                        assert sha(source / 'plugins/github' / name) == digest
+                    for name, digest in data['helper_sha256'].items():
+                        assert sha(ROOT / 'WORKBENCH/conformance' / name) == digest
+                    expected_pin = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022' if vendor == 'codex' else 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'
+                    assert data['native_sha256'] == expected_pin
+                    expected = vendor == 'codex' and token == 'present-first'
+                    assert data['authenticated_tools_list'] == expected == data['probe_in_model_context']
+                    assert any(r['authorized'] and r['method'] == 'tools/list' for r in data['http_requests']) == expected
+                    assert not data['real_credentials'] and not data['external_model'] and not data['external_github']
+                    assert not any(r['method'] == 'tools/call' for r in data['http_requests'])
+                    if vendor == 'codex':
+                        assert any(e.get('method') == 'turn/completed' and e['params']['turn']['status'] == 'completed' for e in data['native_events'])
+                    else:
+                        assert data['completion']['stopReason'] == 'end_turn' and data['http_requests']
+                    records.append(path.name)
+            skill = json.loads((base / 'diagnosing-bugs-native-discovery.json').read_text())
+            assert skill['passed'] and skill['skill_sha256'] == sha(ROOT / '.agents/skills/diagnosing-bugs/SKILL.md')
+            assert len(skill['codex']) == len(skill['copilot']) == 1
+            assert skill['codex'][0]['scope'] == 'repo' and skill['copilot'][0]['source'] == 'project'
+            assert skill['codex'][0]['enabled'] and skill['copilot'][0]['enabled']
+            setup = json.loads((base / 'github-project-setup.json').read_text())
+            assert setup['user_config_preserved'] and setup['user_mode_preserved'] and setup['package_hashes_match']
+            assert not setup['copilot_activation'] and not setup['credential_values_copied']
+            discovery = json.loads((base / 'github-codex-project-discovery-summary.json').read_text())
+            assert discovery['source_sha256'] == sha(source / 'config.toml')
+            plugins = discovery['project_marketplaces'][0]['plugins']
+            assert len(plugins) == 1 and plugins[0]['id'] == 'github@open-dot-agents'
+            assert plugins[0]['installed'] and plugins[0]['enabled'] and plugins[0]['localVersion'] == '0.1.11'
+            validator = json.loads((base / 'github-upstream-validator.json').read_text())
+            assert validator['exit_code'] != 0 and 'required' in validator['stdout'] + validator['stderr']
+            for source_record in json.loads((base / 'github-official-sources.json').read_text()):
+                assert sha(ROOT / source_record['file']) == source_record['sha256']
+            return {'authentication_records': records, 'external_MCP_use_verified': False, 'full_adapter_support': False}
+        check('project-extension-native-evidence', project_extensions)
+
+        def stable_import_safety():
+            base = ROOT / 'WORKBENCH/evidence/project-tools'
+            baseline_path = base / 'stable-import-safety-baseline.json'
+            baseline = json.loads(baseline_path.read_text())
+            assert baseline['exit_code'] != 0
+            assert baseline['test_sha256'] == sha(baseline_path.with_suffix('.test.go'))
+            for name in ('TestStableCodexImportRejectsLiteralSecretsBeforeWrites',
+                         'TestStableImportPreservesRequiredCapabilities',
+                         'TestStableImportRefusesUnmappedMCPControlsBeforeWrites'):
+                assert 'FAIL: '+name in baseline['stdout']
+            assert 'cannot unmarshal' not in baseline['stdout']
+            result_path = base / 'stable-import-cli-user-instructions.json'
+            result = json.loads(result_path.read_text())
+            assert result['runner_sha256'] == sha(result_path.with_suffix('.runner.py')) == sha(ROOT / 'CLI/scripts/check_stable_import_safety.py')
+            assert result['passed'] and not result['native_harness_execution'] and not result['runtime_support_promoted']
+            for path, digest in result['source_sha256'].items():
+                assert sha(ROOT / path) == digest, path
+            cases = {case['case']: case for case in result['results']}
+            for name in ('literal', 'mixed', 'disabled', 'bearer'):
+                assert cases[name]['exit_code'] != 0 and cases[name]['unchanged']
+                assert 'oda-test-secret' not in cases[name]['stdout'] + cases[name]['stderr']
+            assert cases['policy']['exit_code'] == 0
+            assert cases['policy']['manifest']['requires'] == ['mcp.envRef']
+            assert cases['policy']['existing_mode_preserved'] and cases['policy']['backups_private']
+            plan = cases['preserved-policy-refusal']['plan']
+            assert not plan['applicable'] and plan['actions'] == []
+            assert any('mcp.envRef' in diagnostic for diagnostic in plan['diagnostics'])
+            return {'public_cli_cases': len(cases), 'baseline_commit': baseline['baseline_commit'], 'native_harness_execution': False}
+        check('project-tool-import-safety', stable_import_safety)
+
+    docs = ['docs/PLUGIN_STANDARD.md', 'docs/NATIVE_CONFIGURATION.md', 'docs/NATIVE_DEBUG_RESEARCH.md', 'docs/FEATURE_INVENTORY.md',
             'docs/VENDOR_EVIDENCE.md', 'CLI/README.md']
+    if args.with_project_extensions:
+        docs += ['docs/PROJECT_EXTENSIONS_READINESS.md', 'docs/PLUGIN_CATALOG_REVIEW.md', '.agents/plugins/com.openai.codex/README.md']
+    if args.with_otel_transports:
+        docs += ['docs/CODEX_OTEL_TRANSPORTS.md', 'SPEC/spec/1.1-draft.2/SPECIFICATION.md']
+    if args.with_provider_auth:
+        docs += ['docs/NATIVE_AUTHENTICATION.md']
+    if args.with_command_auth:
+        docs += ['docs/CODEX_COMMAND_AUTHENTICATION.md']
+    if args.with_project_scope:
+        docs += ['docs/CODEX_PROJECT_SCOPE.md']
+    if args.with_role_scope:
+        docs += ['docs/CODEX_ROLE_OVERRIDES.md']
+    if args.with_role_references:
+        docs += ['docs/CODEX_ROLE_REFERENCES.md']
+    if args.with_copilot_skill_metadata:
+        docs += ['docs/COPILOT_SKILL_METADATA.md']
+    if args.with_copilot_skill_import:
+        docs += ['docs/COPILOT_SKILL_IMPORT.md']
+    if args.with_copilot_recursive_instructions:
+        docs += ['docs/COPILOT_RECURSIVE_INSTRUCTIONS.md']
+    if args.with_copilot_root_instructions:
+        docs += ['docs/COPILOT_ROOT_INSTRUCTIONS.md']
+    if args.with_copilot_agent_instructions:
+        docs += ['docs/COPILOT_AGENT_INSTRUCTIONS.md']
+    if args.with_copilot_canonical_instructions:
+        docs += ['docs/COPILOT_CANONICAL_INSTRUCTIONS.md']
+    if args.with_copilot_user_instructions:
+        docs += ['docs/COPILOT_USER_INSTRUCTIONS.md']
 
     def links():
         for name in docs:
@@ -407,8 +611,12 @@ def main():
         check('telemetry-runner-syntax', lambda: compile((ROOT / 'WORKBENCH/conformance/run_native_codex_otel.py').read_text(), 'telemetry-runner', 'exec') and 'valid')
     if args.with_codex_otel_tls:
         check('tls-runner-syntax', lambda: compile((ROOT / 'WORKBENCH/conformance/run_native_codex_otel_tls.py').read_text(), 'tls-runner', 'exec') and 'valid')
-    files = set(docs + ['.agents/features/coverage.json', 'scripts/native_coverage.py', 'scripts/native_coverage_semantics.py', 'scripts/native_coverage_test.py',
+    files = set(docs + ['.agents/features/coverage.json', 'CLI/scripts/native_coverage.py', 'CLI/scripts/native_coverage_semantics.py', 'CLI/scripts/native_coverage_test.py',
+                       'WORKBENCH/evidence/native-draft2-debug/coverage-native-links-before.json',
+                       'WORKBENCH/evidence/native-draft2-debug/coverage-native-links-before.test.py',
                         'WORKBENCH/conformance/run_native_plugin_selections.py', 'SPEC/conformance/native_draft.py'])
+    if args.with_instruction_links:
+        files.add('WORKBENCH/conformance/run_native_instruction_links.py')
     if args.with_git:
         files.add('WORKBENCH/conformance/run_native_plugin_git.py')
     if args.with_mcp:
@@ -429,6 +637,67 @@ def main():
     if args.with_codex_otel_tls:
         files.update({'WORKBENCH/conformance/run_native_codex_otel.py', 'WORKBENCH/conformance/run_native_codex_otel_tls.py', 'WORKBENCH/evidence/native-draft2-debug/codex-otel-tls-sources.json'})
     files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'CLI/internal/config').glob('*.go'))
+    files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'CLI/cmd').rglob('*.go'))
+    if args.with_otel_transports:
+        files.update({'WORKBENCH/conformance/verify_codex_otel_transports.py', 'WORKBENCH/conformance/run_native_codex_otel_transports.py', 'SPEC/spec/1.1-draft.2/SPECIFICATION.md'})
+    if args.with_provider_auth:
+        files.update({'WORKBENCH/conformance/verify_native_provider_auth.py', 'WORKBENCH/conformance/run_native_provider_auth.py', 'WORKBENCH/evidence/native-draft2-debug/codex-provider-auth.sources.json'})
+    if args.with_command_auth:
+        files.update({'WORKBENCH/conformance/verify_native_command_auth.py', 'WORKBENCH/conformance/run_native_command_auth.py', 'WORKBENCH/evidence/native-draft2-debug/codex-command-auth.sources.json'})
+    if args.with_project_scope:
+        files.update({'WORKBENCH/conformance/verify_codex_project_scope.py', 'WORKBENCH/conformance/run_native_codex_project_scope.py', 'WORKBENCH/evidence/native-draft2-debug/codex-provider-scope.sources.json'})
+    if args.with_role_scope:
+        files.update({'WORKBENCH/conformance/verify_codex_role_scope.py', 'WORKBENCH/conformance/run_native_codex_role_scope.py', 'WORKBENCH/evidence/native-draft2-debug/codex-role-audit.sources.json'})
+    if args.with_role_references:
+        files.update({'WORKBENCH/conformance/verify_codex_role_references.py', 'WORKBENCH/conformance/run_native_codex_role_references.py'})
+    if args.with_copilot_skill_metadata:
+        files.update({'WORKBENCH/conformance/verify_copilot_skill_metadata.py',
+                      'WORKBENCH/conformance/verify_copilot_skill_metadata_test.py',
+                      'WORKBENCH/conformance/run_native_copilot_skill_metadata.py',
+                      'WORKBENCH/conformance/run_native_copilot_preferences.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-skill-frontmatter.sources.json'})
+    if args.with_copilot_skill_import:
+        files.update({'WORKBENCH/conformance/verify_copilot_skill_import.py',
+                      'WORKBENCH/conformance/verify_copilot_skill_import_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-shared-skills.sources.json',
+                      'WORKBENCH/conformance/run_native_copilot_skill_import.py',
+                      'CLI/scripts/check_project_skill_import.py'})
+    if args.with_copilot_recursive_instructions:
+        files.update({'WORKBENCH/conformance/verify_copilot_recursive_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_instruction_triggers.py',
+                      'WORKBENCH/conformance/run_native_copilot_instruction_triggers.py',
+                      'WORKBENCH/conformance/verify_copilot_recursive_instructions_test.py',
+                      'WORKBENCH/conformance/run_native_copilot_recursive_instructions.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-recursive-instructions.sources.json'})
+    if args.with_project_extensions:
+        files.update({'CLI/scripts/check_project_extensions.py', 'CLI/scripts/check_project_extensions_test.py',
+                      'CLI/scripts/check_stable_import_safety.py',
+                      'SPEC/conformance/run.py', 'WORKBENCH/conformance/run_github_plugin_auth.py'})
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT / '.agents/plugins').rglob('*') if p.is_file())
+    if args.with_copilot_root_instructions:
+        files.update({'WORKBENCH/conformance/run_native_copilot_root_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_root_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_root_instructions_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-root-instructions.sources.json'})
+    if args.with_copilot_agent_instructions:
+        files.update({'WORKBENCH/conformance/run_native_copilot_agent_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_agent_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_agent_instructions_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-agent-instructions.sources.json'})
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT/'SPEC/examples/native-agent-instructions').rglob('*') if p.is_file())
+    if args.with_copilot_canonical_instructions:
+        files.update({'WORKBENCH/conformance/run_native_copilot_canonical_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_canonical_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_canonical_instructions_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-canonical-instructions.sources.json'})
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT/'SPEC/examples/canonical-instructions').rglob('*') if p.is_file())
+    if args.with_copilot_user_instructions:
+        files.update({'WORKBENCH/conformance/run_native_copilot_user_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_user_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_user_instructions_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-user-instructions.sources.json',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-user-instructions-source-duplication.json'})
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT/'SPEC/examples/user-instructions').rglob('*') if p.is_file())
     files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'SPEC/examples/plugins-draft').rglob('*') if p.is_file())
     result = {'checked_at': datetime.now(timezone.utc).isoformat(), 'revision': 'uncommitted working tree',
               'passed': all(c['exit_code'] == 0 for c in checks), 'full_adapter_support': False,
