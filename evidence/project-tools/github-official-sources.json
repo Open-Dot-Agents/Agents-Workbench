@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://learn.chatgpt.com/docs/plugins.md",
+    "file": "WORKBENCH/evidence/project-tools/openai-plugins.source.md",
+    "sha256": "edfc5dfe4e2fbd6b0d00ab30bda96241f6ca81f9a96141c2a340ec46e962446a"
+  },
+  {
+    "url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-plugin-reference",
+    "file": "WORKBENCH/evidence/project-tools/copilot-plugin-reference.source.md",
+    "sha256": "82e2d6c4f201eaf26fb67abae9a026256520eb78dedffe53f6553e55090e201a"
+  }
+]

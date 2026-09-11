@@ -1,0 +1,30 @@
+{
+  "source_revision": "d416fd5a43426019986b1e489506db3db66dee3d",
+  "native_version": "codex-cli 0.154.0",
+  "command": [
+    "codex",
+    "-c",
+    "marketplaces.open-dot-agents.source_type=\"local\"",
+    "-c",
+    "marketplaces.open-dot-agents.source=\"/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex\"",
+    "plugin",
+    "add",
+    "github@open-dot-agents",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"pluginId\": \"github@open-dot-agents\",\n  \"name\": \"github\",\n  \"marketplaceName\": \"open-dot-agents\",\n  \"version\": \"0.1.11\",\n  \"installedPath\": \"/home/maurizio/.codex/plugins/cache/open-dot-agents/github/0.1.11\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+  "stderr": "",
+  "backup_directory": "/mnt/DATA/tmp/oda-github-native-backup-kplpxqfg",
+  "user_config_preserved": true,
+  "user_mode_preserved": true,
+  "project_source": ".agents/plugins/com.openai.codex",
+  "project_destination": ".codex/config.toml",
+  "project_config_sha256": "8d83fb98ef8d678ca976f23e08fa6bc922db5a12a135c63e492bd8c3aca972c9",
+  "scope": "project",
+  "credential_values_copied": false,
+  "copilot_activation": false,
+  "authentication": "existing connected GitHub app; GITHUB_PAT_TOKEN absent for direct MCP",
+  "installed_package": "/home/maurizio/.codex/plugins/cache/open-dot-agents/github/0.1.11",
+  "package_hashes_match": true
+}

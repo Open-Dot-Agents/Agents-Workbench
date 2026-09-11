@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "/home/maurizio/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py",
+    "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/plugins/github"
+  ],
+  "exit_code": 1,
+  "stdout": "Plugin validation failed:\n- `.app.json` app `github` field `required` is not accepted by plugin validation\n- `.app.json` app `github-enterprise` field `required` is not accepted by plugin validation\n",
+  "stderr": "",
+  "validator_sha256": "f4eeadb733b28b0c3e714de263a76d6542866a672f3e99bdffcf4dbcdf85e944",
+  "upstream_package_modified": false,
+  "assessment": "The bundled validator rejects upstream optional app required fields. Native installation was checked separately."
+}

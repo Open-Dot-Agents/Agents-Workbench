@@ -1,0 +1,95 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-github-discovery-i467jjdi",
+  "first_attempts": [
+    {
+      "vendor": "codex",
+      "operation": "marketplace add",
+      "exit_code": 1,
+      "reason": "marketplace root does not contain a supported manifest",
+      "cause": "Only root marketplace.json existed; Codex needs a supported native manifest location."
+    },
+    {
+      "vendor": "copilot",
+      "operation": "marketplace add",
+      "exit_code": 1,
+      "reason": "plugins.0.source: Invalid input",
+      "cause": "The native OpenAI source object is not a Copilot source object."
+    }
+  ],
+  "later_attempts": [
+    {
+      "command": [
+        "codex",
+        "plugin",
+        "marketplace",
+        "add",
+        "/mnt/DATA/tmp/oda-github-discovery-i467jjdi/market"
+      ],
+      "exit_code": 0,
+      "stdout": "Added marketplace `oda-project` from /mnt/DATA/tmp/oda-github-discovery-i467jjdi/market.\nInstalled marketplace root: /mnt/DATA/tmp/oda-github-discovery-i467jjdi/market\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "codex",
+        "plugin",
+        "add",
+        "github@oda-project"
+      ],
+      "exit_code": 0,
+      "stdout": "Added plugin `github` from marketplace `oda-project`.\nInstalled plugin root: /mnt/DATA/tmp/oda-github-discovery-i467jjdi/codex/plugins/cache/oda-project/github/0.1.11\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "codex",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"github@oda-project\",\n      \"name\": \"github\",\n      \"marketplaceName\": \"oda-project\",\n      \"version\": \"0.1.11\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"/mnt/DATA/tmp/oda-github-discovery-i467jjdi/market/plugins/github\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"/mnt/DATA/tmp/oda-github-discovery-i467jjdi/market\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "copilot",
+        "plugin",
+        "marketplace",
+        "add",
+        "/mnt/DATA/tmp/oda-github-discovery-i467jjdi/market"
+      ],
+      "exit_code": 0,
+      "stdout": "Marketplace \"oda-project\" added successfully.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "copilot",
+        "plugin",
+        "install",
+        "github@oda-project"
+      ],
+      "exit_code": 0,
+      "stdout": "Plugin \"github\" installed successfully.\nEnabled \"github@oda-project\". It is loaded live from /mnt/DATA/tmp/oda-github-discovery-i467jjdi/market/plugins/github, so edits take effect on the next session \u2014 nothing was copied.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "copilot",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "error: unknown option '--json'\n"
+    }
+  ],
+  "copilot_resource_list": {
+    "exit_code": 0,
+    "stdout": "{\n  \"plugins\": [\n    {\n      \"kind\": \"plugin\",\n      \"name\": \"github\",\n      \"scope\": \"user\",\n      \"source\": \"live-marketplace:oda-project\",\n      \"enabled\": true,\n      \"installedFrom\": \"/mnt/DATA/tmp/oda-github-discovery-i467jjdi/market\"\n    },\n    {\n      \"kind\": \"mcp\",\n      \"name\": \"github\",\n      \"scope\": \"plugin\",\n      \"source\": \"plugin\",\n      \"enabled\": true,\n      \"description\": \"http transport\"\n    }\n  ],\n  \"errors\": []\n}\n",
+    "stderr": ""
+  },
+  "interpretation": "Correct manifest placement and source syntax permit installation. Installation alone does not prove package metadata or authentication support."
+}

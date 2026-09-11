@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeRecursiveInstructionRoundTrip (0.00s)\n    --- FAIL: TestNativeRecursiveInstructionRoundTrip/project (0.00s)\n        native_recursive_instructions_test.go:37: open /tmp/TestNativeRecursiveInstructionRoundTripproject777742275/002/.agents/native/com.github.copilot/scoped-instructions/nested/deep/same.instructions.md: no such file or directory\n    --- FAIL: TestNativeRecursiveInstructionRoundTrip/user (0.00s)\n        native_recursive_instructions_test.go:37: open /tmp/TestNativeRecursiveInstructionRoundTripuser2722938726/002/.agents/native/com.github.copilot/scoped-instructions/nested/deep/same.instructions.md: no such file or directory\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.014s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "5e28caf5f83291419abfa31eaef537b0256df5237e312e0c3a0af578e853ebc0"
+}

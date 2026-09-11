@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "^TestNativeProviderCommandAuthenticationRoundTrip$",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeProviderCommandAuthenticationRoundTrip (0.00s)\n    native_provider_command_auth_test.go:19: valid token-command configuration was rejected: native authentication in /model_providers/demo cannot be preserved: the definition contains an excluded credential or authority field; source remains unchanged\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.009s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "1bd7db3c91de1ab87b20dab0ca26cb64d51399bcc36138bcf2cd230f771819eb"
+}

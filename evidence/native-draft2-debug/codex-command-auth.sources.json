@@ -1,0 +1,30 @@
+{
+  "codex_source_revision": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/model-provider/src/bearer_auth_provider.rs",
+      "file": "codex-command-auth-codex-rs-model-provider-src-bearer_auth_provider.source.txt",
+      "sha256": "8db9f8a849d0fee2c6c349af69f2335ef403b65a54a4e216eb9f5ea284aa4949"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/model-provider/src/auth.rs",
+      "file": "codex-command-auth-codex-rs-model-provider-src-auth.source.txt",
+      "sha256": "1c1042b33df733ffb583d19bd3102c8511ab37b9e5e8cd91a673103321f249d8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/protocol/src/config_types.rs",
+      "file": "codex-command-auth-codex-rs-protocol-src-config_types.source.txt",
+      "sha256": "96b4050a2498275ba5a11da0021bc75d5fb2fd2c50802f0930629aa7716a282a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/login/src/auth/external_bearer.rs",
+      "file": "codex-command-auth-runtime.source.txt",
+      "sha256": "89adaddd77a3e409d09f46df164781c9f29d45e5c4611ee5247bacca75ee17ec"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/login/src/auth/manager.rs",
+      "file": "codex-command-auth-manager.source.txt",
+      "sha256": "87926092db3a115b8269c6fdbc6958e2268d9750ddcb8baa1799f1ec7e3ba4d9"
+    }
+  ]
+}

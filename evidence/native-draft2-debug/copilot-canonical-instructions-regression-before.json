@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeCanonicalInstruction(ImportRelocation|BindingValidation|DuplicateBinding)",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCanonicalInstructionImportRelocation (0.00s)\n    native_canonical_instructions_test.go:25: native import refuses distinct project instructions in AGENTS.md and /tmp/TestNativeCanonicalInstructionImportRelocation1212213707/001/.github/copilot-instructions.md\n--- FAIL: TestNativeCanonicalInstructionBindingValidation (0.00s)\n    native_canonical_instructions_test.go:64: copilot project unknown native artifact kind canonical-instructions\n--- FAIL: TestNativeCanonicalInstructionDuplicateBinding (0.00s)\n    native_canonical_instructions_test.go:71: native import refuses distinct project instructions in AGENTS.md and /tmp/TestNativeCanonicalInstructionDuplicateBinding1698101891/001/.github/copilot-instructions.md\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.011s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "a04c13611be8093057b084259a83a4ed9cd28b1c46f28d6d2e6c48faa6076a37"
+}

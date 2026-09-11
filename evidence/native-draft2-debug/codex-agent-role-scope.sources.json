@@ -1,0 +1,16 @@
+{
+  "codex_source_revision": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "native_behavior_verified": false,
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/core/src/agent/role.rs",
+      "file": "codex-agent-role-scope-codex-rs-core-src-agent-role.source.txt",
+      "sha256": "274720be5d0633cab5fc6a9259a9756bdbd8b9b1d2b1c69afc48580b5ec86352"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/agent-roles/src/loader.rs",
+      "file": "codex-agent-role-scope-codex-rs-agent-roles-src-loader.source.txt",
+      "sha256": "611e202c2bb4a2bad6c201bd93555d56b6c6c7021e96a294015556fd47b16b38"
+    }
+  ]
+}

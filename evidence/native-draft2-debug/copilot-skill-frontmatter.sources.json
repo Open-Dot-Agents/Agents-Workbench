@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "url": "https://docs.github.com/llms.txt",
+      "file": "copilot-skill-index.source.txt",
+      "sha256": "8808227efc71ec33434ee9fbee06cf0f0eab833d933e2694e2814f05c80ecb24"
+    },
+    {
+      "url": "https://docs.github.com/api/article/body?pathname=/en/copilot/reference/copilot-cli-reference/cli-command-reference",
+      "file": "copilot-skill-frontmatter-reference.source.txt",
+      "sha256": "49fc20d28db015d49f6b720afe7354ab7474ad23f267b6cd10b3cfc83d814a47"
+    }
+  ]
+}

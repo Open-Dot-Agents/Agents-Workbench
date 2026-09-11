@@ -1,0 +1,22 @@
+{
+  "selected_servers": [
+    "context7",
+    "openai-developer-docs",
+    "semgrep"
+  ],
+  "method": "Targeted native file merge from canonical catalog; full CLI sync remains refused by required mcp.envRef.",
+  "untouched_settings_verified": true,
+  "private_backup": "/mnt/DATA/tmp/oda-project-tools-backup-wzfukelt",
+  "files": [
+    {
+      "path": ".codex/config.toml",
+      "before_sha256": "1015e745dadb6012da2d8a9ad70dc223d6e25c2675affda18f89968438ca06db",
+      "after_sha256": "6217f27f159687cec78c6c9397b0fab36be11ac793d62f664db1114b4a18382b"
+    },
+    {
+      "path": ".github/mcp.json",
+      "before_sha256": "19c1a70b778113e43324a46cd397b17b348f226e929df626b4c8d7e8e7f1eda6",
+      "after_sha256": "2fd56bf9746fd15b34c1ef644438dcd319f8940b4f2e9c125607278bfd9d7923"
+    }
+  ]
+}

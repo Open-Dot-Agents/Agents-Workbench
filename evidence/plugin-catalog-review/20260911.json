@@ -1,0 +1,141 @@
+{
+  "scope": "Catalog structure and selected package source inspection. No new catalog, native plugin, remote scanner, or runtime installed. This is not a security audit of every listed plugin.",
+  "sources": [
+    {
+      "repository": "hashgraph-online/awesome-codex-plugins",
+      "commit": "5cb6096acff379bdeb7f48ed3a41c347c1e31851",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/hashgraph-online/awesome-codex-plugins/5cb6096acff379bdeb7f48ed3a41c347c1e31851/README.md",
+      "sha256": "d856a529911f7e568640573324c268ab502cf988f21311a96f3e2c1f097af3fd",
+      "bytes": 64117
+    },
+    {
+      "repository": "hashgraph-online/awesome-codex-plugins",
+      "commit": "5cb6096acff379bdeb7f48ed3a41c347c1e31851",
+      "path": ".agents/plugins/marketplace.json",
+      "url": "https://raw.githubusercontent.com/hashgraph-online/awesome-codex-plugins/5cb6096acff379bdeb7f48ed3a41c347c1e31851/.agents/plugins/marketplace.json",
+      "sha256": "07b189af8308cf169b82d18aa82bd81b4a9565a69a0da753733d50687a73a2d6",
+      "bytes": 124942
+    },
+    {
+      "repository": "github/copilot-plugins",
+      "commit": "fbf7c536a5c7af0c94ff5f528a39004c55129e6d",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/github/copilot-plugins/fbf7c536a5c7af0c94ff5f528a39004c55129e6d/README.md",
+      "sha256": "3969b037aaa4b21fad2450aade53bfd397839142f17d0240e9f74385b28da581",
+      "bytes": 1981
+    },
+    {
+      "repository": "github/copilot-plugins",
+      "commit": "fbf7c536a5c7af0c94ff5f528a39004c55129e6d",
+      "path": ".github/plugin/marketplace.json",
+      "url": "https://raw.githubusercontent.com/github/copilot-plugins/fbf7c536a5c7af0c94ff5f528a39004c55129e6d/.github/plugin/marketplace.json",
+      "sha256": "3134eba4fc23ec322fd54e2dbed08c501df29d6e848a75a9ea996aa9a90bd75e",
+      "bytes": 12485
+    },
+    {
+      "repository": "github/copilot-plugins",
+      "commit": "fbf7c536a5c7af0c94ff5f528a39004c55129e6d",
+      "path": ".claude-plugin/marketplace.json",
+      "url": "https://raw.githubusercontent.com/github/copilot-plugins/fbf7c536a5c7af0c94ff5f528a39004c55129e6d/.claude-plugin/marketplace.json",
+      "sha256": "6264798cfdc76c14e53ef7928087c50e8766beeb8f1fd685b5fb4bb16d8bde8a",
+      "bytes": 34
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/README.md",
+      "sha256": "5aa8da470004d683e81694a2cf6489489b3669d805ae7c6b4418a5fbc5d8c554",
+      "bytes": 9934
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "docs/harnesses.md",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/docs/harnesses.md",
+      "sha256": "49169c8f9e15a5e285bc79370f9eb108315b7718d7f8ba8f43cae960e5b1ac10",
+      "bytes": 13333
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "plugins/debugging-toolkit/.codex-plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/plugins/debugging-toolkit/.codex-plugin/plugin.json",
+      "sha256": "9460e1c024a60f49de55d22b0a57740b671c42c6227e48afc176bb406a923ae5",
+      "bytes": 492
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "plugins/unit-testing/.codex-plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/plugins/unit-testing/.codex-plugin/plugin.json",
+      "sha256": "b7f3977771e5c3595968c7dd0dcdcaf8bc84b5e29aff222c346b7bd740980b98",
+      "bytes": 478
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "plugins/security-scanning/.codex-plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/plugins/security-scanning/.codex-plugin/plugin.json",
+      "sha256": "8843158a9c353ea1f6250a1900ee61a7189a1874467ca7b353edadefd2402197",
+      "bytes": 567
+    },
+    {
+      "repository": "wshobson/agents",
+      "commit": "a30778f8c4e6b0a87567941b7cca4f534bf642b6",
+      "path": "plugins/python-development/.codex-plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/wshobson/agents/a30778f8c4e6b0a87567941b7cca4f534bf642b6/plugins/python-development/.codex-plugin/plugin.json",
+      "sha256": "2962613598861a7ad3026bd6423c0fa53b289f688a40460b1d06f8fb8f725d57",
+      "bytes": 534
+    },
+    {
+      "repository": "awesome-dsh-plugin/awesome-dsh-plugin",
+      "commit": "5b7be0b95ecaf31e8782d38c41811a863b04432b",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/5b7be0b95ecaf31e8782d38c41811a863b04432b/README.md",
+      "sha256": "3e03b743c36692293458952a60b075081ec142e9478151c3892377726a00571a",
+      "bytes": 984529
+    },
+    {
+      "repository": "github/copilot-advanced-security-plugin",
+      "commit": "9c8cd1a00c1290bf89db8f068aded1fb5dace200",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/github/copilot-advanced-security-plugin/9c8cd1a00c1290bf89db8f068aded1fb5dace200/README.md",
+      "sha256": "e53c718d93d96e6fd6b78d25b6c31838b70cc6aebddc7269e900a066b34fe417",
+      "bytes": 2155
+    },
+    {
+      "repository": "github/copilot-advanced-security-plugin",
+      "commit": "9c8cd1a00c1290bf89db8f068aded1fb5dace200",
+      "path": ".mcp.json",
+      "url": "https://raw.githubusercontent.com/github/copilot-advanced-security-plugin/9c8cd1a00c1290bf89db8f068aded1fb5dace200/.mcp.json",
+      "sha256": "f88a4cf0619c3cd66dbb283fdc4b203ce88ea1158ed0ae366c12a6a092afde19",
+      "bytes": 347
+    },
+    {
+      "repository": "github/copilot-advanced-security-plugin",
+      "commit": "9c8cd1a00c1290bf89db8f068aded1fb5dace200",
+      "path": ".github/plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/github/copilot-advanced-security-plugin/9c8cd1a00c1290bf89db8f068aded1fb5dace200/.github/plugin/plugin.json",
+      "sha256": "057541c2df5dddb66bb9121d8477b84b3eb0c19b196a22b154cbe87ff55a360e",
+      "bytes": 212
+    }
+  ],
+  "observations": {
+    "codex_catalog_entries": 220,
+    "copilot_catalog_entries": 17,
+    "copilot_legacy_marketplace_symlink": "../.github/plugin/marketplace.json",
+    "wshobson_source_skills": 183,
+    "wshobson_missing_declared_skills_directories": [
+      "plugins/debugging-toolkit/skills",
+      "plugins/unit-testing/skills"
+    ],
+    "dsh_manifest_family": "dsh.bundle",
+    "advanced_security_prerequisites": [
+      "GitHub MCP endpoint https://api.githubcopilot.com/mcp/",
+      "code_security, secret_protection, security_advisories, dependabot toolsets",
+      "Native authentication; availability has not been tested in this project"
+    ]
+  }
+}

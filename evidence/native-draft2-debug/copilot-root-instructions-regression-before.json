@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeCopilotRootInstructionImport",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCopilotRootInstructionImport (0.00s)\n    native_root_instructions_test.go:19: no recognized native configuration artifacts\n--- FAIL: TestNativeCopilotRootInstructionImportRefusals (0.01s)\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/conflict/normal (0.00s)\n        native_root_instructions_test.go:64: unsafe import accepted\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/conflict/force (0.00s)\n        native_root_instructions_test.go:64: unsafe import accepted\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/reference/normal (0.00s)\n        native_root_instructions_test.go:66: no recognized native configuration artifacts\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/reference/force (0.00s)\n        native_root_instructions_test.go:66: no recognized native configuration artifacts\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/directory/normal (0.00s)\n        native_root_instructions_test.go:64: unsafe import accepted\n    --- FAIL: TestNativeCopilotRootInstructionImportRefusals/directory/force (0.00s)\n        native_root_instructions_test.go:64: unsafe import accepted\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.014s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "269f5d1d0b22c63dbfd21e815bbbc795432227b51aa6e28a8f745b9ab3ca7e20"
+}

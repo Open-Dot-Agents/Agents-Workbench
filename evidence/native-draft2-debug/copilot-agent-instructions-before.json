@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNative(CopilotAgentInstructionFiles|AgentInstructionRegistryScope)",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCopilotAgentInstructionFiles (0.00s)\n    native_agent_instructions_test.go:22: Copilot root AGENTS.md contains a potential file reference; import cannot preserve its reference base at .github/copilot-instructions.md\n--- FAIL: TestNativeAgentInstructionRegistryScope (0.00s)\n    native_agent_instructions_test.go:65: unknown native artifact kind agent-instructions\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.007s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "dffcdaaa7afd6330ccb652d052e3de144f86132d23f117c7b4bbf6b7b4517172"
+}

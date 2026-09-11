@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeCodexOtelCredentialMaterialRemainsExternal",
+    "-count=1"
+  ],
+  "exit_code": 0,
+  "stdout": "ok  \tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.007s [no tests to run]\n",
+  "stderr": "",
+  "test_sha256": "4a24617f2d5d7d6269ea0fdfe87ec3d5fb4873259adf497ee8f3f5c4979b2134"
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeCanonicalInstructionLinkOwnership",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCanonicalInstructionLinkOwnership (0.01s)\n    native_canonical_instructions_test.go:322: canonical link remains owned\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.014s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "ef2c38855735b6a81d3cce8db5bde3f1be3bfd0b2fb8476d973b05e60a4df87e"
+}

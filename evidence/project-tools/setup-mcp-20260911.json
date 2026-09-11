@@ -1,0 +1,102 @@
+{
+  "scope": "Direct MCP initialization and tool listing only. No native harness execution or scan.",
+  "results": [
+    {
+      "server": "context7",
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp@3.2.2"
+      ],
+      "initialize": {
+        "result": {
+          "protocolVersion": "2024-11-05",
+          "capabilities": {
+            "tools": {
+              "listChanged": true
+            },
+            "prompts": {},
+            "resources": {}
+          },
+          "serverInfo": {
+            "name": "Context7",
+            "version": "3.2.2",
+            "websiteUrl": "https://context7.com",
+            "description": "Context7 provides up-to-date documentation and code examples for libraries and frameworks.",
+            "icons": [
+              {
+                "src": "https://context7.com/context7-icon-green.png",
+                "mimeType": "image/png"
+              }
+            ]
+          },
+          "instructions": "Use this server to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service -- even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer -- your training data may not reflect recent changes. Prefer this over web search for library docs.\n\nDo not use for: refactoring, writing scripts from scratch, debugging business logic, code review, or general programming concepts."
+        },
+        "jsonrpc": "2.0",
+        "id": 1
+      },
+      "tools": [
+        "resolve-library-id",
+        "query-docs"
+      ],
+      "passed": true
+    },
+    {
+      "server": "semgrep",
+      "command": [
+        "uvx",
+        "--from",
+        "semgrep==1.172.0",
+        "semgrep",
+        "mcp"
+      ],
+      "initialize": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "protocolVersion": "2024-11-05",
+          "capabilities": {
+            "experimental": {},
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "subscribe": false,
+              "listChanged": false
+            },
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "serverInfo": {
+            "name": "Semgrep",
+            "version": "1.23.3"
+          }
+        }
+      },
+      "tools": [
+        "semgrep_rule_schema",
+        "get_supported_languages",
+        "semgrep_findings",
+        "semgrep_scan_with_custom_rule",
+        "semgrep_scan",
+        "get_abstract_syntax_tree",
+        "semgrep_scan_supply_chain"
+      ],
+      "passed": true
+    },
+    {
+      "server": "openai-developer-docs",
+      "url": "https://developers.openai.com/mcp",
+      "http_status": 200,
+      "tools": [
+        "search_openai_docs",
+        "list_openai_docs",
+        "fetch_openai_doc",
+        "list_api_endpoints",
+        "get_openapi_spec"
+      ],
+      "passed": true
+    }
+  ]
+}

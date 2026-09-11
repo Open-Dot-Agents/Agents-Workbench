@@ -1,0 +1,20 @@
+{
+  "codex_source_revision": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "sources": [
+    {
+      "url": "https://learn.chatgpt.com/docs/llms.txt",
+      "file": "codex-provider-auth-docs-index.source.txt",
+      "sha256": "44caae2d94fe5b10dbc61e498988235bb4c715c7b1e0d0faafc4ff5bf0de4ddb"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference.md",
+      "file": "codex-provider-auth-reference.source.txt",
+      "sha256": "f432ae52ed50ad88998c396c8da88cba74ef022f51f2def7ca494fd08c94ae58"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/model-provider-info/src/lib.rs",
+      "file": "codex-provider-auth-source.source.txt",
+      "sha256": "03ba8ea303b9763f7c5e25a468b7f6675c9970dfb91109205beb6d0509f574d1"
+    }
+  ]
+}

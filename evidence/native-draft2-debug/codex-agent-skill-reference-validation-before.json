@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCodexRoleReferenceImportRelocation (0.08s)\n    --- FAIL: TestNativeCodexRoleReferenceImportRelocation/project/managed-skill (0.00s)\n        native_codex_role_references_test.go:102: ODA-ADAPTER-0003: codex cannot preserve an unselected skills profile while .agents/skills contains content; projection refused; direct harness use can still discover these skills\n    --- FAIL: TestNativeCodexRoleReferenceImportRelocation/project/external-skill (0.00s)\n        native_codex_role_references_test.go:79: skill reference changed location: got ../../../005/fixture/SKILL.md, want /tmp/TestNativeCodexRoleReferenceImportRelocationprojectexternal-sk4280769723/005/fixture/SKILL.md\n    --- FAIL: TestNativeCodexRoleReferenceImportRelocation/user/external-skill (0.00s)\n        native_codex_role_references_test.go:79: skill reference changed location: got ../../005/fixture/SKILL.md, want /tmp/TestNativeCodexRoleReferenceImportRelocationuserexternal-skill699125259/005/fixture/SKILL.md\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.095s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "746a53a33fab2a7753d12a17ad51b53b6ea346a17da856d90a762a66751335c1"
+}

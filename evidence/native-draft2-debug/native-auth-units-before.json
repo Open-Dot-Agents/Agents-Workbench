@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeImportMustNotRemoveRuntimeAuthentication|TestNativeProviderAuthRequirementIsConfiguration",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeImportMustNotRemoveRuntimeAuthentication (0.00s)\n    --- FAIL: TestNativeImportMustNotRemoveRuntimeAuthentication/codex-mcp (0.00s)\n        native_auth_units_test.go:20: import removed runtime authentication and reported success\n    --- FAIL: TestNativeImportMustNotRemoveRuntimeAuthentication/codex-provider (0.00s)\n        native_auth_units_test.go:20: import removed runtime authentication and reported success\n    --- FAIL: TestNativeImportMustNotRemoveRuntimeAuthentication/copilot-mcp (0.00s)\n        native_auth_units_test.go:20: import removed runtime authentication and reported success\n--- FAIL: TestNativeProviderAuthRequirementIsConfiguration (0.00s)\n    native_auth_units_test.go:32: authentication requirement was treated as a credential: [model_providers.demo.requires_openai_auth]\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.014s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "374cd1992a4a51941276e4892e1e01055896ac493a992aafe1c35b951d430ddf"
+}

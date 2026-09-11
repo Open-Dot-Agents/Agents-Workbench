@@ -1,0 +1,211 @@
+{
+  "passed": true,
+  "fixture": "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6",
+  "build": [
+    "go",
+    "build",
+    "-trimpath",
+    "-buildvcs=false",
+    "-o",
+    "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+    "./cmd/agents"
+  ],
+  "binary_sha256": "a0934c5174795bcafc9f2744fb00f3086ecce3a5b3aa207f7eb98f320b262292",
+  "source_sha256": {
+    "CLI/internal/config/apply.go": "ebcdac5b86dddbae6660a6ffcd147b923a7875c73331624afa12f0747348c8aa",
+    "CLI/internal/config/apply_test.go": "ed8bd0f29a50946fd07f1aaaf54fa217d9a01140976670b8e48da08a9c5abb1f",
+    "CLI/internal/config/codex_security.go": "f48cbdb6a09a7d040de69fd613153f488b77dbe7f352a69d82209841b4bf9106",
+    "CLI/internal/config/codex_security_linux.go": "a37c37cd628681f0938454b61ede98829190b26e951f98c3b6e7751b819a3218",
+    "CLI/internal/config/codex_security_linux_test.go": "f0617926a57bbf1bdb342007c4b889cd5ee3ba843e05493e46891cc287bc0e48",
+    "CLI/internal/config/codex_security_other.go": "7fa4f5c3ae7569d10c43024769959bc1793038ff9ac89eab079e4da543261929",
+    "CLI/internal/config/codex_security_test.go": "c9d86a688a91f4f5cf816a5bf6414f786a9bd8d36686c4505f516155571582fc",
+    "CLI/internal/config/config.go": "06a0dc3bc9fceb80d775fe2f7902f7b9dfbe43b7028438ce650529f52b021e37",
+    "CLI/internal/config/config_test.go": "6693c20643f9e46e7c32f1ee41d9fb2077c9db40145a7e313a036abd886c12ef",
+    "CLI/internal/config/diff.go": "b21220f0571d92d0a3b6ef0c72868970ec7c674bc0de530152d0bd69dc52b6ab",
+    "CLI/internal/config/diff_test.go": "c51a31dc6afee48eb1bd3a44b3737bc8765b8d4e9f3d204a73c2dc5c3a56e9e1",
+    "CLI/internal/config/hooks_lifecycle_test.go": "4d0dc6234a74c945355962d5fcf557d9cfabd9998bfa3fa0d42e236a43f55d8b",
+    "CLI/internal/config/import_safety_test.go": "9e701a704938f9f407ddd0603e571f4bac39a6b5d3a585f1e77a7b02e9dae095",
+    "CLI/internal/config/instructions.go": "cfff1c817bf42ea56e07b05c27146aad3941fc1140ae0f4f3c5ae5b1b86a1484",
+    "CLI/internal/config/instructions_test.go": "95beaabaf363dbd27a609be58611e92da5b3c4706f3408fbc2f0e43e81c51869",
+    "CLI/internal/config/native.go": "93d656aff3057fc2bd6b1e49b6dd3a9493dfc28cc9503a917e5b01e0ff6bc5a6",
+    "CLI/internal/config/native_agents.go": "047c9cb24c18eea65a22b4a1d00c146e310e6890833aa476ab09353fc8e7b699",
+    "CLI/internal/config/native_agents_test.go": "2351ba52bf07e78ec1f521e7236bcd3b6116b3709faf1c991c07235740bc034d",
+    "CLI/internal/config/native_codex_hooks.go": "8d69f8f4d6f20a5adc4d4d93a59ef4da2e704c137ef0894214d64cf9fb612051",
+    "CLI/internal/config/native_codex_hooks_test.go": "743690e6bad933e1dd0f1c09ef42166626b4dec9fd78889a1d35283975286eda",
+    "CLI/internal/config/native_codex_otel.go": "8d65e671954fcfdb80edf6e5fa31e757a3d60db9d7b50a0b323a0895bf6b8583",
+    "CLI/internal/config/native_codex_otel_test.go": "ed9f3208d396a806f4ba90a248e4f07b55d491dd0e26ff0140481201b4ec6012",
+    "CLI/internal/config/native_codex_schema.go": "322eedf2e060b80dff9402fe332b97fa4963e6de42bc557a7bb73e5ae0b1607d",
+    "CLI/internal/config/native_codex_skills.go": "8eea91c8d59745dbf91487ca6ad80c63fda98c3f357423755a44978728157349",
+    "CLI/internal/config/native_codex_skills_test.go": "1a61e3ebcd49edb14e3c2492fd1b8bc02e5cdf5f6479028180103f479b614bc3",
+    "CLI/internal/config/native_copilot_agent.go": "7e623b9bf984536a7bacbf9ee05266ab2546aa0cd9c669c36762b06958f28358",
+    "CLI/internal/config/native_copilot_agent_test.go": "57cf8e3409e687da2963164e4077013d4121be20114c703d50d7a70e46c57b40",
+    "CLI/internal/config/native_copilot_hooks.go": "1b6405eabfee838d62680e9f24413ef22407feeb91862313558f1e428a6fb602",
+    "CLI/internal/config/native_copilot_hooks_test.go": "90e4b56f73dedf5683a461e053788f02792fa735bbac0756ecc65041c14e623a",
+    "CLI/internal/config/native_copilot_legacy.go": "0956b0efa98fc2c65172fef9300dd6f6fe2639d3e8ea7183dfb475c2fc8c11eb",
+    "CLI/internal/config/native_copilot_legacy_test.go": "8e97a1a2c8ab10ede99f758516c52fc2565e982078db747f8625aa740a83d4eb",
+    "CLI/internal/config/native_copilot_mcp.go": "89577015a750b9773beb0e99a911f35d4891048c5a89fabc0d1f9252d14903a1",
+    "CLI/internal/config/native_copilot_mcp_test.go": "842f0f7a11a94281a48ecccee3c942ac80b419d866cf337aaf64470c7f7b0146",
+    "CLI/internal/config/native_copilot_preferences.go": "426e073102bd97c31a4f98c24848ff7b0f5e59a71bcf3fbb334afff0ab2c5302",
+    "CLI/internal/config/native_copilot_preferences_test.go": "c663219adca0c5e2682a78d46cb3b3c14c862a24767026bd77013c2f254d907c",
+    "CLI/internal/config/native_copilot_subagents.go": "f321f357532d79b5fe2452a31bb90d2e836e9c4f6d39b344a2cde0247352103b",
+    "CLI/internal/config/native_copilot_subagents_test.go": "8e3d71d7079289e4cf6349f1df8d9ffc942f21735dec0999bf233ff0f41d52fb",
+    "CLI/internal/config/native_debug_test.go": "2c5581afe1ce12dbf0aae3ebf16d3d54991b4cfdda126e7b31dc98494ae5f768",
+    "CLI/internal/config/native_declarations.go": "cea60ba131900104b7c5e636624757cf8b1b4965d938f9897046da5335873269",
+    "CLI/internal/config/native_field_context.go": "1c59ebdfdd9da4af21bca764357f0977018e062d0656ce6cad5fc9a724800471",
+    "CLI/internal/config/native_fs.go": "2495403c2f4554fc61e09ba91d62c0c96f7d160fed1e9f9e919ce02f90232f08",
+    "CLI/internal/config/native_fs_linux.go": "713a3814de2c4ea3636083970bd70f309ba3301dd11eb8004d95a4ac84a5d931",
+    "CLI/internal/config/native_fs_linux_test.go": "417235b02214afd7c828d05f0a9ebc07e122313639931018c261dd014d3f7a04",
+    "CLI/internal/config/native_fs_other.go": "944769bac2566a32a8785df2be93c0d6d6ad1cd3fe76f845c27157a967e6153b",
+    "CLI/internal/config/native_import_assets.go": "313919d4d14d660720de44227c06e4e716a4daecfbf1056d77fd494c063441e1",
+    "CLI/internal/config/native_import_merge.go": "8b551b5f6c575cd59031adc2247691fbcb490475c6563981a604451415f0bcee",
+    "CLI/internal/config/native_instructions_test.go": "bb7d8103e486be3136ff001935b2a2a2e8ec56f2391b49668fbef8252591aec9",
+    "CLI/internal/config/native_lock_linux.go": "5766dc7b5abf5b5789bfcbffd272889067bce2b7bbb00ed0b11f678c470c5252",
+    "CLI/internal/config/native_lock_linux_test.go": "cd9ad245e002052e8f638d1157a088dbb5b469ad26da33c02d6565107cd2ea2d",
+    "CLI/internal/config/native_lock_other.go": "6b09b198d592dbc6f8d872cd120bf4d4dc34e425d68981d9bdaf65e7c26f116c",
+    "CLI/internal/config/native_lsp.go": "0a86bbf6643347ada74429d883e5d4a5bb0223d8c21cdd4e1d54e6781472a7a2",
+    "CLI/internal/config/native_lsp_test.go": "e7422fce1c1c9599846d28f23cd5e45c7a5fed20e4f138a2fb10c3137f372953",
+    "CLI/internal/config/native_ownership.go": "a6e231c8d3940d3c40175b8db63f7031da1c15b95a4a824519786ec5264fa1c3",
+    "CLI/internal/config/native_plugins.go": "d1b2ec7486d65e9fd1ae32766019c271a2abdc391234c66724a7e8a13e9a85e0",
+    "CLI/internal/config/native_plugins_test.go": "51e0483f6b0f99542ed20725b2f1c8dd3084f11971d0f1f012cf4c8e33c23e9d",
+    "CLI/internal/config/native_registry.go": "90e6d6cdb050ce16891d9873a6ac5f3b2fa9e43b2e2327da6b5f75a36addb74b",
+    "CLI/internal/config/native_selection.go": "61964a5b4636990b07366951080dd80bb7ed7fb90431b401fd6169245a3595ec",
+    "CLI/internal/config/native_selection_test.go": "c86520f17f08a5e46279f6c1e878a597e5dce3940b287a8685694e6215145aac",
+    "CLI/internal/config/native_test.go": "84fd82ebef9066c8a65359a7e366f97d8a9488597b1e5b2096c8566ee6ff483e",
+    "CLI/internal/config/native_types.go": "79672317173544fc7b91dedd9c7589294fa9ca2bea67c90e94afa636fb9f4252",
+    "CLI/internal/config/native_values.go": "a87b8b469a5e1976d0488e0288c3e03f12634d20275e525c74061bec8552b38a",
+    "CLI/internal/config/portability.go": "6698e4eff84391fc07db87966bef50c045b6ccc7afb5033462dd54dd50a87a7f",
+    "CLI/internal/config/portability_test.go": "929236192a323030c6c965f5f5a1eb671076e5d7f3daf6db81ea820901bc23c3",
+    "CLI/internal/config/security.go": "e84168641ff9abfc557e1220f5cd38b5e72fb6a64d2cb05a1e6beda10eb3d84c",
+    "CLI/internal/config/security_test.go": "d228446fd340bc399f08d4edbae6de4459cd5fdf80717f07566f5a00bf3ce24e",
+    "CLI/internal/config/skills_encoding_test.go": "e5e590bdbde96b8f86019dd6bcdd018ccec477c4b1daf5d0db9d7d5d86e72da1",
+    "CLI/internal/config/stable_import.go": "6d2edfea6ad049297af6810d8e46aa7c69a7353b69fca28c38271303e2cf0669",
+    "CLI/internal/config/tools_lifecycle_test.go": "698943db25951953c2a52cca7866cfe3fa73301e960a17ef037b9743e25f36dd"
+  },
+  "results": [
+    {
+      "case": "literal",
+      "source": "[mcp_servers.demo]\ncommand='demo'\n[mcp_servers.demo.env]\nTOKEN='oda-test-secret'\n",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/literal",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "agents: ODA-IMPORT-0003: Codex MCP server \"demo\" contains literal environment or header values\n",
+      "unchanged": true
+    },
+    {
+      "case": "mixed",
+      "source": "[mcp_servers.demo]\ncommand='demo'\nenv_vars=['FROM_ENV']\n[mcp_servers.demo.env]\nTOKEN='oda-test-secret'\n",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/mixed",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "agents: ODA-IMPORT-0003: Codex MCP server \"demo\" contains literal environment or header values\n",
+      "unchanged": true
+    },
+    {
+      "case": "disabled",
+      "source": "[mcp_servers.demo]\ncommand='demo'\nenabled=false\n",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/disabled",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "agents: ODA-IMPORT-0004: codex MCP server \"demo\" field \"enabled\" has no stable mapping; use native import for supported native fields\n",
+      "unchanged": true
+    },
+    {
+      "case": "bearer",
+      "source": "[mcp_servers.demo]\nurl='https://example.test/mcp'\nbearer_token_env_var='TOKEN'\n",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/bearer",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "agents: ODA-IMPORT-0004: codex MCP server \"demo\" field \"bearer_token_env_var\" has no stable mapping; use native import for supported native fields\n",
+      "unchanged": true
+    },
+    {
+      "case": "policy",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "import",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/policy",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "manifest": {
+        "profiles": [
+          "tools"
+        ],
+        "requires": [
+          "mcp.envRef"
+        ],
+        "version": "1.0.0"
+      },
+      "existing_mode_preserved": true,
+      "backups_private": true
+    },
+    {
+      "case": "preserved-policy-refusal",
+      "command": [
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/agents",
+        "plan",
+        "--vendor",
+        "codex",
+        "--root",
+        "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/policy",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "plan": {
+        "schema_version": "1.0.0",
+        "vendor": "codex",
+        "root": "/mnt/DATA/tmp/oda-stable-import-cli-b_ghe5k6/policy",
+        "applicable": false,
+        "actions": [],
+        "diagnostics": [
+          "ODA-ADAPTER-0005: codex cannot preserve explicitly required capability \"mcp.envRef\"; projection refused"
+        ]
+      }
+    }
+  ],
+  "native_harness_execution": false,
+  "runtime_support_promoted": false
+}

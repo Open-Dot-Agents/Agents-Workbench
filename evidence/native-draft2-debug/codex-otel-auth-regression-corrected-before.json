@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "^TestNativeCodexOtelCredentials$",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCodexOtelCredentials (0.03s)\n    --- FAIL: TestNativeCodexOtelCredentials/cookie (0.03s)\n        native_codex_otel_test.go:134: credential removal left the exporter active or allowed a native default\n    --- FAIL: TestNativeCodexOtelCredentials/token-header (0.00s)\n        native_codex_otel_test.go:134: credential removal left the exporter active or allowed a native default\n    --- FAIL: TestNativeCodexOtelCredentials/userinfo (0.00s)\n        native_codex_otel_test.go:134: credential removal left the exporter active or allowed a native default\n    --- FAIL: TestNativeCodexOtelCredentials/query (0.00s)\n        native_codex_otel_test.go:134: credential removal left the exporter active or allowed a native default\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.040s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "4a24617f2d5d7d6269ea0fdfe87ec3d5fb4873259adf497ee8f3f5c4979b2134"
+}

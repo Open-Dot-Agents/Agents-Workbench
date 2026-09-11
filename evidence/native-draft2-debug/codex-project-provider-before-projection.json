@@ -1,0 +1,26 @@
+{
+  "source_record": "codex-project-provider-before.json",
+  "source_record_sha256": "2aeff2e3a58dccc0a4e3e6fc978663e90c199557bc1a90c42ed6026ea9cfe584",
+  "project_file": "/mnt/DATA/tmp/oda-codex-project-scope-55jpyn5s/project/.codex/config.toml",
+  "project_file_sha256": "66a038ad9764de0dc94cca7b9faa01abe7adc1958c69ba520abebde4ff0849ee",
+  "project_values": {
+    "model": "project-model",
+    "model_provider": "project-fixture",
+    "model_providers": {
+      "project-fixture": {
+        "base_url": "http://127.0.0.1:40673/v1",
+        "name": "Project override",
+        "requires_openai_auth": false,
+        "wire_api": "responses"
+      },
+      "user-fixture": {
+        "base_url": "http://127.0.0.1:40673/v1",
+        "name": "Project override",
+        "requires_openai_auth": false,
+        "wire_api": "responses"
+      }
+    }
+  },
+  "matches_original_project_source": true,
+  "inspection": "Post-run inspection of the retained isolated fixture; the native source and projected phases are in the source record."
+}

@@ -1,0 +1,41 @@
+{
+  "codex_source_revision": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "codex_tag": "rust-v0.154.0",
+  "sources": [
+    {
+      "url": "https://learn.chatgpt.com/docs/llms.txt",
+      "file": "codex-otel-transport-docs-index.source.txt",
+      "sha256": "44caae2d94fe5b10dbc61e498988235bb4c715c7b1e0d0faafc4ff5bf0de4ddb"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-advanced.md",
+      "file": "codex-otel-transport-config-advanced.source.txt",
+      "sha256": "42a5bc68a4ae38cae00df542edf16d3b059265b113f22884a8e9a598973190af"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference.md",
+      "file": "codex-otel-transport-config-reference.source.txt",
+      "sha256": "f432ae52ed50ad88998c396c8da88cba74ef022f51f2def7ca494fd08c94ae58"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/core/src/otel_init.rs",
+      "file": "codex-otel-transport-source-codex-rs-core-src-otel_init.source.txt",
+      "sha256": "9fcb7fecca2b83e32122e517fd8e26c1b470a3e047bdc64bad0b522907d662a7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/core/src/config/otel.rs",
+      "file": "codex-otel-transport-source-codex-rs-core-src-config-otel.source.txt",
+      "sha256": "311961ae6f6aaae38a529053059ce3af3e56f6ab41dfdf32680273fe865ecde2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/otel/src/provider.rs",
+      "file": "codex-otel-transport-source-codex-rs-otel-src-provider.source.txt",
+      "sha256": "b892d1f53eda11b06dd311fb479426318ba29d1f783f0665b85dca80f179f9b2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/otel/src/metrics/config.rs",
+      "file": "codex-otel-transport-source-codex-rs-otel-src-metrics-config.source.txt",
+      "sha256": "287cd191aaf6f3020f12d90ef610f198c6b7b25faf171a1ccd69f5e321eaeee1"
+    }
+  ]
+}

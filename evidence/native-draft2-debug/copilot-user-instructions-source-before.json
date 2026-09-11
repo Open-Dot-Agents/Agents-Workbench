@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-11T06:25:28.990904+00:00",
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "^TestNativeCopilotUserInstructionsKeepDeclaredSource$",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCopilotUserInstructionsKeepDeclaredSource (0.00s)\n    native_user_instructions_test.go:24: reimport changed the declared instruction source or profile\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.012s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "dc4bf75be3c1d2f3863d9ade65795e2a6f0ef9ba207ef5397d8b2e64f278f363"
+}

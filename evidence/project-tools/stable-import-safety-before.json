@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestStableCodexImportRejectsLiteralSecretsBeforeWrites|TestStableImportPreservesRequiredCapabilities",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestStableCodexImportRejectsLiteralSecretsBeforeWrites (0.00s)\n    --- FAIL: TestStableCodexImportRejectsLiteralSecretsBeforeWrites/literal-env (0.00s)\n        import_safety_test.go:30: refused import changed repository files\n    --- FAIL: TestStableCodexImportRejectsLiteralSecretsBeforeWrites/mixed-env (0.00s)\n        import_safety_test.go:24: literal credential was accepted or discarded\n    --- FAIL: TestStableCodexImportRejectsLiteralSecretsBeforeWrites/literal-header (0.00s)\n        import_safety_test.go:30: refused import changed repository files\n    --- FAIL: TestStableCodexImportRejectsLiteralSecretsBeforeWrites/mixed-header (0.00s)\n        import_safety_test.go:24: literal credential was accepted or discarded\n--- FAIL: TestStableImportPreservesRequiredCapabilities (0.00s)\n    import_safety_test.go:44: json: cannot unmarshal object into Go struct field manifestDocument.requires of type []string\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.014s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "a8111868c45eb793b048dd3e6d7d832f37c07c92acc8edb16490a0bd95d76b1d"
+}

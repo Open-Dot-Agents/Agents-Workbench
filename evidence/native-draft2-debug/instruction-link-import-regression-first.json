@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestNativeImportApplyImportPreservesCanonicalLink",
+    "-count=1"
+  ],
+  "cwd": "CLI",
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeImportApplyImportPreservesCanonicalLink (0.00s)\n    --- FAIL: TestNativeImportApplyImportPreservesCanonicalLink/codex (0.00s)\n        native_instructions_test.go:236: native path contains a symlink: /tmp/TestNativeImportApplyImportPreservesCanonicalLinkcodex2140479303/001/AGENTS.md\n    --- FAIL: TestNativeImportApplyImportPreservesCanonicalLink/copilot (0.00s)\n        native_instructions_test.go:236: no recognized native configuration artifacts\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.010s\nFAIL\n",
+  "scope": "Failing regression before the project canonical-link import fix."
+}

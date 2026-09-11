@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "url": "https://learn.chatgpt.com/docs/llms.txt",
+      "file": "codex-role-index.source.txt",
+      "sha256": "44caae2d94fe5b10dbc61e498988235bb4c715c7b1e0d0faafc4ff5bf0de4ddb"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents.md",
+      "file": "codex-role-reference.source.txt",
+      "sha256": "578375343fcbb4bfac2121fbc2bc1ef9839b306c98e49e0472310ef6e179f5a6"
+    }
+  ]
+}

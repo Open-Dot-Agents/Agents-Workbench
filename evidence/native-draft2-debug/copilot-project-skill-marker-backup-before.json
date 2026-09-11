@@ -1,0 +1,27 @@
+{
+  "fixture": "/mnt/DATA/tmp/oda-project-skill-marker-backup-w17zi9_f",
+  "commands": [
+    {
+      "args": [
+        "import",
+        "--vendor",
+        "copilot",
+        "--force",
+        "--backup"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "validate",
+        "--format",
+        "json"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"checks\":[{\"diagnostic\":\"ODA-VALIDATE-0001\",\"id\":\"repository.validate\",\"message\":\"canonical skill \\\".gitkeep.bak\\\" must be a directory\",\"passed\":false}],\"class\":\"repository\",\"implementation\":\"reference-cli\",\"implementationVersion\":\"dev\",\"passed\":false,\"schemaVersion\":\"1.1.0-draft.2\",\"standardVersion\":\"1.1.0-draft.2\"}\n",
+      "stderr": "agents: canonical skill \".gitkeep.bak\" must be a directory\nexit status 1\n"
+    }
+  ]
+}

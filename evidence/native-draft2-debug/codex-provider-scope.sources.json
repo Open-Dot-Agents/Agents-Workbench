@@ -1,0 +1,30 @@
+{
+  "codex_source_revision": "6b9826e3aa83b1a5947db50f4332cb9c65f1b340",
+  "sources": [
+    {
+      "file": "codex-provider-scope-index.source.txt",
+      "url": "https://learn.chatgpt.com/docs/llms.txt",
+      "sha256": "44caae2d94fe5b10dbc61e498988235bb4c715c7b1e0d0faafc4ff5bf0de4ddb"
+    },
+    {
+      "file": "codex-provider-scope-reference.source.txt",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference.md",
+      "sha256": "f432ae52ed50ad88998c396c8da88cba74ef022f51f2def7ca494fd08c94ae58"
+    },
+    {
+      "file": "codex-provider-scope-local.source.txt",
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/config/src/loader/local.rs",
+      "sha256": "7c5f754d7be0141744221c804f7a8d830bca7bc35e8b9bce36ae78bbb3f1b030"
+    },
+    {
+      "file": "codex-provider-scope-project_discovery.source.txt",
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/config/src/loader/project_discovery.rs",
+      "sha256": "5d3ecc932cfd900aad4f2155a0fc1b6de32d4fd6bec7d634c4537e3b0594ed64"
+    },
+    {
+      "file": "codex-provider-scope-mod.source.txt",
+      "url": "https://raw.githubusercontent.com/openai/codex/6b9826e3aa83b1a5947db50f4332cb9c65f1b340/codex-rs/config/src/loader/mod.rs",
+      "sha256": "6fc44b60c64065994c9aa18df248eb521dba6b0e9917a8cf69fc60e0035ac56a"
+    }
+  ]
+}

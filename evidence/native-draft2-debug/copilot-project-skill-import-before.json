@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCopilotProjectSkillImport (0.00s)\n    --- FAIL: TestNativeCopilotProjectSkillImport/.github (0.00s)\n        native_copilot_skill_import_test.go:21: no recognized native configuration artifacts\n    --- FAIL: TestNativeCopilotProjectSkillImport/.claude (0.00s)\n        native_copilot_skill_import_test.go:21: no recognized native configuration artifacts\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.008s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "5d9c991610bbdfa06fb84828932247d3d5368ebf582a01a1b55c0fd75f0d886e"
+}

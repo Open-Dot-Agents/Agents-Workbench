@@ -1,0 +1,98 @@
+{
+  "native_version": "0.154.0",
+  "source_sha256": "581bdccb9f27816b256afab12bf222d9595fc646ada6996c297906c9262cd867",
+  "effective_plugin_config": {
+    "plugins": {
+      "github@open-dot-agents": {
+        "enabled": true
+      }
+    },
+    "marketplaces": {
+      "open-dot-agents": {
+        "last_updated": null,
+        "last_revision": null,
+        "source_type": "local",
+        "source": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex",
+        "ref": null,
+        "sparse_paths": null
+      }
+    }
+  },
+  "project_marketplaces": [
+    {
+      "name": "open-dot-agents",
+      "path": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/.agents/plugins/marketplace.json",
+      "interface": {
+        "displayName": "Open Dot Agents"
+      },
+      "plugins": [
+        {
+          "id": "github@open-dot-agents",
+          "remotePluginId": null,
+          "version": null,
+          "localVersion": "0.1.11",
+          "name": "github",
+          "shareContext": null,
+          "source": {
+            "type": "local",
+            "path": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/plugins/github"
+          },
+          "installed": true,
+          "installedAt": null,
+          "enabled": true,
+          "installPolicy": "AVAILABLE",
+          "installPolicySource": null,
+          "mustShowInstallationInterstitial": null,
+          "authPolicy": "ON_INSTALL",
+          "availability": "AVAILABLE",
+          "disabledReason": null,
+          "eligiblePlanTypes": null,
+          "interface": {
+            "displayName": "GitHub",
+            "shortDescription": "Triage PRs, issues, CI, and publish flows",
+            "longDescription": "Use GitHub to inspect repositories, review pull requests, address feedback, debug failing Actions checks, and prepare code changes for review through a connector-first workflow with targeted CLI fallbacks.",
+            "developerName": "OpenAI",
+            "category": "Developer Tools",
+            "capabilities": [
+              "Interactive",
+              "Write"
+            ],
+            "websiteUrl": "https://github.com/",
+            "privacyPolicyUrl": "https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement",
+            "termsOfServiceUrl": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+            "defaultPrompt": [
+              "Inspect PRs, triage issues, debug failing checks, and prepare code changes for review"
+            ],
+            "brandColor": "#24292F",
+            "composerIcon": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/plugins/github/assets/github-small.svg",
+            "composerIconUrl": null,
+            "logo": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/plugins/github/assets/github.png",
+            "logoDark": "/mnt/DATA/workspace/_/Open-Dot-Agents/Open-Dot-Agents/.agents/plugins/com.openai.codex/plugins/github/assets/github-dark.png",
+            "logoUrl": null,
+            "logoUrlDark": null,
+            "screenshots": [],
+            "screenshotUrls": []
+          },
+          "keywords": [
+            "github",
+            "microsoft",
+            "git",
+            "repositories",
+            "source control",
+            "pull requests",
+            "github actions",
+            "ci/cd",
+            "pull-request",
+            "code-review",
+            "issues",
+            "ci",
+            "actions"
+          ]
+        }
+      ]
+    }
+  ],
+  "marketplace_load_errors": [],
+  "external_mcp_execution": false,
+  "omitted": "Unrelated native marketplace entries; raw response is kept in the private setup backup."
+}

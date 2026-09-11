@@ -1,0 +1,15 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "TestSkillDefinitionMustBeUTF8|TestStableSkillImportRefuses",
+    "-count=1"
+  ],
+  "cwd": "CLI",
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestSkillDefinitionMustBeUTF8 (0.00s)\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.0.0/codex (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.0.0/copilot (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.1.0-draft.1/codex (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.1.0-draft.1/copilot (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.1.0-draft.2/codex (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n    --- FAIL: TestSkillDefinitionMustBeUTF8/1.1.0-draft.2/copilot (0.00s)\n        skills_encoding_test.go:26: invalid skill encoding was not refused: <nil>\n--- FAIL: TestStableSkillImportRefusesInvalidEncodingBeforeWrites (0.00s)\n    --- FAIL: TestStableSkillImportRefusesInvalidEncodingBeforeWrites/codex (0.00s)\n        skills_encoding_test.go:72: invalid skill import was not refused: <nil>\n    --- FAIL: TestStableSkillImportRefusesInvalidEncodingBeforeWrites/copilot (0.00s)\n        skills_encoding_test.go:72: invalid skill import was not refused: <nil>\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.016s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "1aac31728d7ad802b9f63805feba8018a57916f0e63674dced4eb226e6822461"
+}

@@ -1,0 +1,58 @@
+{
+  "expected_refusal": "Required mcp.envRef remains unsupported; native setup does not bypass it.",
+  "initial_fixture_correction": "Plan reports applicable=false with exit status 0. A nonzero-exit assertion was incorrect.",
+  "commands": [
+    {
+      "vendor": "codex",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "plan",
+        "--vendor",
+        "codex",
+        "--root",
+        "..",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "plan": {
+        "schema_version": "1.0.0",
+        "vendor": "codex",
+        "root": "..",
+        "applicable": false,
+        "actions": [],
+        "diagnostics": [
+          "ODA-ADAPTER-0005: codex cannot preserve explicitly required capability \"mcp.envRef\"; projection refused"
+        ]
+      }
+    },
+    {
+      "vendor": "copilot",
+      "command": [
+        "go",
+        "run",
+        "./cmd/agents",
+        "plan",
+        "--vendor",
+        "copilot",
+        "--root",
+        "..",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "plan": {
+        "schema_version": "1.0.0",
+        "vendor": "copilot",
+        "root": "..",
+        "applicable": false,
+        "actions": [],
+        "diagnostics": [
+          "ODA-ADAPTER-0005: copilot cannot preserve explicitly required capability \"mcp.envRef\"; projection refused"
+        ]
+      }
+    }
+  ]
+}

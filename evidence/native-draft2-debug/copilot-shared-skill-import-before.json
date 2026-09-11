@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-11T06:14:25.555616+00:00",
+  "command": [
+    "go",
+    "test",
+    "./internal/config",
+    "-run",
+    "^TestNativeCopilotSharedSkillImport$",
+    "-count=1"
+  ],
+  "exit_code": 1,
+  "stdout": "--- FAIL: TestNativeCopilotSharedSkillImport (0.00s)\n    --- FAIL: TestNativeCopilotSharedSkillImport/bare (0.00s)\n        native_shared_skill_import_test.go:25: open /tmp/TestNativeCopilotSharedSkillImportbare2718095512/001/.agents/manifest.json: file does not exist\n    --- FAIL: TestNativeCopilotSharedSkillImport/draft2 (0.00s)\n        native_shared_skill_import_test.go:25: no recognized native configuration artifacts\nFAIL\nFAIL\tgithub.com/Open-Dot-Agents/Agents-CLI/internal/config\t0.008s\nFAIL\n",
+  "stderr": "",
+  "test_sha256": "267c3cfa97aad925fe884d77ed3c2652c84b078ada2fe2286d34170d0ab3215c"
+}

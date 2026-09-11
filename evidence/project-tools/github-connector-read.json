@@ -1,0 +1,14 @@
+{
+  "plugin_reference": "github@openai",
+  "app_id": "connector_76869538009648d5b282a4bb21c3d157",
+  "dependency_status": "installed and enabled",
+  "optional_enterprise_dependency": "no unique canonical plugin",
+  "read_operation": "GitHub repository metadata",
+  "repository_full_name": "Open-Dot-Agents/Open-Dot-Agents",
+  "repository_id": "1327140497",
+  "default_branch": "main",
+  "visibility": "public",
+  "succeeded": true,
+  "writes": false,
+  "source": "Already connected GitHub app in the current session. This does not prove external MCP use by the new local package."
+}
