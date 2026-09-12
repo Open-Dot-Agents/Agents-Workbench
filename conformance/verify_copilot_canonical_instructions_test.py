@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """Reject stale core-loading or changed reference-base claims."""
-import json
 import unittest
 
-from verify_copilot_canonical_instructions import BASE, check_canonical_phase
+from synthetic_instruction_fixtures import instruction_phase
+
+from verify_copilot_canonical_instructions import check_canonical_phase
 
 
 class EvidenceTests(unittest.TestCase):
     def phase(self, index=2):
-        return json.loads((BASE/'copilot-canonical-instructions-link-distinct-user-instructions.json').read_text())['phases'][index]
+        markers = ['AGENTS_ROOT_INSTRUCTION_MARKER', 'AGENTS_OTHER_INSTRUCTION_MARKER',
+                   'AGENTS_REFERENCED_POLICY', 'AGENTS_NATIVE_REFERENCED_POLICY']
+        if index == 2: markers.append('AGENTS_UPDATED_CORE_MARKER')
+        return instruction_phase(markers, ('source', 'relocated', 'updated')[index])
 
     def test_valid(self):
         for index in range(3): check_canonical_phase(self.phase(index), 'link-distinct')

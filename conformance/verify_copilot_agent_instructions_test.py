@@ -1,14 +1,30 @@
 #!/usr/bin/env python3
 """Reject instruction evidence with missing effects or changed scope."""
-import json
 import unittest
 
-from verify_copilot_agent_instructions import BASE, check_phase
+from synthetic_instruction_fixtures import instruction_phase
+
+from verify_copilot_agent_instructions import check_phase
 
 
 class EvidenceTests(unittest.TestCase):
     def result(self, label='combined-root'):
-        return json.loads((BASE/f'copilot-agent-instructions-{label}-user-instructions.json').read_text())
+        definitions = {'.claude/CLAUDE.md': 'SYNTHETIC_DOT_BODY'}
+        references = {'.claude/policy.md': 'SYNTHETIC_DOT_POLICY'}
+        if label == 'combined-root':
+            definitions['AGENTS.md'] = 'SYNTHETIC_ROOT_BODY'
+            references['child-policy.md'] = 'AGENTS_CHILD_REFERENCED_POLICY'
+            markers = ['SYNTHETIC_ROOT_BODY', 'AGENTS_CHILD_REFERENCED_POLICY']
+        elif label == 'dot-root':
+            markers = []
+        else:
+            raise ValueError(label)
+        phases = [instruction_phase(markers, stage) for stage in ('source', 'relocated')]
+        for phase in phases:
+            phase['instruction_markers'] = {name: body in markers for name, body in definitions.items()}
+            phase['reference_markers'] = {name: body in markers for name, body in references.items()}
+        return {'case': 'combined' if label == 'combined-root' else 'dot-only',
+                'cwd_subdir': '.', 'definitions': definitions, 'references': references, 'phases': phases}
 
     def test_valid(self):
         r = self.result()

@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """Reject missing, stale, or unrelated native instruction evidence."""
-import json
 import unittest
 
-from verify_copilot_root_instructions import BASE, check_phase
+from synthetic_instruction_fixtures import instruction_phase
+
+from verify_copilot_root_instructions import check_phase
 
 
 class EvidenceTests(unittest.TestCase):
     def phase(self, index=1):
-        return json.loads((BASE/'copilot-github-reference-link-source-final.json').read_text())['phases'][index]
+        bodies = (
+            ['AGENTS_ROOT_INSTRUCTION_MARKER', 'AGENTS_WRONG_REFERENCE_BASE'],
+            ['AGENTS_ROOT_INSTRUCTION_MARKER', 'AGENTS_WRONG_REFERENCE_BASE'],
+            ['AGENTS_ROOT_INSTRUCTION_MARKER', 'AGENTS_WRONG_REFERENCE_BASE', 'AGENTS_UPDATED_GITHUB_MARKER'],
+            [],
+        )
+        return instruction_phase(bodies[index], ('source', 'relocated', 'updated', 'removed')[index])
 
     def test_valid_phases(self):
         for index in range(4): check_phase(self.phase(index), 'github-reference')
