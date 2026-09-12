@@ -26,7 +26,7 @@ def main():
     if output.exists():
         parser.error('use a new result directory')
     output.mkdir(parents=True)
-    base = Path(tempfile.mkdtemp(prefix='oda-trust-safe-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='oda-trust-safe-'))
     home, root = base / 'home', base / 'workspace'
     home.mkdir(mode=0o700); root.mkdir()
     source = Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex'))) / 'auth.json'

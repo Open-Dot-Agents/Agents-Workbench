@@ -13,7 +13,7 @@ import time
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -24,9 +24,9 @@ def main():
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot']
-    base = Path(tempfile.mkdtemp(prefix='agents-user-instructions-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='agents-user-instructions-'))
     source, target = [base/name for name in ('source', 'target')]
     homes = {label: base/(label+'-home') for label in ('source', 'target')}
     native_homes = {label: home/'.copilot' if args.case == 'default-home' else base/(label+'-native')

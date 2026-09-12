@@ -141,6 +141,19 @@ command that writes the same marker cannot satisfy an MCP check. Records
 include exact commands, runner and CLI SHA-256 values, sanitized bounded
 transcripts, and native MCP markers. Do not count preflight as feature evidence.
 
+`evidence_state.py` keeps two results separate. Historical artifact integrity
+checks the receipt against its captured runner and declared captured files.
+Current support eligibility also checks the tracked runner, implementation,
+and helper files. An intact historical receipt cannot satisfy the release gate
+until a current pinned run replaces it.
+
+Current eligibility requires a current runner path, a nonempty implementation
+source map, and current paths for every declared helper. An omitted comparison
+cannot pass. These omissions do not invalidate intact historical artifacts.
+The summary includes `receipt_count`; an empty set returns false for both
+historical integrity and current eligibility. Family-specific verifiers must
+also check native results, binary pins, and the required behavior assertions.
+
 The current suite covers root/nested instruction use, one portable skill,
 stdio MCP, session/tool hooks, and deactivation. It does not establish remote
 MCP, runtime environment-reference resolution, all hook events, matcher engine

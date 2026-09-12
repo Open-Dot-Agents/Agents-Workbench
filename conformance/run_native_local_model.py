@@ -26,7 +26,7 @@ def main():
     binary = shutil.which('codex')
     if not binary or sha(binary) != PINS['codex']:
         parser.error('Codex does not match the evidence pin')
-    base = Path(tempfile.mkdtemp(prefix='oda-local-model-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='oda-local-model-'))
     home, workspace = base / 'home', base / 'workspace'
     home.mkdir(mode=0o700); workspace.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '--quiet', str(workspace)], check=True)

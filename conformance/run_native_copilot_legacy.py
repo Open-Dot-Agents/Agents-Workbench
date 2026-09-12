@@ -28,7 +28,7 @@ def main():
     binary = Path(shutil.which('copilot'))
     assert sha(binary) == PINS['copilot'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-legacy-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-legacy-'))
     source, control, target, workspace = [root / name for name in ['source', 'control', 'target', 'workspace']]
     for path in [source, control, target, workspace]: path.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

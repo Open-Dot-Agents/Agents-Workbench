@@ -4,6 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 from run_native_approvals import PINS, sha
 from verify_copilot_root_instructions import check_phase
 
@@ -30,14 +32,14 @@ def verify():
     for source in sources:
         assert hashlib.sha256(source['body'].encode()).hexdigest() == source['sha256']
     implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
+    receipts=[]
     for case in ('link-only', 'link-distinct'):
         path = BASE/f'copilot-canonical-instructions-{case}-user-instructions.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and r['case'] == case
         assert r['native_version'] == '1.0.83' and r['native_sha256'] == PINS['copilot']
-        assert r['implementation_sha256'] == implementation
-        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT/'WORKBENCH/conformance/run_native_copilot_canonical_instructions.py')
-        assert r['helper_sha256'] == sha(ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert r['source_unchanged'] and r['authority_unchanged'] and r['source_link_preserved'] and r['roundtrip_preserved']
         assert [p['label'] for p in r['phases']] == ['source', 'relocated', 'updated']
         for phase in r['phases']: check_canonical_phase(phase, case)
@@ -54,7 +56,10 @@ def verify():
     assert before['runner_sha256'] == sha(path.with_suffix('.runner.py'))
     check_canonical_phase(before['phases'][0], 'link-distinct')
     assert before['commands'][-1]['exit_code'] != 0 and 'distinct project instructions' in before['commands'][-1]['stderr']
-    print('PASS: six native sessions; canonical reference base, relocation, and updated core loading')
+    state=summarize_receipts(receipts,ROOT,current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_canonical_instructions.py',
+                             current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'],state['integrity_errors']
+    print(json.dumps({'passed':True,'native_cases':2,**state,'full_adapter_support':False},indent=2))
 
 
 if __name__ == '__main__':

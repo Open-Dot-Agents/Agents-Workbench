@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import assess_receipt
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022'
@@ -34,6 +36,7 @@ def phase_check(phase, skill=False):
 
 def verify(evidence_suffix='project-skills-final'):
     files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    eligibility = []
     for scope in ('project', 'user'):
         for case in ('external', 'managed', 'absolute', 'declared-only', 'managed-skill'):
             path = BASE / f'codex-role-reference-{case}-{scope}-{evidence_suffix}.json'
@@ -42,9 +45,11 @@ def verify(evidence_suffix='project-skills-final'):
             assert record['native_version'] == '0.154.0' and record['native_sha256'] == PIN
             assert record['reference'] == ('managed' if case == 'managed-skill' else case)
             assert record['skill_reference'] is (case == 'managed-skill')
-            assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_codex_role_references.py')
-            assert record['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-            assert record['implementation_sha256'] == files
+            assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+            state = assess_receipt(path, ROOT, current_runner=ROOT/'WORKBENCH/conformance/run_native_codex_role_references.py',
+                                   current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+            assert state.integrity_valid, state.integrity_errors
+            eligibility.append(state.current_eligible)
             assert record['source_unchanged'] and not record['full_adapter_support']
             assert all(c['exit_code'] == 0 for c in record['commands'])
             assert record['imported_config'] == record['projected_config'] == record['reimported_config']
@@ -79,7 +84,8 @@ def verify(evidence_suffix='project-skills-final'):
         assert before['exit_code'] != 0 and 'reference changed location' in before['stdout']
         assert before['test_sha256'] == sha(path.with_suffix('.test.go'))
     return {'passed': True, 'native_cases': 10, 'native_processes': 20, 'completed_native_turns': 40,
-            'scope': 'project|user', 'full_adapter_support': False}
+            'scope': 'project|user', 'historical_integrity': True,
+            'current_support_eligible': all(eligibility), 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ import time
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def fixture_edit_allowed(params, path, session_id):
@@ -35,9 +35,9 @@ def main():
     args = parser.parse_args()
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot']
-    root = Path(tempfile.mkdtemp(prefix='agents-instruction-triggers-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='agents-instruction-triggers-'))
     workspace, home = root/'workspace', root/'home'
     workspace.mkdir(mode=0o700)
     home.mkdir(mode=0o700)

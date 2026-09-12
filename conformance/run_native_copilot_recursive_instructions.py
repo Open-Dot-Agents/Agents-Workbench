@@ -14,7 +14,7 @@ import time
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def fixture_instruction_read(params, paths, session_id):
@@ -39,9 +39,9 @@ def main():
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot']
-    base = Path(tempfile.mkdtemp(prefix='agents-recursive-instructions-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='agents-recursive-instructions-'))
     source, target, source_home, target_home = [base / name for name in ('source', 'target', 'source-home', 'target-home')]
     for directory in (source, target, source_home, target_home): directory.mkdir(mode=0o700)
     for workspace in (source, target):

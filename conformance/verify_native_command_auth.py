@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import assess_receipt
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022'
@@ -23,15 +25,18 @@ def model_requests(phase):
 def verify(evidence_suffix='project-skills-final'):
     files = {str(p.relative_to(ROOT / 'CLI')): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
     turns = 0
+    eligibility = []
     for case in (*SUCCESSES, *FAILURES):
         path = BASE / f'codex-command-auth-{case}-{evidence_suffix}.json'
         record = json.loads(path.read_text())
         assert record['passed'] and record['case'] == case
         assert record['native_version'] == '0.154.0' and record['native_sha256'] == PIN
-        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_command_auth.py')
-        assert record['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
+        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert record['token_helper_sha256'] == sha(path.with_suffix('.token.py'))
-        assert record['implementation_sha256'] == files
+        state = assess_receipt(path, ROOT/'CLI', current_runner=ROOT/'WORKBENCH/conformance/run_native_command_auth.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert state.integrity_valid, state.integrity_errors
+        eligibility.append(state.current_eligible)
         assert record['observe_failure_fallback'] is (case in FAILURES)
         assert not record['authentication_enforcement_verified'] and not record['full_adapter_support']
         assert all(record[k] for k in ('adapter_did_not_execute', 'external_helper_unchanged', 'no_helper_copied', 'no_auth_files', 'source_config_unchanged'))
@@ -90,7 +95,7 @@ def verify(evidence_suffix='project-skills-final'):
         assert sha(BASE / source['file']) == source['sha256']
     return {'passed': True, 'native_cases': 9, 'native_processes': 18, 'completed_native_turns': turns,
             'scope': 'user', 'native_authentication_fallback_cases': 5, 'authentication_enforcement_verified': False,
-            'full_adapter_support': False}
+            'historical_integrity': True, 'current_support_eligible': all(eligibility), 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ import tomllib
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex']
-    root = Path(tempfile.mkdtemp(prefix='oda-codex-project-scope-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-codex-project-scope-'))
     workspace, home = root / 'project', root / 'home'
     workspace.mkdir(mode=0o700); home.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

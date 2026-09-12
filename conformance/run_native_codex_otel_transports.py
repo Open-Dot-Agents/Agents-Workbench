@@ -22,7 +22,7 @@ from opentelemetry.proto.collector.logs.v1 import logs_service_pb2 as logs_pb, l
 from opentelemetry.proto.collector.trace.v1 import trace_service_pb2 as traces_pb, trace_service_pb2_grpc as traces_rpc
 from opentelemetry.proto.collector.metrics.v1 import metrics_service_pb2 as metrics_pb, metrics_service_pb2_grpc as metrics_rpc
 
-from run_native_approvals import PINS, sha
+from run_native_approvals import PINS, sha, native_binary
 from run_native_codex_otel_tls import certificate
 
 
@@ -52,10 +52,10 @@ def main():
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
     dependencies = {p: importlib.metadata.version(p) for p in ['grpcio', 'opentelemetry-proto', 'protobuf', 'cryptography']}
     assert dependencies == {'grpcio': '1.83.1', 'opentelemetry-proto': '1.44.0', 'protobuf': '7.36.1', 'cryptography': '46.0.5'}
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-otel-transports-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-otel-transports-'))
     source, target, workspace, owner, host_home = [root / p for p in ['source', 'target', 'workspace', 'owner', 'host-home']]
     for p in (source, target, workspace, owner, host_home):
         p.mkdir(mode=0o700)

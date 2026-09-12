@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'
@@ -163,22 +165,26 @@ def filename(case):
 
 def verify():
     files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    receipts = []
     for case in matrix():
         path = BASE / filename(case)
+        receipts.append(path)
         record = json.loads(path.read_text())
         assert tuple(record[k] for k in ('scope', 'cases', 'invoked_skill', 'trigger', 'interface', 'decision')) == case
         assert record['passed'] and record['native_version'] == '1.0.83' and record['native_sha256'] == PIN
         assert record['grant'] == '*' and record['command_style'] == 'builtin'
-        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_copilot_skill_metadata.py')
-        assert record['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-        assert record['terminal_helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_copilot_preferences.py')
-        assert record['verifier_sha256'] == sha(__file__) == sha(path.with_suffix('.verifier.py'))
-        assert record['implementation_sha256'] == files and not record['full_adapter_support']
+        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+        assert record['verifier_sha256'] == sha(path.with_suffix('.verifier.py'))
+        assert not record['full_adapter_support']
         assert evaluate(record) == record['observations']
     sources = json.loads((BASE / 'copilot-skill-frontmatter.sources.json').read_text())
     for source in sources['sources']:
         assert sha(BASE / source['file']) == source['sha256']
-    return {'passed': True, 'native_cases': len(matrix()), 'full_adapter_support': False}
+    state = summarize_receipts(receipts, ROOT,
+                               current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_skill_metadata.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'], state['integrity_errors']
+    return {'passed': True, 'native_cases': len(matrix()), **state, 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

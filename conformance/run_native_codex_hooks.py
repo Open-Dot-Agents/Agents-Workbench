@@ -30,7 +30,7 @@ def main():
  p.add_argument('--output',type=Path,required=True);args=p.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
  binary=Path(shutil.which('codex'));assert sha(binary)==PINS['codex'];repo=Path(__file__).resolve().parents[2]
- root=Path(tempfile.mkdtemp(prefix='oda-codex-hooks-',dir='/mnt/DATA/tmp'));home=root/'home';workspace=root/'workspace';source=root/'source'
+ root=Path(tempfile.mkdtemp(prefix='oda-codex-hooks-'));home=root/'home';workspace=root/'workspace';source=root/'source'
  for path in [home,workspace,source]:path.mkdir(mode=0o700)
  for path in [workspace,source]:subprocess.run(['git','init','-q',str(path)],check=True)
  hook=root/'hook.py';hook.write_text(HOOK);log=root/'hooks.jsonl';probe=workspace/'probe.py';effect=workspace/'effect.txt';probe.write_text('from pathlib import Path\nPath('+repr(str(effect))+').write_text("ODA_CODEX_TOOL_EFFECT")\n')

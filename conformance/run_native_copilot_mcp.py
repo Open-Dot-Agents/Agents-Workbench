@@ -13,7 +13,7 @@ import tempfile
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 SERVER=r'''
 import sys,json,pathlib,os,time
@@ -40,8 +40,8 @@ def main():
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
- binary=Path('/home/maurizio/.local/bin/copilot');assert sha(binary)==PINS['copilot']
- repo=Path(__file__).resolve().parents[2];root=Path(tempfile.mkdtemp(prefix='oda-native-mcp-',dir='/mnt/DATA/tmp'))
+ binary=native_binary('copilot');assert sha(binary)==PINS['copilot']
+ repo=Path(__file__).resolve().parents[2];root=Path(tempfile.mkdtemp(prefix='oda-native-mcp-'))
  source=root/'source';workspace=root/'workspace';home=root/'home';native=home/'copilot';canonical=workspace
  for path in [source,workspace,home,native]:path.mkdir(exist_ok=True)
  for path in [source,workspace]:subprocess.run(['git','init','-q',str(path)],check=True)

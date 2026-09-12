@@ -12,7 +12,7 @@ import tomllib
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -28,9 +28,9 @@ def main():
     assert not output.exists() and not output.with_suffix('.runner.py').exists() and not output.with_suffix('.token.py').exists()
     repo = Path(__file__).resolve().parents[2]
     cli_root = args.cli_root.resolve() if args.cli_root else repo / 'CLI'
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex']
-    root = Path(tempfile.mkdtemp(prefix='oda-command-auth-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-command-auth-'))
     source, target, owner, workspace, command_dir = [root / n for n in ('source', 'target', 'owner', 'workspace', 'command')]
     for p in (source, target, owner, workspace, command_dir): p.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

@@ -70,7 +70,7 @@ def main():
     binary = Path(shutil.which('codex'))
     assert sha(binary) == PINS['codex'], 'native binary pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-codex-background-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-codex-background-'))
     home, workspace, source = [root / name for name in ['home', 'workspace', 'source']]
     for path in [home, workspace, source]:
         path.mkdir(mode=0o700)

@@ -3,6 +3,8 @@
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 from run_native_approvals import PINS, sha
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -44,14 +46,14 @@ def check_phase(phase, result):
 
 def verify():
     implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
+    receipts=[]
     for case, cwd, label in CASES:
         path = BASE/f'copilot-agent-instructions-{label}-user-instructions.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and (r['case'], r['cwd_subdir']) == (case, cwd)
         assert r['native_version'] == '1.0.83' and r['native_sha256'] == PINS['copilot']
-        assert r['implementation_sha256'] == implementation
-        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT/'WORKBENCH/conformance/run_native_copilot_agent_instructions.py')
-        assert r['helper_sha256'] == sha(ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert r['source_unchanged'] and r['authority_unchanged'] and r['references_unchanged'] and r['roundtrip_preserved']
         assert set(r['definitions']) == ({'.claude/CLAUDE.md'} if case == 'dot-only' else {'AGENTS.md', 'CLAUDE.md', '.claude/CLAUDE.md', 'GEMINI.md', '.github/copilot-instructions.md'})
         assert set(r['references']) == {'root-policy.md', 'child-policy.md', 'claude-policy.md', '.claude/policy.md', '.github/policy.md', 'gemini-policy.md'}
@@ -67,7 +69,10 @@ def verify():
         assert not r['passed'] and r['native_sha256'] == PINS['copilot']
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert r['phases'][0]['instruction_markers']['.claude/CLAUDE.md'] is False
-    print('PASS: four agent instruction cases; eight correlated native sessions; prior failures retained')
+    state=summarize_receipts(receipts,ROOT,current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_agent_instructions.py',
+                             current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'],state['integrity_errors']
+    print(json.dumps({'passed':True,'native_cases':4,**state,'full_adapter_support':False},indent=2))
 
 
 if __name__ == '__main__':

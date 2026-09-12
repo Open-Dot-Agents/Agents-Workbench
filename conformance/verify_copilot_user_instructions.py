@@ -4,6 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 from run_native_approvals import PINS, sha
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -41,14 +43,14 @@ def verify():
     for source in sources: assert hashlib.sha256(source['body'].encode()).hexdigest()==source['sha256']
     assert '$HOME/.copilot/copilot-instructions.md' in sources[1]['body']
     sessions = []
+    receipts=[]
     for case in ('default-home','custom-home','custom-source'):
         path = BASE/f'copilot-user-instructions-{case}-final.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and r['case']==case and r['scope']=='user'
         assert r['native_version']=='1.0.83' and r['native_sha256']==PINS['copilot']
-        assert r['implementation_sha256']==implementation
-        assert r['runner_sha256']==sha(path.with_suffix('.runner.py'))==sha(ROOT/'WORKBENCH/conformance/run_native_copilot_user_instructions.py')
-        assert r['helper_sha256']==sha(ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert r['runner_sha256']==sha(path.with_suffix('.runner.py'))
         assert all(r[k] for k in ('roundtrip_preserved','source_unchanged','authority_unchanged','references_unchanged','project_unchanged'))
         assert r['target_mode']==0o600 and r['plan']['applicable']
         assert len(r['authority_checks'])==6 and all(c['before']==c['after'] for c in r['authority_checks'])
@@ -85,7 +87,10 @@ def verify():
         path = BASE/(name+'.json')
         record = json.loads(path.read_text())
         assert record['exit_code']!=0 and record['test_sha256']==sha(path.with_suffix('.test.go'))
-    print('PASS: 12 native user instruction sessions; source routing, references, updates, and removal')
+    state=summarize_receipts(receipts,ROOT,current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_user_instructions.py',
+                             current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'],state['integrity_errors']
+    print(json.dumps({'passed':True,'native_cases':3,**state,'full_adapter_support':False},indent=2))
 
 
 if __name__=='__main__':

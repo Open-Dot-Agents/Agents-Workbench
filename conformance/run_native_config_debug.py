@@ -18,7 +18,7 @@ def main():
         parser.error('Codex binary does not match the evidence pin')
     if args.output.exists():
         parser.error('Use a new evidence path')
-    base = Path(tempfile.mkdtemp(prefix='oda-config-debug-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='oda-config-debug-'))
     record = {'native_version': '0.154.0', 'binary_sha256': sha(binary),
               'fixture': str(base), 'scope': 'native config load only; no authentication or model turn',
               'full_adapter_support': False, 'cases': []}

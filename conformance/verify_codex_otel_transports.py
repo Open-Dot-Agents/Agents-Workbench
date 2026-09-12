@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import assess_receipt
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 CASES = {
@@ -29,6 +31,7 @@ def attrs(record):
 
 def verify(evidence_suffix='project-skills-final'):
     files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    eligibility = []
     for name, settings in CASES.items():
         path = BASE / ('codex-otel-' + name + '-' + evidence_suffix + '.json')
         record = json.loads(path.read_text())
@@ -36,11 +39,12 @@ def verify(evidence_suffix='project-skills-final'):
         assert tuple(record[k] for k in ('transport', 'tls', 'analytics', 'credentials')) == settings
         assert record['native_version'] == '0.154.0'
         assert record['native_sha256'] == '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022'
-        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_codex_otel_transports.py')
-        assert record['implementation_sha256'] == files
+        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert record['dependencies'] == {'grpcio': '1.83.1', 'opentelemetry-proto': '1.44.0', 'protobuf': '7.36.1', 'cryptography': '46.0.5'}
-        for helper, digest in record['helper_sha256'].items():
-            assert sha(ROOT / 'WORKBENCH/conformance' / helper) == digest
+        state = assess_receipt(path, ROOT, current_runner=ROOT/'WORKBENCH/conformance/run_native_codex_otel_transports.py',
+                               current_helpers={helper: ROOT/'WORKBENCH/conformance'/helper for helper in record['helper_sha256']})
+        assert state.integrity_valid, state.integrity_errors
+        eligibility.append(state.current_eligible)
         assert record['independent_collector_control'] and not record['full_adapter_support']
         assert record['source_tls_before'] == record['source_tls_after']
         assert 'ODA_OTLP_SYNTHETIC' not in json.dumps(record), 'credential value in evidence'
@@ -94,7 +98,8 @@ def verify(evidence_suffix='project-skills-final'):
     assert sources['codex_source_revision'] == '6b9826e3aa83b1a5947db50f4332cb9c65f1b340'
     for source in sources['sources']:
         assert sha(BASE / source['file']) == source['sha256']
-    return {'passed': True, 'native_cases': len(CASES), 'native_phases': 2 * len(CASES), 'scope': 'user', 'full_adapter_support': False}
+    return {'passed': True, 'native_cases': len(CASES), 'native_phases': 2 * len(CASES), 'scope': 'user',
+            'historical_integrity': True, 'current_support_eligible': all(eligibility), 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

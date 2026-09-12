@@ -19,7 +19,7 @@ from cryptography import __version__ as cryptography_version, x509
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.x509.oid import ExtendedKeyUsageOID, NameOID
-from run_native_approvals import PINS, sha
+from run_native_approvals import PINS, sha, native_binary
 
 
 def certificate(directory, name, issuer=None, server=False, key_type='ec'):
@@ -67,10 +67,10 @@ def main():
     output = args.output.resolve()
     snapshot = output.with_suffix('.runner.py')
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-otel-tls-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-otel-tls-'))
     source, target, workspace, owner, host_home = [root / name for name in ('source', 'target', 'workspace', 'owner', 'host-home')]
     for path in (source, target, workspace, owner, host_home): path.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

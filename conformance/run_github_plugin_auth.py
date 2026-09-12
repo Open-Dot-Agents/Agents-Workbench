@@ -18,10 +18,21 @@ from run_native_approvals import Client, PINS, sha
 from run_native_codex_hooks import toml
 
 
+def expected_authentication(vendor, token_present, server):
+    """Use the tested package fields, including an already bundled header."""
+    bearer = vendor == 'codex' and server.get('bearer_token_env_var') == 'GITHUB_PAT_TOKEN'
+    header = server.get('headers', {}).get('Authorization') == 'Bearer ${GITHUB_PAT_TOKEN}'
+    return token_present and (bearer or header)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--vendor', required=True, choices=['codex', 'copilot'])
     parser.add_argument('--token', required=True, choices=['present', 'missing'])
+    parser.add_argument('--copilot-header-overlay', action='store_true',
+                        help='convert the Codex bearer environment field to a Copilot header reference')
+    parser.add_argument('--shared-header-fallback', action='store_true',
+                        help='retain the Codex bearer field and add the Copilot header reference')
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args()
     output = args.output.resolve()
@@ -33,7 +44,7 @@ def main():
     assert all(sha(source / p) == h for p, h in provenance['files'].items())
     binary = Path(shutil.which(args.vendor))
     assert sha(binary) == PINS[args.vendor], 'native version pin mismatch'
-    root = Path(tempfile.mkdtemp(prefix='oda-github-auth-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-github-auth-'))
     home, workspace, market = [root / p for p in ['home', 'workspace', 'market']]
     for p in (home, workspace, market):
         p.mkdir(mode=0o700)
@@ -47,7 +58,11 @@ def main():
               'source_revision': provenance['revision'], 'source_files': provenance['files'],
               'fixture': str(root), 'token_present': args.token == 'present',
               'real_credentials': False, 'external_model': False, 'external_github': False,
-              'package_mutation': 'Only .mcp.json mcpServers.github.url points to local test server.',
+              'package_mutation': 'The MCP URL points to the local test server.' +
+                  (' Copilot bearer_token_env_var is converted to an Authorization environment reference.'
+                   if args.copilot_header_overlay else
+                   ' A Copilot Authorization environment reference is added beside the Codex bearer field.'
+                   if args.shared_header_fallback else ''),
               'commands': [], 'http_requests': [], 'model_requests': [], 'passed': False,
               'full_adapter_support': False}
 
@@ -110,6 +125,15 @@ def main():
     url = f'http://127.0.0.1:{server.server_port}'
     mcp = json.loads((package / '.mcp.json').read_text())
     mcp['mcpServers']['github']['url'] = url + '/mcp'
+    if args.copilot_header_overlay:
+        assert args.vendor == 'copilot', 'the header overlay is Copilot-specific'
+        server_config = mcp['mcpServers']['github']
+        assert server_config.pop('bearer_token_env_var') == 'GITHUB_PAT_TOKEN'
+        server_config['headers'] = {'Authorization': 'Bearer ${GITHUB_PAT_TOKEN}'}
+    if args.shared_header_fallback:
+        server_config = mcp['mcpServers']['github']
+        assert server_config['bearer_token_env_var'] == 'GITHUB_PAT_TOKEN'
+        server_config['headers'] = {'Authorization': 'Bearer ${GITHUB_PAT_TOKEN}'}
     (package / '.mcp.json').write_text(json.dumps(mcp))
     catalog = {'name': 'oda-github-auth', 'owner': {'name': 'Fixture'},
                'plugins': [{'name': 'github', 'source': './github'}]}
@@ -163,10 +187,10 @@ def main():
         result['authenticated_tools_list'] = any(r['method'] == 'tools/list' and r['authorized'] for r in result['http_requests'])
         result['probe_in_model_context'] = 'oda_auth_probe' in json.dumps(result['model_requests'])
         assert result['model_requests'], 'no correlated local model request'
-        expected = args.vendor == 'codex' and args.token == 'present'
+        expected = expected_authentication(args.vendor, args.token == 'present', mcp['mcpServers']['github'])
         assert result['authenticated_tools_list'] == expected, 'bearer reference behavior differs from expected result'
         assert result['probe_in_model_context'] == expected, 'native tool visibility differs from HTTP observation'
-        if args.vendor == 'copilot':
+        if args.vendor == 'copilot' and not expected_authentication(args.vendor, True, mcp['mcpServers']['github']):
             assert result['http_requests'], 'Copilot did not attempt MCP discovery'
             assert not any(r['authorized'] for r in result['http_requests']), 'Copilot authorization behavior changed'
         result['passed'] = True

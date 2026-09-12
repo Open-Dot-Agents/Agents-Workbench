@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'
@@ -74,16 +76,16 @@ def check_phase(phase, flat, nested, instruction_reads=(), approval=None):
 
 def verify(suffix='user-instructions'):
     implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    receipts = []
     for scope, label, match, pattern, follow, decision in CASES:
         path = BASE / f'copilot-recursive-instructions-{scope}-{label}-{suffix}.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support']
         assert (r['scope'], r['match'], r['pattern']) == (scope, match, pattern)
         assert r['follow_catalog'] is follow and r['instruction_approval'] == decision
         assert r['native_version'] == '1.0.83' and r['native_sha256'] == PIN
-        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_copilot_recursive_instructions.py')
-        assert r['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-        assert r['implementation_sha256'] == implementation
+        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         expected = {name: hashlib.sha256(f'---\napplyTo: "{pattern}"\n---\nAGENTS_{kind}_INSTRUCTION_BODY\n'.encode()).hexdigest()
                     for name, kind in [('flat.instructions.md', 'FLAT'), ('nested/deep/fixture.instructions.md', 'NESTED')]}
         assert r['source_hashes'] == r['imported_hashes'] == r['projected_hashes'] == r['reimported_hashes'] == expected
@@ -137,9 +139,13 @@ def verify(suffix='user-instructions'):
         assert len(case['imported']) == int(case['nesting'] == 'flat')
     sources = json.loads((BASE / 'copilot-recursive-instructions.sources.json').read_text())
     for source in sources['sources']: assert sha(BASE / source['file']) == source['sha256']
+    state = summarize_receipts(receipts, ROOT,
+                               current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_recursive_instructions.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'], state['integrity_errors']
     return {'passed': True, 'native_cases': 7, 'native_processes': 14, 'completed_native_turns': 14,
             'scope': 'project|user', 'model_catalog_verified': True,
-            'path_matching_verified': False, 'full_adapter_support': False}
+            'path_matching_verified': False, **state, 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

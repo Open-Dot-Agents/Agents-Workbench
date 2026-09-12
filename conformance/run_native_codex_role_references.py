@@ -14,7 +14,7 @@ import tomllib
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -27,9 +27,9 @@ def main():
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex']
-    base = Path(tempfile.mkdtemp(prefix='agents-role-reference-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='agents-role-reference-'))
     source, target, workspace, canonical = [base / name for name in ('source', 'target', 'workspace', 'canonical')]
     if args.skill_reference: target = base / 'relocated/target'
     for path in (source, target, workspace, canonical): path.mkdir(mode=0o700, parents=True)

@@ -10,7 +10,7 @@ import threading
 import time
 import traceback
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -21,10 +21,10 @@ def main():
     output = args.output.resolve()
     snapshot = output.with_suffix('.runner.py')
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-subagents-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-subagents-'))
     home, workspace = root / 'home', root / 'workspace'
     for path in (home, workspace): path.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

@@ -10,7 +10,7 @@ import threading
 import time
 import traceback
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
     snapshot = output.with_suffix('.runner.py')
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin') / args.vendor
+    binary = native_binary(args.vendor)
     assert sha(binary) == PINS[args.vendor], 'native pin mismatch'
-    root = Path(tempfile.mkdtemp(prefix='oda-native-instruction-link-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-instruction-link-'))
     workspace, home = root / 'workspace', root / 'native-home'
     for path in (workspace, home, workspace / '.agents'):
         path.mkdir(mode=0o700)

@@ -44,7 +44,7 @@ def main():
     if output.exists():
         parser.error('use a new result directory; prior evidence is retained')
     output.mkdir(parents=True)
-    fixture_base = Path(tempfile.mkdtemp(prefix='oda-codex-native-', dir='/mnt/DATA/tmp'))
+    fixture_base = Path(tempfile.mkdtemp(prefix='oda-codex-native-'))
     root = fixture_base / 'workspace'
     home = fixture_base / 'native-home'
     outside = fixture_base / 'outside'

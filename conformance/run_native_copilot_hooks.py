@@ -10,7 +10,7 @@ import tempfile
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 HOOK = r'''
 import json,os,pathlib,sys,time
@@ -36,8 +36,8 @@ def main():
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
- repo=Path(__file__).resolve().parents[2];binary=Path('/home/maurizio/.local/bin/copilot');assert sha(binary)==PINS['copilot']
- root=Path(tempfile.mkdtemp(prefix='oda-native-hooks-',dir='/mnt/DATA/tmp'));workspace=root/'workspace';native=root/'home/copilot';source=root/'source'
+ repo=Path(__file__).resolve().parents[2];binary=native_binary('copilot');assert sha(binary)==PINS['copilot']
+ root=Path(tempfile.mkdtemp(prefix='oda-native-hooks-'));workspace=root/'workspace';native=root/'home/copilot';source=root/'source'
  for path in [workspace,native,source]:path.mkdir(parents=True)
  for path in [workspace,source]:subprocess.run(['git','init','-q',str(path)],check=True)
  script=root/'hook.py';script.write_text(HOOK);log=root/'hooks.jsonl';execution=workspace/'execution';execution.mkdir()

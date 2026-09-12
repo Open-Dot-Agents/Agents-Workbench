@@ -8,6 +8,8 @@ from pathlib import Path
 import re
 import subprocess
 
+from evidence_state import assess_receipt
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -42,6 +44,15 @@ def main():
     parser.add_argument('--with-copilot-agent-instructions', action='store_true', help='check native agent instruction locations, references, and scope')
     parser.add_argument('--with-copilot-canonical-instructions', action='store_true', help='check fixed core binding, relocation, and independent native instructions')
     parser.add_argument('--with-copilot-user-instructions', action='store_true', help='check user instruction source routing, references, updates, and removal')
+    parser.add_argument('--with-copilot-github-instructions', action='store_true', help='check GitHub instruction reference bases, relocation, updates, and removal')
+    parser.add_argument('--with-copilot-user-skills', action='store_true', help='check personal and shared user skill discovery, execution, and lifecycle')
+    parser.add_argument('--with-copilot-settings', action='store_true', help='check bounded user settings loading, update, and removal')
+    parser.add_argument('--with-global-config', action='store_true', help='check native global defaults, project overrides, and pinned sidekick limitations')
+    parser.add_argument('--with-codex-keymap', action='store_true', help='check native keymap lifecycle and absent-setting limitations')
+    parser.add_argument('--with-copilot-parent-skills', action='store_true', help='check parent skill ownership, inheritance, override, and Git boundaries')
+    parser.add_argument('--with-trust-boundaries', action='store_true', help='check unattended and compound commands in trust-derived Codex mode')
+    parser.add_argument('--with-public-github-mcp', action='store_true', help='check direct and pinned Codex public GitHub MCP discovery')
+    parser.add_argument('--with-copilot-local-network', action='store_true', help='check the pinned Copilot local-network connection-class limitation')
     parser.add_argument('--repository-only', action='store_true', help='run repository checks without repeating or promoting native evidence')
     args = parser.parse_args()
     if args.repository_only and any((args.with_git, args.with_mcp, args.with_legacy, args.with_preferences, args.with_subagents, args.with_codex_skills, args.with_codex_otel, args.with_codex_otel_tls, args.with_instruction_links)):
@@ -106,6 +117,40 @@ def main():
     if args.with_copilot_root_instructions:
         commands.append(('copilot-root-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_root_instructions.py']))
         commands.append(('copilot-root-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_root_instructions_test.py']))
+    if args.with_copilot_github_instructions:
+        commands.append(('copilot-github-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_github_instructions.py']))
+        commands.append(('copilot-github-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_github_instructions_test.py']))
+    if args.with_copilot_settings:
+        commands.append(('copilot-settings', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_settings.py']))
+        commands.append(('copilot-settings-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_settings_test.py']))
+    if args.with_global_config:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('global-config', 'verify_global_config.py'), ('global-config-evidence-tests', 'verify_global_config_test.py'),
+            ('copilot-sidekick-limitation', 'verify_copilot_sidekick.py'), ('copilot-sidekick-evidence-tests', 'verify_copilot_sidekick_test.py')]])
+    if args.with_codex_keymap:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('codex-keymap', 'verify_codex_keymap.py'), ('codex-keymap-evidence-tests', 'verify_codex_keymap_test.py'),
+            ('codex-setting-gaps', 'verify_codex_setting_gaps.py'), ('codex-setting-gap-evidence-tests', 'verify_codex_setting_gaps_test.py')]])
+    if args.with_copilot_parent_skills:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('copilot-parent-skills', 'verify_copilot_parent_skills.py'),
+            ('copilot-parent-skill-evidence-tests', 'verify_copilot_parent_skills_test.py')]])
+    if args.with_trust_boundaries:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('codex-trust-boundaries', 'verify_native_trust_boundaries.py'),
+            ('codex-trust-boundary-evidence-tests', 'verify_native_trust_boundaries_test.py')]])
+    if args.with_public_github_mcp:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('public-github-mcp', 'verify_public_github_mcp.py'),
+            ('public-github-mcp-evidence-tests', 'verify_public_github_mcp_test.py')]])
+    if args.with_copilot_local_network:
+        commands.extend([(name, '.', ['python3', 'WORKBENCH/conformance/'+script]) for name, script in [
+            ('copilot-local-network', 'verify_copilot_local_network.py'),
+            ('copilot-local-network-evidence-tests', 'verify_copilot_local_network_test.py')]])
+    if args.with_copilot_user_skills:
+        commands.append(('copilot-user-skills', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_user_skills.py']))
+        commands.append(('copilot-user-skill-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_user_skills_test.py']))
+        commands.append(('copilot-project-skill-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_skill_import_test.py']))
     if args.with_copilot_agent_instructions:
         commands.append(('copilot-agent-instructions', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_agent_instructions.py']))
         commands.append(('copilot-agent-instruction-evidence-tests', '.', ['python3', 'WORKBENCH/conformance/verify_copilot_agent_instructions_test.py']))
@@ -182,28 +227,31 @@ def main():
         native = [f'WORKBENCH/evidence/native-draft2-debug/{vendor}-instruction-link-{origin}-final.json'
                   for vendor in ('codex', 'copilot') for origin in ('stable', 'native')]
 
-    if args.repository_only:
+    if args.repository_only or args.with_public_github_mcp:
         native = []
 
     def native_records():
         packages = []
         mcp_packages = []
+        eligibility = {}
         for name in native:
             path = ROOT / name
             record = json.loads(path.read_text())
             assert record['passed'], name
-            assert sha(path.with_suffix('.runner.py')) == record['runner_sha256'], name
             runner = 'run_native_copilot_subagents.py' if Path(name).name.startswith('copilot-subagents-verified-') else 'run_native_copilot_preferences.py' if Path(name).name.startswith('copilot-preferences-') else 'run_native_copilot_legacy.py' if Path(name).name.startswith('copilot-legacy-') else 'run_native_plugin_mcp.py' if '-mcp-final-' in name else 'run_native_plugin_git.py' if Path(name).name.startswith(('codex-git-', 'copilot-git-')) else 'run_native_plugin_selections.py'
             if Path(name).name.startswith('codex-skills-verified-'): runner = 'run_native_codex_skills.py'
             if Path(name).name.startswith('codex-otel-adapter-'): runner = 'run_native_codex_otel.py'
             if Path(name).name.startswith('codex-otel-tls-http-'): runner = 'run_native_codex_otel.py'
             elif Path(name).name.startswith('codex-otel-tls-'): runner = 'run_native_codex_otel_tls.py'
             if '-instruction-link-' in name: runner = 'run_native_instruction_links.py'
-            assert sha(ROOT / 'WORKBENCH/conformance' / runner) == record['runner_sha256'], name
-            for source, digest in record['implementation_sha256'].items():
-                assert sha(ROOT / source) == digest, source
-            for source, digest in record['helper_sha256'].items():
-                assert sha(ROOT / 'WORKBENCH/conformance' / source) == digest, source
+            helper_hashes = record.get('helper_sha256', {})
+            helper_paths = ({source: ROOT / 'WORKBENCH/conformance' / source for source in helper_hashes}
+                            if isinstance(helper_hashes, dict) else {})
+            state = assess_receipt(path, ROOT, current_runner=ROOT / 'WORKBENCH/conformance' / runner,
+                                   current_helpers=helper_paths)
+            assert state.integrity_valid, f"{name}: {'; '.join(state.integrity_errors)}"
+            eligibility[name] = {'current_eligible': state.current_eligible,
+                                 'reasons': list(state.eligibility_errors)}
             if runner == 'run_native_instruction_links.py':
                 assert record['native_version'] == ('0.154.0' if record['vendor'] == 'codex' else '1.0.83'), name
                 from run_native_approvals import PINS
@@ -334,12 +382,14 @@ def main():
                 packages.append(record['package_hashes'])
         assert all(package == packages[0] for package in packages), 'cross-client package bytes differ'
         assert not mcp_packages or all(package == mcp_packages[0] for package in mcp_packages), 'cross-client MCP package bytes differ'
-        return {'records': native, 'shared_package_hashes': packages[0] if packages else None, 'shared_mcp_package_hashes': mcp_packages[0] if mcp_packages else None}
+        return {'records': native, 'current_support_eligibility': eligibility,
+                'shared_package_hashes': packages[0] if packages else None,
+                'shared_mcp_package_hashes': mcp_packages[0] if mcp_packages else None}
 
     if args.repository_only:
         check('native-evidence-scope', lambda: {'status': 'not-run', 'reason': 'Repository validation and projection checks only. Historical native records retain their original source hashes; no native support claim is added.'})
     else:
-        check('native-results-and-current-source-hashes', native_records)
+        check('native-results-integrity-and-current-eligibility', native_records)
 
     def failed_records():
         names = [f'{vendor}-selection-final-{scope}.json' for vendor in ('codex', 'copilot') for scope in ('project', 'user')]
@@ -477,18 +527,22 @@ def main():
             source = ROOT / '.agents/plugins/com.openai.codex'
             provenance = json.loads((source / 'provenance.json').read_text())
             records = []
+            eligibility = {}
             for vendor in ('codex', 'copilot'):
                 for token in ('present-first', 'missing'):
                     path = base / f'github-{vendor}-auth-{token}.json'
                     data = json.loads(path.read_text())
                     assert data['passed'] and data['native_turn_completed']
-                    assert data['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_github_plugin_auth.py')
-                    assert data['source_revision'] == provenance['revision']
-                    assert data['source_files'] == provenance['files']
+                    assert data['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+                    current = data['runner_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_github_plugin_auth.py')
+                    current = current and data['source_revision'] == provenance['revision']
+                    current = current and data['source_files'] == provenance['files']
+                    assert all(isinstance(name, str) and name and isinstance(digest, str) and len(digest) == 64
+                               for name, digest in data['source_files'].items())
                     for name, digest in data['source_files'].items():
-                        assert sha(source / 'plugins/github' / name) == digest
+                        current = current and sha(source / 'plugins/github' / name) == digest
                     for name, digest in data['helper_sha256'].items():
-                        assert sha(ROOT / 'WORKBENCH/conformance' / name) == digest
+                        current = current and sha(ROOT / 'WORKBENCH/conformance' / name) == digest
                     expected_pin = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022' if vendor == 'codex' else 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'
                     assert data['native_sha256'] == expected_pin
                     expected = vendor == 'codex' and token == 'present-first'
@@ -501,6 +555,7 @@ def main():
                     else:
                         assert data['completion']['stopReason'] == 'end_turn' and data['http_requests']
                     records.append(path.name)
+                    eligibility[path.name] = current
             skill = json.loads((base / 'diagnosing-bugs-native-discovery.json').read_text())
             assert skill['passed'] and skill['skill_sha256'] == sha(ROOT / '.agents/skills/diagnosing-bugs/SKILL.md')
             assert len(skill['codex']) == len(skill['copilot']) == 1
@@ -518,7 +573,9 @@ def main():
             assert validator['exit_code'] != 0 and 'required' in validator['stdout'] + validator['stderr']
             for source_record in json.loads((base / 'github-official-sources.json').read_text()):
                 assert sha(ROOT / source_record['file']) == source_record['sha256']
-            return {'authentication_records': records, 'external_MCP_use_verified': False, 'full_adapter_support': False}
+            return {'authentication_records': records, 'historical_integrity': True,
+                    'current_support_eligibility': eligibility,
+                    'external_MCP_use_verified': False, 'full_adapter_support': False}
         check('project-extension-native-evidence', project_extensions)
 
         def stable_import_safety():
@@ -532,12 +589,13 @@ def main():
                          'TestStableImportRefusesUnmappedMCPControlsBeforeWrites'):
                 assert 'FAIL: '+name in baseline['stdout']
             assert 'cannot unmarshal' not in baseline['stdout']
-            result_path = base / 'stable-import-cli-user-instructions.json'
+            result_path = base / ('stable-import-cli-parent-skills-docs-final.json' if args.with_copilot_parent_skills else 'stable-import-cli-keymap-final.json' if args.with_codex_keymap else 'stable-import-cli-global-final.json' if args.with_global_config else 'stable-import-cli-user-skills-final.json' if args.with_copilot_user_skills else 'stable-import-cli-github-reference-final.json' if args.with_copilot_github_instructions else 'stable-import-cli-user-instructions.json')
             result = json.loads(result_path.read_text())
-            assert result['runner_sha256'] == sha(result_path.with_suffix('.runner.py')) == sha(ROOT / 'CLI/scripts/check_stable_import_safety.py')
+            assert result['runner_sha256'] == sha(result_path.with_suffix('.runner.py'))
             assert result['passed'] and not result['native_harness_execution'] and not result['runtime_support_promoted']
+            current = result['runner_sha256'] == sha(ROOT / 'CLI/scripts/check_stable_import_safety.py')
             for path, digest in result['source_sha256'].items():
-                assert sha(ROOT / path) == digest, path
+                current = current and sha(ROOT / path) == digest
             cases = {case['case']: case for case in result['results']}
             for name in ('literal', 'mixed', 'disabled', 'bearer'):
                 assert cases[name]['exit_code'] != 0 and cases[name]['unchanged']
@@ -548,7 +606,9 @@ def main():
             plan = cases['preserved-policy-refusal']['plan']
             assert not plan['applicable'] and plan['actions'] == []
             assert any('mcp.envRef' in diagnostic for diagnostic in plan['diagnostics'])
-            return {'public_cli_cases': len(cases), 'baseline_commit': baseline['baseline_commit'], 'native_harness_execution': False}
+            return {'public_cli_cases': len(cases), 'baseline_commit': baseline['baseline_commit'],
+                    'historical_integrity': True, 'current_support_eligible': current,
+                    'native_harness_execution': False}
         check('project-tool-import-safety', stable_import_safety)
 
     docs = ['docs/PLUGIN_STANDARD.md', 'docs/NATIVE_CONFIGURATION.md', 'docs/NATIVE_DEBUG_RESEARCH.md', 'docs/FEATURE_INVENTORY.md',
@@ -575,6 +635,10 @@ def main():
         docs += ['docs/COPILOT_RECURSIVE_INSTRUCTIONS.md']
     if args.with_copilot_root_instructions:
         docs += ['docs/COPILOT_ROOT_INSTRUCTIONS.md']
+    if args.with_copilot_github_instructions:
+        docs += ['docs/COPILOT_GITHUB_INSTRUCTIONS.md']
+    if args.with_copilot_user_skills:
+        docs += ['docs/COPILOT_USER_SKILLS.md']
     if args.with_copilot_agent_instructions:
         docs += ['docs/COPILOT_AGENT_INSTRUCTIONS.md']
     if args.with_copilot_canonical_instructions:
@@ -679,6 +743,31 @@ def main():
                       'WORKBENCH/conformance/verify_copilot_root_instructions.py',
                       'WORKBENCH/conformance/verify_copilot_root_instructions_test.py',
                       'WORKBENCH/evidence/native-draft2-debug/copilot-root-instructions.sources.json'})
+    if args.with_copilot_github_instructions:
+        files.update({'WORKBENCH/conformance/run_native_copilot_root_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_root_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_github_instructions.py',
+                      'WORKBENCH/conformance/verify_copilot_github_instructions_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-github-instructions.sources.json',
+                      'SPEC/spec/1.1-draft.2/SPECIFICATION.md'})
+    if args.with_copilot_user_skills:
+        files.update({'WORKBENCH/conformance/run_native_copilot_user_skills.py',
+                      'WORKBENCH/conformance/verify_copilot_user_skills.py',
+                      'WORKBENCH/conformance/verify_copilot_user_skills_test.py',
+                      'WORKBENCH/conformance/verify_copilot_skill_import.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-user-skills.sources.json',
+                      'SPEC/spec/1.1-draft.2/SPECIFICATION.md'})
+    if args.with_copilot_settings:
+        files.update({'WORKBENCH/conformance/run_native_copilot_preferences.py',
+                      'WORKBENCH/conformance/verify_copilot_settings.py',
+                      'WORKBENCH/conformance/verify_copilot_settings_test.py',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-settings-sidekick.sources.json',
+                      'WORKBENCH/evidence/native-draft2-debug/copilot-settings-artifact.json'})
+    if args.with_global_config:
+        files.update({'CLI/internal/config/global.go', 'CLI/internal/config/global_test.go',
+                      'CLI/cmd/agents/global.go', 'CLI/cmd/agents/global_test.go', 'docs/GLOBAL_CONFIGURATION.md'})
+        files.update(str(p.relative_to(ROOT)) for pattern in ('*global_config*.py', '*copilot_sidekick*.py') for p in (ROOT/'WORKBENCH/conformance').glob(pattern))
+        files.update(str(p.relative_to(ROOT)) for pattern in ('global-config-*.json', 'copilot-sidekick-*.json') for p in (ROOT/'WORKBENCH/evidence/native-draft2-debug').glob(pattern))
     if args.with_copilot_agent_instructions:
         files.update({'WORKBENCH/conformance/run_native_copilot_agent_instructions.py',
                       'WORKBENCH/conformance/verify_copilot_agent_instructions.py',
@@ -698,6 +787,39 @@ def main():
                       'WORKBENCH/evidence/native-draft2-debug/copilot-user-instructions.sources.json',
                       'WORKBENCH/evidence/native-draft2-debug/copilot-user-instructions-source-duplication.json'})
         files.update(str(p.relative_to(ROOT)) for p in (ROOT/'SPEC/examples/user-instructions').rglob('*') if p.is_file())
+    if args.with_codex_keymap:
+        files.update({'CLI/internal/config/native_codex_keymap.go','CLI/internal/config/native_codex_keymap_test.go','docs/CODEX_KEYMAP.md'})
+        files.update(str(p.relative_to(ROOT)) for pattern in ('*codex_keymap*.py','*codex_setting_gaps*.py') for p in (ROOT/'WORKBENCH/conformance').glob(pattern))
+        files.update(str(p.relative_to(ROOT)) for pattern in ('codex-keymap-*.json','codex-setting-*.json','codex-remaining-settings*.json','codex-keymap.sources.json') for p in (ROOT/'WORKBENCH/evidence/native-draft2-debug').glob(pattern))
+    if args.with_copilot_parent_skills:
+        files.update({'CLI/internal/config/native_copilot_inherited_skills.go',
+                      'CLI/internal/config/native_copilot_inherited_skills_test.go',
+                      'docs/COPILOT_PARENT_SKILLS.md', 'docs/NATIVE_MILESTONE_AUDIT.md'})
+        files.update(str(p.relative_to(ROOT)) for pattern in ('*copilot_parent_skills*.py', 'probe_copilot_parent_discovery.py') for p in (ROOT/'WORKBENCH/conformance').glob(pattern))
+        files.update(str(p.relative_to(ROOT)) for pattern in ('copilot-parent-*.json',) for p in (ROOT/'WORKBENCH/evidence/native-draft2-debug').glob(pattern))
+    if args.with_trust_boundaries:
+        files.update(str(p.relative_to(ROOT)) for pattern in ('*native_trust_boundaries*.py',) for p in (ROOT/'WORKBENCH/conformance').glob(pattern))
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT/'WORKBENCH/evidence/native-draft2-debug').glob('codex-trust-boundary-*.json'))
+    if args.with_public_github_mcp:
+        files.update({'WORKBENCH/conformance/probe_public_github_mcp.py',
+                      'WORKBENCH/conformance/run_native_public_github_plugin.py',
+                      'WORKBENCH/conformance/verify_public_github_mcp.py',
+                      'WORKBENCH/conformance/verify_public_github_mcp_test.py',
+                      'docs/PLUGIN_STANDARD.md', 'docs/NATIVE_DEBUG_RESEARCH.md',
+                      'docs/NATIVE_MILESTONE_AUDIT.md', 'docs/VENDOR_EVIDENCE.md'})
+        files.update(str(p.relative_to(ROOT)) for p in (ROOT/'WORKBENCH/evidence/native-draft2-debug').glob('*public-github*.json'))
+    if args.with_copilot_local_network:
+        files.update({'CLI/scripts/native_coverage.py',
+                      'CLI/scripts/native_coverage_test.py',
+                      'WORKBENCH/conformance/run_copilot_security.py',
+                      'WORKBENCH/conformance/copilot_security_probe.py',
+                      'WORKBENCH/conformance/verify_copilot_local_network.py',
+                      'WORKBENCH/conformance/verify_copilot_local_network_test.py',
+                      'WORKBENCH/evidence/2026-09-10-copilot-local-classes/result.json',
+                      '.agents/features/coverage.json',
+                      '.agents/features/implementation.json',
+                      'docs/NATIVE_DEBUG_RESEARCH.md',
+                      'docs/NATIVE_MILESTONE_AUDIT.md'})
     files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'SPEC/examples/plugins-draft').rglob('*') if p.is_file())
     result = {'checked_at': datetime.now(timezone.utc).isoformat(), 'revision': 'uncommitted working tree',
               'passed': all(c['exit_code'] == 0 for c in checks), 'full_adapter_support': False,

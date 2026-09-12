@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import assess_receipt
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022'
@@ -20,14 +22,17 @@ def requests(phase):
 
 def verify(evidence_suffix='project-skills-final'):
     files = {str(p.relative_to(ROOT / 'CLI')): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    eligibility = []
     for auth in ('on', 'off'):
         path = BASE / f'codex-provider-auth-{auth}-{evidence_suffix}.json'
         record = json.loads(path.read_text())
         assert record['passed'] and record['auth'] == auth
         assert record['native_version'] == '0.154.0' and record['native_sha256'] == PIN
-        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_provider_auth.py')
-        assert record['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-        assert record['implementation_sha256'] == files
+        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+        state = assess_receipt(path, ROOT/'CLI', current_runner=ROOT/'WORKBENCH/conformance/run_native_provider_auth.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert state.integrity_valid, state.integrity_errors
+        eligibility.append(state.current_eligible)
         assert record['auth_before'] == record['auth_after'] and len(record['auth_after']) == 2
         assert record['imported_config']['model_providers']['fixture']['requires_openai_auth'] is (auth == 'on')
         assert not record['full_adapter_support']
@@ -56,7 +61,8 @@ def verify(evidence_suffix='project-skills-final'):
     for source in sources['sources']:
         assert sha(BASE / source['file']) == source['sha256']
     return {'passed': True, 'native_cases': 2, 'native_phases': 4, 'retained_native_failure': True,
-            'scope': 'user', 'full_adapter_support': False}
+            'scope': 'user', 'historical_integrity': True, 'current_support_eligible': all(eligibility),
+            'full_adapter_support': False}
 
 
 if __name__ == '__main__':

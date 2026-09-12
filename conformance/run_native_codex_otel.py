@@ -11,7 +11,7 @@ import tomllib
 import traceback
 import uuid
 
-from run_native_approvals import PINS, sha
+from run_native_approvals import PINS, sha, native_binary
 
 
 def main():
@@ -22,10 +22,10 @@ def main():
     output = args.output.resolve()
     snapshot = output.with_suffix('.runner.py')
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-otel-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-otel-'))
     home, workspace, canonical = [root / p for p in ('home', 'workspace', 'canonical')]
     for path in (home, workspace, canonical): path.mkdir(mode=0o700)
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)

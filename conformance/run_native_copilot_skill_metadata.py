@@ -14,7 +14,7 @@ import time
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 from run_native_copilot_preferences import plain_terminal
 from verify_copilot_skill_metadata import evaluate
 
@@ -100,9 +100,9 @@ def main():
     output = args.output.resolve()
     assert not any(p.exists() for p in (output, output.with_suffix('.runner.py'), output.with_suffix('.verifier.py')))
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot']
-    base = Path(tempfile.mkdtemp(prefix='agents-copilot-skill-metadata-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='agents-copilot-skill-metadata-'))
     home, workspace = base / 'home', base / 'workspace'
     canonical = workspace if args.scope == 'project' else base / 'canonical'
     for p in (home, workspace, canonical): p.mkdir(mode=0o700, exist_ok=True)

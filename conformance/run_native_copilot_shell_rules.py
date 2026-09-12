@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 import time
 
 
@@ -28,8 +28,8 @@ def main():
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
- binary=Path('/home/maurizio/.local/bin/copilot');assert sha(binary)==PINS['copilot']
- root=Path(tempfile.mkdtemp(prefix='oda-native-shell-',dir='/mnt/DATA/tmp'));workspace=root/'workspace';home=root/'home';native=home/'copilot'
+ binary=native_binary('copilot');assert sha(binary)==PINS['copilot']
+ root=Path(tempfile.mkdtemp(prefix='oda-native-shell-'));workspace=root/'workspace';home=root/'home';native=home/'copilot'
  workspace.mkdir();native.mkdir(parents=True);subprocess.run(['git','init','-q',str(workspace)],check=True)
  marker=workspace/'effect.txt';second=workspace/'second.txt';probe=workspace/'probe.py';probe.write_text('from pathlib import Path\nPath('+repr(str(second if args.command=='compound-mixed' else marker))+').write_text("ODA_SHELL_EFFECT")\n')
  absolute='/usr/bin/python3' if args.command.startswith('python') else '/usr/bin/touch'

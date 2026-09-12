@@ -28,6 +28,19 @@ def sha(path):
         return hashlib.file_digest(source, 'sha256').hexdigest()
 
 
+def native_binary(vendor):
+    if vendor not in PINS:
+        raise ValueError('unknown native harness: ' + vendor)
+    configured = os.environ.get(vendor.upper() + '_BIN')
+    candidate = configured or shutil.which(vendor)
+    if not candidate:
+        raise FileNotFoundError(vendor + ' executable is not available; set ' + vendor.upper() + '_BIN')
+    path = Path(candidate).expanduser()
+    if configured and not path.is_absolute():
+        raise ValueError(vendor.upper() + '_BIN must be absolute')
+    return path
+
+
 def approval_command_matches(command, probe):
     """Approve only the exact test command, including its native shell wrapper."""
     try:
@@ -298,7 +311,7 @@ def main():
         parser.error('use a new result directory')
     output.mkdir(parents=True)
     import tempfile
-    base = Path(tempfile.mkdtemp(prefix='oda-native-approvals-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='oda-native-approvals-'))
     records = []
     modes = ['allow', 'deny', 'noninteractive'] if args.mode == 'all' else [args.mode]
     for mode in modes:

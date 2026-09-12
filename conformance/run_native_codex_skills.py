@@ -11,7 +11,7 @@ import time
 import tomllib
 import traceback
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
@@ -23,10 +23,10 @@ def main():
     output = args.output.resolve()
     snapshot = output.with_suffix('.runner.py')
     assert not output.exists() and not snapshot.exists(), 'refuse evidence replacement'
-    binary = Path('/home/maurizio/.local/bin/codex')
+    binary = native_binary('codex')
     assert sha(binary) == PINS['codex'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-skills-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-codex-skills-'))
     source, home, workspace, canonical = [root / p for p in ('source', 'target', 'workspace', 'canonical')]
     for path in (source, home, workspace, canonical): path.mkdir(mode=0o700)
     if args.scope == 'project': canonical = workspace

@@ -6,6 +6,8 @@ import json
 import re
 from pathlib import Path
 
+from evidence_state import assess_receipt
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022'
@@ -26,14 +28,17 @@ def phase_check(phase):
 
 def verify(evidence_suffix='project-skills-final'):
     files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    eligibility = []
     for name, all_keys in (('provider', False), ('allkeys', True)):
         path = BASE / f'codex-project-{name}-{evidence_suffix}.json'
         record = json.loads(path.read_text())
         assert record['passed'] and record['all_keys'] is all_keys
         assert record['native_version'] == '0.154.0' and record['native_sha256'] == PIN
-        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_codex_project_scope.py')
-        assert record['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-        assert record['implementation_sha256'] == files
+        assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+        state = assess_receipt(path, ROOT, current_runner=ROOT/'WORKBENCH/conformance/run_native_codex_project_scope.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+        assert state.integrity_valid, state.integrity_errors
+        eligibility.append(state.current_eligible)
         assert record['required_refused_before_writes'] and record['user_config_unchanged'] and record['canonical_preserved']
         assert not record['full_adapter_support']
         assert record['imported_profile_required'] is False
@@ -71,7 +76,8 @@ def verify(evidence_suffix='project-skills-final'):
     assert keys == set(all_fields) - {'model', 'features'} and len(keys) == 12
     assert 'if features.remove("respect_system_proxy").is_some()' in loader
     return {'passed': True, 'native_cases': 2, 'completed_native_turns': 4, 'ignored_project_fields': 13,
-            'scope': 'project', 'full_adapter_support': False}
+            'scope': 'project', 'historical_integrity': True, 'current_support_eligible': all(eligibility),
+            'full_adapter_support': False}
 
 
 if __name__ == '__main__':

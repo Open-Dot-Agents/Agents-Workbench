@@ -4,6 +4,7 @@ import json
 import hashlib
 from pathlib import Path
 
+from evidence_state import summarize_receipts
 from verify_copilot_recursive_instructions import BASE, PIN, ROOT, sha
 
 CASES = [('mention', '**/*.go'), ('resource', '**/*.go'), ('tracked-view', '**/*.go'),
@@ -13,12 +14,13 @@ CASES = [('mention', '**/*.go'), ('resource', '**/*.go'), ('tracked-view', '**/*
 
 def verify():
     turns = 0
+    receipts=[]
     for name, pattern in CASES:
         path = BASE / f'copilot-instruction-trigger-{name}-first.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['native_version'] == '1.0.83' and r['native_sha256'] == PIN
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
-        assert r['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
         assert not r['adapter_invoked'] and not r['full_adapter_support'] and r['pattern'] == pattern
         assert r['requests'] and r['turns']
         assert len(r['turns']) == (2 if name == 'second-turn' else 1)
@@ -65,9 +67,12 @@ def verify():
         assert r['passed'] is direct
         if not direct:
             assert ('native edit did not produce its file effect' if name == 'edit' else 'native instruction bodies differ from expected loading') in r['error']
+    state=summarize_receipts(receipts,ROOT,current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_instruction_triggers.py',
+                             current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'],state['integrity_errors']
     return {'passed': True, 'native_cases': len(CASES), 'completed_native_turns': turns,
             'automatic_injection_expectation_corrected': True, 'adapter_invoked': False,
-            'full_adapter_support': False}
+            **state, 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

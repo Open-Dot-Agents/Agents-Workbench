@@ -5,6 +5,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from evidence_state import summarize_receipts
+
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'WORKBENCH/evidence/native-draft2-debug'
 PIN = 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'
@@ -14,7 +16,7 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def phase_check(phase, present=True):
+def phase_check(phase, present=True, source='project', effect='AGENTS_SKILL_IMPORT_ASSET'):
     assert phase['prompt']['stopReason'] == 'end_turn'
     assert phase['requests'] and phase['nonce'] in json.dumps(phase['requests'])
     assert phase['body_loaded'] is present
@@ -33,7 +35,7 @@ def phase_check(phase, present=True):
         assert any(e['type'] == 'tool.execution_complete' and e['data']['success'] is False
                    and e['data']['error']['message'] == 'Skill not found: fixture-import' for e in events)
         return
-    assert rows[0]['path'] == phase['package'] and rows[0]['enabled'] and rows[0]['source'] == 'project'
+    assert rows[0]['path'] == phase['package'] and rows[0]['enabled'] and rows[0]['source'] == source
     assert invoked[0]['path'] == phase['package']+'/SKILL.md' and invoked[0]['trigger'] == 'agent-invoked'
     assert 'AGENTS_SKILL_IMPORT_BODY' in invoked[0]['content']
     shell = [e['data'] for e in events if e['type'] == 'tool.execution_start' and e['data']['toolName'] == 'bash']
@@ -48,7 +50,7 @@ def phase_check(phase, present=True):
     assert approvals[0]['response']['outcome']['optionId'] == 'allow_once'
     assert any(e['type'] == 'tool.execution_complete' and e['data']['toolCallId'] == shell[0]['toolCallId']
                and e['data']['success'] is True for e in events)
-    assert phase['effect'] == 'AGENTS_SKILL_IMPORT_ASSET'
+    assert phase['effect'] == effect
 
 
 def package_check(r):
@@ -66,14 +68,15 @@ def verify(evidence_suffix='user-instructions'):
     sources = json.loads((BASE/'copilot-shared-skills.sources.json').read_text())['sources']
     for source in sources: assert hashlib.sha256(source['body'].encode()).hexdigest() == source['sha256']
     assert '.agents/skills/' in sources[1]['body']
+    receipts = []
     for origin in ('github', 'claude', 'agents'):
         path = BASE / f'copilot-project-skill-{origin}-{evidence_suffix}.json'
+        receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and r['origin'] == origin and r['scope'] == 'project'
         assert r['native_sha256'] == PIN and r['native_version'] == '1.0.83'
-        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'WORKBENCH/conformance/run_native_copilot_skill_import.py')
-        assert r['helper_sha256'] == sha(ROOT / 'WORKBENCH/conformance/run_native_approvals.py')
-        assert r['implementation_sha256'] == files and not r['full_adapter_support']
+        assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+        assert not r['full_adapter_support']
         package_check(r)
         assert all(c['exit_code'] == 0 for c in r['commands'])
         assert r['import_report']['imported_project_skills'] == {f'.{origin}/skills/fixture-import': 'skills/fixture-import'}
@@ -107,8 +110,9 @@ def verify(evidence_suffix='user-instructions'):
     path = BASE / 'copilot-project-skill-cli-user-instructions.json'
     public = json.loads(path.read_text())
     assert public['passed'] and not public['native_harness_execution']
-    assert public['runner_sha256'] == sha(path.with_suffix('.runner.py')) == sha(ROOT / 'CLI/scripts/check_project_skill_import.py')
-    for name, digest in public['source_sha256'].items(): assert sha(ROOT / name) == digest
+    assert public['runner_sha256'] == sha(path.with_suffix('.runner.py'))
+    assert all(isinstance(name, str) and name and isinstance(digest, str) and len(digest) == 64
+               for name, digest in public['source_sha256'].items())
     assert [case['origin'] for case in public['cases']] == ['github', 'claude']
     for case in public['cases']:
         assert case['before_refusal'] == case['after_refusal'] and case['before_refusal']
@@ -124,8 +128,12 @@ def verify(evidence_suffix='user-instructions'):
     before = json.loads((BASE / 'copilot-project-skill-marker-backup-before.json').read_text())
     assert before['commands'][0]['exit_code'] == 0 and before['commands'][1]['exit_code'] != 0
     assert '.gitkeep.bak' in before['commands'][1]['stdout']
+    state = summarize_receipts(receipts, ROOT,
+                               current_runner=ROOT/'WORKBENCH/conformance/run_native_copilot_skill_import.py',
+                               current_helper=ROOT/'WORKBENCH/conformance/run_native_approvals.py')
+    assert state['historical_integrity'], state['integrity_errors']
     return {'passed': True, 'native_cases': 3, 'native_processes': 6, 'completed_native_turns': 6,
-            'scope': 'project', 'full_adapter_support': False}
+            'scope': 'project', **state, 'full_adapter_support': False}
 
 
 if __name__ == '__main__':

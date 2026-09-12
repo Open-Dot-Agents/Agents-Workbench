@@ -13,20 +13,21 @@ import time
 import traceback
 import uuid
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--case', choices=['root', 'identical', 'distinct', 'reference'], required=True)
+    parser.add_argument('--case', choices=['root', 'identical', 'distinct', 'reference', 'github-reference', 'github-reference-regular', 'github-reference-combined'], required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    github_reference = args.case.startswith('github-reference')
     output = args.output.resolve()
     assert not output.exists() and not output.with_suffix('.runner.py').exists()
     repo = Path(__file__).resolve().parents[2]
-    binary = Path('/home/maurizio/.local/bin/copilot')
+    binary = native_binary('copilot')
     assert sha(binary) == PINS['copilot']
-    base = Path(tempfile.mkdtemp(prefix='agents-root-instructions-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='agents-root-instructions-'))
     source, target, home = [base / n for n in ('source', 'target', 'home')]
     for p in (source, target, home): p.mkdir(mode=0o700)
     for p in (source, target):
@@ -35,11 +36,19 @@ def main():
         (p/'policy.md').write_text('AGENTS_REFERENCED_POLICY\n')
         (p/'.github').mkdir()
         (p/'.github/policy.md').write_text('AGENTS_WRONG_REFERENCE_BASE\n')
+        if github_reference:
+            (p/'root-policy.md').write_text('AGENTS_SEPARATE_ROOT_POLICY\n')
+            (p/'.github/root-policy.md').write_text('AGENTS_WRONG_ROOT_POLICY\n')
     (home/'config.json').write_text(json.dumps({'trustedFolders': [str(source), str(target)], 'firstLaunchAt': 1234}))
     (home/'config.json').chmod(0o600)
     body = 'AGENTS_ROOT_INSTRUCTION_MARKER\n'
-    if args.case == 'reference': body += '@policy.md\n'
-    (source/'AGENTS.md').write_text(body)
+    if args.case == 'reference' or github_reference: body += '@policy.md\n'
+    root_body = 'AGENTS_SEPARATE_ROOT_MARKER\n@root-policy.md\n'
+    if github_reference:
+        (source/'.github/copilot-instructions.md').write_text(body)
+        if args.case == 'github-reference-combined': (source/'AGENTS.md').write_text(root_body)
+    else:
+        (source/'AGENTS.md').write_text(body)
     if args.case in ('identical', 'distinct'):
         (source/'.github/copilot-instructions.md').write_text(body if args.case == 'identical' else 'AGENTS_OTHER_INSTRUCTION_MARKER\n')
     result = {'passed': False, 'case': args.case, 'fixture': str(base), 'native_version': '1.0.83',
@@ -103,11 +112,18 @@ def main():
                 phase['native_events'] = [json.loads(line) for line in path.read_text().splitlines()] if path.exists() else []
         assert phase['prompt']['stopReason'] == 'end_turn' and not phase['approvals']
         context = json.dumps(phase['requests'])
-        assert 'AGENTS_ROOT_INSTRUCTION_MARKER' in context and 'AGENTS_FILE_READ' in context
+        assert ('AGENTS_ROOT_INSTRUCTION_MARKER' in context) == (label != 'removed')
+        assert 'AGENTS_FILE_READ' in context
         if args.case == 'distinct': assert 'AGENTS_OTHER_INSTRUCTION_MARKER' in context
         if args.case == 'reference':
             expected, absent = ('AGENTS_WRONG_REFERENCE_BASE', 'AGENTS_REFERENCED_POLICY') if label == 'unconverted' else ('AGENTS_REFERENCED_POLICY', 'AGENTS_WRONG_REFERENCE_BASE')
             assert expected in context and absent not in context
+        if github_reference:
+            assert ('AGENTS_WRONG_REFERENCE_BASE' in context) == (label != 'removed')
+            assert 'AGENTS_REFERENCED_POLICY' not in context and 'AGENTS_WRONG_ROOT_POLICY' not in context
+            assert ('AGENTS_SEPARATE_ROOT_MARKER' in context) == (args.case == 'github-reference-combined')
+            assert ('AGENTS_SEPARATE_ROOT_POLICY' in context) == (args.case == 'github-reference-combined')
+            assert ('AGENTS_UPDATED_GITHUB_MARKER' in context) == (label == 'updated')
 
     def adapter(operation, workspace, expect=0):
         argv = [base/'agents', operation, '--vendor', 'copilot', '--root', workspace, '--experimental']
@@ -123,19 +139,43 @@ def main():
         adapter('import', source)
         core = (source/'.agents/AGENTS.md').read_text()
         expected_core = 'AGENTS_OTHER_INSTRUCTION_MARKER\n' if args.case == 'distinct' else 'Use the selected native profile.\n' if args.case == 'reference' else body
+        if github_reference:
+            expected_core = root_body if args.case == 'github-reference-combined' else 'Use the selected native profile.\n'
         assert core == expected_core
         if args.case in ('distinct', 'reference'):
             assert (source/'.agents/native/com.github.copilot/agent-instructions/AGENTS.md').read_text() == body
         shutil.copytree(source/'.agents', target/'.agents')
+        if args.case == 'github-reference':
+            (target/'AGENTS.md').symlink_to('.agents/AGENTS.md')
         result['plan'] = json.loads(adapter('plan', target)['stdout'])
         adapter('apply', target)
-        assert (target/'.github/copilot-instructions.md').read_text() == core
+        assert (target/'.github/copilot-instructions.md').read_text() == (body if github_reference else core)
         if args.case in ('distinct', 'reference'): assert (target/'AGENTS.md').read_text() == body
         native('relocated', target)
         adapter('import', target)
         assert (target/'.agents/AGENTS.md').read_text() == core
         if args.case in ('distinct', 'reference'):
             assert (target/'.agents/native/com.github.copilot/agent-instructions/AGENTS.md').read_text() == body
+        if github_reference:
+            native_source = target/'.agents/native/com.github.copilot/copilot-instructions.md'
+            assert native_source.read_text() == body
+            updated = body+'AGENTS_UPDATED_GITHUB_MARKER\n'
+            native_source.write_text(updated)
+            adapter('apply', target)
+            native('updated', target)
+            adapter('import', target)
+            assert native_source.read_text() == updated
+            assert (target/'.agents/AGENTS.md').read_text() == core
+            profile_path = target/'.agents/native/com.github.copilot/profile.json'
+            profile = json.loads(profile_path.read_text())
+            profile['artifacts'] = [a for a in profile['artifacts'] if a['kind'] != 'instructions']
+            profile_path.write_text(json.dumps(profile))
+            adapter('apply', target)
+            assert not (target/'.github/copilot-instructions.md').exists()
+            assert (target/'AGENTS.md').read_text() == core
+            native('removed', target)
+            assert (target/'.github/policy.md').read_text() == 'AGENTS_WRONG_REFERENCE_BASE\n'
+            result['update_and_removal_preserved'] = True
         result['roundtrip_preserved'] = True
         result['source_unchanged'] = all(sha(source/p) == digest for p, digest in before.items())
         result['authority_unchanged'] = authority == sha(home/'config.json')

@@ -20,6 +20,11 @@ def plain_terminal(raw):
     return re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', raw)
 
 
+def status_at_padding(raw, name, padding):
+    position = r'(?:\x1b\[\d+;' + str(padding + 1) + 'H|\r\n' + (' ' * padding) + ')'
+    return re.search(position + 'ODA_STATUS_' + name, raw) is not None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
@@ -30,7 +35,7 @@ def main():
     binary = Path(shutil.which('copilot'))
     assert sha(binary) == PINS['copilot'], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-native-preferences-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-native-preferences-'))
     home, workspace = root / 'home', root / 'workspace'
     for path in (home, workspace):
         path.mkdir(mode=0o700)
@@ -179,11 +184,7 @@ def main():
                 # Startup can produce event-driven calls. Require two later gaps
                 # close to the selected interval, with generous scheduler slack.
                 assert sum(interval * .65 <= gap <= interval * 1.5 for gap in phase['refresh_gaps']) >= 2, 'selected refresh interval not observed'
-                position = r'\x1b\[\d+;' + str(padding + 1) + 'H'
-                if padding == 0:
-                    # CRLF also puts the next printed character in column one.
-                    position = '(?:' + position + r'|\r\n)'
-                assert re.search(position + 'ODA_STATUS_' + name, phase['raw_output']), 'status output/padding not observed'
+                assert status_at_padding(phase['raw_output'], name, padding), 'status output/padding not observed'
             else:
                 assert event_path.read_bytes() == before_events, 'removed status command still executed'
                 assert 'ODA_STATUS_' not in phase['output'], 'removed status line still rendered'

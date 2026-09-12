@@ -44,7 +44,7 @@ def main():
     if output.exists():
         parser.error('use a new result directory')
     output.mkdir(parents=True)
-    base = Path(tempfile.mkdtemp(prefix='oda-copilot-native-', dir='/mnt/DATA/tmp'))
+    base = Path(tempfile.mkdtemp(prefix='oda-copilot-native-'))
     root, home, outside = (base / part for part in ['workspace', 'home', 'outside'])
     for path in [root, home, outside, root / 'readonly', root / 'private']:
         path.mkdir()

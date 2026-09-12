@@ -67,7 +67,7 @@ def main():
     binary = Path(shutil.which(args.vendor))
     assert sha(binary) == PINS[args.vendor], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-plugin-git-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-plugin-git-'))
     home, workspace, origin, git_root = [root / name for name in ['home', 'workspace', 'origin', 'git']]
     for path in [home, workspace, origin, git_root]:
         path.mkdir(mode=0o700)

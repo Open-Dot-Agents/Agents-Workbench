@@ -13,7 +13,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-from run_native_approvals import Client, PINS, sha
+from run_native_approvals import Client, PINS, sha, native_binary
 
 SERVER = r'''
 import json,os,pathlib,sys,time
@@ -44,11 +44,11 @@ def main():
  parser.add_argument('--scope',choices=['project','user'],required=True)
  parser.add_argument('--scenario',choices=['hover','timeout','delayed-hover'],default='hover')
  parser.add_argument('--output',type=Path,required=True)
- parser.add_argument('--binary',type=Path,default=Path('/home/maurizio/.local/bin/copilot'))
+ parser.add_argument('--binary',type=Path,default=native_binary('copilot'))
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
  assert sha(args.binary)==PINS['copilot'],'native binary pin mismatch'
- repo=Path(__file__).resolve().parents[2];root=Path(tempfile.mkdtemp(prefix='oda-native-lsp-',dir='/mnt/DATA/tmp'))
+ repo=Path(__file__).resolve().parents[2];root=Path(tempfile.mkdtemp(prefix='oda-native-lsp-'))
  canonical=root/'canonical';home=root/'home';native=home/'copilot';workspace=canonical if args.scope=='project' else root/'workspace'
  for path in [canonical,home,native,workspace]:path.mkdir(exist_ok=True)
  subprocess.run(['git','init','-q',str(workspace)],check=True)

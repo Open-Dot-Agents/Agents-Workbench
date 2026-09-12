@@ -30,7 +30,7 @@ def main():
     binary = Path(shutil.which(args.vendor))
     assert sha(binary) == PINS[args.vendor], 'native pin mismatch'
     repo = Path(__file__).resolve().parents[2]
-    root = Path(tempfile.mkdtemp(prefix='oda-plugin-selections-', dir='/mnt/DATA/tmp'))
+    root = Path(tempfile.mkdtemp(prefix='oda-plugin-selections-'))
     home, workspace, source, market = [root / name for name in ['home', 'workspace', 'source', 'market']]
     for path in [home, workspace, source, market]:
         path.mkdir(mode=0o700)
