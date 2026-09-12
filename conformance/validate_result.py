@@ -46,6 +46,24 @@ ACCEPTED_CREDENTIALS = {
 }
 
 
+def required_preflight_checks(harness: str, auth_mode: str) -> set[str]:
+    if harness not in REQUIRED_CREDENTIAL_CHECKS:
+        raise ValueError("preflight must identify a stable harness")
+    if auth_mode not in {"environment", "existing-login"}:
+        raise ValueError("invalid authMode")
+    if auth_mode == "existing-login" and harness not in {"codex", "copilot"}:
+        raise ValueError("existing-login is unavailable for this harness")
+    required = {
+        "preflight.agents.bin",
+        f"preflight.{harness}.installed",
+        f"preflight.{harness}.version",
+        f"preflight.{harness}.existing-login" if auth_mode == "existing-login" else REQUIRED_CREDENTIAL_CHECKS[harness],
+    }
+    if auth_mode == "existing-login" and harness == "codex":
+        required.add("preflight.codex.login-status")
+    return required
+
+
 def validate_adapter_semantics(result: dict[str, object]) -> None:
     if result.get("class") != "adapter" or not result.get("passed"):
         return
@@ -105,15 +123,7 @@ def validate_adapter_semantics(result: dict[str, object]) -> None:
         for item in checks
         if isinstance(item, dict) and item.get("passed") is True
     }
-    required_preflight = {
-        "preflight.agents.bin",
-        f"preflight.{harness}.installed",
-        f"preflight.{harness}.version",
-        f"preflight.{harness}.existing-login" if auth_mode == "existing-login" else REQUIRED_CREDENTIAL_CHECKS[harness],
-    }
-    if auth_mode == "existing-login" and harness == "codex":
-        required_preflight.add("preflight.codex.login-status")
-    required = set(required_preflight)
+    required = required_preflight_checks(harness, auth_mode)
     if run_mode == "native":
         transcripts = metadata.get("transcripts")
         if not isinstance(transcripts, list) or not transcripts:
