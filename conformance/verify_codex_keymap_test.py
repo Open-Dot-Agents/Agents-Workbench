@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-import json
+import tempfile
 import unittest
 
-from verify_codex_keymap import BASE,RECEIPTS,verify_record
+from verify_codex_keymap import verify_record
+from synthetic_verifier_fixtures import snapshot, keymap_record
 
 
 class EvidenceTests(unittest.TestCase):
-    path=BASE/RECEIPTS['user']
-    def record(self):return json.loads(self.path.read_text())
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.path = snapshot(directory.name)
+
+    def record(self):return keymap_record(self.path)
     def test_valid(self):verify_record(self.record(),self.path)
     def test_old_key_still_active(self):
         record=self.record();record['phases'][2]['keys'][1]['effect']=record['phases'][1]['keys'][1]['effect']

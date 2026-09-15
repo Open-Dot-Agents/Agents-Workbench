@@ -1,17 +1,30 @@
 #!/usr/bin/env python3
 import copy
 import json
+import tempfile
+from pathlib import Path
 import io
 from contextlib import redirect_stdout
 import unittest
 from unittest import mock
 
-from verify_copilot_local_network import RESULT, verify, verify_record
+from verify_copilot_local_network import verify, verify_record
+from synthetic_verifier_fixtures import local_network_record
 
 
 class EvidenceTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls): cls.record = json.loads(RESULT.read_text())
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        base = Path(directory.name)
+        self.record = local_network_record()
+        (base / 'result.json').write_text(json.dumps(self.record))
+        (base / 'settings.json').write_text(json.dumps({'sandbox': {'userPolicy': {
+            'network': {'allowOutbound': False, 'allowLocalNetwork': False}}}}))
+        for target, value in [('BASE', base), ('RESULT', base / 'result.json')]:
+            patch = mock.patch('verify_copilot_local_network.'+target, value)
+            patch.start()
+            self.addCleanup(patch.stop)
 
     def test_valid(self): verify_record(copy.deepcopy(self.record))
 

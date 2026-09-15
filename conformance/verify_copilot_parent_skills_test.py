@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
-import json
+import tempfile
+from unittest import mock
 import unittest
 
-from verify_copilot_parent_skills import RECEIPT,verify_record
+from verify_copilot_parent_skills import verify_record
+
+
+from synthetic_verifier_fixtures import snapshot, parent_skills_record
 
 
 class EvidenceTests(unittest.TestCase):
-    def record(self):return json.loads(RECEIPT.read_text())
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.path = snapshot(directory.name)
+        patch = mock.patch('verify_copilot_parent_skills.RECEIPT', self.path)
+        patch.start()
+        self.addCleanup(patch.stop)
+
+    def record(self):return parent_skills_record(self.path)
     def test_valid(self):verify_record(self.record())
     def test_child_capture_refused(self):
         record=self.record();record['child_did_not_capture_parent']=False

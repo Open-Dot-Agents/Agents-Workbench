@@ -1,30 +1,22 @@
 #!/usr/bin/env python3
 """Reject incomplete or contradictory native skill evidence."""
 import copy
-import hashlib
 import json
 import unittest
 
-from verify_copilot_skill_metadata import BASE, evaluate, filename
+from verify_copilot_skill_metadata import evaluate
+from synthetic_verifier_fixtures import skill_metadata_record
 
 
 class SkillEvidenceTest(unittest.TestCase):
-    def test_retained_refusal_regression(self):
-        path = BASE / 'copilot-skill-activation-refusal-before.json'
-        r = json.loads(path.read_text())
-        self.assertNotEqual(r['exit_code'], 0)
-        self.assertEqual(r['stdout'].count('ignored native skill was offered as applicable:'), 6)
-        self.assertEqual(r['test_sha256'], hashlib.sha256(path.with_suffix('.test.go').read_bytes()).hexdigest())
-
     def record(self, skill='allowed', trigger='model', interface='acp', decision='deny'):
-        case = ('project', 'controls', skill, trigger, interface, decision)
-        return json.loads((BASE / filename(case)).read_text())
+        return skill_metadata_record(skill, trigger, interface, decision)
 
     def rejects(self, record):
         with self.assertRaises((AssertionError, KeyError)):
             evaluate(record)
 
-    def test_real_allow_and_deny_controls(self):
+    def test_synthetic_allow_and_deny_controls(self):
         for interface, decision in [('acp', 'deny'), ('cli', 'deny'), ('tui', 'deny'), ('tui', 'allow')]:
             r = self.record(trigger='user' if interface == 'tui' else 'model', interface=interface, decision=decision)
             self.assertTrue(evaluate(r)['permission_observation_verified'])
@@ -81,8 +73,8 @@ class SkillEvidenceTest(unittest.TestCase):
         self.rejects(r)
 
     def test_refusal_requires_unchanged_files(self):
-        case = ('project', 'malformed', None, 'model', 'acp', 'deny')
-        r = json.loads((BASE / filename(case)).read_text())
+        r = skill_metadata_record(malformed=True)
+        evaluate(r)
         r['refusal_unchanged'] = False
         self.rejects(r)
 

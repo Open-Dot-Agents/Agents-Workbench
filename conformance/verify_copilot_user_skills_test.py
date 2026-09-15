@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Reject project fallback and uncorrelated user skill execution evidence."""
-import json
 import unittest
 
-from verify_copilot_skill_import import BASE, phase_check
+from verify_copilot_skill_import import phase_check
+from synthetic_verifier_fixtures import skill_phase
 
 
 class EvidenceTests(unittest.TestCase):
     def phase(self, index=1):
-        return json.loads((BASE/'copilot-user-skills-copilot-verified.json').read_text())['phases'][index]
+        return skill_phase(('source', 'relocated')[index], source='personal-copilot')
 
     def test_valid_user_phase(self):
         phase_check(self.phase(), source='personal-copilot')

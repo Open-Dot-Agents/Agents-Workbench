@@ -165,6 +165,11 @@ def filename(case):
 
 def verify():
     files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
+    before_path = BASE / 'copilot-skill-activation-refusal-before.json'
+    before = json.loads(before_path.read_text())
+    assert before['exit_code'] != 0
+    assert before['stdout'].count('ignored native skill was offered as applicable:') == 6
+    assert before['test_sha256'] == sha(before_path.with_suffix('.test.go'))
     receipts = []
     for case in matrix():
         path = BASE / filename(case)

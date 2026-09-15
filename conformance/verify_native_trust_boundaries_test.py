@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-import json
+import tempfile
 import unittest
-from verify_native_trust_boundaries import BASE,FILES,verify_record
+from verify_native_trust_boundaries import verify_record
+from synthetic_verifier_fixtures import snapshot, trust_record
 
 class EvidenceTests(unittest.TestCase):
     def record(self,case):
-        path=BASE/FILES[case];return path,json.loads(path.read_text())
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = snapshot(directory.name, case)
+        return path, trust_record(path, case)
     def test_valid_unattended(self):
         path,record=self.record('unattended');verify_record(record,path)
     def test_valid_composed(self):

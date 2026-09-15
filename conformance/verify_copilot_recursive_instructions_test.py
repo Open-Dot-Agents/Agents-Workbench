@@ -4,15 +4,15 @@ import copy
 import json
 import unittest
 
-from verify_copilot_recursive_instructions import BASE, check_phase, check_catalog
+from verify_copilot_recursive_instructions import check_phase, check_catalog
+from synthetic_verifier_fixtures import recursive_phase, instruction_read_permission, instruction_edit_permission
 from run_native_copilot_recursive_instructions import fixture_instruction_read
 from run_native_copilot_instruction_triggers import fixture_edit_allowed
 
 
 class RecursiveInstructionEvidenceTest(unittest.TestCase):
     def setUp(self):
-        record = json.loads((BASE / 'copilot-recursive-instructions-project-all-first.json').read_text())
-        self.phase = copy.deepcopy(record['phases'][1])
+        self.phase = recursive_phase()
 
     def test_correlated_record(self):
         check_phase(self.phase, True, True)
@@ -39,8 +39,7 @@ class RecursiveInstructionEvidenceTest(unittest.TestCase):
         with self.assertRaises(AssertionError): check_phase(self.phase, True, True)
 
     def test_catalog_is_not_the_body(self):
-        record = json.loads((BASE / 'copilot-recursive-instructions-project-catalog-first.json').read_text())
-        phase = record['phases'][1]
+        phase = recursive_phase(catalog=True)
         paths = ['.github/instructions/flat.instructions.md', '.github/instructions/nested/deep/fixture.instructions.md']
         check_catalog(phase, paths)
         check_phase(phase, True, True, paths)
@@ -48,10 +47,9 @@ class RecursiveInstructionEvidenceTest(unittest.TestCase):
         with self.assertRaises(AssertionError): check_catalog(phase, paths)
 
     def test_read_permission_is_bound_to_exact_fixture_files(self):
-        record = json.loads((BASE / 'copilot-recursive-instructions-user-catalog-allowed-first.json').read_text())
-        phase = record['phases'][0]
-        params = phase['approvals'][0]['params']
-        paths = {r['path'] for r in phase['catalog']}
+        params = instruction_read_permission()
+        phase = {'session': {'sessionId': params['sessionId']}}
+        paths = {params['toolCall']['rawInput']['path']}
         self.assertTrue(fixture_instruction_read(params, paths, phase['session']['sessionId']))
         for change in ('path', 'session', 'kind', 'extra'):
             altered = copy.deepcopy(params)
@@ -62,7 +60,7 @@ class RecursiveInstructionEvidenceTest(unittest.TestCase):
             self.assertFalse(fixture_instruction_read(altered, paths, phase['session']['sessionId']))
 
     def test_edit_permission_rejects_additional_changes(self):
-        record = json.loads((BASE / 'copilot-instruction-trigger-edit-allowed-first.json').read_text())
+        record = instruction_edit_permission()
         params = record['approvals'][0]['params']
         self.assertTrue(fixture_edit_allowed(params, record['file'], record['session']['sessionId']))
         params['toolCall']['rawInput']['diff'] += '\n+Unapproved change\n'

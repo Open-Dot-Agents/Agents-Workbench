@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Require native effects and unchanged shared package identity for import claims."""
-import json
 import unittest
 
-from verify_copilot_skill_import import BASE, package_check, phase_check
+from verify_copilot_skill_import import package_check, phase_check
+from synthetic_verifier_fixtures import package_record
 
 
 class EvidenceTests(unittest.TestCase):
     def record(self):
-        return json.loads((BASE/'copilot-project-skill-agents-user-instructions.json').read_text())
+        return package_record()
 
     def test_valid(self):
         r = self.record()

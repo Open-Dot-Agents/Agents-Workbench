@@ -13,6 +13,12 @@ sys.path.insert(0, str(ROOT / "conformance"))
 from evidence_state import assess_receipt, summarize_receipts
 
 
+def receipt_verifiers(directory):
+    """Select production verifiers, excluding their deterministic tests."""
+    return sorted(path for path in directory.glob("verify*.py")
+                  if not path.name.endswith("_test.py"))
+
+
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -99,7 +105,7 @@ class EvidenceStateTests(unittest.TestCase):
             re.compile(r"assert .*implementation_sha256.*==.*(?:files|implementation)"),
         )
         failures = []
-        for path in sorted((ROOT / "conformance").glob("verify*.py")):
+        for path in receipt_verifiers(ROOT / "conformance"):
             for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
                 if any(pattern.search(line) for pattern in prohibited):
                     failures.append(f"{path.name}:{number}: {line.strip()}")
@@ -176,13 +182,21 @@ class EvidenceStateTests(unittest.TestCase):
 
     def test_receipt_verifiers_report_current_eligibility(self):
         missing = []
-        for path in sorted((ROOT / "conformance").glob("verify*.py")):
+        for path in receipt_verifiers(ROOT / "conformance"):
             source = path.read_text(encoding="utf-8")
             if "runner_sha256" not in source:
                 continue
             if "summarize_receipts" not in source and "current_support_eligib" not in source and "current eligibility" not in source:
                 missing.append(path.name)
         self.assertEqual(missing, [])
+
+    def test_verifier_discovery_keeps_production_files(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            for name in ("verify.py", "verify_example.py", "verify_example_test.py", "synthetic_fixtures.py"):
+                (directory / name).write_text("", encoding="utf-8")
+            self.assertEqual([path.name for path in receipt_verifiers(directory)],
+                             ["verify.py", "verify_example.py"])
 
 
 if __name__ == "__main__":

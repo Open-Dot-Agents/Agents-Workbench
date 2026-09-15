@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
 """Reject stale or uncorrelated settings lifecycle evidence."""
-import json
+import tempfile
+from unittest import mock
 import unittest
 
 from run_native_copilot_preferences import status_at_padding
-from verify_copilot_settings import RECEIPT, verify_record
+from verify_copilot_settings import verify_record
+
+
+from synthetic_verifier_fixtures import snapshot, settings_record
 
 
 class EvidenceTests(unittest.TestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.path = snapshot(directory.name)
+        patch = mock.patch('verify_copilot_settings.RECEIPT', self.path)
+        patch.start()
+        self.addCleanup(patch.stop)
+
     def record(self):
-        return json.loads(RECEIPT.read_text())
+        return settings_record(self.path)
 
     def test_valid_receipt(self):
         verify_record(self.record())
