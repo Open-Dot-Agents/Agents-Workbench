@@ -39,7 +39,11 @@ class SecurityDraftTest(unittest.TestCase):
                 self.assertEqual(result.returncode == 0, case['valid'], result.stderr)
                 payload = json.loads(result.stdout)
                 self.assertEqual(payload['passed'], case['valid'])
-                directory = '1.1-draft' if payload['schemaVersion'] == '1.1.0-draft.1' else '1.0'
+                directory = {
+                    '1.0.0': '1.0',
+                    '1.1.0-draft.1': '1.1-draft',
+                    '1.1.0-draft.2': '1.1-draft.2',
+                }[payload['schemaVersion']]
                 schema = json.loads((ROOT / 'SPEC/spec' / directory / 'schemas/conformance-result.schema.json').read_text())
                 Draft202012Validator(schema).validate(payload)
 

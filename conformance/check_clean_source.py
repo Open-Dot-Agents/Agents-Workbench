@@ -49,7 +49,7 @@ def main():
             ('SPEC', [sys.executable, 'conformance/security_draft.py']),
             ('SPEC', [sys.executable, 'conformance/native_draft.py']),
             ('CLI', ['go', 'test', './...']),
-            ('CLI', ['go', 'run', './cmd/agents', 'validate', '--root', '..', '--format', 'json']),
+            ('CLI', ['go', 'run', './cmd/agents', 'validate', '--experimental', '--root', '..', '--format', 'json']),
             ('', [sys.executable, 'CLI/scripts/native_coverage_test.py']),
             ('', [sys.executable, 'CLI/scripts/check_compatibility.py']),
             ('WORKBENCH', [sys.executable, '-m', 'unittest', 'discover', '-s', 'task/test', '-p', '*_test.py']),
