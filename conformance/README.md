@@ -261,3 +261,84 @@ absence alone are insufficient. A nonzero result can mean a policy mismatch
 or missing evidence; inspect `status` and `assessment_complete`. These tests
 are not a runtime launcher installed by the reference CLI. See
 [the assessment](../evidence/ISOLATION_APPROVALS.md).
+
+## Development workflow regression
+
+Run this campaign from the superproject root. It uses the Codex and Copilot
+executables currently installed on `PATH`. To select a specific installed
+executable, set `CODEX_BIN` or `COPILOT_BIN` to its absolute path.
+At startup, the runner copies each executable into a private directory. It
+checks the source and copy hashes before execution, then records the exact
+version and SHA-256 hash. Preview versions such as `1.0.84-9` are accepted.
+Each session must use the same private copy. Copilot auto-update is disabled
+for that copy. The runner does not install, upgrade, or downgrade a harness.
+
+```sh
+(cd CLI && GOCACHE=/tmp/agents-gocache GOPATH=/tmp/agents-gopath GOFLAGS= \
+  go build -trimpath -buildvcs=false -o /tmp/agents-workflow ./cmd/agents)
+python3 WORKBENCH/conformance/probe_development.py \
+  --vendor all --agents-cli /tmp/agents-workflow \
+  --output /tmp/agents-development-workflows.json
+python3 WORKBENCH/conformance/verify_development.py \
+  /tmp/agents-development-workflows.json --require-current
+```
+
+`--vendor codex` and `--vendor copilot` select one harness. The output path
+must be new. The earlier `probe_development_codex.py` command is unchanged.
+The supplied CLI must match a fresh build with the flags shown above. The
+runner also executes the clean-source gate. It uses disposable Git projects,
+native homes, dummy protected data, and a local model server. It needs local
+sockets, the installed executables, Python, Git, and the Go toolchain. It copies no
+account credentials and changes no real user configuration. Native trust is
+set only for the disposable projects in their disposable native homes.
+The fixture retains an existing Codex command rule and Copilot saved
+permissions. It compares their bytes before and after each adapter command.
+This proves preservation by the adapter, not native activation of each grant.
+User-scope checks compare all selected user files around each project command.
+Native sessions capture configuration before and after execution separately:
+Copilot can migrate settings into its managed state file. These native changes
+are retained as observations and are not attributed to adapter commands.
+The Copilot fixture uses the documented
+[saved-permissions file](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference#permissions-configjson).
+
+The shared cases cover creation, adoption, update, repeated apply, conflict,
+removal, rollback, project/user interaction, and relocation of canonical
+content. Adoption preserves the canonical `AGENTS.md` link and emits Copilot
+development guidance in a separate native instruction file.
+Each phase starts a new native process. Copilot tests instruction
+composition and removal; they do not claim model-setting precedence. Codex
+also tests legacy migration, edits, tests, builds, formatting, local commits,
+submodule commits, existing and future protected paths, aliases, local
+network denial, and a read-only session override. The rollback fixture uses
+an internal Go test hook; the public CLI has no failure-injection option.
+
+Codex can leave an empty read-only placeholder for a protected path that did
+not exist. The future-path case records its type, mode, and size. After the
+native process closes, the fixture replaces only that empty regular file with
+dummy data, then starts a new session to test denial. It refuses to replace
+nonempty files, directories, symlinks, or hard links. This fixture step does
+not remove the native side effect or change the permission policy.
+
+Exit status is `0` for a current passing campaign, `1` for failed checks, and
+`2` for an unavailable prerequisite. Each case has a separate result.
+Failures take precedence when failures and unavailable prerequisites coexist.
+Inspect the receipt for the failure or prerequisite reason. A host that cannot create
+local sockets cannot run this campaign. Change the test execution context;
+the runner does not change host permissions.
+
+Keep the JSON receipt, its `.runner.py` file, and its `.artifacts` directory
+together. They contain source snapshots and hashes, disposable configuration,
+native request/event records, observed effects, and clean-source results.
+The verifier uses the shared evidence integrity checks. It checks every
+required phase and compares the complete source inventory with current files.
+Old evidence can retain valid historical integrity without qualifying the
+current implementation. Results apply only to the recorded native versions
+and hashes; they do not qualify later system updates. Synthetic tests never
+qualify as native evidence.
+
+Push, script deletion, and history rewrite cases are observations of
+guidance-only decisions. The local fixture model deliberately emits those
+commands to expose native limits. All remotes and files are disposable.
+These cases never count as enforced operation approval. A passing campaign
+does not establish complete adapter conformance or strict-policy support.
+The practical preset remains project-scoped. Publication is a separate step.
