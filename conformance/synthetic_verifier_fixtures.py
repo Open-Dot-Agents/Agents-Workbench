@@ -26,7 +26,7 @@ def snapshot(directory, name='synthetic'):
 
 def base_record(path, vendor='copilot'):
     return {'synthetic': True, 'passed': True, 'full_adapter_support': False,
-            'fixture': FIXTURE, 'native_version': '0.154.0' if vendor == 'codex' else '1.0.83',
+            'fixture': FIXTURE, 'native_version': '0.154.0' if vendor == 'codex' else '1.0.84-9',
             'native_sha256': PINS[vendor],
             'runner_sha256': hashlib.sha256(path.with_suffix('.runner.py').read_bytes()).hexdigest()}
 
@@ -74,7 +74,7 @@ def settings_record(path):
         if name != 'removed':
             phase['status_events'] = [{'phase': name, 'recorded_at': n*2,
                 'value': {'session_id': 'synthetic-'+name, 'cwd': FIXTURE+'/workspace',
-                          'version': '1.0.83', 'model': {'id': 'fixture-model'}}} for n in range(3)]
+                          'version': '1.0.84-9', 'model': {'id': 'fixture-model'}}} for n in range(3)]
             phase['refresh_gaps'] = [2, 2]
         record['phases'].append(phase)
     return record
@@ -242,7 +242,7 @@ def public_mcp_records(path, root):
         completion={'params': {'threadId': 'synthetic-thread', 'turn': {'status': 'completed'}, 'output': 'AGENTS_PUBLIC_GITHUB_READY'}},
         approvals=[], provider_errors=[], events=[])
     copilot = copy.deepcopy(native)
-    copilot.update(native_version='1.0.83', native_sha256=PINS['copilot'],
+    copilot.update(native_version='1.0.84-9', native_sha256=PINS['copilot'],
         source_transformations=copy.deepcopy(provenance['transformations']),
         plugin_list={'stdout': 'github@agents-public-github'},
         model_requests=[{'tools': [{'type': 'function', 'function': {'name': 'github-'+n, 'parameters': {}}} for n in names]}],
@@ -277,7 +277,7 @@ def skill_metadata_record(skill='allowed', trigger='model', interface='acp', dec
         'requests': [{'messages': [{'role': 'system', 'content': ' '.join('AGENTS_SKILL_DESCRIPTION_'+n for n in visible)},
                                   {'role': 'user', 'content': 'synthetic-nonce'}], 'tools': []}],
         'catalog_descriptions': {n: n in visible for n in names},
-        'native_events': [{'type': 'session.start', 'data': {'sessionId': 'synthetic-session', 'copilotVersion': '1.0.83', 'context': {'cwd': FIXTURE+'/workspace'}}},
+        'native_events': [{'type': 'session.start', 'data': {'sessionId': 'synthetic-session', 'copilotVersion': '1.0.84-9', 'context': {'cwd': FIXTURE+'/workspace'}}},
                           {'type': 'user.message', 'data': {'content': 'synthetic-nonce', 'turnId': 'synthetic-turn'}},
                           {'type': 'assistant.turn_end', 'data': {'turnId': 'synthetic-turn'}}],
         'discovery': [{'name': 'fixture-'+n, 'source': 'project', 'enabled': True} for n in names],
