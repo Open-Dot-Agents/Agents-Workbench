@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Observe safe-command approval under trust-derived Codex policy."""
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path

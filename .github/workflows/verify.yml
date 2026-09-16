@@ -35,6 +35,11 @@ jobs:
           python-version: '3.14'
       - name: Install evidence validator
         run: python3 -m pip install -r monorepo/WORKBENCH/conformance/requirements.txt
+      - name: Lint Python scripts
+        working-directory: monorepo/WORKBENCH
+        run: |
+          python3 -m pip install ruff==0.16.8
+          python3 -m ruff check conformance
       - name: Check compatibility including Workbench pins
         run: python3 CLI/scripts/check_compatibility.py
         working-directory: monorepo

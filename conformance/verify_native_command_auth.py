@@ -23,7 +23,6 @@ def model_requests(phase):
 
 
 def verify(evidence_suffix='project-skills-final'):
-    files = {str(p.relative_to(ROOT / 'CLI')): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
     turns = 0
     eligibility = []
     for case in (*SUCCESSES, *FAILURES):

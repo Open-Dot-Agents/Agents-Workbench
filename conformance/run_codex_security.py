@@ -5,7 +5,6 @@ No model or account is used. Trust is created only in an isolated test home.
 Native commands use the exact invocation and replacement environment from plan.
 """
 import argparse
-import hashlib
 import ipaddress
 import json
 import os
@@ -17,7 +16,7 @@ import sys
 import time
 import tempfile
 
-from run_security import REPO, digest, run, version_matches
+from run_security import REPO, digest, run
 
 
 def snapshot(root):

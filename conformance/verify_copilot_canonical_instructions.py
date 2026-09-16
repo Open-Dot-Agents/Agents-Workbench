@@ -31,7 +31,6 @@ def verify():
     ]
     for source in sources:
         assert hashlib.sha256(source['body'].encode()).hexdigest() == source['sha256']
-    implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     receipts=[]
     for case in ('link-only', 'link-distinct'):
         path = BASE/f'copilot-canonical-instructions-{case}-user-instructions.json'

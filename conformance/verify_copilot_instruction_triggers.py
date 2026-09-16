@@ -2,7 +2,6 @@
 """Verify that the earlier automatic-injection expectation was incorrect."""
 import json
 import hashlib
-from pathlib import Path
 
 from evidence_state import summarize_receipts
 from verify_copilot_recursive_instructions import BASE, PIN, ROOT, sha

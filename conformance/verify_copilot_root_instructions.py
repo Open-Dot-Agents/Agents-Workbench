@@ -44,7 +44,6 @@ def check_phase(phase, case):
 
 
 def verify():
-    implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     receipts = []
     for case in ('root', 'identical', 'distinct', 'reference'):
         suffix = 'github-reference-final' if case == 'identical' else 'github-reference-retry'
