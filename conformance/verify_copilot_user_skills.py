@@ -7,7 +7,6 @@ from verify_copilot_skill_import import ROOT, BASE, PIN, sha, phase_check
 
 
 def verify():
-    implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     sessions = set()
     receipts = []
     for origin in ('copilot', 'agents'):

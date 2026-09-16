@@ -89,7 +89,6 @@ def run_cache_scenario(args, output, snapshot):
   finally:
    client.close();http.shutdown();http.server_close()
 
- client=None
  try:
   assert imported.returncode==0 and applied.returncode==0,'import or projection failed'
   assert sha(native/'config.json')==state_hash,'apply changed native trust state'

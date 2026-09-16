@@ -164,7 +164,6 @@ def filename(case):
 
 
 def verify():
-    files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
     before_path = BASE / 'copilot-skill-activation-refusal-before.json'
     before = json.loads(before_path.read_text())
     assert before['exit_code'] != 0

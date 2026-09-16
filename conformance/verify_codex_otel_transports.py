@@ -30,7 +30,6 @@ def attrs(record):
 
 
 def verify(evidence_suffix='project-skills-final'):
-    files = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT / 'CLI/internal/config').glob('*.go')}
     eligibility = []
     for name, settings in CASES.items():
         path = BASE / ('codex-otel-' + name + '-' + evidence_suffix + '.json')

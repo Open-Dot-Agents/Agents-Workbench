@@ -38,7 +38,6 @@ def check_phase(phase):
 
 
 def verify():
-    implementation = {str(p.relative_to(ROOT)):sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     sources = json.loads((BASE/'copilot-user-instructions.sources.json').read_text())['sources']
     for source in sources: assert hashlib.sha256(source['body'].encode()).hexdigest()==source['sha256']
     assert '$HOME/.copilot/copilot-instructions.md' in sources[1]['body']

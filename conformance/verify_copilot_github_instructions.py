@@ -8,7 +8,6 @@ from run_native_approvals import PINS, sha
 
 
 def verify():
-    implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     sessions = set()
     receipts = []
     for case, name in [('github-reference', 'link'), ('github-reference-regular', 'regular'),

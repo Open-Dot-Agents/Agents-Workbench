@@ -45,7 +45,6 @@ def check_phase(phase, result):
 
 
 def verify():
-    implementation = {str(p.relative_to(ROOT)): sha(p) for p in (ROOT/'CLI/internal/config').glob('*.go')}
     receipts=[]
     for case, cwd, label in CASES:
         path = BASE/f'copilot-agent-instructions-{label}-user-instructions.json'

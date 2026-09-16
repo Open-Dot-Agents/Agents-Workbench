@@ -7,7 +7,6 @@ from pathlib import Path
 import subprocess
 import urllib.error
 import urllib.request
-import uuid
 
 
 def redact_credential_result(result, token):
