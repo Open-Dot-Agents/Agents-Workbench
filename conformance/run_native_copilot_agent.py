@@ -14,7 +14,7 @@ from run_native_approvals import Client, PINS, sha, native_binary
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  parser.add_argument('--scope',choices=['project','user'],required=True)
- parser.add_argument('--scenario',choices=['execution','no-infer','tool-string','tool-none','model-override'],default='execution')
+ parser.add_argument('--scenario',choices=['execution','no-infer','tool-string','tool-none','model-override','reasoning-effort'],default='execution')
  parser.add_argument('--filename',choices=['oda-fixture.agent.md','oda-fixture.md'],default='oda-fixture.agent.md')
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
@@ -31,9 +31,12 @@ def main():
  tools='bash' if args.scenario=='tool-string' else '[]' if args.scenario=='tool-none' else '[bash]'
  # model-override uses a distinct session default and agent-declared model so a
  # captured request can attribute its `model` value to the session or the child.
- agent_model='oda-subagent-model' if args.scenario=='model-override' else 'fixture-model'
+ # reasoning-effort uses a harness-recognized reasoning model name (gpt-5) so the
+ # native binary transmits a `reasoning_effort` request field at all.
+ agent_model='oda-subagent-model' if args.scenario=='model-override' else 'gpt-5' if args.scenario=='reasoning-effort' else 'fixture-model'
  session_model='oda-session-model' if args.scenario=='model-override' else 'fixture-model'
- configuration=f'---\nname: ODA Fixture\ndescription: Native fixture agent\ntools: {tools}\nmodel: {agent_model}\nreasoningEffort: low\n'
+ declared_reasoning_effort='high' if args.scenario=='reasoning-effort' else 'low'
+ configuration=f'---\nname: ODA Fixture\ndescription: Native fixture agent\ntools: {tools}\nmodel: {agent_model}\nreasoningEffort: {declared_reasoning_effort}\n'
  if args.scenario=='no-infer':configuration+='infer: false\n'
  configuration+='---\nODA_CHILD_DEVELOPER_MARKER\nUse the isolated fixture command.\n'
  (directory/'fixture.md').write_text(configuration);(native/'settings.json').write_text('{"theme":"dark"}\n')
@@ -100,6 +103,15 @@ def main():
     assert requests[0]['model']==session_model,'parent turn did not use the session default model'
     assert requests[1]['model']==agent_model,'child turn did not honor the agent frontmatter model override'
     result['model_override']={'session_model':session_model,'agent_model':agent_model,'parent_request_model':requests[0]['model'],'child_request_model':requests[1]['model']}
+   if args.scenario=='reasoning-effort':
+    # Negative-result fixture: with a harness-recognized reasoning model (gpt-5)
+    # and a declared `reasoningEffort: high`, the native binary is expected to
+    # NOT honor the declared value. It transmits a fixed default instead. This
+    # fixture pins that observed default so a future native fix (transmitting
+    # 'high') is caught as a fixture failure requiring re-audit, not silence.
+    transmitted=requests[1].get('reasoning_effort')
+    assert transmitted=='medium','declared reasoningEffort now appears honored (transmitted='+repr(transmitted)+'); re-audit the reasoningEffort field disposition'
+    result['reasoning_effort_probe']={'agent_model':agent_model,'declared_reasoning_effort':declared_reasoning_effort,'transmitted_reasoning_effort':transmitted}
   result['passed']=True
  except Exception as error:result.update(passed=False,error=str(error))
  finally:
