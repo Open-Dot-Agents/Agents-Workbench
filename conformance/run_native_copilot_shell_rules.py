@@ -70,7 +70,7 @@ def main():
    data=json.dumps(response).encode();self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
  http=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=http.serve_forever,daemon=True).start();env['COPILOT_PROVIDER_BASE_URL']=f'http://127.0.0.1:{http.server_port}/v1'
  common=[str(binary),'--disable-builtin-mcps','--no-auto-update','--no-remote','--no-remote-export','--no-bash-env','--no-custom-instructions',*(['--allow-all-paths'] if args.paths=='all' else ['--add-dir','/usr/bin'] if args.paths=='executable' else []),'--log-level','debug',*flags]
- result={'fixture':str(root),'case':vars(args)|{'output':str(output)},'native_version':'1.0.83','native_sha256':sha(binary),'runner_sha256':sha(__file__),'helper_sha256':sha(Path(__file__).with_name('run_native_approvals.py')),'operation':operation,'probe_sha256':sha(probe),'full_adapter_support':False,'portable_security_projection_tested':False};client=None
+ result={'fixture':str(root),'case':vars(args)|{'output':str(output)},'native_version':'1.0.84-9','native_sha256':sha(binary),'runner_sha256':sha(__file__),'helper_sha256':sha(Path(__file__).with_name('run_native_approvals.py')),'operation':operation,'probe_sha256':sha(probe),'full_adapter_support':False,'portable_security_projection_tested':False};client=None
  try:
   if args.interface=='prompt':
    command=common+['--output-format','json','--stream','off','-p','Run the isolated shell-rule fixture once.'];result['command']=command

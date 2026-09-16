@@ -38,7 +38,7 @@ def verify():
         receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and r['case'] == case
-        assert r['native_version'] == '1.0.83' and r['native_sha256'] == PINS['copilot']
+        assert r['native_version'] == '1.0.84-9' and r['native_sha256'] == PINS['copilot']
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert r['source_unchanged'] and r['authority_unchanged'] and r['source_link_preserved'] and r['roundtrip_preserved']
         assert [p['label'] for p in r['phases']] == ['source', 'relocated', 'updated']

@@ -33,7 +33,7 @@ def main():
     (workspace / '.agents/AGENTS.md').write_text('Use isolated fixture data.\n')
     (workspace / '.agents/manifest.json').write_text(json.dumps({'version': '1.1.0-draft.2', 'profiles': ['native']}))
     (directory / 'profile.json').write_text(json.dumps({
-        'namespace': 'com.github.copilot', 'harness_version': '=1.0.83', 'scope': 'user', 'required': True,
+        'namespace': 'com.github.copilot', 'harness_version': '=1.0.84-9', 'scope': 'user', 'required': True,
         'artifacts': [{'kind': 'config', 'source': 'settings.json'},
                       {'kind': 'agent', 'source': 'fixture.md', 'name': 'oda-fixture.agent.md'}]}))
     # An agent name is a native selector. It is not a portable model identity.
@@ -55,7 +55,7 @@ def main():
            'COPILOT_CACHE_HOME': str(root / 'cache'), 'XDG_STATE_HOME': str(root / 'state'),
            'COPILOT_OFFLINE': 'true', 'COPILOT_PROVIDER_TYPE': 'openai',
            'COPILOT_PROVIDER_WIRE_API': 'completions', 'COPILOT_MODEL': 'gpt-5.4'}
-    result = {'case': args.case, 'fixture': str(root), 'native_version': '1.0.83', 'native_sha256': sha(binary),
+    result = {'case': args.case, 'fixture': str(root), 'native_version': '1.0.84-9', 'native_sha256': sha(binary),
               'runner_sha256': sha(__file__), 'helper_sha256': {'run_native_approvals.py': sha(Path(__file__).with_name('run_native_approvals.py'))},
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},
               'configuration': settings, 'agent_source': agent, 'environment': env,

@@ -76,7 +76,7 @@ def main():
            'XDG_STATE_HOME': str(root / 'state'), 'GIT_CONFIG_NOSYSTEM': '1',
            'GIT_TERMINAL_PROMPT': '0'}
     result = {'vendor': args.vendor, 'scope': args.scope, 'fixture': str(root),
-              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.83',
+              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'implementation_sha256': {str(p.relative_to(repo)): sha(p)
                   for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},

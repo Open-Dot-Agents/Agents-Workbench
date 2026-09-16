@@ -19,7 +19,7 @@ def verify():
         path = BASE / f'copilot-instruction-trigger-{name}-first.json'
         receipts.append(path)
         r = json.loads(path.read_text())
-        assert r['native_version'] == '1.0.83' and r['native_sha256'] == PIN
+        assert r['native_version'] == '1.0.84-9' and r['native_sha256'] == PIN
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert not r['adapter_invoked'] and not r['full_adapter_support'] and r['pattern'] == pattern
         assert r['requests'] and r['turns']
@@ -40,7 +40,7 @@ def verify():
                 assert f"| {pattern} | '.github/instructions/{file}' |  |" in initial
         events = r['native_events']
         assert any(e['type'] == 'session.start' and e['data']['sessionId'] == r['session']['sessionId']
-                   and e['data']['copilotVersion'] == '1.0.83' for e in events)
+                   and e['data']['copilotVersion'] == '1.0.84-9' for e in events)
         assert sum(e['type'] == 'assistant.turn_end' for e in events) == len(r['requests'])
         user_messages = [e['data'] for e in events if e['type'] == 'user.message']
         assert len(user_messages) == len(r['turns'])

@@ -50,7 +50,7 @@ def evaluate(record):
                                                for name in record['sources']}
     events = record['native_events']
     starts = [e['data'] for e in events if e['type'] == 'session.start']
-    assert len(starts) == 1 and starts[0]['copilotVersion'] == '1.0.83'
+    assert len(starts) == 1 and starts[0]['copilotVersion'] == '1.0.84-9'
     assert starts[0]['context']['cwd'] == record['fixture']+'/workspace'
     users = [e['data'] for e in events if e['type'] == 'user.message' and record['nonce'] in e['data'].get('content', '')]
     assert len(users) == 1
@@ -176,7 +176,7 @@ def verify():
         receipts.append(path)
         record = json.loads(path.read_text())
         assert tuple(record[k] for k in ('scope', 'cases', 'invoked_skill', 'trigger', 'interface', 'decision')) == case
-        assert record['passed'] and record['native_version'] == '1.0.83' and record['native_sha256'] == PIN
+        assert record['passed'] and record['native_version'] == '1.0.84-9' and record['native_sha256'] == PIN
         assert record['grant'] == '*' and record['command_style'] == 'builtin'
         assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert record['verifier_sha256'] == sha(path.with_suffix('.verifier.py'))

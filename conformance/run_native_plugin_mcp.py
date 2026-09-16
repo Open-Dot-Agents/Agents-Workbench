@@ -119,7 +119,7 @@ def main():
            'COPILOT_OFFLINE': 'true', 'COPILOT_PROVIDER_TYPE': 'openai', 'COPILOT_PROVIDER_WIRE_API': 'completions',
            'COPILOT_MODEL': 'fixture-model', 'ODA_AMBIENT': 'MUST_NOT_EXPAND'}
     result = {'vendor': args.vendor, 'scope': args.scope, 'native_approval': args.native_approval, 'decision': args.decision, 'fixture': str(root), 'native_sha256': sha(binary),
-              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.83', 'runner_sha256': sha(__file__),
+              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.84-9', 'runner_sha256': sha(__file__),
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},
               'helper_sha256': {name: sha(Path(__file__).with_name(name)) for name in ['run_native_approvals.py', 'run_native_codex_hooks.py']},
               'commands': [], 'model_requests': [], 'sessions': [], 'package_hashes': package_hashes,

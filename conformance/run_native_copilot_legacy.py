@@ -46,7 +46,7 @@ def main():
     (target / 'config.json').write_text(json.dumps(state))
     (target / 'config.json').chmod(0o600)
     cli = root / 'agents'
-    result = {'case': args.case, 'fixture': str(root), 'native_version': '1.0.83', 'native_sha256': sha(binary),
+    result = {'case': args.case, 'fixture': str(root), 'native_version': '1.0.84-9', 'native_sha256': sha(binary),
               'runner_sha256': sha(__file__), 'helper_sha256': {'run_native_approvals.py': sha(Path(__file__).with_name('run_native_approvals.py'))},
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},
               'initial_legacy': legacy, 'initial_modern': modern, 'commands': [], 'full_adapter_support': False,

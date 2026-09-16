@@ -34,7 +34,7 @@ def main():
     args = parser.parse_args()
     binary = shutil.which('copilot')
     if platform.system() != 'Linux' or not binary or sha(binary) != PIN:
-        parser.error('requires the recorded Copilot 1.0.83 Linux binary')
+        parser.error('requires the recorded Copilot 1.0.84-9 Linux binary')
     if not args.slirp4netns.is_file() or not os.access(args.slirp4netns, os.X_OK):
         parser.error('slirp4netns must be an executable file')
     token = os.environ.get('COPILOT_GITHUB_TOKEN')

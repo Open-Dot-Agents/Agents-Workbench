@@ -53,7 +53,7 @@ def main():
   target.parent.mkdir(parents=True,exist_ok=True);target.write_text(configuration)
   apply=subprocess.CompletedProcess(command,0,'Direct native fixture; adapter not tested.','')
  else:apply=subprocess.run(command,env=env,capture_output=True,text=True)
- result={'scope':args.scope,'direct':args.direct,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.83','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'configuration':configuration,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))},'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py')}
+ result={'scope':args.scope,'direct':args.direct,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.84-9','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'configuration':configuration,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))},'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py')}
  if imported:result['import']={'exit':imported.returncode,'stdout':imported.stdout,'stderr':imported.stderr}
  result['mcp_helper_sha256']=sha(repo/'WORKBENCH/conformance/run_native_copilot_mcp.py')
  requests=[];fixture_type=[]

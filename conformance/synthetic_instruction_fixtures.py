@@ -16,7 +16,7 @@ def instruction_phase(markers, label='source'):
         ],
         'native_events': [
             {'type': 'session.start', 'data': {'sessionId': session,
-                'copilotVersion': '1.0.83', 'context': {'cwd': workspace}}},
+                'copilotVersion': '1.0.84-9', 'context': {'cwd': workspace}}},
             {'type': 'user.message', 'data': {'content': 'synthetic-nonce'}},
             {'type': 'tool.execution_start', 'data': {'toolName': 'view',
                 'toolCallId': 'synthetic-read', 'arguments': {'path': workspace+'/fixture.txt'}}},

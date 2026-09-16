@@ -37,7 +37,7 @@ class EvidenceTests(unittest.TestCase):
         return {
             'vendor': vendor, 'fixture': fixture, 'passed': True, 'full_adapter_support': False,
             'provider_errors': [], 'native_sha256': PINS[vendor],
-            'native_version': '0.154.0' if vendor == 'codex' else '1.0.83',
+            'native_version': '0.154.0' if vendor == 'codex' else '1.0.84-9',
             'runner_sha256': sha(self.path.with_suffix('.runner.py')),
             'global_plan': {'applicable': True, 'native': {'scope': 'user'}},
             'project_plan': {'applicable': True, 'native': {'scope': 'project', 'global_source': fixture+'/home/.agents'}},

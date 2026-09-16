@@ -15,7 +15,7 @@ def verify_record(record, path):
     vendor = record['vendor']
     assert record['passed'] and not record['full_adapter_support'] and not record['provider_errors']
     assert record['native_sha256'] == PINS[vendor]
-    assert record['native_version'] == ('0.154.0' if vendor == 'codex' else '1.0.83')
+    assert record['native_version'] == ('0.154.0' if vendor == 'codex' else '1.0.84-9')
     assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
     assert record['global_plan']['applicable'] and record['global_plan']['native']['scope'] == 'user'
     assert record['project_plan']['applicable'] and record['project_plan']['native']['scope'] == 'project'

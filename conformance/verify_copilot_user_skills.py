@@ -15,7 +15,7 @@ def verify():
         receipts.append(path)
         result = json.loads(path.read_text())
         assert result['passed'] and result['origin'] == origin and result['scope'] == 'user'
-        assert result['native_version'] == '1.0.83' and result['native_sha256'] == PIN
+        assert result['native_version'] == '1.0.84-9' and result['native_sha256'] == PIN
         assert not result['full_adapter_support']
         assert result['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert result['source_unchanged'] and result['source_modes_preserved'] and result['source_inodes_preserved']

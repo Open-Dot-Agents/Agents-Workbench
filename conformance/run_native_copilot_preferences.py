@@ -51,7 +51,7 @@ def main():
            'COPILOT_PROVIDER_BASE_URL': 'http://127.0.0.1:9/v1',
            'COPILOT_MODEL': 'fixture-model', 'TERM': 'xterm-256color'}
     cli = root / 'agents'
-    result = {'fixture': str(root), 'native_version': '1.0.83', 'native_sha256': sha(binary),
+    result = {'fixture': str(root), 'native_version': '1.0.84-9', 'native_sha256': sha(binary),
               'runner_sha256': sha(__file__),
               'helper_sha256': {'run_native_approvals.py': sha(Path(__file__).with_name('run_native_approvals.py'))},
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},
@@ -128,7 +128,7 @@ def main():
         (workspace / '.agents/manifest.json').write_text(json.dumps({'version': '1.1.0-draft.2', 'profiles': ['native']}))
         (workspace / '.agents/AGENTS.md').write_text('Use this isolated fixture.\n')
         (canonical_dir / 'profile.json').write_text(json.dumps({
-            'namespace': 'com.github.copilot', 'harness_version': '=1.0.83', 'scope': 'user',
+            'namespace': 'com.github.copilot', 'harness_version': '=1.0.84-9', 'scope': 'user',
             'required': True, 'artifacts': [{'kind': 'config', 'source': 'settings.json'}]}))
         preferences_path = canonical_dir / 'settings.json'
         event_path = root / 'status-events.jsonl'
@@ -177,7 +177,7 @@ def main():
                 assert len(phase['status_events']) >= 3, 'status timer did not repeat'
                 session_ids = {e['value']['session_id'] for e in phase['status_events']}
                 assert len(session_ids) == 1, 'status calls came from different sessions'
-                assert all(e['value']['cwd'] == str(workspace) and e['value']['version'] == '1.0.83'
+                assert all(e['value']['cwd'] == str(workspace) and e['value']['version'] == '1.0.84-9'
                            and e['value']['model']['id'] == 'fixture-model' for e in phase['status_events']), 'native status input mismatch'
                 times = [e['recorded_at'] for e in phase['status_events']]
                 phase['refresh_gaps'] = [b - a for a, b in zip(times, times[1:])]

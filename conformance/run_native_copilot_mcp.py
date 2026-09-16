@@ -80,7 +80,7 @@ def main():
  if args.scope=='user':command+=['--native-home',str(native)]
  applied=subprocess.run(command,env=env,capture_output=True,text=True)
  def result_of(run):return {'exit':run.returncode,'stdout':run.stdout,'stderr':run.stderr}
- result={'scope':args.scope,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.83','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':config,'import':result_of(imported),'apply':result_of(applied),'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
+ result={'scope':args.scope,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.84-9','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':config,'import':result_of(imported),'apply':result_of(applied),'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
  requests=[]
  class Handler(BaseHTTPRequestHandler):
   def log_message(self,*_):pass

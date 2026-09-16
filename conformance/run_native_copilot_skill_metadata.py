@@ -136,7 +136,7 @@ def main():
            'XDG_STATE_HOME': str(base / 'state'), 'COPILOT_OFFLINE': 'true', 'COPILOT_PROVIDER_TYPE': 'openai',
            'COPILOT_PROVIDER_WIRE_API': 'completions', 'COPILOT_MODEL': 'gpt-5.4'}
     result = {'passed': False, 'scope': args.scope, 'cases': args.cases, 'fixture': str(base), 'sources': sources,
-              'native_version': '1.0.83', 'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
+              'native_version': '1.0.84-9', 'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'terminal_helper_sha256': sha(Path(__file__).with_name('run_native_copilot_preferences.py')),
               'verifier_sha256': sha(Path(__file__).with_name('verify_copilot_skill_metadata.py')),

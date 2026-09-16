@@ -31,7 +31,7 @@ def check_phase(phase, case):
     assert 'AGENTS_FILE_READ' in json.dumps(phase['requests'][1]['messages'])
     events = phase['native_events']
     session = phase['session']['sessionId']
-    assert any(e['type'] == 'session.start' and e['data']['sessionId'] == session and e['data']['copilotVersion'] == '1.0.83'
+    assert any(e['type'] == 'session.start' and e['data']['sessionId'] == session and e['data']['copilotVersion'] == '1.0.84-9'
                and e['data']['context']['cwd'] == phase['workspace'] for e in events)
     assert any(e['type'] == 'user.message' and phase['nonce'] in e['data']['content'] for e in events)
     reads = [e['data'] for e in events if e['type'] == 'tool.execution_start']
@@ -52,7 +52,7 @@ def verify():
         receipts.append(path)
         result = json.loads(path.read_text())
         assert result['passed'] and not result['full_adapter_support'] and result['case'] == case
-        assert result['native_version'] == '1.0.83' and result['native_sha256'] == PINS['copilot']
+        assert result['native_version'] == '1.0.84-9' and result['native_sha256'] == PINS['copilot']
         assert result['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert result['source_unchanged'] and result['authority_unchanged']
         expected = ['source', 'relocated']

@@ -21,7 +21,7 @@ def main():
     home=base/'home';home.mkdir(mode=0o700)
     env={'HOME':str(home),'COPILOT_HOME':str(home/'.copilot'),'COPILOT_CACHE_HOME':str(base/'cache'),
          'XDG_STATE_HOME':str(base/'state'),'PATH':'/usr/bin:/bin','COPILOT_OFFLINE':'true'}
-    result={'native_version':'1.0.83','native_sha256':sha(binary),'runner_sha256':sha(snapshot),'fixture':str(base),'cases':[],
+    result={'native_version':'1.0.84-9','native_sha256':sha(binary),'runner_sha256':sha(snapshot),'fixture':str(base),'cases':[],
             'full_adapter_support':False,'adapter_mapping':False}
     for mode in ('no-git','parent-git','nested-git'):
         parent=base/mode;child=parent/'packages/child';child.mkdir(parents=True)

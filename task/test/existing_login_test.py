@@ -18,7 +18,7 @@ class ExistingLoginTests(unittest.TestCase):
     def test_auto_uses_existing_copilot_login_without_claiming_authentication(self):
         with mock.patch.dict(os.environ, {'AGENTS_BIN': '/fake/agents'}, clear=True), \
              mock.patch.object(run_adapter, 'harness_executable', return_value=('/fake/copilot', 'COPILOT_BIN')), \
-             mock.patch.object(run_adapter.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, 'GitHub Copilot CLI 1.0.83.')):
+             mock.patch.object(run_adapter.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, 'GitHub Copilot CLI 1.0.84-9.')):
             checks, metadata = run_adapter.preflight('copilot', 'auto')
         self.assertTrue(all(c['passed'] for c in checks))
         self.assertEqual(metadata['authMode'], 'existing-login')
@@ -38,7 +38,7 @@ class ExistingLoginTests(unittest.TestCase):
     def test_environment_mode_still_requires_credentials(self):
         with mock.patch.dict(os.environ, {'AGENTS_BIN': '/fake/agents'}, clear=True), \
              mock.patch.object(run_adapter, 'harness_executable', return_value=('/fake/copilot', 'COPILOT_BIN')), \
-             mock.patch.object(run_adapter.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, 'GitHub Copilot CLI 1.0.83.')):
+             mock.patch.object(run_adapter.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, 'GitHub Copilot CLI 1.0.84-9.')):
             checks, metadata = run_adapter.preflight('copilot', 'environment')
         self.assertFalse(all(c['passed'] for c in checks))
         self.assertEqual(metadata['authMode'], 'environment')
