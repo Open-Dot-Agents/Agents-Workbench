@@ -17,7 +17,7 @@ from run_native_approvals import Client, PINS, sha, native_binary
 
 SERVER=r'''
 import sys,json,pathlib,os,time
-log=pathlib.Path(sys.argv[1])
+log=pathlib.Path(sys.argv[1]);delay_ms=int(os.environ.get('ODA_MCP_SERVER_DELAY_MS','0'))
 def record(value):
  with log.open('a') as stream:stream.write(json.dumps(dict(value,_recorded_at=time.monotonic()))+'\n')
 record({'event':'process','cwd':os.getcwd(),'env':{'ODA_LITERAL':os.getenv('ODA_LITERAL'),'ODA_ENV':os.getenv('ODA_ENV')}})
@@ -29,6 +29,7 @@ for line in sys.stdin:
  if method=='initialize':result={'protocolVersion':request['params']['protocolVersion'],'capabilities':{'tools':{}},'serverInfo':{'name':'oda-fixture','version':'1'}}
  if method=='tools/list':result={'tools':[{'name':name,'description':'Record isolated fixture data.','inputSchema':{'type':'object','properties':{'marker':{'type':'string'}},'required':['marker']}} for name in ['record','blocked']]}
  if method=='tools/call':
+  if delay_ms:time.sleep(delay_ms/1000)
   result={'content':[{'type':'text','text':'ODA_MCP_TOOL_RESULT'}]}
  print(json.dumps({'jsonrpc':'2.0','id':identifier,'result':result}),flush=True)
 '''
@@ -36,7 +37,7 @@ for line in sys.stdin:
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  parser.add_argument('--scope',choices=['project','user'],required=True)
- parser.add_argument('--scenario',choices=['call','blocked','expansion','http'],default='call')
+ parser.add_argument('--scenario',choices=['call','blocked','expansion','http','timeout-exceeded','timeout-tolerated'],default='call')
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
  if output.exists() or snapshot.exists():raise SystemExit('Refuse to replace evidence')
@@ -46,7 +47,13 @@ def main():
  for path in [source,workspace,home,native]:path.mkdir(exist_ok=True)
  for path in [source,workspace]:subprocess.run(['git','init','-q',str(path)],check=True)
  execution=workspace/'execution';execution.mkdir();server=root/'server.py';server.write_text(SERVER);events_path=root/'mcp-events.jsonl'
- config={'mcpServers':{'oda-fixture':{'type':'local','command':'/usr/bin/python3','args':[str(server),str(events_path)],'tools':['record'],'deferTools':'never','disableToolCache':True,'timeout':3000,'env':{'ODA_LITERAL':'fixture','ODA_ENV':'${ODA_MCP_INPUT}'},'cwd':str(execution)}}}
+ # timeout-exceeded pairs a slow server response with a shorter configured
+ # timeout; timeout-tolerated pairs the same delay with a longer timeout so
+ # the same slow server succeeds. This isolates the timeout field's effect
+ # from the server's own behavior.
+ server_delay_ms=4000 if args.scenario in ('timeout-exceeded','timeout-tolerated') else 0
+ mcp_timeout_ms=500 if args.scenario=='timeout-exceeded' else 8000 if args.scenario=='timeout-tolerated' else 3000
+ config={'mcpServers':{'oda-fixture':{'type':'local','command':'/usr/bin/python3','args':[str(server),str(events_path)],'tools':['record'],'deferTools':'never','disableToolCache':True,'timeout':mcp_timeout_ms,'env':{'ODA_LITERAL':'fixture','ODA_ENV':'${ODA_MCP_INPUT}','ODA_MCP_SERVER_DELAY_MS':str(server_delay_ms)},'cwd':str(execution)}}}
  if args.scenario=='expansion':config['mcpServers']['oda-fixture'].update(command='${ODA_MCP_PYTHON}',args=['${ODA_MCP_SERVER}',str(events_path)])
  remote_http=None
  if args.scenario=='http':
@@ -119,10 +126,19 @@ def main():
   if args.scenario=='blocked':
    assert not any(e.get('method')=='tools/call' for e in events),'excluded MCP tool reached the server'
    assert any(e.get('toolCallId')=='fixture-mcp-call' and e.get('status')=='failed' for e in updates),'no correlated native tool refusal'
+  elif args.scenario=='timeout-exceeded':
+   # The server receives the call (it is recorded before the artificial
+   # delay) but the native client must give up before the slow reply
+   # arrives, proving the configured `timeout` (not the delay itself)
+   # ends the call.
+   call=next(e for e in events if e.get('method')=='tools/call');assert call['params']['name']=='record' and call['params']['arguments']['marker']=='ODA_CALL_MARKER'
+   assert any(e.get('toolCallId')=='fixture-mcp-call' and e.get('status')=='failed' for e in updates),'timeout did not end the slow call as a failure'
+   result['mcp_timeout_ms']=mcp_timeout_ms;result['server_delay_ms']=server_delay_ms
   else:
    call=next(e for e in events if e.get('method')=='tools/call');assert call['params']['name']=='record' and call['params']['arguments']['marker']=='ODA_CALL_MARKER'
    assert any(e.get('toolCallId')=='fixture-mcp-call' and e.get('status')=='completed' and 'ODA_MCP_TOOL_RESULT' in json.dumps(e) for e in updates),'no correlated native completion'
    assert len(requests)>=2 and 'ODA_MCP_TOOL_RESULT' in json.dumps(requests[-1]['messages']),'MCP result absent from model input'
+   if args.scenario=='timeout-tolerated':result['mcp_timeout_ms']=mcp_timeout_ms;result['server_delay_ms']=server_delay_ms
   result['passed']=True
  except Exception as error:result.update(passed=False,error=str(error))
  finally:
