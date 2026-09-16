@@ -89,12 +89,18 @@ def require(result, name, actual, expected=True):
 
 def start(fixture, label, **options):
     present, absent = expectations(label)
-    return fixture.session(label, present=present, absent=absent, **options)
+    result = fixture.session(label, present=present, absent=absent, **options)
+    state = {'remove': 'not-selected', 'rollback': 'needs-apply'}.get(label, 'current')
+    fixture.doctor('session-' + label, state)
+    return result
 
 
 def setup(fixture):
+    fixture.doctor('missing', 'missing')
     fixture.invoke('init', '--preset', 'development', '--experimental')
+    fixture.doctor('initialized', 'needs-apply')
     fixture.apply()
+    fixture.doctor('applied', 'current')
 
 
 def managed(fixture):
@@ -120,10 +126,13 @@ def run_case(name, fixture, result, repo):
         # The portable starter selects no external service or credential.
         write_json(canonical / 'manifest.json', {'version': '1.0.0', 'profiles': ['skills'], 'requires': ['skills']})
         original = (canonical / 'manifest.json').read_bytes()
+        fixture.doctor('adoptable', 'missing')
         fixture.invoke('init', '--preset', 'development', '--experimental', '--adopt')
         backups = list(canonical.glob('manifest.json.backup-*'))
         require(result, 'manifest-backup', len(backups) == 1 and backups[0].read_bytes() == original)
+        fixture.doctor('initialized', 'needs-apply')
         fixture.apply()
+        fixture.doctor('applied', 'current')
         start(fixture, name)
         return
     if name == 'rollback':
@@ -142,6 +151,7 @@ def run_case(name, fixture, result, repo):
         result['rollback'] = json.loads(output.read_text())
         require(result, 'rollback-restored', result['rollback']['after'], result['rollback']['before'])
         require(result, 'rollback-injected-after-write', result['rollback']['injected'])
+        fixture.doctor('rolled-back', 'needs-apply')
         start(fixture, name)
         return
     if name == 'legacy-migration':
@@ -153,7 +163,9 @@ def run_case(name, fixture, result, repo):
                     '[sandbox_workspace_write]\nnetwork_access=true\n'
                     '[mcp_servers.preserved]\ncommand="/bin/false"\nenabled=false\n')
         path.write_text(original)
+        fixture.doctor('legacy', 'legacy-settings')
         fixture.apply('--force', '--backup')
+        fixture.doctor('migrated', 'current')
         require(result, 'legacy-backup', path.with_suffix('.toml.bak').read_text(), original)
         value = tomllib.loads(path.read_text())
         require(result, 'legacy-keys-removed', all(k not in value for k in ('sandbox_mode', 'sandbox_workspace_write')))
@@ -171,28 +183,35 @@ def run_case(name, fixture, result, repo):
         repeat = json.loads(fixture.apply()['stdout'])
         require(result, 'repeat-actions', repeat['actions'], [])
         require(result, 'repeat-bytes', managed(fixture), before)
+        fixture.doctor('repeat', 'current')
         start(fixture, name)
     elif name == 'update':
         policy(fixture, local_commits='deny', external_changes='deny')
         path = fixture.workspace / '.agents/guardrails/development.md'
         path.write_text(path.read_text() + '\nAGENTS_EDITED_GUIDANCE\n')
+        fixture.doctor('edited', 'needs-apply')
         fixture.apply()
+        fixture.doctor('updated', 'current')
         start(fixture, name)
     elif name == 'conflict':
         path = fixture.workspace / ('.codex/config.toml' if fixture.vendor == 'codex' else '.github/copilot-instructions.md')
         path.write_text(path.read_text().replace('Local commits: allow', 'Local commits: deny'))
         before = managed(fixture)
+        fixture.doctor('conflict', 'conflict')
         fixture.apply(expected=1)
         require(result, 'conflict-preserved', managed(fixture), before)
         # Restore only the deliberate test edit, then prove the old native
         # configuration still loads without any successful apply.
         path.write_text(path.read_text().replace('Local commits: deny', 'Local commits: allow'))
+        fixture.doctor('restored', 'current')
         start(fixture, name)
     elif name == 'remove':
         write_json(fixture.workspace / '.agents/manifest.json', {'version': '1.1.0-draft.2', 'profiles': [], 'requires': []})
+        fixture.doctor('deselected', 'removal-pending')
         fixture.apply()
         repeat = json.loads(fixture.apply()['stdout'])
         require(result, 'removal-repeat', repeat['actions'], [])
+        fixture.doctor('removed', 'not-selected')
         start(fixture, name)
     elif name == 'global-scope':
         start(fixture, name)
@@ -223,6 +242,7 @@ def run_case(name, fixture, result, repo):
             fixture.invoke('apply', '--experimental', '--vendor', 'codex', expected=1)
             require(result, 'full-requirement-refusal', managed(fixture), before_owned)
             fixture.apply()
+            fixture.doctor('scoped', 'current')
         else:
             core = fixture.workspace / '.agents/AGENTS.md'
             original = core.read_text()
@@ -254,7 +274,9 @@ def run_case(name, fixture, result, repo):
             value['trustedFolders'].append(str(target))
             write_json(settings, value)
         fixture.workspace = target
+        fixture.doctor('relocated', 'needs-apply')
         fixture.apply()
+        fixture.doctor('relocated-applied', 'current')
         start(fixture, name)
         require(result, 'original-project-preserved', snapshot(original, MANAGED_PATHS), before)
     else:
@@ -326,6 +348,7 @@ def run_operation(name, fixture, result):
         result['head_before'] = git(workspace, 'rev-parse', 'HEAD')
     else:
         raise ValueError(name)
+    fixture.doctor('operation', 'current')
     start(fixture, name, command=command, host_read_only=name == 'host-restriction')
     if name in ('edit', 'host-restriction', 'commit', 'submodule-commit'):
         result['file_after'] = (workspace / 'tracked.txt').read_text()

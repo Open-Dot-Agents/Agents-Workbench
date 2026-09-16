@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import threading
 import time
@@ -54,6 +55,21 @@ def snapshot(root, paths):
     return result
 
 
+def inspection_snapshot(root):
+    """Fixture-only hashes and metadata; reads can change atime, not mtime."""
+    result = {}
+    for path in [root, *sorted(root.rglob('*'))]:
+        info = path.lstat()
+        value = {'mode': info.st_mode, 'mtime_ns': info.st_mtime_ns, 'ctime_ns': info.st_ctime_ns,
+                 'uid': info.st_uid, 'gid': info.st_gid}
+        if stat.S_ISLNK(info.st_mode):
+            value['link'] = os.readlink(path)
+        elif stat.S_ISREG(info.st_mode):
+            value['sha256'] = sha(path)
+        result[str(path.relative_to(root))] = value
+    return result
+
+
 class DevelopmentFixture:
     def __init__(self, base, vendor, binary, agents_cli, native_identity=None):
         self.base, self.vendor, self.binary, self.cli = base, vendor, binary, agents_cli
@@ -70,7 +86,7 @@ class DevelopmentFixture:
         git(self.workspace, 'commit', '-qm', 'fixture base')
         self.env = {'PATH': '/usr/bin:/bin', 'HOME': str(self.home),
                     'XDG_STATE_HOME': str(base / 'state'), 'GIT_CONFIG_GLOBAL': '/dev/null',
-                    'GIT_CONFIG_NOSYSTEM': '1'}
+                    'GIT_CONFIG_NOSYSTEM': '1', vendor.upper() + '_BIN': str(binary)}
         self.commands, self.sessions = [], []
         self.requests, self.provider_errors, self.network_requests = [], [], []
         self.command, self.nonce = None, ''
@@ -190,6 +206,19 @@ class DevelopmentFixture:
         if self.vendor == 'codex':
             arguments += ['--preset', 'development']
         return self.invoke(*arguments, *extra, expected=expected)
+
+    def doctor(self, phase, state):
+        before = inspection_snapshot(self.base)
+        row = self.invoke('doctor', '--experimental', '--vendor', self.vendor, '--format', 'json',
+                          expected=0 if state in ('current', 'not-selected') else 1)
+        row.update(doctor_phase=phase, inspection_before=before, inspection_after=inspection_snapshot(self.base))
+        report = json.loads(row['stdout'])
+        if (report.get('configuration_state') != state or row['inspection_before'] != row['inspection_after']
+                or report.get('scope') != ('development-only' if self.vendor == 'codex' else 'full-project')
+                or not any(check.get('id') == 'session.authority' and check.get('status') == 'unknown'
+                           for check in report.get('checks', []))):
+            raise AssertionError('doctor inspection did not preserve the fixture or report its expected state: ' + phase)
+        return report
 
     def session(self, label, *, command=None, present=(), absent=(), host_read_only=False):
         self.command, self.nonce = command, 'AGENTS_DEVELOPMENT_' + uuid.uuid4().hex

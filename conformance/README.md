@@ -312,6 +312,16 @@ submodule commits, existing and future protected paths, aliases, local
 network denial, and a read-only session override. The rollback fixture uses
 an internal Go test hook; the public CLI has no failure-injection option.
 
+The cases now run read-only `agents doctor` before changes are applied and
+after native reload. They check missing setup, adoption, edits, conflicts,
+legacy migration, removal, rollback drift, scope, and relocation. Each doctor
+call records file hashes, modes, ownership, and modification times before and
+after inspection. This includes project configuration, Git metadata, and the
+disposable user home. Access times are excluded because reads can change them.
+The verifier requires the expected diagnostic phases and unchanged snapshots.
+Doctor reports session authority as unknown even after a successful native
+phase. The separate native session records establish the bounded behavior.
+
 Codex can leave an empty read-only placeholder for a protected path that did
 not exist. The future-path case records its type, mode, and size. After the
 native process closes, the fixture replaces only that empty regular file with

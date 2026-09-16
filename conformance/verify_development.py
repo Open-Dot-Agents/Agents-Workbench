@@ -36,6 +36,70 @@ CHECKS = {
 }
 
 
+def doctor_expectations(name, vendor):
+    setup = [('missing', 'missing'), ('initialized', 'needs-apply'), ('applied', 'current')]
+    phases = {
+        'adopt': [('adoptable', 'missing'), ('initialized', 'needs-apply'), ('applied', 'current')],
+        'rollback': [('rolled-back', 'needs-apply')],
+        'legacy-migration': [('legacy', 'legacy-settings'), ('migrated', 'current')],
+        'new': setup + [('repeat', 'current')],
+        'update': setup + [('edited', 'needs-apply'), ('updated', 'current')],
+        'conflict': setup + [('conflict', 'conflict'), ('restored', 'current')],
+        'remove': setup + [('deselected', 'removal-pending'), ('removed', 'not-selected')],
+        'relocate': setup + [('relocated', 'needs-apply'), ('relocated-applied', 'current')],
+        'global-scope': setup,
+        'protected-later': setup + [('session-protected-later-before', 'current'), ('operation', 'current')],
+    }.get(name, setup + [('operation', 'current')])
+    phases += [('session-' + str(name), {'remove': 'not-selected', 'rollback': 'needs-apply'}.get(name, 'current'))]
+    if name == 'global-scope':
+        prefix = '' if vendor == 'codex' else 'copilot-'
+        phases += [('session-' + prefix + 'global-override', 'current'),
+                   ('session-' + prefix + 'global-fallback', 'current')]
+        if vendor == 'codex':
+            phases += [('scoped', 'current')]
+    return phases
+
+
+def doctor_errors(commands, name, vendor):
+    rows = [item for item in commands if item.get('command', [])[1:2] == ['doctor'] or 'doctor_phase' in item]
+    phases = doctor_expectations(name, vendor)
+    if [item.get('doctor_phase') for item in rows] != [phase for phase, _ in phases]:
+        return ['doctor lifecycle phases are missing or reordered']
+    errors = []
+    for row, (phase, state) in zip(rows, phases):
+        try:
+            report = json.loads(row.get('stdout', ''))
+        except (ValueError, TypeError):
+            report = {}
+        if not isinstance(report, dict):
+            report = {}
+        ready = state in ('current', 'not-selected')
+        checks = report.get('checks', [])
+        if not isinstance(checks, list) or any(not isinstance(check, dict) for check in checks):
+            checks = []
+        authority = [check for check in checks if check.get('id') == 'session.authority' or check.get('layer') == 'active-session']
+        if (row.get('command', [])[1:] != ['doctor', '--experimental', '--vendor', vendor, '--format', 'json']
+                or report.get('schema_version') != '1.0.0' or report.get('vendor') != vendor
+                or report.get('configuration_state') != state or report.get('ready') is not ready
+                or row.get('exit_code') != (0 if ready else 1)
+                or report.get('scope') != ('development-only' if vendor == 'codex' else 'full-project')
+                or len(authority) != 1 or authority[0].get('id') != 'session.authority'
+                or authority[0].get('layer') != 'active-session' or authority[0].get('status') != 'unknown'
+                or ready != (not any(c.get('status') == 'action-required' for c in checks))
+                or not any(c.get('id') == 'executable.location' and c.get('status') == 'ok' for c in checks)):
+            errors.append('doctor result differs from its inspection contract: ' + phase)
+        before = row.get('inspection_before', {})
+        if (not before or '.' not in before or not any(p.startswith('home/') for p in before)
+                or not any(p.startswith('workspace/.git/') for p in before)
+                or before != row.get('inspection_after')):
+            errors.append('doctor changed files or lacks file preservation evidence: ' + phase)
+        if name == 'submodule-commit' and phase == 'operation':
+            paths = [path for check in checks if check.get('id') == 'filesystem.git' for path in check.get('paths', [])]
+            if not any(path.endswith('/.git/modules/modules/api') for path in paths):
+                errors.append('doctor did not inspect submodule Git metadata')
+    return errors
+
+
 def session_errors(session, vendor, identity):
     errors = []
     label = session.get('label')
@@ -115,6 +179,7 @@ def evaluate_case(row, vendor, identity):
     if any('actual' not in item or 'expected' not in item or item['actual'] != item['expected'] for item in checks):
         errors.append('lifecycle assertion failed')
     commands = row.get('commands', [])
+    errors.extend(doctor_errors(commands, name, vendor))
     if (not commands and name != 'rollback') or any((item.get('exit_code') == 0) != item.get('expect_success')
                            or not item.get('authority_before') or item['authority_before'] != item.get('authority_after')
                            for item in commands):

@@ -15,7 +15,7 @@ from contextlib import redirect_stdout
 from development_cases import COMMON_CASES, create_later_protected_file, run_case
 from development_fixture import DevelopmentFixture, USER_FILES
 from probe_development import Unavailable, checked_native, fresh_cli, run
-from verify_development import HELPERS, evaluate_case, session_errors, source_paths, tool_result, verify
+from verify_development import HELPERS, doctor_errors, doctor_expectations, evaluate_case, session_errors, source_paths, tool_result, verify
 from run_native_approvals import sha
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -45,6 +45,9 @@ class LifecycleTest(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix='agents-development-tests-')
         cls.base = Path(cls.temporary.name)
         cls.cli = cls.base / 'agents'
+        cls.native = cls.base / 'native-must-not-run'
+        cls.native.write_text('#!/bin/sh\necho launched > "$HOME/accidental-launch"\nexit 99\n')
+        cls.native.chmod(0o755)
         subprocess.run(['go', 'build', '-buildvcs=false', '-o', str(cls.cli), './cmd/agents'],
                        cwd=ROOT / 'CLI', check=True, capture_output=True)
 
@@ -56,19 +59,21 @@ class LifecycleTest(unittest.TestCase):
         for vendor in ('codex', 'copilot'):
             for name in COMMON_CASES + (('legacy-migration',) if vendor == 'codex' else ()):
                 with self.subTest(vendor=vendor, case=name), patch('development_fixture.ThreadingHTTPServer', NoServer):
-                    fixture = DevelopmentFixture(self.base / vendor / name, vendor, Path('/not-executed'), self.cli)
+                    fixture = DevelopmentFixture(self.base / vendor / name, vendor, self.native, self.cli)
                     row = {}
                     try:
                         with patch.object(fixture, 'session', return_value={}):
                             run_case(name, fixture, row, ROOT)
                         self.assertTrue(all(item['actual'] == item['expected'] for item in row.get('checks', [])))
+                        self.assertEqual(doctor_errors(fixture.commands, name, vendor), [])
+                        self.assertFalse((fixture.home / 'accidental-launch').exists())
                         self.assertEqual(fixture.sessions, [])  # These are not native tests.
                     finally:
                         fixture.close()
 
     def test_later_protected_file_replaces_readonly_native_placeholder(self):
         with patch('development_fixture.ThreadingHTTPServer', NoServer):
-            fixture = DevelopmentFixture(self.base / 'later-placeholder', 'codex', Path('/not-executed'), self.cli)
+            fixture = DevelopmentFixture(self.base / 'later-placeholder', 'codex', self.native, self.cli)
             row, phases = {}, []
 
             def native_phase(label, **options):
@@ -96,7 +101,7 @@ class LifecycleTest(unittest.TestCase):
 
     def test_global_scope_allows_native_settings_migration(self):
         with patch('development_fixture.ThreadingHTTPServer', NoServer):
-            fixture = DevelopmentFixture(self.base / 'copilot-native-migration', 'copilot', Path('/not-executed'), self.cli)
+            fixture = DevelopmentFixture(self.base / 'copilot-native-migration', 'copilot', self.native, self.cli)
             row, phases = {}, []
 
             def native_phase(label, **_):
@@ -124,7 +129,7 @@ class LifecycleTest(unittest.TestCase):
         real_run = subprocess.run
         for filename in ('settings.json', 'permissions-config.json', 'copilot-instructions.md'):
             with self.subTest(filename=filename), patch('development_fixture.ThreadingHTTPServer', NoServer):
-                fixture = DevelopmentFixture(self.base / ('adapter-change-' + filename), 'copilot', Path('/not-executed'), self.cli)
+                fixture = DevelopmentFixture(self.base / ('adapter-change-' + filename), 'copilot', self.native, self.cli)
 
                 def corrupted_apply(command, **options):
                     completed = real_run(command, **options)
@@ -166,11 +171,52 @@ def synthetic_operation(name='edit'):
         {'type': 'function_call', 'call_id': 'development-call', 'name': 'exec_command',
          'arguments': json.dumps({'cmd': session['command'], 'workdir': session['cwd'], 'login': False})},
         {'type': 'function_call_output', 'call_id': 'development-call', 'output': 'Process exited with code 0\n'}]})
-    return {'case': name, 'commands': [{'exit_code': 0, 'expect_success': True, 'authority_before': 'hash', 'authority_after': 'hash'}],
+    return {'case': name, 'commands': synthetic_doctors(name),
             'sessions': [session], 'file_after': 'after\n', 'guidance_only': name.startswith('push-')}
 
 
+def synthetic_doctors(name):
+    """Verifier inputs only. These records never establish native evidence."""
+    rows = []
+    for phase, state in doctor_expectations(name, 'codex'):
+        ready = state in ('current', 'not-selected')
+        report = {'schema_version': '1.0.0', 'vendor': 'codex', 'scope': 'development-only',
+                  'configuration_state': state, 'ready': ready, 'checks': [
+                      {'id': 'session.authority', 'layer': 'active-session', 'status': 'unknown'},
+                      {'id': 'executable.location', 'status': 'ok'}]}
+        if not ready:
+            report['checks'].append({'id': 'configuration.' + state, 'status': 'action-required'})
+        snapshot = {'.': 'synthetic', 'home/settings.json': 'synthetic', 'workspace/.git/HEAD': 'synthetic'}
+        rows.append({'command': ['agents', 'doctor', '--experimental', '--vendor', 'codex', '--format', 'json'],
+                     'doctor_phase': phase, 'stdout': json.dumps(report), 'exit_code': 0 if ready else 1,
+                     'expect_success': ready, 'authority_before': 'hash', 'authority_after': 'hash',
+                     'inspection_before': dict(snapshot), 'inspection_after': dict(snapshot)})
+    return rows
+
+
 class VerifierTest(unittest.TestCase):
+    def test_doctor_requires_phase_results_and_unchanged_files(self):
+        for corrupt in ('missing-phase', 'state', 'authority', 'write', 'missing-snapshot', 'exit'):
+            with self.subTest(corrupt=corrupt):
+                rows = synthetic_doctors('edit')
+                self.assertEqual(doctor_errors(rows, 'edit', 'codex'), [])
+                if corrupt == 'missing-phase':
+                    rows.pop()
+                elif corrupt in ('state', 'authority'):
+                    report = json.loads(rows[-1]['stdout'])
+                    if corrupt == 'state':
+                        report['configuration_state'] = 'needs-apply'
+                    else:
+                        report['checks'][0]['status'] = 'ok'
+                    rows[-1]['stdout'] = json.dumps(report)
+                elif corrupt == 'write':
+                    rows[-1]['inspection_after']['home/settings.json'] = 'changed'
+                elif corrupt == 'missing-snapshot':
+                    rows[-1].pop('inspection_before')
+                else:
+                    rows[-1]['exit_code'] = 1
+                self.assertTrue(doctor_errors(rows, 'edit', 'codex'))
+
     def test_user_scope_requires_per_command_file_evidence(self):
         user = {name: None for name in USER_FILES}
         command = {'command': ['agents', 'apply'], 'user_files_before': user, 'user_files_after': dict(user)}

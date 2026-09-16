@@ -24,7 +24,7 @@ Native executable SHA-256 hashes:
 - Codex: `3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022`.
 - Copilot: `905a39134b45d1644bcf79c1db1ca58387515207cb2cb07ff8241e871687f57a`.
 
-The verified receipt reports `historical_integrity: true`,
+At completion of that baseline, the verified receipt reported `historical_integrity: true`,
 `workflow_checks_passed: true`, and `current_workflow_eligible: true`.
 It reports no failed checks, stale sources, or unavailable prerequisites.
 `full_adapter_support` remains `false`: these bounded workflow results do
@@ -40,6 +40,38 @@ at startup and records their exact versions and SHA-256 hashes. Results apply
 only to those versions and hashes. This work does not upgrade a native
 harness or change an adapter support claim. See the
 [run instructions](../conformance/README.md#development-workflow-regression).
+
+## Development diagnostics acceptance
+
+The new doctor command and its lifecycle checks change the captured source
+inventory. The baseline receipt above remains historical evidence; its earlier
+current-source result does not qualify these changes. A fresh installed-binary
+campaign and current-source verification are required before doctor acceptance.
+The new checks must preserve project files, user settings, ownership records,
+and Git metadata. They must report runtime authority as unknown and must not
+start a native process themselves. No adapter support claim is extended.
+
+### Restricted-process attempt
+
+A doctor campaign selected the installed Codex 0.154.0 and Copilot 1.0.84-9
+executables, with the same executable hashes as the baseline. It then stopped
+before native cases because this process could not create the local model
+socket (`Operation not permitted`). It establishes no new native behavior.
+The receipt reports `workflow_status: unavailable` and
+`current_workflow_eligible: false`. Later review edits also require new source
+capture. The unchanged bundle is retained at
+`results/development-doctor-unavailable-2026-09-16/`; the original is
+`/tmp/agents-workflow-check-4jbma679/results.json`. Its SHA-256 is
+`a2dba31cb7b1620f1819dc645d8d3afbc7243510dd0e1f935d23de87f965faba`.
+
+The separate clean-source run passed the specification, draft schemas,
+repository validation, coverage tests, compatibility checks, and 160 Workbench
+conformance tests. Two checks could not pass in this process: the existing Go
+mount-alias test detects the sandbox's alternate mount view, and a Workbench
+TLS fixture cannot create its local socket. The new doctor tests pass,
+including file-access observation for protected data and credential stores.
+Full acceptance and local delivery remain pending a run from a normal local
+terminal with fixture socket access.
 
 ## First retained native run
 
@@ -132,3 +164,18 @@ The practical preset remains project-scoped. Tests of user defaults use only
 disposable native homes. Copilot guidance delivery, saved-permission
 preservation, and enforced runtime boundaries are separate claims. Strict
 mode and complete adapter conformance remain outside this milestone.
+
+## Doctor acceptance
+
+The refreshed clean-source gate and all 28 required native workflow cases
+passed with the doctor checks. Five Codex cases remain observations of
+guidance-only effects. They do not prove enforced approval.
+
+- codex: 0.154.0; SHA-256 `3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022`.
+- copilot: 1.0.84-9; SHA-256 `905a39134b45d1644bcf79c1db1ca58387515207cb2cb07ff8241e871687f57a`.
+
+Local receipt: `results/agents-doctor-acceptance-t4_fb04w/results.json`. Receipt SHA-256:
+`08572ea97197501294d7990775f14dfb2f64c5c116abbbc957703a416d195c30`.
+
+Current-source verification passed. Full adapter support remains false.
+The evidence bundle is ignored by Git and has not been published.
