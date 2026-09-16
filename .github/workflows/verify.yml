@@ -36,7 +36,7 @@ jobs:
       - name: Install evidence validator
         run: python3 -m pip install -r monorepo/WORKBENCH/conformance/requirements.txt
       - name: Check compatibility including Workbench pins
-        run: python3 monorepo/CLI/scripts/check_compatibility.py
+        run: python3 CLI/scripts/check_compatibility.py
         working-directory: monorepo
       - name: Test deterministic checks without ignored local artifacts
         run: python3 WORKBENCH/conformance/check_clean_source.py
