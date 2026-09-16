@@ -14,7 +14,7 @@ from run_native_approvals import Client, PINS, sha, native_binary
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  parser.add_argument('--scope',choices=['project','user'],required=True)
- parser.add_argument('--scenario',choices=['execution','no-infer','tool-string','tool-none'],default='execution')
+ parser.add_argument('--scenario',choices=['execution','no-infer','tool-string','tool-none','model-override'],default='execution')
  parser.add_argument('--filename',choices=['oda-fixture.agent.md','oda-fixture.md'],default='oda-fixture.agent.md')
  parser.add_argument('--output',type=Path,required=True)
  args=parser.parse_args();output=args.output.resolve();snapshot=output.with_suffix('.runner.py')
@@ -29,13 +29,17 @@ def main():
  (manifest/'AGENTS.md').write_text('Use fixture data.\n');(manifest/'manifest.json').write_text(json.dumps({'version':'1.1.0-draft.2','profiles':['native']}))
  (directory/'profile.json').write_text(json.dumps({'namespace':'com.github.copilot','harness_version':'=1.0.84-9','scope':args.scope,'required':True,'artifacts':[{'kind':'agent','source':'fixture.md','name':args.filename}]}))
  tools='bash' if args.scenario=='tool-string' else '[]' if args.scenario=='tool-none' else '[bash]'
- configuration=f'---\nname: ODA Fixture\ndescription: Native fixture agent\ntools: {tools}\nmodel: fixture-model\nreasoningEffort: low\n'
+ # model-override uses a distinct session default and agent-declared model so a
+ # captured request can attribute its `model` value to the session or the child.
+ agent_model='oda-subagent-model' if args.scenario=='model-override' else 'fixture-model'
+ session_model='oda-session-model' if args.scenario=='model-override' else 'fixture-model'
+ configuration=f'---\nname: ODA Fixture\ndescription: Native fixture agent\ntools: {tools}\nmodel: {agent_model}\nreasoningEffort: low\n'
  if args.scenario=='no-infer':configuration+='infer: false\n'
  configuration+='---\nODA_CHILD_DEVELOPER_MARKER\nUse the isolated fixture command.\n'
  (directory/'fixture.md').write_text(configuration);(native/'settings.json').write_text('{"theme":"dark"}\n')
  before={str(p.relative_to(native)):sha(p) for p in native.rglob('*') if p.is_file()}
  cli=root/'agents';subprocess.run(['go','build','-o',str(cli),'./cmd/agents'],cwd=repo/'CLI',check=True)
- env={'PATH':'/usr/bin:/bin','HOME':str(home),'COPILOT_HOME':str(native),'XDG_STATE_HOME':str(root/'state'),'COPILOT_OFFLINE':'true','COPILOT_PROVIDER_TYPE':'openai','COPILOT_PROVIDER_WIRE_API':'completions','COPILOT_MODEL':'fixture-model'}
+ env={'PATH':'/usr/bin:/bin','HOME':str(home),'COPILOT_HOME':str(native),'XDG_STATE_HOME':str(root/'state'),'COPILOT_OFFLINE':'true','COPILOT_PROVIDER_TYPE':'openai','COPILOT_PROVIDER_WIRE_API':'completions','COPILOT_MODEL':session_model}
  command=[str(cli),'apply','--vendor','copilot','--root',str(canonical),'--experimental','--scope',args.scope]
  if args.scope=='user':command+=['--native-home',str(native)]
  apply=subprocess.run(command,env=env,capture_output=True,text=True)
@@ -57,7 +61,7 @@ def main():
     call=('bash',{'command':f'/usr/bin/python3 {probe}','description':'Write isolated fixture marker'})
    if call:
     message={'role':'assistant','content':None,'tool_calls':[{'id':f'fixture-call-{n}','type':'function','function':{'name':call[0],'arguments':json.dumps(call[1])}}]};finish='tool_calls'
-   response={'id':'fixture','object':'chat.completion','created':1,'model':'fixture-model','choices':[{'index':0,'message':message,'finish_reason':finish}],'usage':{'prompt_tokens':1,'completion_tokens':1,'total_tokens':2}}
+   response={'id':'fixture','object':'chat.completion','created':1,'model':request.get('model','fixture-model'),'choices':[{'index':0,'message':message,'finish_reason':finish}],'usage':{'prompt_tokens':1,'completion_tokens':1,'total_tokens':2}}
    data=json.dumps(response).encode();self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
  http=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=http.serve_forever,daemon=True).start()
  env['COPILOT_PROVIDER_BASE_URL']=f'http://127.0.0.1:{http.server_port}/v1';client=None
@@ -89,6 +93,13 @@ def main():
     assert any(e['approved'] and e['params'].get('toolCall',{}).get('toolCallId')=='fixture-call-2' for e in client.approvals),'no correlated approval'
     assert any(e.get('toolCallId')=='fixture-call-2' and e.get('status')=='completed' and e.get('_meta',{}).get('github.com/copilot',{}).get('agentId') for e in updates),'no correlated child command completion'
     assert any(e.get('toolCallId')=='fixture-call-1' and e.get('status')=='completed' and 'ODA_CHILD_COMPLETED' in json.dumps(e) for e in updates),'no correlated delegation result'
+   if args.scenario=='model-override':
+    # The parent session turn (request 0) must use the session default model;
+    # the delegated child turn (request 1) must use the agent's own `model`
+    # frontmatter field instead of inheriting the parent's model.
+    assert requests[0]['model']==session_model,'parent turn did not use the session default model'
+    assert requests[1]['model']==agent_model,'child turn did not honor the agent frontmatter model override'
+    result['model_override']={'session_model':session_model,'agent_model':agent_model,'parent_request_model':requests[0]['model'],'child_request_model':requests[1]['model']}
   result['passed']=True
  except Exception as error:result.update(passed=False,error=str(error))
  finally:
