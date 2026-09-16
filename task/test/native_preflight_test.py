@@ -106,7 +106,7 @@ class NativePreflightTests(unittest.TestCase):
 
     def test_preflight_accepts_copilot_documented_token_alternatives(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            executable = fake_executable(Path(temporary), "copilot", "GitHub Copilot CLI 1.0.83.")
+            executable = fake_executable(Path(temporary), "copilot", "GitHub Copilot CLI 1.0.84-9.")
             with mock.patch.dict(
                 os.environ,
                 {
@@ -158,8 +158,8 @@ class NativePreflightTests(unittest.TestCase):
 
     def test_version_match_accepts_copilot_sentence_punctuation(self) -> None:
         self.assertTrue(run_adapter.matches_pinned_version(
-            "GitHub Copilot CLI 1.0.83.\nRun 'copilot update' to check for updates.", "1.0.83"))
-        self.assertFalse(run_adapter.matches_pinned_version("GitHub Copilot CLI 1.0.83.1", "1.0.83"))
+            "GitHub Copilot CLI 1.0.84-9.\nRun 'copilot update' to check for updates.", "1.0.84-9"))
+        self.assertFalse(run_adapter.matches_pinned_version("GitHub Copilot CLI 1.0.84-9.1", "1.0.84-9"))
 
     def test_version_command_uses_preflighted_executable(self) -> None:
         self.assertEqual(

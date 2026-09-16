@@ -60,7 +60,7 @@ def main():
  cli=root/'agents';subprocess.run(['go','build','-o',str(cli),'./cmd/agents'],cwd=repo/'CLI',check=True)
  env={'PATH':'/usr/bin:/bin','HOME':str(root/'home'),'COPILOT_HOME':str(native),'XDG_STATE_HOME':str(root/'state'),'COPILOT_OFFLINE':'true','COPILOT_PROVIDER_TYPE':'openai','COPILOT_PROVIDER_WIRE_API':'completions','COPILOT_MODEL':'fixture-model','ODA_HOOK_INPUT':'expanded-fixture'}
  if args.project_opt_in:env['GITHUB_COPILOT_PROMPT_MODE_REPO_HOOKS']='true'
- result={'interface':args.interface,'project_opt_in':args.project_opt_in,'tracked':args.tracked,'scope':args.scope,'scenario':args.scenario,'location':args.location,'direct':args.direct,'fixture':str(root),'native_version':'1.0.83','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':content,'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
+ result={'interface':args.interface,'project_opt_in':args.project_opt_in,'tracked':args.tracked,'scope':args.scope,'scenario':args.scenario,'location':args.location,'direct':args.direct,'fixture':str(root),'native_version':'1.0.84-9','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':content,'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
  target_path=target(workspace if args.scope=='project' else native)
  def run_cli(operation,canonical,home=None):
   command=[str(cli),operation,'--vendor','copilot','--root',str(canonical),'--experimental','--scope',args.scope]

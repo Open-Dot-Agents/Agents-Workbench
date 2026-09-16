@@ -72,7 +72,7 @@ def verify_native(record, direct, path=NATIVE):
 
 def verify_copilot(record, direct, path=COPILOT):
     assert record["passed"] and not record["full_adapter_support"]
-    assert record["native_version"] == "1.0.83" and record["native_sha256"] == PINS["copilot"]
+    assert record["native_version"] == "1.0.84-9" and record["native_sha256"] == PINS["copilot"]
     assert record["runner_sha256"] == sha(path.with_suffix(".runner.py"))
     assert record["public_endpoint"] == direct["endpoint"] and record["external_github_mcp"]
     assert not record["external_model"] and not record["remote_mutations"]

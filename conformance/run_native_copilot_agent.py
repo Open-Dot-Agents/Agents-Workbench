@@ -27,7 +27,7 @@ def main():
  marker=root/'effect.txt';probe=root/'effect.py';probe.write_text('from pathlib import Path\nPath('+repr(str(marker))+').write_text("ODA_NATIVE_CHILD_EFFECT")\n')
  manifest=canonical/'.agents';directory=manifest/'native/com.github.copilot';directory.mkdir(parents=True)
  (manifest/'AGENTS.md').write_text('Use fixture data.\n');(manifest/'manifest.json').write_text(json.dumps({'version':'1.1.0-draft.2','profiles':['native']}))
- (directory/'profile.json').write_text(json.dumps({'namespace':'com.github.copilot','harness_version':'=1.0.83','scope':args.scope,'required':True,'artifacts':[{'kind':'agent','source':'fixture.md','name':args.filename}]}))
+ (directory/'profile.json').write_text(json.dumps({'namespace':'com.github.copilot','harness_version':'=1.0.84-9','scope':args.scope,'required':True,'artifacts':[{'kind':'agent','source':'fixture.md','name':args.filename}]}))
  tools='bash' if args.scenario=='tool-string' else '[]' if args.scenario=='tool-none' else '[bash]'
  configuration=f'---\nname: ODA Fixture\ndescription: Native fixture agent\ntools: {tools}\nmodel: fixture-model\nreasoningEffort: low\n'
  if args.scenario=='no-infer':configuration+='infer: false\n'
@@ -39,7 +39,7 @@ def main():
  command=[str(cli),'apply','--vendor','copilot','--root',str(canonical),'--experimental','--scope',args.scope]
  if args.scope=='user':command+=['--native-home',str(native)]
  apply=subprocess.run(command,env=env,capture_output=True,text=True)
- result={'scope':args.scope,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.83','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'configuration':configuration,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))},'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py')}
+ result={'scope':args.scope,'scenario':args.scenario,'fixture':str(root),'native_version':'1.0.84-9','native_sha256':sha(binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'configuration':configuration,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))},'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py')}
  requests=[];fixture_type=[]
  class Handler(BaseHTTPRequestHandler):
   def log_message(self,*_):pass

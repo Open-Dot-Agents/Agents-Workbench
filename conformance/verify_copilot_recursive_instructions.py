@@ -42,7 +42,7 @@ def check_phase(phase, flat, nested, instruction_reads=(), approval=None):
     if approval != 'deny': assert phase['file_read']
     events = phase['native_events']
     assert any(e['type'] == 'session.start' and e['data']['sessionId'] == phase['session']['sessionId']
-               and e['data']['copilotVersion'] == '1.0.83' and e['data']['context']['cwd'] == phase['workspace'] for e in events)
+               and e['data']['copilotVersion'] == '1.0.84-9' and e['data']['context']['cwd'] == phase['workspace'] for e in events)
     assert any(e['type'] == 'user.message' and phase['nonce'] in e['data']['content'] for e in events)
     reads = [e['data'] for e in events if e['type'] == 'tool.execution_start' and e['data']['toolName'] == 'view']
     expected_reads = [*instruction_reads, phase['file']]
@@ -84,7 +84,7 @@ def verify(suffix='user-instructions'):
         assert r['passed'] and not r['full_adapter_support']
         assert (r['scope'], r['match'], r['pattern']) == (scope, match, pattern)
         assert r['follow_catalog'] is follow and r['instruction_approval'] == decision
-        assert r['native_version'] == '1.0.83' and r['native_sha256'] == PIN
+        assert r['native_version'] == '1.0.84-9' and r['native_sha256'] == PIN
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         expected = {name: hashlib.sha256(f'---\napplyTo: "{pattern}"\n---\nAGENTS_{kind}_INSTRUCTION_BODY\n'.encode()).hexdigest()
                     for name, kind in [('flat.instructions.md', 'FLAT'), ('nested/deep/fixture.instructions.md', 'NESTED')]}

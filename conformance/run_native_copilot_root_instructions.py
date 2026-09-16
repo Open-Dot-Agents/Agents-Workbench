@@ -51,7 +51,7 @@ def main():
         (source/'AGENTS.md').write_text(body)
     if args.case in ('identical', 'distinct'):
         (source/'.github/copilot-instructions.md').write_text(body if args.case == 'identical' else 'AGENTS_OTHER_INSTRUCTION_MARKER\n')
-    result = {'passed': False, 'case': args.case, 'fixture': str(base), 'native_version': '1.0.83',
+    result = {'passed': False, 'case': args.case, 'fixture': str(base), 'native_version': '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo/'CLI/internal/config').glob('*.go'))},

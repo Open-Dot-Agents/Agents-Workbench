@@ -32,7 +32,7 @@ def check_phase(phase, result):
     assert 'AGENTS_FILE_READ' in json.dumps(phase['requests'][1]['messages'])
     session = phase['session']['sessionId']
     events = phase['native_events']
-    assert any(e['type'] == 'session.start' and e['data']['sessionId'] == session and e['data']['copilotVersion'] == '1.0.83'
+    assert any(e['type'] == 'session.start' and e['data']['sessionId'] == session and e['data']['copilotVersion'] == '1.0.84-9'
                and e['data']['context']['cwd'] == phase['workspace'] for e in events)
     assert any(e['type'] == 'user.message' and phase['nonce'] in e['data']['content'] for e in events)
     reads = [e['data'] for e in events if e['type'] == 'tool.execution_start']
@@ -52,7 +52,7 @@ def verify():
         receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and (r['case'], r['cwd_subdir']) == (case, cwd)
-        assert r['native_version'] == '1.0.83' and r['native_sha256'] == PINS['copilot']
+        assert r['native_version'] == '1.0.84-9' and r['native_sha256'] == PINS['copilot']
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert r['source_unchanged'] and r['authority_unchanged'] and r['references_unchanged'] and r['roundtrip_preserved']
         assert set(r['definitions']) == ({'.claude/CLAUDE.md'} if case == 'dot-only' else {'AGENTS.md', 'CLAUDE.md', '.claude/CLAUDE.md', 'GEMINI.md', '.github/copilot-instructions.md'})

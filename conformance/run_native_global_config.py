@@ -35,7 +35,7 @@ def main():
     subprocess.run(['git', 'init', '-q', str(project)], check=True)
     cli = base/'agents'
     env = {'HOME': str(home), 'PATH': '/usr/bin:/bin', 'XDG_STATE_HOME': str(base/'state')}
-    result = {'vendor': vendor, 'fixture': str(base), 'native_version': '0.154.0' if vendor == 'codex' else '1.0.83',
+    result = {'vendor': vendor, 'fixture': str(base), 'native_version': '0.154.0' if vendor == 'codex' else '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(snapshot),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for directory in ('CLI/internal/config', 'CLI/cmd/agents') for p in sorted((repo/directory).glob('*.go'))},

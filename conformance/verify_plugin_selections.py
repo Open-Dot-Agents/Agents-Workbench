@@ -253,7 +253,7 @@ def main():
             eligibility[name] = {'current_eligible': state.current_eligible,
                                  'reasons': list(state.eligibility_errors)}
             if runner == 'run_native_instruction_links.py':
-                assert record['native_version'] == ('0.154.0' if record['vendor'] == 'codex' else '1.0.83'), name
+                assert record['native_version'] == ('0.154.0' if record['vendor'] == 'codex' else '1.0.84-9'), name
                 from run_native_approvals import PINS
                 assert record['native_sha256'] == PINS[record['vendor']], name
                 assert [p['label'] for p in record['phases']] == ['first', 'updated'], name
@@ -285,7 +285,7 @@ def main():
                 assert record['pending_migration_refusal']['exit_code'] != 0, name
                 assert 'would replace setting memory' in record['pending_migration_refusal']['stderr'], name
             elif runner == 'run_native_copilot_preferences.py':
-                assert record['native_version'] == '1.0.83', name
+                assert record['native_version'] == '1.0.84-9', name
                 assert record['native_sha256'] == 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd', name
                 assert [p['name'] for p in record['phases']] == ['plan', 'interactive', 'removed'], name
                 for phase in record['phases']:
@@ -296,7 +296,7 @@ def main():
                 assert len(record['phases'][1]['status_events']) >= 3, name
                 assert not record['phases'][2]['status_events'], name
             elif runner == 'run_native_copilot_subagents.py':
-                assert record['native_version'] == '1.0.83', name
+                assert record['native_version'] == '1.0.84-9', name
                 assert record['native_sha256'] == 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd', name
                 assert record['configuration'] == record['reimported_preferences'], name
                 assert record['state_unchanged_by_apply'] and record['settings_mode'] == 0o600, name

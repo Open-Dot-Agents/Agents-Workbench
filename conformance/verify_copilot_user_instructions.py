@@ -26,7 +26,7 @@ def check_phase(phase):
     events = phase['native_events']
     session = phase['session']['sessionId']
     assert any(e['type']=='session.start' and e['data']['sessionId']==session
-               and e['data']['copilotVersion']=='1.0.83' and e['data']['context']['cwd']==phase['workspace'] for e in events)
+               and e['data']['copilotVersion']=='1.0.84-9' and e['data']['context']['cwd']==phase['workspace'] for e in events)
     assert any(e['type']=='user.message' and phase['nonce'] in e['data']['content'] for e in events)
     reads = [e['data'] for e in events if e['type']=='tool.execution_start']
     assert len(reads)==1 and reads[0]['toolName']=='view'
@@ -49,7 +49,7 @@ def verify():
         receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and not r['full_adapter_support'] and r['case']==case and r['scope']=='user'
-        assert r['native_version']=='1.0.83' and r['native_sha256']==PINS['copilot']
+        assert r['native_version']=='1.0.84-9' and r['native_sha256']==PINS['copilot']
         assert r['runner_sha256']==sha(path.with_suffix('.runner.py'))
         assert all(r[k] for k in ('roundtrip_preserved','source_unchanged','authority_unchanged','references_unchanged','project_unchanged'))
         assert r['target_mode']==0o600 and r['plan']['applicable']

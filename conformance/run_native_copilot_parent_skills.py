@@ -44,7 +44,7 @@ def main():
          'XDG_STATE_HOME':str(base/'state'),'PATH':'/usr/bin:/bin','COPILOT_OFFLINE':'true',
          'COPILOT_PROVIDER_TYPE':'openai','COPILOT_PROVIDER_WIRE_API':'completions','COPILOT_MODEL':'gpt-5.4'}
     cli=base/'agents';requests=[];errors=[];offset=0;active_probe=None
-    result={'native_version':'1.0.83','native_sha256':sha(binary),'runner_sha256':sha(snapshot),'fixture':str(base),
+    result={'native_version':'1.0.84-9','native_sha256':sha(binary),'runner_sha256':sha(snapshot),'fixture':str(base),
             'helper_sha256':{name:sha(Path(__file__).with_name(name)) for name in ('run_native_approvals.py','verify_copilot_skill_import.py')},
             'implementation_sha256':{str(p.relative_to(repo)):sha(p) for directory in ('CLI/internal/config','CLI/cmd/agents') for p in (repo/directory).glob('*.go')},
             'commands':[],'phases':[],'full_adapter_support':False}
@@ -132,7 +132,7 @@ def main():
         (child_core/'AGENTS.md').write_text('Local child instructions.\n')
         (child_core/'manifest.json').write_text('{"version":"1.1.0-draft.2","profiles":["native","skills"]}')
         directory=child_core/'native/com.github.copilot';directory.mkdir(parents=True)
-        (directory/'profile.json').write_text('{"namespace":"com.github.copilot","harness_version":"=1.0.83","scope":"project","required":true,"artifacts":[]}')
+        (directory/'profile.json').write_text('{"namespace":"com.github.copilot","harness_version":"=1.0.84-9","scope":"project","required":true,"artifacts":[]}')
         local=child_core/'skills/fixture-import';shutil.copytree(package,local);(local/'data.txt').write_text('AGENTS_CHILD_OVERRIDE')
         parent_before=hashes(target/'.agents')
         result['child_plan']=json.loads(adapter('apply',target_child)['stdout'])

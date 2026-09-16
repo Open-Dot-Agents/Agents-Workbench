@@ -17,7 +17,7 @@ class SecurityDraftTest(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix='oda-security-test-')
         cls.work = Path(cls.temporary.name)
         cls.agents = cls.work / 'agents'
-        subprocess.run(['go', 'build', '-o', str(cls.agents), './cmd/agents'], cwd=ROOT / 'CLI', check=True)
+        subprocess.run(['go', 'build', '-buildvcs=false', '-o', str(cls.agents), './cmd/agents'], cwd=ROOT / 'CLI', check=True)
         module_path = ROOT / 'SPEC/conformance/security_draft.py'
         spec = importlib.util.spec_from_file_location('security_draft', module_path)
         cls.fixture_module = importlib.util.module_from_spec(spec)
@@ -52,8 +52,8 @@ class SecurityDraftTest(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('security_runner', path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        self.assertTrue(module.version_matches('GitHub Copilot CLI 1.0.83.', '1.0.83'))
-        self.assertFalse(module.version_matches('GitHub Copilot CLI 1.0.830.', '1.0.83'))
+        self.assertTrue(module.version_matches('GitHub Copilot CLI 1.0.84-9.', '1.0.84-9'))
+        self.assertFalse(module.version_matches('GitHub Copilot CLI 1.0.84-90.', '1.0.84-9'))
         self.assertFalse(module.version_matches('codex-cli 0.154.1', '0.154.0'))
 
     def test_required_and_optional_extensions_remain_inactive(self):

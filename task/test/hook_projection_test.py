@@ -39,7 +39,7 @@ class HookProjectionTests(unittest.TestCase):
             "GOPATH": os.environ.get("GOPATH", "/tmp/agents-gopath"),
         }
         subprocess.run(
-            ["go", "build", "-o", str(cls.agents_bin), "./cmd/agents"],
+            ["go", "build", "-buildvcs=false", "-o", str(cls.agents_bin), "./cmd/agents"],
             cwd=CLI,
             env=env,
             check=True,

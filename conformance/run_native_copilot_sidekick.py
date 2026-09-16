@@ -52,7 +52,7 @@ def main():
     requests, errors = [], []
     lock = threading.Lock()
     result = {'scope': args.scope, 'behavior': args.behavior, 'experimental': args.experimental, 'fixture': str(root),
-              'native_version': '1.0.83', 'native_sha256': sha(binary), 'runner_sha256': sha(snapshot),
+              'native_version': '1.0.84-9', 'native_sha256': sha(binary), 'runner_sha256': sha(snapshot),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'configuration': body, 'full_adapter_support': False, 'adapter_mapping': False}
 

@@ -25,7 +25,7 @@ def phase_check(phase, present=True, source='project', effect='AGENTS_SKILL_IMPO
     assert len(rows) == int(present)
     events = phase['native_events']
     assert any(e['type'] == 'session.start' and e['data']['sessionId'] == phase['session']['sessionId']
-               and e['data']['copilotVersion'] == '1.0.83' for e in events)
+               and e['data']['copilotVersion'] == '1.0.84-9' for e in events)
     assert any(e['type'] == 'user.message' and phase['nonce'] in e['data']['content'] for e in events)
     assert any(e['type'] == 'assistant.turn_end' for e in events)
     invoked = [e['data'] for e in events if e['type'] == 'skill.invoked']
@@ -74,7 +74,7 @@ def verify(evidence_suffix='user-instructions'):
         receipts.append(path)
         r = json.loads(path.read_text())
         assert r['passed'] and r['origin'] == origin and r['scope'] == 'project'
-        assert r['native_sha256'] == PIN and r['native_version'] == '1.0.83'
+        assert r['native_sha256'] == PIN and r['native_version'] == '1.0.84-9'
         assert r['runner_sha256'] == sha(path.with_suffix('.runner.py'))
         assert not r['full_adapter_support']
         package_check(r)

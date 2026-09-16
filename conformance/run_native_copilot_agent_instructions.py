@@ -67,7 +67,7 @@ def main():
     for workspace in (source, target):
         (workspace/'.claude').mkdir(exist_ok=True)
         (workspace/'.claude/fixture.txt').write_text('AGENTS_FILE_READ\n')
-    result = {'passed': False, 'cwd_subdir': args.cwd_subdir, 'case': args.case, 'definitions': definitions, 'references': references, 'fixture': str(base), 'native_version': '1.0.83',
+    result = {'passed': False, 'cwd_subdir': args.cwd_subdir, 'case': args.case, 'definitions': definitions, 'references': references, 'fixture': str(base), 'native_version': '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo/'CLI/internal/config').glob('*.go'))},

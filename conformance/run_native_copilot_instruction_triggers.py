@@ -63,7 +63,7 @@ def main():
     record = {'passed': False, 'trigger': args.trigger, 'scope': args.scope, 'pattern': args.pattern,
               'model': args.model, 'match': args.match, 'expected_loaded': args.expect_loaded,
               'fixture': str(root), 'file': str(active), 'definitions': bodies,
-              'native_version': '1.0.83', 'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
+              'native_version': '1.0.84-9', 'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': sha(Path(__file__).with_name('run_native_approvals.py')),
               'adapter_invoked': False, 'full_adapter_support': False, 'requests': [], 'turns': []}
     requests = record['requests']

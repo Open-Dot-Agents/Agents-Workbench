@@ -51,7 +51,7 @@ def main():
     subprocess.run(['git', 'init', '-q', str(workspace)], check=True)
     package = market / 'github'
     shutil.copytree(source, package)
-    result = {'vendor': args.vendor, 'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.83',
+    result = {'vendor': args.vendor, 'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': {name: sha(Path(__file__).with_name(name)) for name in
                                ['run_native_approvals.py', 'run_native_codex_hooks.py']},

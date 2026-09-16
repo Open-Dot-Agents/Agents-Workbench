@@ -50,7 +50,7 @@ def main():
         (home/'child.md').write_text(child)
     (native_homes['source']/'copilot-instructions.md').write_text(body)
     result = dict(passed=False, fixture=str(base), case=args.case, scope='user',
-                  native_version='1.0.83', native_sha256=sha(binary), runner_sha256=sha(__file__),
+                  native_version='1.0.84-9', native_sha256=sha(binary), runner_sha256=sha(__file__),
                   helper_sha256=sha(Path(__file__).with_name('run_native_approvals.py')),
                   implementation_sha256={str(p.relative_to(repo)): sha(p) for p in (repo/'CLI/internal/config').glob('*.go')},
                   commands=[], phases=[], authority_checks=[], full_adapter_support=False)

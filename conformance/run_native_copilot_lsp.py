@@ -56,7 +56,7 @@ def main():
  server=root/'server.py';server.write_text(SERVER);events_path=root/'lsp-events.jsonl'
  manifest=canonical/'.agents';directory=manifest/'native/com.github.copilot';directory.mkdir(parents=True)
  (manifest/'AGENTS.md').write_text('Use fixture data.\n');(manifest/'manifest.json').write_text(json.dumps({'version':'1.1.0-draft.2','profiles':['native']}))
- (directory/'profile.json').write_text(json.dumps({'namespace':'com.github.copilot','harness_version':'=1.0.83','scope':args.scope,'required':True,'artifacts':[{'kind':'lsp','source':'lsp.json'}]}))
+ (directory/'profile.json').write_text(json.dumps({'namespace':'com.github.copilot','harness_version':'=1.0.84-9','scope':args.scope,'required':True,'artifacts':[{'kind':'lsp','source':'lsp.json'}]}))
  config={'lspServers':{'fixture':{'command':'${ODA_LSP_PYTHON}','args':[str(server),'${ODA_LSP_EVENTS}',args.scenario],'fileExtensions':{'.oda':'fixture'},'env':{'ODA_LSP_MODE':'${ODA_LSP_INPUT}'},'initializationOptions':{'tokenTypes':['function'],'authenticationMode':'external','sentinel':'ODA_LSP','exact':9007199254740993},'rootUri':'packages/frontend','requestTimeoutMs':1000 if args.scenario=='timeout' else 30000}}}
  (directory/'lsp.json').write_text(json.dumps(config));(native/'settings.json').write_text('{"theme":"dark"}\n')
  initial_home={str(p.relative_to(native)):sha(p) for p in native.rglob('*') if p.is_file()}
@@ -65,7 +65,7 @@ def main():
  command=[str(cli),'apply','--vendor','copilot','--root',str(canonical),'--experimental','--scope',args.scope]
  if args.scope=='user':command+=['--native-home',str(native)]
  apply=subprocess.run(command,env=env,capture_output=True,text=True)
- result={'scenario':args.scenario,'scope':args.scope,'fixture':str(root),'native_version':'1.0.83','native_sha256':sha(args.binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':config,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
+ result={'scenario':args.scenario,'scope':args.scope,'fixture':str(root),'native_version':'1.0.84-9','native_sha256':sha(args.binary),'cli_sha256':sha(cli),'runner_sha256':sha(__file__),'helper_sha256':sha(repo/'WORKBENCH/conformance/run_native_approvals.py'),'configuration':config,'apply':{'exit':apply.returncode,'stdout':apply.stdout,'stderr':apply.stderr},'implementation_sha256':{str(p.relative_to(repo)):sha(p) for p in sorted((repo/'CLI/internal/config').glob('native*.go'))}}
  requests=[]
  class Handler(BaseHTTPRequestHandler):
   def log_message(self,*_):pass

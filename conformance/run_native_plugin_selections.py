@@ -64,7 +64,7 @@ def main():
     cli = root / 'agents'
     subprocess.run(['go', 'build', '-o', str(cli), './cmd/agents'], cwd=repo / 'CLI', check=True)
     result = {'fixture': str(root), 'vendor': args.vendor, 'scope': args.scope,
-              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.83',
+              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': {name: sha(Path(__file__).with_name(name)) for name in
                                 ['run_native_approvals.py', 'run_native_codex_hooks.py']},

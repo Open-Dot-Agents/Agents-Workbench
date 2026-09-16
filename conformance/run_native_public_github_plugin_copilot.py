@@ -60,7 +60,7 @@ def main():
            "COPILOT_PROVIDER_WIRE_API":"completions",
            "COPILOT_PROVIDER_BASE_URL":f"http://127.0.0.1:{server.server_port}/v1",
            "COPILOT_MODEL":"fixture-model","GITHUB_PAT_TOKEN":token}
-    result = {"native_version":"1.0.83","native_sha256":sha(binary),"runner_sha256":sha(snapshot),
+    result = {"native_version":"1.0.84-9","native_sha256":sha(binary),"runner_sha256":sha(snapshot),
               "helper_sha256":sha(Path(__file__).with_name("run_native_approvals.py")),"fixture":str(base),
               "source_revision":provenance["revision"],"source_files":provenance["files"],
               "source_transformations":provenance["transformations"],

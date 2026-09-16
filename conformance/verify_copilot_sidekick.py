@@ -13,7 +13,7 @@ BASE = ROOT/'WORKBENCH/evidence/native-draft2-debug'
 def verify_record(record, path):
     assert record['passed'] and record['outcome'] == 'native-ignored'
     assert not record['full_adapter_support'] and not record['adapter_mapping']
-    assert record['native_version'] == '1.0.83' and record['native_sha256'] == PINS['copilot']
+    assert record['native_version'] == '1.0.84-9' and record['native_sha256'] == PINS['copilot']
     assert record['runner_sha256'] == sha(path.with_suffix('.runner.py'))
     assert record['experimental'] and '--experimental' in record['command'] and '--acp' in record['command']
     assert record['prompt']['stopReason'] == 'end_turn'

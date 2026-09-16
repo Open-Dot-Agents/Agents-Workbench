@@ -16,7 +16,7 @@ class EvidenceTests(unittest.TestCase):
     def record(self):
         return {
             'passed': True, 'outcome': 'native-ignored', 'full_adapter_support': False,
-            'adapter_mapping': False, 'native_version': '1.0.83', 'native_sha256': PINS['copilot'],
+            'adapter_mapping': False, 'native_version': '1.0.84-9', 'native_sha256': PINS['copilot'],
             'runner_sha256': sha(self.path.with_suffix('.runner.py')),
             'experimental': True, 'command': ['synthetic-copilot', '--experimental', '--acp'],
             'prompt': {'stopReason': 'end_turn'}, 'effect': '', 'approvals': [], 'provider_errors': [],

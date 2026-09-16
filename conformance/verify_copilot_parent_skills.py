@@ -14,7 +14,7 @@ RECEIPT=BASE/'copilot-parent-skills-final.json'
 
 def verify_record(record):
     assert record['passed'] and not record['full_adapter_support'] and not record['provider_errors']
-    assert record['native_version']=='1.0.83' and record['native_sha256']==PINS['copilot']
+    assert record['native_version']=='1.0.84-9' and record['native_sha256']==PINS['copilot']
     assert record['runner_sha256']==sha(RECEIPT.with_suffix('.runner.py'))
     assert record['child_did_not_capture_parent'] and record['child_import_preserved_parent'] and record['parent_unchanged_by_child'] and record['source_unchanged']
     assert record['original_metadata']==record['source_metadata_after']
@@ -47,7 +47,7 @@ def verify_record(record):
 
 def verify_discovery():
     path=BASE/'copilot-parent-discovery-probe.json';record=json.loads(path.read_text())
-    assert record['native_sha256']==PINS['copilot'] and record['native_version']=='1.0.83'
+    assert record['native_sha256']==PINS['copilot'] and record['native_version']=='1.0.84-9'
     assert record['runner_sha256']==sha(path.with_suffix('.runner.py'))
     assert [(c['mode'],c['location']) for c in record['cases']]==[(m,l) for m in ('no-git','parent-git','nested-git') for l in ('parent','child')]
     for case in record['cases']:

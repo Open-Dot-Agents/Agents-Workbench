@@ -19,7 +19,7 @@ import sys
 import time
 
 REPO = Path(__file__).resolve().parents[2]
-PINS = {'codex': '0.154.0', 'copilot': '1.0.83'}
+PINS = {'codex': '0.154.0', 'copilot': '1.0.84-9'}
 SCENARIOS = [
     'allowed-read', 'denied-read', 'allowed-write', 'denied-write',
     'allowed-execution', 'denied-execution', 'symlink-escape', 'path-traversal',
@@ -59,7 +59,7 @@ def snapshot(root):
 
 
 def version_matches(output, expected):
-    match = re.search(r'(?<![0-9.])([0-9]+\.[0-9]+\.[0-9]+)(?![0-9])', output)
+    match = re.search(r'(?<![0-9.])([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z-]+)?)(?![0-9A-Za-z-])', output)
     return bool(match and match.group(1) == expected)
 
 

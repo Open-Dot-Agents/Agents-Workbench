@@ -3,8 +3,8 @@
   "harnesses": {
     "copilot": {
       "package": "@github/copilot",
-      "version": "1.0.83",
-      "integrity": "sha512-M8uZI0V0dahYV1KZij3nGDxaXEGG7I7YUZzQPI7NEZkL/83Nl/tNTbPdxKtdWZbOmWoXsPKXty/eEYoj6RHDhA=="
+      "version": "1.0.84-9",
+      "integrity": "sha512-n5mgb2gRVgNC27YKaKbWPJCrImbzfEOFh2fvigjqOWe7teXk12uJ4RGs+Lq14ptMFsx2D5ayb3fKV3GPtCpWbA=="
     },
     "codex": {
       "package": "@openai/codex",

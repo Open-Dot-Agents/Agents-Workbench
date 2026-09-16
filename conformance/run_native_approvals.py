@@ -19,7 +19,7 @@ import time
 import uuid
 
 PINS = {'codex': '3188814c35471432d4123203e0eb38e5bddc60226e3d7ddf0e59e649ea140022',
-        'copilot': 'a3262c4513ef1fc2ca21485261ca73196977ad76bd5e7990fb572f6134aaeedd'}
+        'copilot': '905a39134b45d1644bcf79c1db1ca58387515207cb2cb07ff8241e871687f57a'}
 RUNNER_SOURCE = Path(__file__).read_bytes()
 
 

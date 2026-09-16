@@ -39,7 +39,7 @@ def main():
            'CODEX_HOME': str(home), 'COPILOT_HOME': str(home),
            'XDG_STATE_HOME': str(root / 'state')}
     result = {'vendor': args.vendor, 'origin': args.origin, 'fixture': str(root),
-              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.83',
+              'native_version': '0.154.0' if args.vendor == 'codex' else '1.0.84-9',
               'native_sha256': sha(binary), 'runner_sha256': sha(__file__),
               'helper_sha256': {'run_native_approvals.py': sha(Path(__file__).with_name('run_native_approvals.py'))},
               'implementation_sha256': {str(p.relative_to(repo)): sha(p) for p in sorted((repo / 'CLI/internal/config').glob('*.go'))},

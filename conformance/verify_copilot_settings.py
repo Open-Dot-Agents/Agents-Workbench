@@ -14,7 +14,7 @@ RECEIPT = ROOT/'WORKBENCH/evidence/native-draft2-debug/copilot-settings-artifact
 
 def verify_record(record):
     assert record['passed'] and not record['full_adapter_support']
-    assert record['native_version'] == '1.0.83' and record['native_sha256'] == PINS['copilot']
+    assert record['native_version'] == '1.0.84-9' and record['native_sha256'] == PINS['copilot']
     assert record['runner_sha256'] == sha(RECEIPT.with_suffix('.runner.py'))
     assert [p['name'] for p in record['phases']] == ['plan', 'interactive', 'removed']
     sessions = set()
@@ -36,7 +36,7 @@ def verify_record(record):
         assert len(ids) == 1 and not ids & sessions
         sessions.update(ids)
         assert all(e['phase'] == name and e['value']['cwd'] == record['fixture']+'/workspace'
-                   and e['value']['version'] == '1.0.83' and e['value']['model']['id'] == 'fixture-model' for e in events)
+                   and e['value']['version'] == '1.0.84-9' and e['value']['model']['id'] == 'fixture-model' for e in events)
         interval = phase['preferences']['statusLine']['refreshInterval']
         gaps = [b['recorded_at']-a['recorded_at'] for a, b in zip(events, events[1:])]
         assert gaps == phase['refresh_gaps']
