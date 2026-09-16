@@ -1,0 +1,43 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic:
+    name: Deterministic tests without ignored local artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Open-Dot-Agents monorepo (for the sibling CLI/SPEC checkouts)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Open-Dot-Agents/Open-Dot-Agents
+          path: monorepo
+      - name: Checkout this WORKBENCH ref into monorepo/WORKBENCH
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: monorepo/WORKBENCH
+      - name: Checkout sibling CLI and SPEC submodules
+        working-directory: monorepo
+        run: git submodule update --init --depth=1 CLI SPEC
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: monorepo/CLI/go.mod
+          cache-dependency-path: monorepo/CLI/go.sum
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+      - name: Install evidence validator
+        run: python3 -m pip install -r monorepo/WORKBENCH/conformance/requirements.txt
+      - name: Check compatibility including Workbench pins
+        run: python3 monorepo/CLI/scripts/check_compatibility.py
+        working-directory: monorepo
+      - name: Test deterministic checks without ignored local artifacts
+        run: python3 WORKBENCH/conformance/check_clean_source.py
+        working-directory: monorepo
