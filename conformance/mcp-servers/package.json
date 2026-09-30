@@ -5,7 +5,7 @@
     "test": "python3 startup_probe.py"
   },
   "dependencies": {
-    "firecrawl-mcp": "3.24.0"
+    "firecrawl-mcp": "3.25.5"
   },
   "overrides": {
     "axios": "1.18.0"
