@@ -26,7 +26,7 @@ jobs:
       - name: Checkout sibling CLI and SPEC submodules
         working-directory: monorepo
         run: git submodule update --init --depth=1 CLI SPEC
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
           go-version-file: monorepo/CLI/go.mod
           cache-dependency-path: monorepo/CLI/go.sum
